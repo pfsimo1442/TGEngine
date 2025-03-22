@@ -6,8 +6,6 @@ namespace tg
 		: mHwnd(nullptr)
 		, mHdc(nullptr)
 		, mSpeed(0.0f)
-		, mX(0.0f)
-		, mY(0.0f)
 	{
 	}
 	Application::~Application()
@@ -18,6 +16,8 @@ namespace tg
 	{
 		mHwnd = hwnd;
 		mHdc = GetDC(hwnd);
+
+		mPlayer.SetPosition(0.0f, 0.0f);
 	}
 
 	void Application::Run()
@@ -31,10 +31,15 @@ namespace tg
 	{
 		mSpeed += 0.01f;
 
-		if (GetAsyncKeyState(VK_LEFT) & 0x8000) { mX -= 0.01f; }
-		if (GetAsyncKeyState(VK_RIGHT) & 0x8000) { mX += 0.01f; }
-		if (GetAsyncKeyState(VK_UP) & 0x8000) { mY -= 0.01f; }
-		if (GetAsyncKeyState(VK_DOWN) & 0x8000) { mY += 0.01f; }
+		float x = mPlayer.GetPositionX();
+		float y = mPlayer.GetPositionY();
+
+		if (GetAsyncKeyState(VK_LEFT) & 0x8000) { x -= 0.01f; }
+		if (GetAsyncKeyState(VK_RIGHT) & 0x8000) { x += 0.01f; }
+		if (GetAsyncKeyState(VK_UP) & 0x8000) { y -= 0.01f; }
+		if (GetAsyncKeyState(VK_DOWN) & 0x8000) { y += 0.01f; }
+
+		mPlayer.SetPosition(x, y);
 	}
 
 	void Application::LateUpdate()
@@ -51,7 +56,9 @@ namespace tg
 		HPEN oldPen = (HPEN)SelectObject(mHdc, redPen);
 		SelectObject(mHdc, oldPen);
 
-		Rectangle(mHdc, 100 + mX, 100 + mY, 200 + mX, 200 + mY);
+		float x = mPlayer.GetPositionX();
+		float y = mPlayer.GetPositionY();
+		Rectangle(mHdc, 100 + x, 100 + y, 200 + x, 200 + y);
 
 		SelectObject(mHdc, oldBrush);
 		DeleteObject(blueBrush);
