@@ -1,5 +1,6 @@
 #include "tgGameObject.h"
 #include "tgInput.h"
+#include "tgTime.h"
 
 namespace tg
 {
@@ -14,10 +15,11 @@ namespace tg
 
 	void GameObject::Update()
 	{
-		if (Input::GetKey(eKeyCode::A)) { mX -= 0.01f; }
-		if (Input::GetKey(eKeyCode::D)) { mX += 0.01f; }
-		if (Input::GetKey(eKeyCode::W)) { mY -= 0.01f; }
-		if (Input::GetKey(eKeyCode::S)) { mY += 0.01f; }
+		const int speed = 100.0f;
+		if (Input::GetKey(eKeyCode::A)) { mX -= speed * Time::DeltaTime(); }
+		if (Input::GetKey(eKeyCode::D)) { mX += speed * Time::DeltaTime(); }
+		if (Input::GetKey(eKeyCode::W)) { mY -= speed * Time::DeltaTime(); }
+		if (Input::GetKey(eKeyCode::S)) { mY += speed * Time::DeltaTime(); }
 	}
 
 	void GameObject::LateUpdate()

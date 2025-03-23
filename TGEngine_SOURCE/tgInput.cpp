@@ -2,7 +2,7 @@
 
 namespace tg
 {
-	std::vector<Input::Key> Input::mKeys = {};
+	std::vector<Input::Key> Input::Keys = {};
 
 	int ASCII[(int)eKeyCode::End] =
 	{
@@ -30,12 +30,12 @@ namespace tg
 			key.bPressed = false;
 			key.state = eKeyState::None;
 			key.keyCode = (eKeyCode)i;
-			mKeys.push_back(key);
+			Keys.push_back(key);
 		}
 	}
 	void Input::updateKeys()
 	{
-		std::for_each(mKeys.begin(), mKeys.end(),
+		std::for_each(Keys.begin(), Keys.end(),
 			[](Key& key) -> void
 			{
 				updateKey(key);
@@ -51,6 +51,10 @@ namespace tg
 		{
 			updateKeyUp(key);
 		}
+	}
+	bool Input::isKeyDown(eKeyCode code)
+	{
+		return GetAsyncKeyState(ASCII[(UINT)code]) & 0x8000;
 	}
 	void Input::updateKeyDown(Input::Key& key)
 	{

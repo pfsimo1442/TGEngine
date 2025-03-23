@@ -1,5 +1,6 @@
 #include "tgApplication.h"
 #include "tgInput.h"
+#include "tgTime.h"
 
 namespace tg
 {
@@ -20,6 +21,7 @@ namespace tg
 		mPlayer.SetPosition(0.0f, 0.0f);
 
 		Input::Initialze();
+		Time::Initialize();
 	}
 
 	void Application::Run()
@@ -32,6 +34,7 @@ namespace tg
 	void Application::Update()
 	{
 		Input::Update();
+		Time::Update();
 
 		mPlayer.Update();
 	}
@@ -43,6 +46,8 @@ namespace tg
 
 	void Application::Render()
 	{
+		Time::Render(mHdc);
+
 		mPlayer.Render(mHdc);
 	}
 }
