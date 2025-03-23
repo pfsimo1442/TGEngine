@@ -1,4 +1,5 @@
 #include "tgApplication.h"
+#include "tgInput.h"
 
 namespace tg
 {
@@ -17,6 +18,8 @@ namespace tg
 		mHdc = GetDC(hwnd);
 
 		mPlayer.SetPosition(0.0f, 0.0f);
+
+		Input::Initialze();
 	}
 
 	void Application::Run()
@@ -28,6 +31,8 @@ namespace tg
 
 	void Application::Update()
 	{
+		Input::Update();
+
 		mPlayer.Update();
 	}
 
