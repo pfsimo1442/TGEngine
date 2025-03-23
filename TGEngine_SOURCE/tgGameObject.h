@@ -1,4 +1,5 @@
 #pragma once
+#include "CommonInclude.h"
 
 namespace tg
 {
@@ -7,6 +8,10 @@ namespace tg
 	public:
 		GameObject();
 		~GameObject();
+
+		void Update();
+		void LateUpdate();
+		void Render(HDC hdc);
 
 		void SetPosition(float x, float y)
 		{

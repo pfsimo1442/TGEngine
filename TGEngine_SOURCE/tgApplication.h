@@ -1,5 +1,4 @@
 #pragma once
-#include "CommonInclude.h"
 #include "tgGameObject.h"
 
 namespace tg
@@ -21,11 +20,6 @@ namespace tg
 		HWND mHwnd;
 		HDC mHdc;
 
-		float mSpeed;
-
-		// player
-		//float mX;
-		//float mY;
 		GameObject mPlayer;
 	};
 }
