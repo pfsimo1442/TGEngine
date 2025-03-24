@@ -7,21 +7,24 @@ namespace tg
 	Application::Application()
 		: mHwnd(nullptr)
 		, mHdc(nullptr)
+		, mWidth(0)
+		, mHeight(0)
+		, mBackHdc(NULL)
+		, mBackBitmap(NULL)
 	{
 	}
 	Application::~Application()
 	{
 	}
 
-	void Application::Initialize(HWND hwnd)
+	void Application::Initialize(HWND hwnd, UINT width, UINT height)
 	{
-		mHwnd = hwnd;
-		mHdc = GetDC(hwnd);
+		adjustWindowRect(hwnd, width, height);
+		createBuffer(width, height);
+		initializeEtc();
 
-		mPlayer.SetPosition(0.0f, 0.0f);
+		mPlayer.SetPosition(0, 0);
 
-		Input::Initialze();
-		Time::Initialize();
 	}
 
 	void Application::Run()
@@ -46,8 +49,48 @@ namespace tg
 
 	void Application::Render()
 	{
-		Time::Render(mHdc);
+		clearRenderTarget();
 
-		mPlayer.Render(mHdc);
+		Time::Render(mBackHdc);
+		mPlayer.Render(mBackHdc);
+
+		copyRenderTarget(mBackHdc, mHdc);
+	}
+
+	void Application::clearRenderTarget()
+	{
+		Rectangle(mBackHdc, -1, -1, 1601, 901);
+	}
+	void Application::copyRenderTarget(HDC source, HDC dest)
+	{
+		BitBlt(dest, 0, 0, mWidth, mHeight
+			, source, 0, 0, SRCCOPY);
+	}
+	void Application::adjustWindowRect(HWND hwnd, UINT width, UINT height)
+	{
+		mHwnd = hwnd;
+		mHdc = GetDC(hwnd);
+
+		RECT rect = { 0, 0, width, height };
+		AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
+
+		mWidth = rect.right - rect.left;
+		mHeight = rect.bottom - rect.top;
+
+		SetWindowPos(hwnd, nullptr, 0, 0, mWidth, mHeight, 0);
+		ShowWindow(hwnd, true);
+	}
+	void Application::createBuffer(UINT width, UINT height)
+	{
+		mBackBitmap = CreateCompatibleBitmap(mHdc, width, height);
+		mBackHdc = CreateCompatibleDC(mHdc);
+
+		HBITMAP oldBitmap = (HBITMAP)SelectObject(mBackHdc, mBackBitmap);
+		DeleteObject(oldBitmap);
+	}
+	void Application::initializeEtc()
+	{
+		Input::Initialze();
+		Time::Initialize();
 	}
 }
