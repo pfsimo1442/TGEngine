@@ -16,14 +16,20 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgGameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgInput.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgSceneManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgTime.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgInput.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgSceneManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgTime.cpp" />
   </ItemGroup>
 </Project>

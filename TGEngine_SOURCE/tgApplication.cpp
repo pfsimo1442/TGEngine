@@ -1,6 +1,7 @@
 #include "tgApplication.h"
 #include "tgInput.h"
 #include "tgTime.h"
+#include "tgSceneManager.h"
 
 namespace tg
 {
@@ -22,9 +23,8 @@ namespace tg
 		adjustWindowRect(hwnd, width, height);
 		createBuffer(width, height);
 		initializeEtc();
-
-		mPlayer.SetPosition(0, 0);
-
+		
+		SceneManager::Initialize();
 	}
 
 	void Application::Run()
@@ -39,7 +39,7 @@ namespace tg
 		Input::Update();
 		Time::Update();
 
-		mPlayer.Update();
+		SceneManager::Update();
 	}
 
 	void Application::LateUpdate()
@@ -52,7 +52,7 @@ namespace tg
 		clearRenderTarget();
 
 		Time::Render(mBackHdc);
-		mPlayer.Render(mBackHdc);
+		SceneManager::Render(mBackHdc);
 
 		copyRenderTarget(mBackHdc, mHdc);
 	}

@@ -33,6 +33,7 @@ namespace tg
 		UINT mWidth;
 		UINT mHeight;
 
-		GameObject mPlayer;
+		//std::vector<Scene*> mScenes;
+		//std::vector<GameObject*> mGameObjects;
 	};
 }

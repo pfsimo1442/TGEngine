@@ -5,6 +5,7 @@
 #include "Editor_Window.h"
 
 #include "..\\TGEngine_SOURCE\\tgApplication.h"
+#include "..\\TGEngine_Window\\tgLoadScenes.h"
 
 tg::Application application;
 
@@ -126,6 +127,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
+
+   //load Scenes
+   tg::LoadScenes();
 
    return TRUE;
 }

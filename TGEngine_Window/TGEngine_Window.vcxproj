@@ -132,6 +132,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="tgLoadScenes.h" />
+    <ClInclude Include="tgPlayScene.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="tgPlayScene.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
