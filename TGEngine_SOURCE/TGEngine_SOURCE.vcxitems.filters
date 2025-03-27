@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)tgApplication.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)tgInput.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)tgTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgEntity.cpp">
       <Filter>Common</Filter>
     </ClCompile>
@@ -24,11 +21,26 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgResources.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgResource.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgInput.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgTime.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgTransform.cpp">
+      <Filter>High Level Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgSpriteRenderer.cpp">
+      <Filter>High Level Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgApplication.cpp">
+      <Filter>High Level Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgLayer.cpp">
+      <Filter>Layer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)tgApplication.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)tgInput.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)tgTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
       <Filter>Common</Filter>
     </ClInclude>
@@ -52,6 +64,27 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgResources.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgResource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgInput.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgTime.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgTransform.h">
+      <Filter>High Level Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgSpriteRenderer.h">
+      <Filter>High Level Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgApplication.h">
+      <Filter>High Level Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgLayer.h">
+      <Filter>Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgEnums.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -71,6 +104,9 @@
     </Filter>
     <Filter Include="Scene">
       <UniqueIdentifier>{59e5dc19-395c-421a-807f-cd01eb958ebb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Layer">
+      <UniqueIdentifier>{7b34bf1c-a769-4bea-a3d1-7e0dc728b50e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

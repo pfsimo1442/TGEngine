@@ -3,6 +3,9 @@
 #include "tgPlayer.h"
 #include "tgTransform.h"
 #include "tgSpriteRenderer.h"
+#include "tgInput.h"
+#include "tgTitleScene.h"
+#include "tgSceneManager.h"
 
 namespace tg
 {
@@ -16,7 +19,7 @@ namespace tg
 	void PlayScene::Initialize()
 	{
 		{
-			Player* bg = new Player();
+			bg = new Player();
 			Transform* tr
 				= bg->AddComponent<Transform>();
 			tr->SetPos(Vector2(0, 0));
@@ -29,7 +32,7 @@ namespace tg
 
 			sr->ImageLoad(L"D:\\Engine\\TGEngine\\Resources\\CloudOcean.png");
 
-			AddGameObject(bg);
+			AddGameObject(bg, eLayerType::BackGround);
 		}
 		
 	}
@@ -42,10 +45,28 @@ namespace tg
 	void PlayScene::LateUpdate()
 	{
 		Scene::LateUpdate();
+
+		if (Input::GetKeyDown(eKeyCode::N))
+		{
+			SceneManager::LoadScene(L"TitleScene");
+		}
 	}
 
 	void PlayScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
+
+		wchar_t str[50] = L"Play Scene ";
+		TextOut(hdc, 0, 0, str, 10);
+	}
+	void PlayScene::OnEnter()
+	{
+
+	}
+
+	void PlayScene::OnExit()
+	{
+		Transform* tr = bg->GetComponent<Transform>();
+		tr->SetPos(Vector2(0, 0));
 	}
 }

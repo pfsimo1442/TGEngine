@@ -135,10 +135,12 @@
     <ClInclude Include="tgLoadScenes.h" />
     <ClInclude Include="tgPlayer.h" />
     <ClInclude Include="tgPlayScene.h" />
+    <ClInclude Include="tgTitleScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tgPlayer.cpp" />
     <ClCompile Include="tgPlayScene.cpp" />
+    <ClCompile Include="tgTitleScene.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -18,6 +18,9 @@
     <ClInclude Include="tgPlayer.h">
       <Filter>Contents</Filter>
     </ClInclude>
+    <ClInclude Include="tgTitleScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tgPlayScene.cpp">
@@ -25,6 +28,9 @@
     </ClCompile>
     <ClCompile Include="tgPlayer.cpp">
       <Filter>Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="tgTitleScene.cpp">
+      <Filter>Scenes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
