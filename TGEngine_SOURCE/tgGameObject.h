@@ -39,6 +39,9 @@ namespace tg
 		}
 
 	private:
+		void initializeTransform();
+
+	private:
 		// gameobject's coorderate
 		std::vector<Component*> mComponents;
 	};

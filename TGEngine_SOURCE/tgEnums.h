@@ -1,6 +1,6 @@
 #pragma once
 
-namespace tg
+namespace tg::enums
 {
 	enum class eLayerType
 	{

@@ -18,6 +18,7 @@ namespace tg
 
 		void AddGameObject(GameObject* gameObject);
 
+		
 
 	private:
 		//eLayerType mType;

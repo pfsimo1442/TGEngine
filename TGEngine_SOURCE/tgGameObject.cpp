@@ -1,12 +1,15 @@
 #include "tgGameObject.h"
 #include "tgInput.h"
 #include "tgTime.h"
+#include "tgTransform.h"
 
 namespace tg
 {
 	GameObject::GameObject()
 	{
+		initializeTransform();
 	}
+
 	GameObject::~GameObject()
 	{
 		for (Component* comp : mComponents)
@@ -46,5 +49,10 @@ namespace tg
 		{
 			comp->Render(hdc);
 		}
+	}
+
+	void GameObject::initializeTransform()
+	{
+		AddComponent<Transform>();
 	}
 }
