@@ -19,25 +19,32 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgGameObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)tgResources.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)tgResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgInput.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgTime.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)tgTransform.cpp">
-      <Filter>High Level Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)tgSpriteRenderer.cpp">
-      <Filter>High Level Interface</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgApplication.cpp">
       <Filter>High Level Interface</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgLayer.cpp">
       <Filter>Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgResource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgResources.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgTexture.cpp">
+      <Filter>Resource\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgSpriteRenderer.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgTransform.cpp">
+      <Filter>Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -62,19 +69,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgGameObject.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)tgResources.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)tgResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgInput.h">
       <Filter>Helpers</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgTime.h">
       <Filter>Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)tgTransform.h">
-      <Filter>High Level Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)tgSpriteRenderer.h">
-      <Filter>High Level Interface</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgApplication.h">
       <Filter>High Level Interface</Filter>
@@ -87,6 +86,21 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgObject.h">
       <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgResources.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgResource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgTexture.h">
+      <Filter>Resource\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgSpriteRenderer.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgTransform.h">
+      <Filter>Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +124,12 @@
     </Filter>
     <Filter Include="Layer">
       <UniqueIdentifier>{7b34bf1c-a769-4bea-a3d1-7e0dc728b50e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{8e2fa7ba-f0ad-4076-b951-05efedc730f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Texture">
+      <UniqueIdentifier>{36bc5e4b-8444-487e-af31-8aceba8b9abc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

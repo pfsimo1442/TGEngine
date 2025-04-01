@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="tgLoadResources.h" />
     <ClInclude Include="tgLoadScenes.h" />
     <ClInclude Include="tgPlayer.h" />
     <ClInclude Include="tgPlayScene.h" />

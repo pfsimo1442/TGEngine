@@ -5,6 +5,7 @@
 #include "Editor_Window.h"
 
 #include "..\\TGEngine_SOURCE\\tgApplication.h"
+#include "..\\TGEngine_Window\\tgLoadResources.h"
 #include "..\\TGEngine_Window\\tgLoadScenes.h"
 
 tg::Application application;
@@ -136,6 +137,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    Gdiplus::GdiplusStartup(&gpToken, &gpsi, NULL);
 
    //load Scenes
+   tg::LoadResources();
    tg::LoadScenes();
 
    return TRUE;

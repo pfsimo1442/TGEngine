@@ -1,13 +1,14 @@
 #include "tgSpriteRenderer.h"
 #include "tgGameObject.h"
 #include "tgTransform.h"
+#include "tgTexture.h"
 
 namespace tg
 {
 	SpriteRenderer::SpriteRenderer()
-		: mImage(nullptr)
-		, mWidth(0)
-		, mHeight(0)
+		: Component()
+		, mTexture(nullptr)
+		, mSize(Vector2::One)
 	{
 	}
 	SpriteRenderer::~SpriteRenderer()
@@ -31,35 +32,28 @@ namespace tg
 
 	void SpriteRenderer::Render(HDC hdc)
 	{
-		//HBRUSH blueBrush = CreateSolidBrush(RGB(0, 0, 255));
-		//HBRUSH randBrush = CreateSolidBrush(RGB(rand() % 255, rand() % 255, rand() % 255));
-		//HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, blueBrush);
-
-		//HPEN redPen = CreatePen(PS_SOLID, 2, RGB(255, 0, 0));
-		//HPEN randPen = CreatePen(PS_SOLID, 2, RGB(rand() % 255, rand() % 255, rand() % 255));
-		//HPEN oldPen = (HPEN)SelectObject(hdc, redPen);
-		//SelectObject(hdc, oldPen);
+		if (mTexture == nullptr)
+			assert(false);
 
 		Transform* tr = GetOwner()->GetComponent<Transform>();
-		//Rectangle(hdc, tr->GetX(), tr->GetY()
-		//	, 100 + tr->GetX(), 100 + tr->GetY());
-
-		//SelectObject(hdc, oldBrush);
-		//DeleteObject(blueBrush);
-		//DeleteObject(randBrush);
-		//DeleteObject(redPen);
-		//DeleteObject(randPen);
-
 		Vector2 pos = tr->GetPosition();
 
-		Gdiplus::Graphics graphcis(hdc);
-		graphcis.DrawImage(mImage, Gdiplus::Rect(pos.x, pos.y, mWidth, mHeight));
+		if (mTexture->GetTextureType() == graphics::Texture::eTextureType::Bmp)
+		{
+			TransparentBlt(hdc, pos.x, pos.y
+				, mTexture->GetWidth() * mSize.x, mTexture->GetHeight() * mSize.y
+				, mTexture->GetHdc(), 0, 0, mTexture->GetWidth(), mTexture->GetHeight()
+				, RGB(255, 0, 255));
+		}
+		else if (mTexture->GetTextureType() == graphics::Texture::eTextureType::Png)
+		{
+			Gdiplus::Graphics graphics(hdc);
+			graphics.DrawImage(mTexture->GetImage()
+				, Gdiplus::Rect(pos.x, pos.y, mTexture->GetWidth() * mSize.x, mTexture->GetHeight() * mSize.y));
+		}
+
+		//Gdiplus::Graphics graphics(hdc);
+		//graphics.DrawImage(mImage, Gdiplus::Rect(pos.x, pos.y, mWidth, mHeight));
 	}
 
-	void SpriteRenderer::ImageLoad(const std::wstring& path)
-	{
-		mImage = Gdiplus::Image::FromFile(path.c_str());
-		mWidth = mImage->GetWidth();
-		mHeight = mImage->GetHeight();
-	}
 }

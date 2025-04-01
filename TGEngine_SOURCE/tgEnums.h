@@ -10,4 +10,14 @@ namespace tg::enums
 		Player,
 		Max = 16,
 	};
+
+	enum class eResourceType
+	{
+		Texture,
+		// Mash, 
+		// Shader, 
+		AudioClip,
+		Prefab, 
+		End,
+	};
 }

@@ -7,6 +7,8 @@
 #include "tgTitleScene.h"
 #include "tgSceneManager.h"
 #include "tgObject.h"
+#include "tgTexture.h"
+#include "tgResources.h"
 
 namespace tg
 {
@@ -20,22 +22,14 @@ namespace tg
 	void PlayScene::Initialize()
 	{
 		{
-			//bg = new Player();
-			//Transform* tr
-			//	= bg->AddComponent<Transform>();
-			//tr->SetPosition(Vector2(0, 0));
-
-			//tr->SetName(L"TR");
-
-			//SpriteRenderer* sr
-			//	= bg->AddComponent<SpriteRenderer>();
-			//sr->SetName(L"SR");
-			// 
-			//AddGameObject(bg, eLayerType::BackGround);
 			bg = object::Instantiate<Player>
-				(enums::eLayerType::BackGround, Vector2(100.0f, 100.0f));
+				(enums::eLayerType::BackGround/*, Vector2(100.0f, 100.0f)*/);
 			SpriteRenderer* sr = bg->AddComponent<SpriteRenderer>();
-			sr->ImageLoad(L"D:\\Engine\\TGEngine\\Resources\\CloudOcean.png");
+
+			graphics::Texture* bg = Resources::Find<graphics::Texture>(L"BG");
+			sr->SetTexture(bg);
+
+			Scene::Initialize();
 		}
 		
 	}

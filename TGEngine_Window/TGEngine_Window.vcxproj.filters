@@ -21,6 +21,7 @@
     <ClInclude Include="tgTitleScene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="tgLoadResources.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tgPlayScene.cpp">
