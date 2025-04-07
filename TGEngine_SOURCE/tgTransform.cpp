@@ -3,6 +3,7 @@
 namespace tg
 {
     Transform::Transform()
+        : Component(enums::eComponentType::Transform)
     {
     }
     Transform::~Transform()

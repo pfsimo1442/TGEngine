@@ -2,11 +2,13 @@
 #include "tgGameObject.h"
 #include "tgTransform.h"
 #include "tgTexture.h"
+#include "tgRenderer.h"
+#include "tgCamera.h"
 
 namespace tg
 {
 	SpriteRenderer::SpriteRenderer()
-		: Component()
+		: Component(enums::eComponentType::SpriteRenderer)
 		, mTexture(nullptr)
 		, mSize(Vector2::One)
 	{
@@ -37,6 +39,7 @@ namespace tg
 
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector2 pos = tr->GetPosition();
+		pos = renderer::mainCamera->CalculatePosition(pos);
 
 		if (mTexture->GetTextureType() == graphics::Texture::eTextureType::Bmp)
 		{

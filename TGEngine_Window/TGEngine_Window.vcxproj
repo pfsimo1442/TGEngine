@@ -135,11 +135,13 @@
     <ClInclude Include="tgLoadResources.h" />
     <ClInclude Include="tgLoadScenes.h" />
     <ClInclude Include="tgPlayer.h" />
+    <ClInclude Include="tgPlayerScript.h" />
     <ClInclude Include="tgPlayScene.h" />
     <ClInclude Include="tgTitleScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tgPlayer.cpp" />
+    <ClCompile Include="tgPlayerScript.cpp" />
     <ClCompile Include="tgPlayScene.cpp" />
     <ClCompile Include="tgTitleScene.cpp" />
   </ItemGroup>

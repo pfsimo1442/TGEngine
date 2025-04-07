@@ -9,6 +9,9 @@
 #include "tgObject.h"
 #include "tgTexture.h"
 #include "tgResources.h"
+#include "tgPlayerScript.h"
+#include "tgCamera.h"
+#include "tgRenderer.h"
 
 namespace tg
 {
@@ -21,17 +24,34 @@ namespace tg
 
 	void PlayScene::Initialize()
 	{
-		{
-			bg = object::Instantiate<Player>
-				(enums::eLayerType::BackGround/*, Vector2(100.0f, 100.0f)*/);
-			SpriteRenderer* sr = bg->AddComponent<SpriteRenderer>();
-
-			graphics::Texture* bg = Resources::Find<graphics::Texture>(L"BG");
-			sr->SetTexture(bg);
-
-			Scene::Initialize();
-		}
+		GameObject* camera = object::Instantiate<GameObject>(enums::eLayerType::None, Vector2(343.0f, 442.0f));
+		Camera*  cameraComp = camera->AddComponent<Camera>();
+		renderer::mainCamera = cameraComp;
+		//camera->AddComponent<PlayerScript>();
 		
+
+
+		mPlayer = object::Instantiate<Player>
+			(enums::eLayerType::Player/*, Vector2(100.0f, 100.0f)*/);
+		SpriteRenderer* sr = mPlayer->AddComponent<SpriteRenderer>();
+		sr->SetSize(Vector2(3.0f, 3.0f));
+		mPlayer->AddComponent<PlayerScript>();
+
+		graphics::Texture* packmanTexture = Resources::Find<graphics::Texture>(L"PackMan");
+		sr->SetTexture(packmanTexture);
+
+
+		GameObject* bg = object::Instantiate<GameObject>
+			(enums::eLayerType::BackGround/*, Vector2(100.0f, 100.0f)*/);
+		SpriteRenderer* bgSr = bg->AddComponent<SpriteRenderer>();
+		bgSr->SetSize(Vector2(3.0f, 3.0f));
+
+		graphics::Texture* bgTexture = Resources::Find<graphics::Texture>(L"Map");
+		bgSr->SetTexture(bgTexture);
+
+
+
+		Scene::Initialize();
 	}
 
 	void PlayScene::Update()
@@ -51,10 +71,10 @@ namespace tg
 
 	void PlayScene::Render(HDC hdc)
 	{
-		Scene::Render(hdc);
-
-		wchar_t str[50] = L"Play Scene ";
-		TextOut(hdc, 0, 0, str, 10);
+			Scene::Render(hdc);
+			//wchar_t str[50] = L"Play Scene ";
+			
+			//TextOut(hdc, 0, 0, str, 10);
 	}
 	void PlayScene::OnEnter()
 	{
@@ -63,7 +83,7 @@ namespace tg
 
 	void PlayScene::OnExit()
 	{
-	//	Transform* tr = bg->GetComponent<Transform>();
+	//	Transform* tr = mPlayer->GetComponent<Transform>();
 	//	tr->SetPosition(Vector2(0, 0));
 	}
 }

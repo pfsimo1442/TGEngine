@@ -16,6 +16,7 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgEnums.h" />
@@ -24,10 +25,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgResources.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgSceneManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgSpriteRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgTime.h" />
@@ -35,16 +38,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgMath.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgResources.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgSceneManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgSpriteRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgTime.cpp" />

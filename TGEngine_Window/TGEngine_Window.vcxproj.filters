@@ -7,6 +7,9 @@
     <Filter Include="Contents">
       <UniqueIdentifier>{00ed6100-06b0-4efb-a533-595c828f103f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{b084a9be-c886-4066-8aa1-92c3712f5ee6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tgLoadScenes.h">
@@ -22,6 +25,9 @@
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="tgLoadResources.h" />
+    <ClInclude Include="tgPlayerScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tgPlayScene.cpp">
@@ -32,6 +38,9 @@
     </ClCompile>
     <ClCompile Include="tgTitleScene.cpp">
       <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="tgPlayerScript.cpp">
+      <Filter>Scripts</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
