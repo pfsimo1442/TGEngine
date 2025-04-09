@@ -15,6 +15,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgAnimation.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgAnimator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgApplication.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgComponent.h" />
@@ -37,6 +39,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgTransform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgAnimation.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgApplication.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgComponent.cpp" />

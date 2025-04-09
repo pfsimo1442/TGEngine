@@ -1,6 +1,8 @@
 #pragma once
 #include "CommonInclude.h"
 
+using namespace tg::math;
+
 namespace tg
 {
 	class Entity
