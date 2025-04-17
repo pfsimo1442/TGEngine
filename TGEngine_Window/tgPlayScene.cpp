@@ -32,25 +32,52 @@ namespace tg
 		
 
 
-		mPlayer = object::Instantiate<Player>(enums::eLayerType::Player);
+		mPlayer = object::Instantiate<Player>(enums::eLayerType::Particle);
 		//SpriteRenderer* sr = mPlayer->AddComponent<SpriteRenderer>();
 		//sr->SetSize(Vector2(3.0f, 3.0f));
 		mPlayer->AddComponent<PlayerScript>();
 
-		graphics::Texture* packmanTexture = Resources::Find<graphics::Texture>(L"Cat");
-		Animator* animator = mPlayer->AddComponent<Animator>();
-		animator->CreateAnimation(L"CatFrontMove", packmanTexture
-			, Vector2(0.0f, 0.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.25f);
+		//graphics::Texture* catTexture = Resources::Find<graphics::Texture>(L"MapleEffect");
+		//Animator* animator = mPlayer->AddComponent<Animator>();
+		//animator->CreateAnimation(L"CatFrontMove", catTexture
+		//	, Vector2(0.0f, 0.0f), Vector2(386.0f, 246.0f), Vector2::Zero, 8, 0.05f);
+		//animator->PlayAnimation(L"CatFrontMove");
 
-		animator->PlayAnimation(L"CatFrontMove");
-		//sr->SetTexture(packmanTexture);
+		graphics::Texture* catTexture = Resources::Find<graphics::Texture>(L"Cat");
+		Animator* animator = mPlayer->AddComponent<Animator>();
+
+		animator->CreateAnimation(L"CatDownWalk", catTexture
+			, Vector2(0.0f, 0.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		animator->CreateAnimation(L"CatRightWalk", catTexture
+			, Vector2(0.0f, 32.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		animator->CreateAnimation(L"CatUpWalk", catTexture
+			, Vector2(0.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		animator->CreateAnimation(L"CatLeftWalk", catTexture
+			, Vector2(0.0f, 96.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		animator->CreateAnimation(L"CatSitDown", catTexture
+			, Vector2(0.0f, 128.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		animator->CreateAnimation(L"CatLeak", catTexture
+			, Vector2(0.0f, 160.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		animator->CreateAnimation(L"CatTired", catTexture
+			, Vector2(0.0f, 192.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		animator->CreateAnimation(L"CatSleep", catTexture
+			, Vector2(0.0f, 224.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 2, 0.1f);
+		animator->CreateAnimation(L"CatStretch", catTexture
+			, Vector2(64.0f, 224.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 2, 0.1f);
+
+		animator->PlayAnimation(L"CatSitDown", false);
+
+		mPlayer->GetComponent<Transform>()->SetPosition(Vector2(100.0f, 100.0f));
+		mPlayer->GetComponent<Transform>()->SetScale(Vector2(2.0f, 2.0f));
+		mPlayer->GetComponent<Transform>()->SetRotation(30.0f);
+		//sr->SetTexture(catTexture);
 
 		GameObject* bg = object::Instantiate<GameObject>
-			(enums::eLayerType::BackGround/*, Vector2(100.0f, 100.0f)*/);
+			(enums::eLayerType::Player/*, Vector2(100.0f, 100.0f)*/);
 		SpriteRenderer* bgSr = bg->AddComponent<SpriteRenderer>();
-		bgSr->SetSize(Vector2(3.0f, 3.0f));
+		//bgSr->SetSize(Vector2(3.0f, 3.0f));
 
-		graphics::Texture* bgTexture = Resources::Find<graphics::Texture>(L"Map");
+		graphics::Texture* bgTexture = Resources::Find<graphics::Texture>(L"Bubble");
 		bgSr->SetTexture(bgTexture);
 
 

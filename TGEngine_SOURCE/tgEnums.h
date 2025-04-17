@@ -18,6 +18,7 @@ namespace tg::enums
 		BackGround,
 		// Monster,
 		Player,
+		Particle,
 		Max = 16,
 	};
 	

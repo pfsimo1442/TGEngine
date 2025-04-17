@@ -6,6 +6,29 @@ namespace tg
 	class PlayerScript : public Script
 	{
 	public:
+		enum class eState
+		{
+			SitDown,
+			//LeftWalk,
+			//RightWalk,
+			//DownWalk,
+			//UpWalk,
+			Walk, 
+			Leak, 
+			Tired, 
+			Sleep,
+			Stretch, 
+		};
+
+		enum class eWalkState
+		{
+			Right,
+			Left,
+			Up,
+			Down,
+			Null, 
+		};
+
 		PlayerScript();
 		~PlayerScript();
 
@@ -15,6 +38,13 @@ namespace tg
 		void Render(HDC hdc) override;
 
 	private:
-		
+		void sitDown();
+		void move();
+
+	private:
+		eState mState;
+		eWalkState mCurrentWS;
+		eWalkState mLastWS;
+		class Animator* mAnimator;
 	};
 }
