@@ -140,6 +140,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    tg::LoadResources();
    tg::LoadScenes();
 
+   int ad = 0;
+   srand((unsigned int)(& ad));
+
    return TRUE;
 }
 

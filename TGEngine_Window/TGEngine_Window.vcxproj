@@ -132,6 +132,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="tgCat.h" />
+    <ClInclude Include="tgCatScript.h" />
     <ClInclude Include="tgLoadResources.h" />
     <ClInclude Include="tgLoadScenes.h" />
     <ClInclude Include="tgPlayer.h" />
@@ -140,6 +142,8 @@
     <ClInclude Include="tgTitleScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="tgCat.cpp" />
+    <ClCompile Include="tgCatScript.cpp" />
     <ClCompile Include="tgPlayer.cpp" />
     <ClCompile Include="tgPlayerScript.cpp" />
     <ClCompile Include="tgPlayScene.cpp" />

@@ -1,0 +1,67 @@
+#pragma once
+#include "..\\TGEngine_SOURCE\\tgScript.h"
+#include "..\\TGEngine_SOURCE\\tgTransform.h"
+
+namespace tg
+{
+	class CatScript : public Script
+	{
+	public:
+		enum class eState
+		{
+			SitDown,
+			//LeftWalk,
+			//RightWalk,
+			//DownWalk,
+			//UpWalk,
+			Walk,
+			Leak,
+			Tired,
+			Sleep,
+			Stretch,
+		};
+
+		enum class eWalkState
+		{
+			Right,
+			Left,
+			Up,
+			Down,
+			Null,
+		};
+
+		enum class eDirection
+		{
+			Left, 
+			Right,
+			Down,
+			Up,
+			End,
+		};
+
+		CatScript();
+		~CatScript();
+
+		void Initialize() override;
+		void Update() override;
+		void LateUpdate() override;
+		void Render(HDC hdc) override;
+
+	private: //fun
+		void sitDown();
+		void move();
+		void tired();
+
+		void playWalkAnimationByDirection(eDirection dir);
+		void translate(Transform* tr);
+
+	private: //var
+		eState mState;
+		eWalkState mCurrentWS;
+		eWalkState mLastWS;
+		eDirection mDirection;
+		class Animator* mAnimator;
+
+		float mTime;
+	};
+}

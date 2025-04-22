@@ -28,6 +28,12 @@
     <ClInclude Include="tgPlayerScript.h">
       <Filter>Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="tgCat.h">
+      <Filter>Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="tgCatScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tgPlayScene.cpp">
@@ -40,6 +46,12 @@
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="tgPlayerScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="tgCat.cpp">
+      <Filter>Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="tgCatScript.cpp">
       <Filter>Scripts</Filter>
     </ClCompile>
   </ItemGroup>

@@ -13,6 +13,8 @@
 #include "tgCamera.h"
 #include "tgRenderer.h"
 #include "tgAnimator.h"
+#include "tgCat.h"
+#include "tgCatScript.h"
 
 namespace tg
 {
@@ -43,43 +45,74 @@ namespace tg
 		//	, Vector2(0.0f, 0.0f), Vector2(386.0f, 246.0f), Vector2::Zero, 8, 0.05f);
 		//animator->PlayAnimation(L"CatFrontMove");
 
-		graphics::Texture* catTexture = Resources::Find<graphics::Texture>(L"Cat");
+		graphics::Texture* packmanTexture = Resources::Find<graphics::Texture>(L"Cat");
 		Animator* animator = mPlayer->AddComponent<Animator>();
 
-		animator->CreateAnimation(L"CatDownWalk", catTexture
+		animator->CreateAnimation(L"CatDownWalk", packmanTexture
 			, Vector2(0.0f, 0.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		animator->CreateAnimation(L"CatRightWalk", catTexture
+		animator->CreateAnimation(L"CatRightWalk", packmanTexture
 			, Vector2(0.0f, 32.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		animator->CreateAnimation(L"CatUpWalk", catTexture
+		animator->CreateAnimation(L"CatUpWalk", packmanTexture
 			, Vector2(0.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		animator->CreateAnimation(L"CatLeftWalk", catTexture
+		animator->CreateAnimation(L"CatLeftWalk", packmanTexture
 			, Vector2(0.0f, 96.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		animator->CreateAnimation(L"CatSitDown", catTexture
+		animator->CreateAnimation(L"CatSitDown", packmanTexture
 			, Vector2(0.0f, 128.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		animator->CreateAnimation(L"CatLeak", catTexture
+		animator->CreateAnimation(L"CatLeak", packmanTexture
 			, Vector2(0.0f, 160.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		animator->CreateAnimation(L"CatTired", catTexture
+		animator->CreateAnimation(L"CatTired", packmanTexture
 			, Vector2(0.0f, 192.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		animator->CreateAnimation(L"CatSleep", catTexture
+		animator->CreateAnimation(L"CatSleep", packmanTexture
 			, Vector2(0.0f, 224.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 2, 0.1f);
-		animator->CreateAnimation(L"CatStretch", catTexture
+		animator->CreateAnimation(L"CatStretch", packmanTexture
 			, Vector2(64.0f, 224.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 2, 0.1f);
 
 		animator->PlayAnimation(L"CatSitDown", false);
 
 		mPlayer->GetComponent<Transform>()->SetPosition(Vector2(100.0f, 100.0f));
 		mPlayer->GetComponent<Transform>()->SetScale(Vector2(2.0f, 2.0f));
-		mPlayer->GetComponent<Transform>()->SetRotation(30.0f);
+		//mPlayer->GetComponent<Transform>()->SetRotation(30.0f);
 		//sr->SetTexture(catTexture);
 
-		GameObject* bg = object::Instantiate<GameObject>
-			(enums::eLayerType::Player/*, Vector2(100.0f, 100.0f)*/);
-		SpriteRenderer* bgSr = bg->AddComponent<SpriteRenderer>();
-		//bgSr->SetSize(Vector2(3.0f, 3.0f));
+		//GameObject* bg = object::Instantiate<GameObject>
+		//	(enums::eLayerType::Player/*, Vector2(100.0f, 100.0f)*/);
+		//SpriteRenderer* bgSr = bg->AddComponent<SpriteRenderer>();
+		////bgSr->SetSize(Vector2(3.0f, 3.0f));
 
-		graphics::Texture* bgTexture = Resources::Find<graphics::Texture>(L"Bubble");
-		bgSr->SetTexture(bgTexture);
+		//graphics::Texture* bgTexture = Resources::Find<graphics::Texture>(L"Bubble");
+		//bgSr->SetTexture(bgTexture);
 
+
+		////Cat
+		Cat* cat = object::Instantiate<Cat>(enums::eLayerType::Pet);
+		cat->AddComponent<CatScript>();
+
+		graphics::Texture* catTex = Resources::Find<graphics::Texture>(L"Cat");
+		Animator* CatAnimator = cat->AddComponent<Animator>();
+
+		CatAnimator->CreateAnimation(L"CatDownWalk", catTex
+			, Vector2(0.0f, 0.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		CatAnimator->CreateAnimation(L"CatRightWalk", catTex
+			, Vector2(0.0f, 32.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		CatAnimator->CreateAnimation(L"CatUpWalk", catTex
+			, Vector2(0.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		CatAnimator->CreateAnimation(L"CatLeftWalk", catTex
+			, Vector2(0.0f, 96.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		CatAnimator->CreateAnimation(L"CatSitDown", catTex
+			, Vector2(0.0f, 128.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		CatAnimator->CreateAnimation(L"CatLeak", catTex
+			, Vector2(0.0f, 160.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		CatAnimator->CreateAnimation(L"CatTired", catTex
+			, Vector2(0.0f, 192.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		CatAnimator->CreateAnimation(L"CatSleep", catTex
+			, Vector2(0.0f, 224.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 2, 0.1f);
+		CatAnimator->CreateAnimation(L"CatStretch", catTex
+			, Vector2(64.0f, 224.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 2, 0.1f);
+
+		CatAnimator->PlayAnimation(L"CatSitDown", false);
+
+		cat->GetComponent<Transform>()->SetPosition(Vector2(200.0f, 200.0f));
+		cat->GetComponent<Transform>()->SetScale(Vector2(2.0f, 2.0f));
 
 
 		Scene::Initialize();
