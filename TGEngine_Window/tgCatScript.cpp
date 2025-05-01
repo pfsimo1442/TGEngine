@@ -12,7 +12,11 @@ namespace tg
 		, mCurrentWS(CatScript::eWalkState::Null)
 		, mLastWS(CatScript::eWalkState::Null)
 		, mAnimator(nullptr)
+		, wasSleep(false)
+		, isStretch(false)
+		, wasStretch(false)
 		, mTime(0.0f)
+		, mStretchTime(0.0f)
 	{
 	}
 	CatScript::~CatScript()
@@ -34,7 +38,7 @@ namespace tg
 			sitDown();
 			break;
 		case CatScript::eState::Walk:
-			move();
+			walk();
 			break;
 		case CatScript::eState::Leak:
 			break;
@@ -42,8 +46,10 @@ namespace tg
 			tired();
 			break;
 		case CatScript::eState::Sleep:
+			sleep();
 			break;
 		case CatScript::eState::Stretch:
+			stretch();
 			break;
 		default:
 			break;
@@ -63,19 +69,44 @@ namespace tg
 	void CatScript::sitDown()
 	{
 		mTime += Time::DeltaTime();
+		if (mTime > 1.0f && wasSleep == false)
+		{
+			int isSleep = rand() % 10;
+			if (isSleep == 0)
+			{
+				mState = eState::Sleep;
+				mAnimator->PlayAnimation(L"CatSleep");
+			}
+			wasSleep = true; 
+		}
 		if (mTime > 2.0f)
 		{
+			wasSleep = false;
 			mState = CatScript::eState::Walk;
 			int direction = (rand() % 4);
 			mDirection = (eDirection)direction;
+			if (mDirection == CatScript::eDirection::Right)
+			{
+				if (rand() % 4 == 0)
+					isStretch = true;
+				else
+					isStretch = false;
+			}
 			playWalkAnimationByDirection(mDirection);
 			mTime = 0.0f;
 		}
 	}
 
-	void CatScript::move()
+	void CatScript::walk()
 	{
 		mTime += Time::DeltaTime();
+		if (mTime > 0.5f && isStretch == true)
+		{
+			mState = eState::Stretch;
+			mAnimator->PlayAnimation(L"CatStretch", false);
+			isStretch = false;
+			wasStretch = true;
+		}
 		if (mTime > 1.0f)
 		{
 			int isTired = rand() % 6;
@@ -99,6 +130,23 @@ namespace tg
 	void CatScript::tired()
 	{
 
+	}
+
+	void CatScript::sleep()
+	{
+
+	}
+
+	void CatScript::stretch()
+	{
+		mStretchTime += Time::DeltaTime();
+		if (mStretchTime > 1.0f && wasStretch == true)
+		{
+			mState = CatScript::eState::Walk;
+			mAnimator->PlayAnimation(L"CatRightWalk");
+			wasStretch = false;
+			mStretchTime = 0.0f;
+		}
 	}
 
 	void CatScript::playWalkAnimationByDirection(eDirection dir)
@@ -133,7 +181,10 @@ namespace tg
 			pos.x -= 100.0f * Time::DeltaTime();
 			break;
 		case CatScript::eDirection::Right:
-			pos.x += 100.0f * Time::DeltaTime();
+			if (isStretch == false && wasStretch == true)
+				pos.x;
+			else
+				pos.x += 100.0f * Time::DeltaTime();
 			break;
 		case CatScript::eDirection::Down:
 			pos.y += 100.0f * Time::DeltaTime();

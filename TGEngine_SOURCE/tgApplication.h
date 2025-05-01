@@ -16,6 +16,7 @@ namespace tg
 		void LateUpdate();
 		void Render();
 
+		HWND GetHWND() { return mHwnd; }
 		HDC GetHdc() { return mHdc; }
 
 		UINT GetWidth() { return mWidth; }

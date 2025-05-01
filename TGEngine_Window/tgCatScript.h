@@ -49,8 +49,10 @@ namespace tg
 
 	private: //fun
 		void sitDown();
-		void move();
+		void walk();
 		void tired();
+		void sleep();
+		void stretch();
 
 		void playWalkAnimationByDirection(eDirection dir);
 		void translate(Transform* tr);
@@ -62,6 +64,11 @@ namespace tg
 		eDirection mDirection;
 		class Animator* mAnimator;
 
+		bool wasSleep;
+		bool isStretch;
+		bool wasStretch;
+
 		float mTime;
+		float mStretchTime;
 	};
 }

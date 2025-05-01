@@ -8,15 +8,12 @@ namespace tg
 	public:
 		enum class eState
 		{
-			SitDown,
-			//LeftWalk,
-			//RightWalk,
-			//DownWalk,
-			//UpWalk,
+			Idle,
 			Walk, 
 			Leak, 
 			Tired, 
 			Sleep,
+			Water,
 			Stretch, 
 		};
 
@@ -38,7 +35,7 @@ namespace tg
 		void Render(HDC hdc) override;
 
 	private:
-		void sitDown();
+		void idle();
 		void move();
 
 	private:

@@ -8,7 +8,7 @@
 namespace tg
 {
 	PlayerScript::PlayerScript()
-		: mState(PlayerScript::eState::SitDown)
+		: mState(PlayerScript::eState::Idle)
 		, mCurrentWS(PlayerScript::eWalkState::Null)
 		, mLastWS(PlayerScript::eWalkState::Null)
 		, mAnimator(nullptr)
@@ -29,8 +29,8 @@ namespace tg
 		
 		switch (mState)
 		{
-		case PlayerScript::eState::SitDown:
-			sitDown();
+		case PlayerScript::eState::Idle:
+			idle();
 			break;
 		case PlayerScript::eState::Walk:
 			move();
@@ -41,40 +41,13 @@ namespace tg
 			break;
 		case PlayerScript::eState::Sleep:
 			break;
+		case PlayerScript::eState::Water:
+			break;
 		case PlayerScript::eState::Stretch:
 			break;
 		default:
 			break;
 		}
-
-		//if (Input::GetKey(eKeyCode::D))
-		//{
-		//    Transform* tr = GetOwner()->GetComponent<Transform>();
-		//    Vector2 pos = tr->GetPosition();
-		//    pos.x += 100.0f * Time::DeltaTime();
-		//    tr->SetPosition(pos);
-		//}
-		//if (Input::GetKey(eKeyCode::A))
-		//{
-		//	Transform* tr = GetOwner()->GetComponent<Transform>();
-		//	Vector2 pos = tr->GetPosition();
-		//	pos.x -= 100.0f * Time::DeltaTime();
-		//	tr->SetPosition(pos);
-		//}
-		//if (Input::GetKey(eKeyCode::W))
-		//{
-		//	Transform* tr = GetOwner()->GetComponent<Transform>();
-		//	Vector2 pos = tr->GetPosition();
-		//	pos.y -= 100.0f * Time::DeltaTime();
-		//	tr->SetPosition(pos);
-		//}
-		//if (Input::GetKey(eKeyCode::S))
-		//{
-		//	Transform* tr = GetOwner()->GetComponent<Transform>();
-		//	Vector2 pos = tr->GetPosition();
-		//	pos.y += 100.0f * Time::DeltaTime();
-		//	tr->SetPosition(pos);
-		//}
 	}
 
 	void PlayerScript::LateUpdate()
@@ -87,27 +60,14 @@ namespace tg
 
 	}
 
-	void PlayerScript::sitDown()
+	void PlayerScript::idle()
 	{
-		if (Input::GetKeyDown(eKeyCode::D))
+		if (Input::GetKeyDown(eKeyCode::Mouse_Left))
 		{
 			mState = PlayerScript::eState::Walk;
-			//mAnimator->PlayAnimation(L"CatRightWalk");
-		}
-		if (Input::GetKeyDown(eKeyCode::A))
-		{
-			mState = PlayerScript::eState::Walk;
-			//mAnimator->PlayAnimation(L"CatLeftWalk");
-		}
-		if (Input::GetKeyDown(eKeyCode::W))
-		{
-			mState = PlayerScript::eState::Walk;
-			//mAnimator->PlayAnimation(L"CatUpWalk");
-		}
-		if (Input::GetKeyDown(eKeyCode::S))
-		{
-			mState = PlayerScript::eState::Walk;
-			//mAnimator->PlayAnimation(L"CatDownWalk");
+			mAnimator->PlayAnimation(L"CatRightWalk");
+
+			Vector2 mousePos = Input::GetMousePosition();
 		}
 	}
 
@@ -189,7 +149,7 @@ namespace tg
 			|| (Input::GetKeyUp(eKeyCode::D) && !(Input::GetKey(eKeyCode::W) || Input::GetKey(eKeyCode::S) || Input::GetKey(eKeyCode::A)))
 			)
 		{
-			mState = PlayerScript::eState::SitDown;
+			mState = PlayerScript::eState::Idle;
 			if (mLastWS != PlayerScript::eWalkState::Null)
 				mAnimator->PlayAnimation(L"CatSitDown", false);
 			mLastWS = PlayerScript::eWalkState::Null;
