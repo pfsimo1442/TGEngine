@@ -8,7 +8,7 @@
 namespace tg
 {
 	CatScript::CatScript()
-		: mState(CatScript::eState::SitDown)
+		: mState(CatScript::eState::Sit)
 		, mCurrentWS(CatScript::eWalkState::Null)
 		, mLastWS(CatScript::eWalkState::Null)
 		, mAnimator(nullptr)
@@ -34,8 +34,8 @@ namespace tg
 
 		switch (mState)
 		{
-		case CatScript::eState::SitDown:
-			sitDown();
+		case CatScript::eState::Sit:
+			sit();
 			break;
 		case CatScript::eState::Walk:
 			walk();
@@ -66,7 +66,7 @@ namespace tg
 
 	}
 
-	void CatScript::sitDown()
+	void CatScript::sit()
 	{
 		mTime += Time::DeltaTime();
 		if (mTime > 1.0f && wasSleep == false)
@@ -117,8 +117,8 @@ namespace tg
 			}
 			else
 			{
-				mState = CatScript::eState::SitDown;
-				mAnimator->PlayAnimation(L"CatSitDown", false);
+				mState = CatScript::eState::Sit;
+				mAnimator->PlayAnimation(L"CatSit", false);
 			}
 			mTime = 0.0f;
 		}
@@ -143,7 +143,7 @@ namespace tg
 		if (mStretchTime > 1.0f && wasStretch == true)
 		{
 			mState = CatScript::eState::Walk;
-			mAnimator->PlayAnimation(L"CatRightWalk");
+			mAnimator->PlayAnimation(L"CatWalkRight");
 			wasStretch = false;
 			mStretchTime = 0.0f;
 		}
@@ -154,16 +154,16 @@ namespace tg
 		switch (dir)
 		{
 		case CatScript::eDirection::Left:
-			mAnimator->PlayAnimation(L"CatLeftWalk");
+			mAnimator->PlayAnimation(L"CatWalkLeft");
 			break;
 		case CatScript::eDirection::Right:
-			mAnimator->PlayAnimation(L"CatRightWalk");
+			mAnimator->PlayAnimation(L"CatWalkRight");
 			break;
 		case CatScript::eDirection::Down:
-			mAnimator->PlayAnimation(L"CatDownWalk");
+			mAnimator->PlayAnimation(L"CatWalkDown");
 			break;
 		case CatScript::eDirection::Up:
-			mAnimator->PlayAnimation(L"CatUpWalk");
+			mAnimator->PlayAnimation(L"CatWalkUp");
 			break;
 		default:
 			assert(false);

@@ -42,6 +42,7 @@ namespace tg
 		case PlayerScript::eState::Sleep:
 			break;
 		case PlayerScript::eState::Water:
+			water();
 			break;
 		case PlayerScript::eState::Stretch:
 			break;
@@ -64,11 +65,12 @@ namespace tg
 	{
 		if (Input::GetKeyDown(eKeyCode::Mouse_Left))
 		{
-			mState = PlayerScript::eState::Walk;
-			mAnimator->PlayAnimation(L"CatRightWalk");
+			mState = PlayerScript::eState::Water;
+			mAnimator->PlayAnimation(L"PlayerWaterDown", false);
 
 			Vector2 mousePos = Input::GetMousePosition();
 		}
+
 	}
 
 	void PlayerScript::move()
@@ -153,6 +155,14 @@ namespace tg
 			if (mLastWS != PlayerScript::eWalkState::Null)
 				mAnimator->PlayAnimation(L"CatSitDown", false);
 			mLastWS = PlayerScript::eWalkState::Null;
+		}
+	}
+	void PlayerScript::water()
+	{
+		if (mAnimator->IsCompleteAnimation())
+		{
+			mState = PlayerScript::eState::Idle;
+			mAnimator->PlayAnimation(L"PlayerIdle");
 		}
 	}
 }

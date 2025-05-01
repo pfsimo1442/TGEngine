@@ -9,7 +9,7 @@ namespace tg
 	public:
 		enum class eState
 		{
-			SitDown,
+			Sit,
 			//LeftWalk,
 			//RightWalk,
 			//DownWalk,
@@ -48,7 +48,7 @@ namespace tg
 		void Render(HDC hdc) override;
 
 	private: //fun
-		void sitDown();
+		void sit();
 		void walk();
 		void tired();
 		void sleep();

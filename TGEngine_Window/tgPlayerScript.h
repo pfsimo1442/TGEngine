@@ -37,11 +37,18 @@ namespace tg
 	private:
 		void idle();
 		void move();
+		void water();
 
 	private:
 		eState mState;
 		eWalkState mCurrentWS;
 		eWalkState mLastWS;
 		class Animator* mAnimator;
+
+		//void (*StartEvent)();
+		//void (*CompleteEvent)();
+		//void (*EndEvent)();
+
+
 	};
 }
