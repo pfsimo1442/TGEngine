@@ -11,6 +11,18 @@ namespace tg
 	}
 	Animator::~Animator()
 	{
+		int a = 0;
+ 		for (auto& iter : mAnimations)
+		{
+			delete iter.second;
+			iter.second = nullptr;
+		}
+
+		for (auto& iter : mEvents)
+		{
+			delete iter.second;
+			iter.second = nullptr;
+		}
 	}
 
 	void Animator::Initialize()

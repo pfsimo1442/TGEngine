@@ -35,6 +35,18 @@ namespace tg
 			return resource;
 		}
 
+		static void Release()
+		{
+			for (auto& iter : mResources)
+			{
+				if (iter.second == nullptr)
+					continue;
+
+				delete iter.second;
+				iter.second = nullptr;
+			}
+		}
+
 	private:
 		static std::map<std::wstring, Resource*> mResources;
 	};

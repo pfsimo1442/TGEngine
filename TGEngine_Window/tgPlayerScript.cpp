@@ -4,6 +4,10 @@
 #include "tgTime.h"
 #include "tgGameObject.h"
 #include "tgAnimator.h"
+#include "tgCat.h"
+#include "tgCatScript.h"
+#include "tgObject.h"
+#include "tgResources.h"
 
 namespace tg
 {
@@ -63,7 +67,35 @@ namespace tg
 
 	void PlayerScript::AttackEffect()
 	{
-		
+		Cat* mCat = object::Instantiate<Cat>(enums::eLayerType::Pet);
+		mCat->AddComponent<CatScript>();
+
+		graphics::Texture* catTex = Resources::Find<graphics::Texture>(L"Cat");
+		Animator* catAni = mCat->AddComponent<Animator>();
+
+		catAni->CreateAnimation(L"CatWalkDown", catTex
+			, Vector2(0.0f, 0.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		catAni->CreateAnimation(L"CatWalkRight", catTex
+			, Vector2(0.0f, 32.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		catAni->CreateAnimation(L"CatWalkUp", catTex
+			, Vector2(0.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		catAni->CreateAnimation(L"CatWalkLeft", catTex
+			, Vector2(0.0f, 96.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		catAni->CreateAnimation(L"CatSit", catTex
+			, Vector2(0.0f, 128.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		catAni->CreateAnimation(L"CatLeak", catTex
+			, Vector2(0.0f, 160.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		catAni->CreateAnimation(L"CatTired", catTex
+			, Vector2(0.0f, 192.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		catAni->CreateAnimation(L"CatSleep", catTex
+			, Vector2(0.0f, 224.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 2, 1.2f);
+		catAni->CreateAnimation(L"CatStretch", catTex
+			, Vector2(64.0f, 224.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 2, 0.5f);
+
+		mCat->GetComponent<Transform>()->SetPosition(Vector2(200.0f, 200.0f));
+		mCat->GetComponent<Transform>()->SetScale(Vector2(2.0f, 2.0f));
+
+		catAni->PlayAnimation(L"CatSit", false);
 	}
 
 	void PlayerScript::idle()

@@ -2,6 +2,7 @@
 #include "tgInput.h"
 #include "tgTime.h"
 #include "tgSceneManager.h"
+#include "tgResources.h"
 
 namespace tg
 {
@@ -55,6 +56,12 @@ namespace tg
 		SceneManager::Render(mBackHdc);
 
 		copyRenderTarget(mBackHdc, mHdc);
+	}
+
+	void Application::Release()
+	{
+		SceneManager::Release();
+		Resources::Release();
 	}
 
 	void Application::clearRenderTarget()

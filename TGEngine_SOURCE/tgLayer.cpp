@@ -8,6 +8,14 @@ namespace tg
 	}
 	Layer::~Layer()
 	{
+		for (GameObject* gameObject : mGameObjects)
+		{
+			if (gameObject == nullptr)
+				continue;
+
+			delete gameObject;
+			gameObject = nullptr;
+		}
 	}
 
 	void Layer::Initialize()
