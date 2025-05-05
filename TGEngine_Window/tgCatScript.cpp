@@ -71,7 +71,7 @@ namespace tg
 		mTime += Time::DeltaTime();
 		if (mTime > 1.0f && wasSleep == false)
 		{
-			int isSleep = rand() % 10;
+			int isSleep = rand() % 24;
 			if (isSleep == 0)
 			{
 				mState = eState::Sleep;
@@ -109,7 +109,7 @@ namespace tg
 		}
 		if (mTime > 1.0f)
 		{
-			int isTired = rand() % 6;
+			int isTired = rand() % 12;
 			if (isTired == 0)
 			{
 				mState = eState::Tired;

@@ -33,6 +33,7 @@ namespace tg
 		renderer::mainCamera = cameraComp;
 
 
+
 		//// Player
 		mPlayer = object::Instantiate<Player>(enums::eLayerType::Particle);
 		PlayerScript* plScript = mPlayer->AddComponent<PlayerScript>();
@@ -84,6 +85,8 @@ namespace tg
 
 		catAni->PlayAnimation(L"CatSit", false);
 
+		////main camera - set target
+		cameraComp->SetTarget(mCat);
 
 		Scene::Initialize();
 	}

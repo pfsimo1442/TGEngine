@@ -17,10 +17,11 @@ namespace tg
 		void LateUpdate() override;
 		void Render(HDC hdc) override;
 		
+		void SetTarget(GameObject* target) { mTarget = target; }
 
 	private:
 		//std::vector<GameObject*> mGameObjects;
-		GameObject* mTarget;
+		class GameObject* mTarget;
 
 		Vector2 mDistance;
 		Vector2 mResolution;
