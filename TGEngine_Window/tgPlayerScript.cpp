@@ -61,6 +61,11 @@ namespace tg
 
 	}
 
+	void PlayerScript::AttackEffect()
+	{
+		
+	}
+
 	void PlayerScript::idle()
 	{
 		if (Input::GetKeyDown(eKeyCode::Mouse_Left))

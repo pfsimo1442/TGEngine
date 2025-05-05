@@ -34,6 +34,8 @@ namespace tg
 		void LateUpdate() override;
 		void Render(HDC hdc) override;
 
+		void AttackEffect();
+
 	private:
 		void idle();
 		void move();
@@ -44,11 +46,5 @@ namespace tg
 		eWalkState mCurrentWS;
 		eWalkState mLastWS;
 		class Animator* mAnimator;
-
-		//void (*StartEvent)();
-		//void (*CompleteEvent)();
-		//void (*EndEvent)();
-
-
 	};
 }

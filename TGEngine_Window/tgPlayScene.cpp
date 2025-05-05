@@ -27,6 +27,7 @@ namespace tg
 
 	void PlayScene::Initialize()
 	{
+		//// Main Camera
 		GameObject* camera = object::Instantiate<GameObject>(enums::eLayerType::None, Vector2(344.0f, 442.0f));
 		Camera*  cameraComp = camera->AddComponent<Camera>();
 		renderer::mainCamera = cameraComp;
@@ -34,7 +35,7 @@ namespace tg
 
 		//// Player
 		mPlayer = object::Instantiate<Player>(enums::eLayerType::Particle);
-		mPlayer->AddComponent<PlayerScript>();
+		PlayerScript* plScript = mPlayer->AddComponent<PlayerScript>();
 
 		graphics::Texture* playerTex = Resources::Find<graphics::Texture>(L"PlayerSDV");
 		Animator* playerAni = mPlayer->AddComponent<Animator>();
@@ -44,12 +45,13 @@ namespace tg
 		playerAni->CreateAnimation(L"PlayerWaterDown", playerTex
 			, Vector2(0.0f, 2000.f), Vector2(250.0f, 250.0f), Vector2::Zero, 12, 0.1f);
 
-		playerAni->PlayAnimation(L"PlayerIdle");
-
 		mPlayer->GetComponent<Transform>()->SetPosition(Vector2(100.0f, 100.0f));
 		mPlayer->GetComponent<Transform>()->SetScale(Vector2(0.5f, 0.5f));
 	
-
+		playerAni->PlayAnimation(L"PlayerIdle");
+		
+		playerAni->GetCompleteEvent(L"PlayerWaterDown") = std::bind(&PlayerScript::AttackEffect, plScript);
+		
 
 		//// Cat
 		Cat* mCat = object::Instantiate<Cat>(enums::eLayerType::Pet);
@@ -77,10 +79,10 @@ namespace tg
 		catAni->CreateAnimation(L"CatStretch", catTex
 			, Vector2(64.0f, 224.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 2, 0.5f);
 
-		catAni->PlayAnimation(L"CatSit", false);
-
 		mCat->GetComponent<Transform>()->SetPosition(Vector2(200.0f, 200.0f));
 		mCat->GetComponent<Transform>()->SetScale(Vector2(2.0f, 2.0f));
+
+		catAni->PlayAnimation(L"CatSit", false);
 
 
 		Scene::Initialize();
