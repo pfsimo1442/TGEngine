@@ -86,7 +86,7 @@ namespace tg
 		catAni->PlayAnimation(L"CatSit", false);
 
 		////main camera - set target
-		cameraComp->SetTarget(mCat);
+		//cameraComp->SetTarget(mCat);
 
 		Scene::Initialize();
 	}

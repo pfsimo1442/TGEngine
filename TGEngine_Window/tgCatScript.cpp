@@ -4,6 +4,7 @@
 #include "tgTime.h"
 #include "tgGameObject.h"
 #include "tgAnimator.h"
+#include "tgObject.h"
 
 namespace tg
 {
@@ -16,6 +17,7 @@ namespace tg
 		, isStretch(false)
 		, wasStretch(false)
 		, mTime(0.0f)
+		, mDeathTime(0.0f)
 		, mStretchTime(0.0f)
 	{
 	}
@@ -29,6 +31,12 @@ namespace tg
 
 	void CatScript::Update()
 	{
+		mDeathTime += Time::DeltaTime();
+		if (mDeathTime >= 8.0f)
+		{
+			object::Destroy(GetOwner());
+		}
+
 		if (mAnimator == nullptr)
 			mAnimator = GetOwner()->GetComponent<Animator>();
 

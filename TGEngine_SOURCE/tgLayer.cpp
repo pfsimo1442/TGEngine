@@ -62,6 +62,27 @@ namespace tg
 		}
 	}
 
+	void Layer::Destroy()
+	{
+		for (GameObjIter iter = mGameObjects.begin()
+			; iter != mGameObjects.end();)
+		{
+			GameObject::eState activeState = (*iter)->GetActiveState();
+			if (activeState == GameObject::eState::Dead)
+			{
+				GameObject* deathObj = (*iter);
+				iter = mGameObjects.erase(iter);
+
+				delete deathObj;
+				deathObj = nullptr;
+				 
+				continue;
+			}
+
+			iter++;
+		}
+	}
+
 	void Layer::AddGameObject(GameObject* gameObject)
 	{
 		if (gameObject == nullptr)

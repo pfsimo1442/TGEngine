@@ -69,6 +69,7 @@ namespace tg
 		bool wasStretch;
 
 		float mTime;
+		float mDeathTime;
 		float mStretchTime;
 	};
 }

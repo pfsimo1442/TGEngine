@@ -15,6 +15,7 @@ namespace tg
 		void Update();
 		void LateUpdate();
 		void Render();
+		void Destroy();
 		void Release();
 
 		HWND GetHWND() { return mHwnd; }

@@ -1,12 +1,23 @@
 #pragma once
 #include "CommonInclude.h"
 #include "tgComponent.h"
+//#include "tgObject.h"
 
 namespace tg
 {
 	class GameObject
 	{
 	public:
+		//friend void object::Destroy(GameObject* obj);
+
+		enum class eState
+		{
+			Active,
+			Pause,
+			Dead,
+			End
+		};
+
 		GameObject();
 		~GameObject();
 
@@ -39,11 +50,19 @@ namespace tg
 			return component;
 		}
 
+		eState GetActiveState() { return mState; }
+		void SetActiveState(bool power)
+		{
+			if (power == true) mState = eState::Active;
+			if (power == false) mState = eState::Pause;
+		}
+		void Death() { mState = eState::Dead; }
+
 	private:
 		void initializeTransform();
 
 	private:
-		// gameobject's coorderate
+		eState mState;
 		std::vector<Component*> mComponents;
 	};
 }
