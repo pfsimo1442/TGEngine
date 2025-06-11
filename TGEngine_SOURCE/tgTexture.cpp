@@ -64,8 +64,8 @@ namespace tg::graphics
 				mbAlpha = true;
 			else if (info.bmBitsPixel == 24)
 				mbAlpha = false;
-			else
-				assert(false);
+			//else
+			//	assert(false);
 			
 
 			HDC mainDC = application.GetHdc();
