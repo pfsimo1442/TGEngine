@@ -66,7 +66,7 @@ namespace tg
 	{
 		POINT mousePos = {};
 		GetCursorPos(&mousePos);
-		ScreenToClient(application.GetHWND(), &mousePos);
+		ScreenToClient(application.GetHwnd(), &mousePos);
 
 		mousePos.x = mousePos.x;
 		mousePos.y = mousePos.y;

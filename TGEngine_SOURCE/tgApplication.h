@@ -18,7 +18,7 @@ namespace tg
 		void Destroy();
 		void Release();
 
-		HWND GetHWND() { return mHwnd; }
+		HWND GetHwnd() { return mHwnd; }
 		HDC GetHdc() { return mHdc; }
 
 		UINT GetWidth() { return mWidth; }

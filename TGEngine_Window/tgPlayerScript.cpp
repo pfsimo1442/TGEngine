@@ -73,23 +73,23 @@ namespace tg
 		graphics::Texture* catTex = Resources::Find<graphics::Texture>(L"Cat");
 		Animator* catAni = mCat->AddComponent<Animator>();
 
-		catAni->CreateAnimation(L"CatWalkDown", catTex
+		catAni->CreateAnimationBySpriteSize(L"CatWalkDown", catTex
 			, Vector2(0.0f, 0.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		catAni->CreateAnimation(L"CatWalkRight", catTex
+		catAni->CreateAnimationBySpriteSize(L"CatWalkRight", catTex
 			, Vector2(0.0f, 32.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		catAni->CreateAnimation(L"CatWalkUp", catTex
+		catAni->CreateAnimationBySpriteSize(L"CatWalkUp", catTex
 			, Vector2(0.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		catAni->CreateAnimation(L"CatWalkLeft", catTex
+		catAni->CreateAnimationBySpriteSize(L"CatWalkLeft", catTex
 			, Vector2(0.0f, 96.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		catAni->CreateAnimation(L"CatSit", catTex
+		catAni->CreateAnimationBySpriteSize(L"CatSit", catTex
 			, Vector2(0.0f, 128.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		catAni->CreateAnimation(L"CatLeak", catTex
+		catAni->CreateAnimationBySpriteSize(L"CatLeak", catTex
 			, Vector2(0.0f, 160.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		catAni->CreateAnimation(L"CatTired", catTex
+		catAni->CreateAnimationBySpriteSize(L"CatTired", catTex
 			, Vector2(0.0f, 192.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		catAni->CreateAnimation(L"CatSleep", catTex
+		catAni->CreateAnimationBySpriteSize(L"CatSleep", catTex
 			, Vector2(0.0f, 224.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 2, 1.2f);
-		catAni->CreateAnimation(L"CatStretch", catTex
+		catAni->CreateAnimationBySpriteSize(L"CatStretch", catTex
 			, Vector2(64.0f, 224.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 2, 0.5f);
 
 		mCat->GetComponent<Transform>()->SetPosition(Vector2(200.0f, 200.0f));

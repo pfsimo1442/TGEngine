@@ -13,6 +13,8 @@ namespace tg::graphics
 			None,
 		};
 
+		static Texture* Create(const std::wstring& name, UINT width, UINT height);
+
 		Texture();
 		~Texture();
 
@@ -20,11 +22,15 @@ namespace tg::graphics
 
 		UINT GetWidth() { return mWidth; }
 		UINT GetHeight() { return mHeight; }
+		void SetWidth(UINT width) { mWidth = width; }
+		void SetHeight(UINT height) { mHeight = height; }
 		HDC GetHdc() { return mHdc; }
 		eTextureType GetTextureType() { return mType; }
 		Gdiplus::Image* GetImage() { return mImage; }
 
 	private:
+		bool mbAlpha;
+
 		eTextureType mType;
 		Gdiplus::Image* mImage;
 		HBITMAP mBitmap;

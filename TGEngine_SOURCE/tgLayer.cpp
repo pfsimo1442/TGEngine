@@ -36,6 +36,11 @@ namespace tg
 			if (gameObj == nullptr)
 				continue;
 
+			GameObject::eState state = gameObj->GetActiveState();
+			if (state == GameObject::eState::Pause
+				|| state == GameObject::eState::Dead)
+				continue;
+
 			gameObj->Update();
 		}
 	}
@@ -47,6 +52,11 @@ namespace tg
 			if (gameObj == nullptr)
 				continue;
 
+			GameObject::eState state = gameObj->GetActiveState();
+			if (state == GameObject::eState::Pause
+				|| state == GameObject::eState::Dead)
+				continue;
+
 			gameObj->LateUpdate();
 		}
 	}
@@ -56,6 +66,11 @@ namespace tg
 		for (GameObject* gameObj : mGameObjects)
 		{
 			if (gameObj == nullptr)
+				continue;
+
+			GameObject::eState state = gameObj->GetActiveState();
+			if (state == GameObject::eState::Pause
+				|| state == GameObject::eState::Dead)
 				continue;
 
 			gameObj->Render(hdc);
@@ -75,7 +90,7 @@ namespace tg
 
 				delete deathObj;
 				deathObj = nullptr;
-				 
+				
 				continue;
 			}
 

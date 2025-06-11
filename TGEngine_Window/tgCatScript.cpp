@@ -12,6 +12,7 @@ namespace tg
 		: mState(CatScript::eState::Sit)
 		, mCurrentWS(CatScript::eWalkState::Null)
 		, mLastWS(CatScript::eWalkState::Null)
+		, mDirection(CatScript::eDirection::End)
 		, mAnimator(nullptr)
 		, wasSleep(false)
 		, isStretch(false)
@@ -34,7 +35,7 @@ namespace tg
 		mDeathTime += Time::DeltaTime();
 		if (mDeathTime >= 8.0f)
 		{
-			object::Destroy(GetOwner());
+			//object::Destroy(GetOwner());
 		}
 
 		if (mAnimator == nullptr)
