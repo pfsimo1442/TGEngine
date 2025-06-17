@@ -39,6 +39,7 @@ namespace tg
 
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector2 pos = tr->GetPosition();
+		Vector2 posStyle = tr->GetPositionStyle();
 		float rot = tr->GetRotation();
 		Vector2 scale = tr->GetScale();
 
@@ -55,7 +56,7 @@ namespace tg
 				func.SourceConstantAlpha = 255; // 0(transparent) ~ 255(Opaque)
 
 				AlphaBlend(hdc
-					, pos.x, pos.y
+					, pos.x - (mTexture->GetWidth() * posStyle.x * scale.x), pos.y - (mTexture->GetHeight() * posStyle.y * scale.y)
 					, mTexture->GetWidth() * mSize.x * scale.x, mTexture->GetHeight() * mSize.y * scale.y
 					, mTexture->GetHdc()
 					, 0, 0
@@ -65,7 +66,7 @@ namespace tg
 			else
 			{
 				TransparentBlt(hdc
-					, pos.x, pos.y
+					, pos.x - (mTexture->GetWidth() * posStyle.x * scale.x), pos.y - (mTexture->GetHeight() * posStyle.y * scale.y)
 					, mTexture->GetWidth() * mSize.x * scale.x, mTexture->GetHeight() * mSize.y * scale.y
 					, mTexture->GetHdc()
 					, 0, 0
@@ -79,7 +80,7 @@ namespace tg
 			imgAtt.SetColorKey(Gdiplus::Color(230, 230, 230), Gdiplus::Color(255, 255, 255));
 			
 			Gdiplus::Graphics graphics(hdc);
-
+			
 			graphics.TranslateTransform(pos.x, pos.y);
 			graphics.RotateTransform(rot);
 			graphics.TranslateTransform(-pos.x, -pos.y);
@@ -87,7 +88,7 @@ namespace tg
 			graphics.DrawImage(mTexture->GetImage()
 				, Gdiplus::Rect
 				(
-					pos.x, pos.y
+					pos.x - (mTexture->GetWidth() * posStyle.x * scale.x), pos.y - (mTexture->GetHeight() * posStyle.y * scale.y)
 					, mTexture->GetWidth() * mSize.x * scale.x
 					, mTexture->GetHeight() * mSize.y * scale.y
 				)

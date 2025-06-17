@@ -68,7 +68,9 @@ namespace tg
 	void PlayerScript::AttackEffect()
 	{
 		Cat* mCat = object::Instantiate<Cat>(enums::eLayerType::Pet);
-		mCat->AddComponent<CatScript>();
+		CatScript* catScr = mCat->AddComponent<CatScript>();
+
+		catScr->SetPlayer(GetOwner());
 
 		graphics::Texture* catTex = Resources::Find<graphics::Texture>(L"Cat");
 		Animator* catAni = mCat->AddComponent<Animator>();
@@ -92,7 +94,9 @@ namespace tg
 		catAni->CreateAnimationBySpriteSize(L"CatStretch", catTex
 			, Vector2(64.0f, 224.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 2, 0.5f);
 
-		mCat->GetComponent<Transform>()->SetPosition(Vector2(200.0f, 200.0f));
+		Transform* tr = GetOwner()->GetComponent<Transform>();
+
+		mCat->GetComponent<Transform>()->SetPosition(tr->GetPosition());
 		mCat->GetComponent<Transform>()->SetScale(Vector2(2.0f, 2.0f));
 
 		catAni->PlayAnimation(L"CatSit", false);

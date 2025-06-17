@@ -20,6 +20,7 @@ namespace tg
 		, mTime(0.0f)
 		, mDeathTime(0.0f)
 		, mStretchTime(0.0f)
+		, mRadian(0.0f)
 	{
 	}
 	CatScript::~CatScript()
@@ -78,7 +79,35 @@ namespace tg
 	void CatScript::sit()
 	{
 		mTime += Time::DeltaTime();
-		if (mTime > 1.0f && wasSleep == false)
+
+		Transform* tr = GetOwner()->GetComponent<Transform>();
+		Vector2 pos = tr->GetPosition();
+		//pos += Vector2::Down * (100.0f * Time::DeltaTime());
+
+		Vector2 mousePos = Vector2::Zero;
+		/*if (Input::GetKeyDown(eKeyCode::D))
+			mousePos += Vector2::Right;
+		if (Input::GetKeyDown(eKeyCode::A))
+			mousePos += Vector2::Left;
+		if (Input::GetKeyDown(eKeyCode::W))
+			mousePos += Vector2::Up;
+		if (Input::GetKeyDown(eKeyCode::S))
+			mousePos += Vector2::Down;*/
+		//mousePos.normalize();
+		Vector2 dest = Vector2::Zero;
+		Transform* plTr = GetOwner()->GetComponent<Transform>();
+
+		if (Input::GetKey(eKeyCode::Arrow_Up))
+		{
+			mousePos = Input::GetMousePosition();
+			dest = mousePos - plTr->GetPosition();
+		}
+
+		pos += dest.normalize() * (100.0f * Time::DeltaTime());
+
+		tr->SetPosition(pos);
+
+		/*if (mTime > 1.0f && wasSleep == false)
 		{
 			int isSleep = rand() % 24;
 			if (isSleep == 0)
@@ -103,7 +132,7 @@ namespace tg
 			}
 			playWalkAnimationByDirection(mDirection);
 			mTime = 0.0f;
-		}
+		}*/
 	}
 
 	void CatScript::walk()

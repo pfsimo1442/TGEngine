@@ -47,6 +47,8 @@ namespace tg
 		void LateUpdate() override;
 		void Render(HDC hdc) override;
 
+		void SetPlayer(GameObject* player) { mPlayer = player; }
+
 	private: //fun
 		void sit();
 		void walk();
@@ -71,5 +73,9 @@ namespace tg
 		float mTime;
 		float mDeathTime;
 		float mStretchTime;
+
+		GameObject* mPlayer;
+		
+		float mRadian;
 	};
 }

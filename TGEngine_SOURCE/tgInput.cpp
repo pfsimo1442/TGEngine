@@ -68,8 +68,8 @@ namespace tg
 		GetCursorPos(&mousePos);
 		ScreenToClient(application.GetHwnd(), &mousePos);
 
-		mousePos.x = mousePos.x;
-		mousePos.y = mousePos.y;
+		mMousePosition.x = mousePos.x;
+		mMousePosition.y = mousePos.y;
 	}
 
 	void Input::updateKey(Input::Key& key)

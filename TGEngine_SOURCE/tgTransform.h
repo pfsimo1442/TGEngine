@@ -20,12 +20,15 @@ namespace tg
         Vector2 GetPosition() { return mPosition; }
         void SetScale(Vector2 scale) { mScale.x = scale.x; mScale.y = scale.y; }
         Vector2 GetScale() { return mScale; }
+        void SetPositionStyle(Vector2 define) { mPositionStyle.x = define.x; mPositionStyle.y = define.y; }
+        Vector2 GetPositionStyle() { return mPositionStyle; }
         void SetRotation(float rotate) { mRotation = rotate; }
         float GetRotation() { return mRotation; }
         
     private:
         Vector2 mPosition;
         Vector2 mScale;
+        Vector2 mPositionStyle;
         float mRotation;
     };
 }

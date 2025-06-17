@@ -16,9 +16,9 @@ namespace tg::enums
 	{
 		None,
 		BackGround,
+		Player,
 		Pet, 
 		// Monster,
-		Player,
 		Particle,
 		Max = 16,
 	};

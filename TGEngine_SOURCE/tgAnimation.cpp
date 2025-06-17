@@ -52,6 +52,7 @@ namespace tg
 		GameObject* gameObj = mAnimator->GetOwner();
 		Transform* tr = gameObj->GetComponent<Transform>();
 		Vector2 pos = tr->GetPosition();
+		Vector2 posStyle = tr->GetPositionStyle();
 		float rot = tr->GetRotation();
 		Vector2 scale = tr->GetScale();
 
@@ -74,7 +75,7 @@ namespace tg
 				func.SourceConstantAlpha = 255; // 0(transparent) ~ 255(Opaque)
 
 				AlphaBlend(hdc
-					, pos.x - (sprite.size.x / 2.0f) + sprite.offset.x, pos.y - (sprite.size.y / 2.0f) + sprite.offset.y
+					, pos.x - (sprite.size.x * posStyle.x * scale.x) + sprite.offset.x, pos.y - (sprite.size.y * posStyle.y * scale.y) + sprite.offset.y
 					, sprite.size.x * scale.x, sprite.size.y * scale.y
 					, imgHdc
 					, sprite.leftTop.x, sprite.leftTop.y
@@ -84,7 +85,7 @@ namespace tg
 			else
 			{
 				TransparentBlt(hdc
-					, pos.x - (sprite.size.x / 2.0f) + sprite.offset.x, pos.y - (sprite.size.y / 2.0f) + sprite.offset.y
+					, pos.x - (sprite.size.x * posStyle.x * scale.x) + sprite.offset.x, pos.y - (sprite.size.y * posStyle.y * scale.y) + sprite.offset.y
 					, sprite.size.x * scale.x, sprite.size.y * scale.y
 					, imgHdc
 					, sprite.leftTop.x, sprite.leftTop.y
@@ -107,7 +108,7 @@ namespace tg
 			graphics.DrawImage(mTexture->GetImage()
 				, Gdiplus::Rect
 				(
-					pos.x - (sprite.size.x / 2.0f), pos.y - (sprite.size.y / 2.0f)
+					pos.x - (sprite.size.x * posStyle.x * scale.x), pos.y - (sprite.size.y * posStyle.y * scale.y)
 					, sprite.size.x * scale.x, sprite.size.y * scale.y
 				)
 				, sprite.leftTop.x, sprite.leftTop.y
