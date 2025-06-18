@@ -15,6 +15,7 @@
 #include "tgAnimator.h"
 #include "tgCat.h"
 #include "tgCatScript.h"
+#include "tgBoxCollider2D.h"
 
 namespace tg
 {
@@ -34,10 +35,11 @@ namespace tg
 		renderer::mainCamera = cameraComp;
 
 
-
 		//// Player
 		mPlayer = object::Instantiate<Player>(enums::eLayerType::Player);
-		PlayerScript* plScript = mPlayer->AddComponent<PlayerScript>();
+		PlayerScript* playerScr = mPlayer->AddComponent<PlayerScript>();
+		BoxCollider2D* playerCol = mPlayer->AddComponent<BoxCollider2D>();
+		playerCol->SetOffset(Vector2(-50.0f, -50.0f));
 
 		graphics::Texture* playerTex = Resources::Find<graphics::Texture>(L"PlayerSDV");
 		Animator* playerAni = mPlayer->AddComponent<Animator>();
@@ -49,49 +51,51 @@ namespace tg
 
 		mPlayer->GetComponent<Transform>()->SetPosition(Vector2::One * 100.0f);
 		//mPlayer->GetComponent<Transform>()->SetPositionStyle(Vector2(0.375f, 0.25f));
-		mPlayer->GetComponent<Transform>()->SetScale(Vector2(0.5f, 0.5f));
+		//mPlayer->GetComponent<Transform>()->SetScale(Vector2(0.5f, 0.5f));
 	
 		playerAni->PlayAnimation(L"PlayerIdle");
 		
-		playerAni->GetCompleteEvent(L"PlayerWaterDown") = std::bind(&PlayerScript::AttackEffect, plScript);
+		playerAni->GetCompleteEvent(L"PlayerWaterDown") = std::bind(&PlayerScript::AttackEffect, playerScr);
 		
 
-		////// Cat
-		//Cat* mCat = object::Instantiate<Cat>(enums::eLayerType::Pet);
-		//mCat->AddComponent<CatScript>();
-		////cameraComp->SetTarget(mCat);
-		//graphics::Texture* catTex = Resources::Find<graphics::Texture>(L"Cat");
-		//Animator* catAni = mCat->AddComponent<Animator>();
+		//// Cat
+		Cat* cat = object::Instantiate<Cat>(enums::eLayerType::Pet);
+		CatScript* catScript = cat->AddComponent<CatScript>();
+		BoxCollider2D* catCollider = cat->AddComponent<BoxCollider2D>();
+		catCollider->SetOffset(Vector2(-50.0f, -50.0f));
 
-		///*catAni->CreateAnimationBySpriteSize(L"CatWalkDown", catTex
-		//	, Vector2(0.0f, 0.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		//catAni->CreateAnimationBySpriteSize(L"CatWalkRight", catTex
-		//	, Vector2(0.0f, 32.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		//catAni->CreateAnimationBySpriteSize(L"CatWalkUp", catTex
-		//	, Vector2(0.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		//catAni->CreateAnimationBySpriteSize(L"CatWalkLeft", catTex
-		//	, Vector2(0.0f, 96.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		//catAni->CreateAnimationBySpriteSize(L"CatSit", catTex
-		//	, Vector2(0.0f, 128.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		//catAni->CreateAnimationBySpriteSize(L"CatLeak", catTex
-		//	, Vector2(0.0f, 160.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		//catAni->CreateAnimationBySpriteSize(L"CatTired", catTex
-		//	, Vector2(0.0f, 192.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		//catAni->CreateAnimationBySpriteSize(L"CatSleep", catTex
-		//	, Vector2(0.0f, 224.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 2, 1.2f);
-		//catAni->CreateAnimationBySpriteSize(L"CatStretch", catTex
-		//	, Vector2(64.0f, 224.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 2, 0.5f);*/
+		graphics::Texture* catTex = Resources::Find<graphics::Texture>(L"Cat");
+		Animator* catAni = cat->AddComponent<Animator>();
 
-		//catAni->CreateAnimationByFolder(L"Mushroom", L"..\\Resources\\Mushroom", Vector2::Zero, 0.1f);
+		/*catAni->CreateAnimationBySpriteSize(L"CatWalkDown", catTex
+			, Vector2(0.0f, 0.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		catAni->CreateAnimationBySpriteSize(L"CatWalkRight", catTex
+			, Vector2(0.0f, 32.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		catAni->CreateAnimationBySpriteSize(L"CatWalkUp", catTex
+			, Vector2(0.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		catAni->CreateAnimationBySpriteSize(L"CatWalkLeft", catTex
+			, Vector2(0.0f, 96.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		catAni->CreateAnimationBySpriteSize(L"CatSit", catTex
+			, Vector2(0.0f, 128.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		catAni->CreateAnimationBySpriteSize(L"CatLeak", catTex
+			, Vector2(0.0f, 160.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		catAni->CreateAnimationBySpriteSize(L"CatTired", catTex
+			, Vector2(0.0f, 192.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
+		catAni->CreateAnimationBySpriteSize(L"CatSleep", catTex
+			, Vector2(0.0f, 224.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 2, 1.2f);
+		catAni->CreateAnimationBySpriteSize(L"CatStretch", catTex
+			, Vector2(64.0f, 224.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 2, 0.5f);*/
 
-		//mCat->GetComponent<Transform>()->SetPosition(Vector2(300.0f, 100.0f));
-		//mCat->GetComponent<Transform>()->SetScale(Vector2(2.0f, 2.0f));
+		catAni->CreateAnimationByFolder(L"MushroomIdle", L"..\\Resources\\Mushroom", Vector2::Zero, 0.1f);
 
-		////catAni->PlayAnimation(L"CatSit", false);
-		//catAni->PlayAnimation(L"Mushroom");
+		cat->GetComponent<Transform>()->SetPosition(Vector2(300.0f, 100.0f));
+		//cat->GetComponent<Transform>()->SetScale(Vector2(2.0f, 2.0f));
+
+		//catAni->PlayAnimation(L"CatSit", false);
+		catAni->PlayAnimation(L"MushroomIdle");
 
 		////main camera - set target
-		//cameraComp->SetTarget(mCat);
+		//cameraComp->SetTarget(cat);
 
 		Scene::Initialize();
 	}

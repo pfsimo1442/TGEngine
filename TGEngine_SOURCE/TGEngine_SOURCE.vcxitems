@@ -18,7 +18,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgAnimation.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgAnimator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgBoxCollider2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgCamera.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgCapsuleCollider2D.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgCircleCollider2D.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgCollider.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgEnums.h" />
@@ -42,7 +46,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgAnimation.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgBoxCollider2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgCamera.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgCapsuleCollider2D.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgCircleCollider2D.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgCollider.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgGameObject.cpp" />

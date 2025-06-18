@@ -92,6 +92,10 @@ namespace tg
 					, sprite.size.x, sprite.size.y
 					, RGB(255, 0, 255));
 			}
+
+			/*Rectangle(hdc
+				, pos.x, pos.y
+				, pos.x + 100, pos.y + 100);*/
 		}
 		else if (type == graphics::Texture::eTextureType::Png)
 		{
