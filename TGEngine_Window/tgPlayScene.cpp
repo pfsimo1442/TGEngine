@@ -16,6 +16,7 @@
 #include "tgCat.h"
 #include "tgCatScript.h"
 #include "tgBoxCollider2D.h"
+#include "tgCollisionManager.h"
 
 namespace tg
 {
@@ -29,6 +30,9 @@ namespace tg
 
 	void PlayScene::Initialize()
 	{
+		//// Collision Manager
+		CollisionManager::CollisionLayerCheck(enums::eLayerType::Player, enums::eLayerType::Pet, true);
+
 		//// Main Camera
 		GameObject* camera = object::Instantiate<GameObject>(enums::eLayerType::None, Vector2(344.0f, 442.0f));
 		Camera*  cameraComp = camera->AddComponent<Camera>();

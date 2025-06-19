@@ -112,6 +112,31 @@ namespace tg
 			Vector2 mousePos = Input::GetMousePosition();
 		}
 
+		Transform* tr = GetOwner()->GetComponent<Transform>();
+		Vector2 pos = tr->GetPosition();
+
+		if (Input::GetKey(eKeyCode::D))
+		{
+			pos.x += 100.0f * Time::DeltaTime();
+			mCurrentWS = PlayerScript::eWalkState::Right;
+		}
+		if (Input::GetKey(eKeyCode::A))
+		{
+			pos.x -= 100.0f * Time::DeltaTime();
+			mCurrentWS = PlayerScript::eWalkState::Left;
+		}
+		if (Input::GetKey(eKeyCode::W))
+		{
+			pos.y -= 100.0f * Time::DeltaTime();
+			mCurrentWS = PlayerScript::eWalkState::Up;
+		}
+		if (Input::GetKey(eKeyCode::S))
+		{
+			pos.y += 100.0f * Time::DeltaTime();
+			mCurrentWS = PlayerScript::eWalkState::Down;
+		}
+
+		tr->SetPosition(pos);
 	}
 
 	void PlayerScript::move()
@@ -166,9 +191,9 @@ namespace tg
 			if (Input::GetKey(eKeyCode::A))
 				mCurrentWS = PlayerScript::eWalkState::Left;
 		}
-		
 
 		tr->SetPosition(pos);
+
 
 		if (mCurrentWS != mLastWS)
 		{

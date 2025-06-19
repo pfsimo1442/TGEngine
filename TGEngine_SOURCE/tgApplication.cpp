@@ -3,6 +3,7 @@
 #include "tgTime.h"
 #include "tgSceneManager.h"
 #include "tgResources.h"
+#include "tgCollisionManager.h"
 
 namespace tg
 {
@@ -25,6 +26,7 @@ namespace tg
 		createBuffer(width, height);
 		initializeEtc();
 		
+		CollisionManager::Initialize();
 		SceneManager::Initialize();
 	}
 
@@ -42,11 +44,13 @@ namespace tg
 		Input::Update();
 		Time::Update();
 
+		CollisionManager::Update();
 		SceneManager::Update();
 	}
 
 	void Application::LateUpdate()
 	{
+		CollisionManager::LateUpdate();
 		SceneManager::LateUpdate();
 	}
 
@@ -55,6 +59,7 @@ namespace tg
 		clearRenderTarget();
 
 		//Time::Render(mBackHdc);
+		CollisionManager::Render(mBackHdc);
 		SceneManager::Render(mBackHdc);
 
 		copyRenderTarget(mBackHdc, mHdc);

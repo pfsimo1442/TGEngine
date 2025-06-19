@@ -17,12 +17,14 @@ namespace tg::enums
 	{
 		None,
 		BackGround,
-		Player,
-		Pet, 
 		// Monster,
+		Pet, 
+		Player,
 		Particle,
 		Max = 16,
 	};
+
+//#define (UINT)(eLayerType::Max);
 	
 	enum class eResourceType
 	{

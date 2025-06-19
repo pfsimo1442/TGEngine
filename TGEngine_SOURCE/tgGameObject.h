@@ -3,12 +3,17 @@
 #include "tgComponent.h"
 //#include "tgObject.h"
 
+namespace tg::object
+{
+	void Destroy(GameObject* gameObject);
+}
+
 namespace tg
 {
 	class GameObject
 	{
 	public:
-		//friend void object::Destroy(GameObject* obj);
+		friend void object::Destroy(GameObject* obj);
 
 		enum class eState
 		{
@@ -56,10 +61,14 @@ namespace tg
 			if (power == true) mState = eState::Active;
 			if (power == false) mState = eState::Pause;
 		}
-		void Death() { mState = eState::Dead; }
+
+		bool IsActive() { return mState == eState::Active; }
+		bool IsPause() { return mState == eState::Pause; }
+		bool IsDead() { return mState == eState::Dead; }
 
 	private:
 		void initializeTransform();
+		void death() { mState = eState::Dead; }
 
 	private:
 		eState mState;
