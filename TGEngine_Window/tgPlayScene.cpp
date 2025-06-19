@@ -41,62 +41,64 @@ namespace tg
 
 		//// Player
 		mPlayer = object::Instantiate<Player>(enums::eLayerType::Player);
-		PlayerScript* playerScr = mPlayer->AddComponent<PlayerScript>();
-		BoxCollider2D* playerCol = mPlayer->AddComponent<BoxCollider2D>();
-		playerCol->SetOffset(Vector2(-50.0f, -50.0f));
+		PlayerScript* playerScript = mPlayer->AddComponent<PlayerScript>();
+		BoxCollider2D* playerCollider = mPlayer->AddComponent<BoxCollider2D>();
+		playerCollider->SetSize(Vector2(100.0f, 200.0f));
+		playerCollider->SetOffset(Vector2(-50.0f, -100.0f));
 
-		graphics::Texture* playerTex = Resources::Find<graphics::Texture>(L"PlayerSDV");
-		Animator* playerAni = mPlayer->AddComponent<Animator>();
+		graphics::Texture* playerTexture = Resources::Find<graphics::Texture>(L"PlayerSDV");
+		Animator* playerAnimator = mPlayer->AddComponent<Animator>();
 
-		playerAni->CreateAnimationBySpriteSize(L"PlayerIdle", playerTex
+		playerAnimator->CreateAnimationBySpriteSize(L"PlayerIdle", playerTexture
 			, Vector2(2000.0f, 250.0f), Vector2(250.0f, 250.0f), Vector2::Zero, 1, 0.1f);
-		playerAni->CreateAnimationBySpriteSize(L"PlayerWaterDown", playerTex
+		playerAnimator->CreateAnimationBySpriteSize(L"PlayerWaterDown", playerTexture
 			, Vector2(0.0f, 2000.f), Vector2(250.0f, 250.0f), Vector2::Zero, 12, 0.1f);
 
 		mPlayer->GetComponent<Transform>()->SetPosition(Vector2::One * 100.0f);
 		//mPlayer->GetComponent<Transform>()->SetPositionStyle(Vector2(0.375f, 0.25f));
 		//mPlayer->GetComponent<Transform>()->SetScale(Vector2(0.5f, 0.5f));
 	
-		playerAni->PlayAnimation(L"PlayerIdle");
+		playerAnimator->PlayAnimation(L"PlayerIdle");
 		
-		playerAni->GetCompleteEvent(L"PlayerWaterDown") = std::bind(&PlayerScript::AttackEffect, playerScr);
+		playerAnimator->GetCompleteEvent(L"PlayerWaterDown") = std::bind(&PlayerScript::AttackEffect, playerScript);
 		
 
 		//// Cat
 		Cat* cat = object::Instantiate<Cat>(enums::eLayerType::Pet);
 		CatScript* catScript = cat->AddComponent<CatScript>();
 		BoxCollider2D* catCollider = cat->AddComponent<BoxCollider2D>();
+		catCollider->SetSize(Vector2(100.0f, 100.0f));
 		catCollider->SetOffset(Vector2(-50.0f, -50.0f));
 
-		graphics::Texture* catTex = Resources::Find<graphics::Texture>(L"Cat");
-		Animator* catAni = cat->AddComponent<Animator>();
+		graphics::Texture* catTexture = Resources::Find<graphics::Texture>(L"Cat");
+		Animator* catAnimator = cat->AddComponent<Animator>();
 
-		/*catAni->CreateAnimationBySpriteSize(L"CatWalkDown", catTex
+		/*catAnimator->CreateAnimationBySpriteSize(L"CatWalkDown", catTexture
 			, Vector2(0.0f, 0.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		catAni->CreateAnimationBySpriteSize(L"CatWalkRight", catTex
+		catAnimator->CreateAnimationBySpriteSize(L"CatWalkRight", catTexture
 			, Vector2(0.0f, 32.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		catAni->CreateAnimationBySpriteSize(L"CatWalkUp", catTex
+		catAnimator->CreateAnimationBySpriteSize(L"CatWalkUp", catTexture
 			, Vector2(0.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		catAni->CreateAnimationBySpriteSize(L"CatWalkLeft", catTex
+		catAnimator->CreateAnimationBySpriteSize(L"CatWalkLeft", catTexture
 			, Vector2(0.0f, 96.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		catAni->CreateAnimationBySpriteSize(L"CatSit", catTex
+		catAnimator->CreateAnimationBySpriteSize(L"CatSit", catTexture
 			, Vector2(0.0f, 128.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		catAni->CreateAnimationBySpriteSize(L"CatLeak", catTex
+		catAnimator->CreateAnimationBySpriteSize(L"CatLeak", catTexture
 			, Vector2(0.0f, 160.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		catAni->CreateAnimationBySpriteSize(L"CatTired", catTex
+		catAnimator->CreateAnimationBySpriteSize(L"CatTired", catTexture
 			, Vector2(0.0f, 192.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		catAni->CreateAnimationBySpriteSize(L"CatSleep", catTex
+		catAnimator->CreateAnimationBySpriteSize(L"CatSleep", catTexture
 			, Vector2(0.0f, 224.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 2, 1.2f);
-		catAni->CreateAnimationBySpriteSize(L"CatStretch", catTex
+		catAnimator->CreateAnimationBySpriteSize(L"CatStretch", catTexture
 			, Vector2(64.0f, 224.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 2, 0.5f);*/
 
-		catAni->CreateAnimationByFolder(L"MushroomIdle", L"..\\Resources\\Mushroom", Vector2::Zero, 0.1f);
+		catAnimator->CreateAnimationByFolder(L"MushroomIdle", L"..\\Resources\\Mushroom", Vector2::Zero, 0.1f);
 
 		cat->GetComponent<Transform>()->SetPosition(Vector2(300.0f, 100.0f));
 		//cat->GetComponent<Transform>()->SetScale(Vector2(2.0f, 2.0f));
 
-		//catAni->PlayAnimation(L"CatSit", false);
-		catAni->PlayAnimation(L"MushroomIdle");
+		//catAnimator->PlayAnimation(L"CatSit", false);
+		catAnimator->PlayAnimation(L"MushroomIdle");
 
 		////main camera - set target
 		//cameraComp->SetTarget(cat);

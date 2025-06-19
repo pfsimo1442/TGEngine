@@ -41,7 +41,7 @@ namespace tg
 
         Rectangle(hdc
             , pos.x + offset.x, pos.y + offset.y
-            , pos.x + offset.x + 100, pos.y + offset.y + 100);
+            , pos.x + offset.x + GetSize().x, pos.y + offset.y + GetSize().y);
         
         SelectObject(hdc, oldBrush);
         SelectObject(hdc, oldPen);

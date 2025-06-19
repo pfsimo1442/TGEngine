@@ -1,12 +1,15 @@
-#include "tgCollisionManager.h"
+﻿#include "tgCollisionManager.h"
 #include "tgScene.h"
 #include "tgSceneManager.h"
 #include "tgGameObject.h"
 #include "tgCollider.h"
+#include "tgTransform.h"
+#include "tgGameObject.h"
 
 namespace tg
 {
 	std::bitset<(UINT)eLayerType::Max> CollisionManager::mCollisionLayMatrix[(UINT)eLayerType::Max] = {};
+	std::unordered_map<UINT64, bool> CollisionManager::mCollisionMap = {};
 
 	void CollisionManager::Initialize()
 	{
@@ -73,7 +76,7 @@ namespace tg
 			{
 				if (left->IsActive() == false)
 					continue;
-				Collider* rightCol = left->GetComponent<Collider>();
+				Collider* rightCol = right->GetComponent<Collider>();
 				if (rightCol == nullptr)
 					continue;
 				if (left == right)
@@ -87,6 +90,60 @@ namespace tg
 
 	void CollisionManager::ColliderCollision(Collider* left, Collider* right)
 	{
-		// logic
+		CollisionID id = {};
+		id.left = left->GetID();
+		id.right = right->GetID();
+		
+		auto iter = mCollisionMap.find(id.id);
+		if (iter == mCollisionMap.end())
+		{
+			mCollisionMap.insert(std::make_pair(id.id, false));
+			iter = mCollisionMap.find(id.id);
+		}
+
+		if (Intersect(left, right))
+		{
+			if (iter->second == false)
+			{
+				left->OnCollisionEnter(right);
+				right->OnCollisionEnter(left);
+				iter->second = true;
+			}
+			else
+			{
+				left->OnCollisionStay(right);
+				right->OnCollisionStay(left);
+			}
+		}
+		else
+		{
+			if (iter->second == true)
+			{
+				left->OnCollisionExit(right);
+				right->OnCollisionExit(left);
+				iter->second = false;
+			}
+		}
+	}
+
+	bool CollisionManager::Intersect(Collider* left, Collider* right)
+	{
+		Transform* leftTr = left->GetOwner()->GetComponent<Transform>();
+		Transform* rightTr = right->GetOwner()->GetComponent<Transform>();
+
+		// positionstyle의 추가에 따른 추가 수정 요함
+		Vector2 leftPos = leftTr->GetPosition() + left->GetOffset();
+		Vector2 rightPos = rightTr->GetPosition() + right->GetOffset();
+
+		Vector2 leftSize = left->GetSize();
+		Vector2 rightSize = right->GetSize();
+
+		if (fabs(leftPos.x - rightPos.x) < fabs(leftSize.x / 2.0f + rightSize.x / 2.0f)
+			&& fabs(leftPos.y - rightPos.y) < fabs(leftSize.y / 2.0f + rightSize.y / 2.0f))
+		{
+			return true;
+		}
+
+		return false;
 	}
 }

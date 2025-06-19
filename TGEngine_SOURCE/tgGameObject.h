@@ -1,6 +1,7 @@
 #pragma once
 #include "CommonInclude.h"
 #include "tgComponent.h"
+#include "tgCollider.h"
 //#include "tgObject.h"
 
 namespace tg::object
