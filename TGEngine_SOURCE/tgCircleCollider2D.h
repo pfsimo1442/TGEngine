@@ -16,6 +16,7 @@ namespace tg
 
 		float GetRadius() { return mRadius; }
 		void SetRadius(float radius) { mRadius = radius; }
+
 	private:
 		float mRadius;
 	};

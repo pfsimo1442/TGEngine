@@ -38,7 +38,7 @@ namespace tg
 
 	void CollisionManager::Render(HDC hdc)
 	{
-
+		
 	}
 	void CollisionManager::CollisionLayerCheck(eLayerType left, eLayerType right, bool enable)
 	{
@@ -131,17 +131,85 @@ namespace tg
 		Transform* leftTr = left->GetOwner()->GetComponent<Transform>();
 		Transform* rightTr = right->GetOwner()->GetComponent<Transform>();
 
-		// positionstyle의 추가에 따른 추가 수정 요함
 		Vector2 leftPos = leftTr->GetPosition() + left->GetOffset();
 		Vector2 rightPos = rightTr->GetPosition() + right->GetOffset();
 
 		Vector2 leftSize = left->GetSize();
 		Vector2 rightSize = right->GetSize();
 
-		if (fabs(leftPos.x - rightPos.x) < fabs(leftSize.x / 2.0f + rightSize.x / 2.0f)
-			&& fabs(leftPos.y - rightPos.y) < fabs(leftSize.y / 2.0f + rightSize.y / 2.0f))
+		eColliderType leftColliderType = left->GetColliderType();
+		eColliderType rightColliderType = right->GetColliderType();
+
+		if ((leftColliderType == eColliderType::Box2D
+			|| leftColliderType == eColliderType::Circle2D
+			|| leftColliderType == eColliderType::Capsule2D)
+			&& (rightColliderType == eColliderType::Box2D
+			|| rightColliderType == eColliderType::Circle2D
+			|| rightColliderType == eColliderType::Capsule2D))
 		{
-			return true;
+			// 2D
+			if (leftColliderType == eColliderType::Box2D && rightColliderType == eColliderType::Box2D)
+			{
+				// box to box
+				if (fabs(leftPos.x - rightPos.x) <= leftSize.x / 2 + rightSize.x / 2
+					&& fabs(leftPos.y - rightPos.y) <= leftSize.y / 2 + rightSize.y / 2)
+				{
+					return true;
+				}
+			}
+			else if(leftColliderType == eColliderType::Circle2D && rightColliderType == eColliderType::Circle2D)
+			{
+				// circle to circle
+				float cir2cirDistance = (leftPos - rightPos).length();
+				if (cir2cirDistance <= leftSize.x / 2 + rightSize.x / 2)
+				{
+					return true;
+				}
+			}
+			else if (leftColliderType == eColliderType::Capsule2D && rightColliderType == eColliderType::Capsule2D)
+			{
+				// capsule to capsule
+				if (fabs(leftPos.y - rightPos.y) <= leftSize.y / 2 + rightSize.y / 2)
+				{
+					if (fabs(leftPos.y - rightPos.y)
+						<= leftSize.y / 2 + rightSize.y / 2 - (leftSize.x / 2 + rightSize.x / 2))
+					{
+						if (fabs(leftPos.x - rightPos.x) <= leftSize.x / 2 + rightSize.x / 2)
+						{
+							return true;
+						}
+					}
+					else
+					{
+						float cap2capDistance = ((leftPos - rightPos).abs()
+							- Vector2(0, leftSize.y / 2 + rightSize.y / 2 - (leftSize.x / 2 + rightSize.x / 2)
+							)).length();
+						if (cap2capDistance <= leftSize.x / 2 + rightSize.x / 2)
+						{
+							return true;
+						}
+					}
+				}
+
+			}
+			else if ((leftColliderType == eColliderType::Box2D && rightColliderType == eColliderType::Circle2D)
+				|| (leftColliderType == eColliderType::Circle2D && rightColliderType == eColliderType::Box2D))
+			{
+				//box to circle
+
+			}
+			else if ((leftColliderType == eColliderType::Circle2D && rightColliderType == eColliderType::Capsule2D)
+				|| (leftColliderType == eColliderType::Capsule2D && rightColliderType == eColliderType::Circle2D))
+			{
+				// circle to capsule
+
+			}
+			else if ((leftColliderType == eColliderType::Capsule2D && rightColliderType == eColliderType::Box2D)
+				|| (leftColliderType == eColliderType::Box2D && rightColliderType == eColliderType::Capsule2D))
+			{
+				// capsule to box
+
+			}
 		}
 
 		return false;

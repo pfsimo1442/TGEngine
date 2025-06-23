@@ -3,7 +3,7 @@
 namespace tg
 {
     Transform::Transform()
-        : Component(enums::eComponentType::Transform)
+        : Component(eComponentType::Transform)
         , mPositionStyle(Vector2(0.5f, 0.5f))
         , mScale(Vector2::One)
         , mRotation(0.0f)

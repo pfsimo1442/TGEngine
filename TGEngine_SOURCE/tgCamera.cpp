@@ -8,7 +8,7 @@ extern tg::Application application;
 namespace tg
 {
 	Camera::Camera()
-		: Component(enums::eComponentType::Camera)
+		: Component(eComponentType::Camera)
 		, mDistance(Vector2::Zero)
 		, mResolution(Vector2::Zero)
 		, mLookPosition(Vector2::Zero)

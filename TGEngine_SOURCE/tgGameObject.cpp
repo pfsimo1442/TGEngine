@@ -18,7 +18,7 @@ namespace tg
 	GameObject::GameObject()
 		: mState(eState::Active)
 	{
-		mComponents.resize((UINT)enums::eComponentType::End);
+		mComponents.resize((UINT)eComponentType::End);
 		initializeTransform();
 	}
 

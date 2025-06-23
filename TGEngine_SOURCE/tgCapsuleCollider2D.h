@@ -14,13 +14,13 @@ namespace tg
 		virtual void LateUpdate();
 		virtual void Render(HDC hdc);
 		
-		float GetHeight() { return mHeight; }
-		void SetHeight(float height) { mHeight = height; }
-		float GetRadius() { return mRadius; }
-		void SetRadius(float radius) { mRadius = radius; }
+		//float GetHeight() { return mHeight; }
+		//void SetHeight(float height) { mHeight = height; }
+		//float GetRadius() { return mRadius; }
+		//void SetRadius(float radius) { mRadius = radius; }
 
 	private:
-		float mHeight;
-		float mRadius;
+		//float mHeight;
+		//float mRadius;
 	};
 }

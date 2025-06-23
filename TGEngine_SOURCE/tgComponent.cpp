@@ -2,7 +2,7 @@
 
 namespace tg
 {
-	Component::Component(enums::eComponentType type)
+	Component::Component(eComponentType type)
 		: mType(type)
 	{
 	}

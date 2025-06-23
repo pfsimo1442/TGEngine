@@ -36,4 +36,12 @@ namespace tg::enums
 		Prefab, 
 		End,
 	};
+
+	enum class eColliderType
+	{
+		Circle2D,
+		Box2D,
+		Capsule2D,
+		End,
+	};
 }

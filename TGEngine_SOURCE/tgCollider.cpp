@@ -6,9 +6,11 @@ namespace tg
 {
     UINT32 Collider::mCollisionID = 1;
 
-    Collider::Collider()
-        : Component(enums::eComponentType::Collider)
+    Collider::Collider(eColliderType type)
+        : Component(eComponentType::Collider)
+        , mType(type)
         , mID(mCollisionID++)
+        , mSize(Vector2::One)
     {
     }
     Collider::~Collider()

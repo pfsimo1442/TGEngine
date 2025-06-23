@@ -111,6 +111,11 @@ namespace tg::math
 			return sqrtf(x * x + y * y);
 		}
 
+		Vector2 abs()
+		{
+			return Vector2(fabs(x), fabs(y));
+		}
+
 		Vector2 normalize()
 		{
 			float len = length();

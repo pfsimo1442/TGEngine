@@ -4,7 +4,7 @@
 namespace tg
 {
 	Script::Script()
-		: Component(enums::eComponentType::Script)
+		: Component(eComponentType::Script)
 	{
 	}
 	Script::~Script()

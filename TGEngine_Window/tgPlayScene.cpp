@@ -42,9 +42,11 @@ namespace tg
 		//// Player
 		mPlayer = object::Instantiate<Player>(enums::eLayerType::Player);
 		PlayerScript* playerScript = mPlayer->AddComponent<PlayerScript>();
-		BoxCollider2D* playerCollider = mPlayer->AddComponent<BoxCollider2D>();
-		playerCollider->SetSize(Vector2(100.0f, 200.0f));
-		playerCollider->SetOffset(Vector2(-50.0f, -100.0f));
+		//BoxCollider2D* playerCollider = mPlayer->AddComponent<BoxCollider2D>();
+		//CircleCollider2D* playerCollider = mPlayer->AddComponent<CircleCollider2D>();
+		CapsuleCollider2D* playerCollider = mPlayer->AddComponent<CapsuleCollider2D>();
+		playerCollider->SetSize(Vector2(50.0f, 100.0f));
+		//playerCollider->SetOffset(Vector2(-50.0f, -100.0f));
 
 		graphics::Texture* playerTexture = Resources::Find<graphics::Texture>(L"PlayerSDV");
 		Animator* playerAnimator = mPlayer->AddComponent<Animator>();
@@ -56,7 +58,7 @@ namespace tg
 
 		mPlayer->GetComponent<Transform>()->SetPosition(Vector2::One * 100.0f);
 		//mPlayer->GetComponent<Transform>()->SetPositionStyle(Vector2(0.375f, 0.25f));
-		//mPlayer->GetComponent<Transform>()->SetScale(Vector2(0.5f, 0.5f));
+		mPlayer->GetComponent<Transform>()->SetScale(Vector2(0.5f, 0.5f));
 	
 		playerAnimator->PlayAnimation(L"PlayerIdle");
 		
@@ -66,9 +68,11 @@ namespace tg
 		//// Cat
 		Cat* cat = object::Instantiate<Cat>(enums::eLayerType::Pet);
 		CatScript* catScript = cat->AddComponent<CatScript>();
-		BoxCollider2D* catCollider = cat->AddComponent<BoxCollider2D>();
-		catCollider->SetSize(Vector2(100.0f, 100.0f));
-		catCollider->SetOffset(Vector2(-50.0f, -50.0f));
+		//BoxCollider2D* catCollider = cat->AddComponent<BoxCollider2D>();
+		//CircleCollider2D* catCollider = cat->AddComponent<CircleCollider2D>();
+		CapsuleCollider2D* catCollider = cat->AddComponent<CapsuleCollider2D>();
+		catCollider->SetSize(Vector2(100.0f, 150.0f));
+		//catCollider->SetOffset(Vector2(-50.0f, -50.0f));
 
 		graphics::Texture* catTexture = Resources::Find<graphics::Texture>(L"Cat");
 		Animator* catAnimator = cat->AddComponent<Animator>();
