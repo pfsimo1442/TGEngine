@@ -50,5 +50,7 @@ namespace tg
 		eWalkState mCurrentWS;
 		eWalkState mLastWS;
 		class Animator* mAnimator;
+
+		bool mPosSetter;
 	};
 }

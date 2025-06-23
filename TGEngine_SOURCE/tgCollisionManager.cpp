@@ -195,20 +195,135 @@ namespace tg
 			else if ((leftColliderType == eColliderType::Box2D && rightColliderType == eColliderType::Circle2D)
 				|| (leftColliderType == eColliderType::Circle2D && rightColliderType == eColliderType::Box2D))
 			{
-				//box to circle
+				// box to circle
+				Vector2 boxSize;
+				float circleRadius;
+				Vector2 boxPos;
+				Vector2 circlePos;
 
+				if (leftColliderType == eColliderType::Box2D)
+				{
+					boxSize = leftSize;
+					circleRadius = rightSize.x / 2;
+					boxPos = leftPos;
+					circlePos = rightPos;
+				}
+				else
+				{
+					boxSize = rightSize;
+					circleRadius = leftSize.x / 2;
+					boxPos = rightPos;
+					circlePos = leftPos;
+				}
+
+				if (boxPos.x - boxSize.x / 2 - circleRadius <= circlePos.x
+					&& circlePos.x <= boxPos.x + boxSize.x / 2 + circleRadius 
+					&& boxPos.y - boxSize.y / 2 - circleRadius <= circlePos.y
+					&& circlePos.y <= boxPos.y + boxSize.y / 2 + circleRadius)
+				{
+					if ((boxPos.x - boxSize.x / 2 <= circlePos.x
+						&& circlePos.x <= boxPos.x + boxSize.x / 2)
+						|| (boxPos.y - boxSize.y / 2 <= circlePos.y
+						&& circlePos.y <= boxPos.y + boxSize.y / 2))
+					{
+						return true;
+					}
+					else if (((circlePos - boxPos).abs()
+						- Vector2(boxSize.x / 2, boxSize.y / 2)
+						).length() 
+						<= circleRadius)
+					{
+						return true;
+					}
+				}
 			}
 			else if ((leftColliderType == eColliderType::Circle2D && rightColliderType == eColliderType::Capsule2D)
 				|| (leftColliderType == eColliderType::Capsule2D && rightColliderType == eColliderType::Circle2D))
 			{
 				// circle to capsule
+				Vector2 capsuleSize;
+				float circleRadius;
+				Vector2 capsulePos;
+				Vector2 circlePos;
 
+				if (leftColliderType == eColliderType::Capsule2D)
+				{
+					capsuleSize = leftSize;
+					circleRadius = rightSize.x / 2;
+					capsulePos = leftPos;
+					circlePos = rightPos;
+				}
+				else
+				{
+					capsuleSize = rightSize;
+					circleRadius = leftSize.x / 2;
+					capsulePos = rightPos;
+					circlePos = leftPos;
+				}
+
+				if (capsulePos.x - capsuleSize.x / 2 - circleRadius <= circlePos.x
+					&& circlePos.x <= capsulePos.x + capsuleSize.x / 2 + circleRadius
+					&& capsulePos.y - capsuleSize.y / 2 - circleRadius <= circlePos.y
+					&& circlePos.y <= capsulePos.y + capsuleSize.y / 2 + circleRadius)
+				{
+					if (capsulePos.y - capsuleSize.y / 2 + capsuleSize.x / 2<= circlePos.y
+						&& circlePos.y <= capsulePos.y + capsuleSize.y / 2 - capsuleSize.x / 2)
+					{
+						return true;
+					}
+					else if (((capsulePos - circlePos).abs()
+						- Vector2(0, capsuleSize.y / 2 - capsuleSize.x / 2)
+						).length()
+						<= capsuleSize.x / 2 + circleRadius)
+					{
+						return true;
+					}
+				}
 			}
 			else if ((leftColliderType == eColliderType::Capsule2D && rightColliderType == eColliderType::Box2D)
 				|| (leftColliderType == eColliderType::Box2D && rightColliderType == eColliderType::Capsule2D))
 			{
 				// capsule to box
+				Vector2 boxSize;
+				Vector2 capsuleSize;
+				Vector2 boxPos;
+				Vector2 capsulePos;
 
+				if (leftColliderType == eColliderType::Box2D)
+				{
+					boxSize = leftSize;
+					capsuleSize = rightSize;
+					boxPos = leftPos;
+					capsulePos = rightPos;
+				}
+				else
+				{
+					boxSize = rightSize;
+					capsuleSize = leftSize;
+					boxPos = rightPos;
+					capsulePos = leftPos;
+				}
+
+				if (boxPos.x - boxSize.x / 2 - capsuleSize.x / 2 <= capsulePos.x
+					&& capsulePos.x <= boxPos.x + boxSize.x / 2 + capsuleSize.x / 2
+					&& boxPos.y - boxSize.y / 2 - capsuleSize.y / 2 <= capsulePos.y
+					&& capsulePos.y <= boxPos.y + boxSize.y / 2 + capsuleSize.y / 2)
+				{
+					if ((boxPos.x - boxSize.x / 2 <= capsulePos.x
+						&& capsulePos.x <= boxPos.x + boxSize.x / 2)
+						|| (boxPos.y - boxSize.y / 2 - (capsuleSize.y / 2 - capsuleSize.x / 2) <= capsulePos.y
+						&& capsulePos.y <= boxPos.y + boxSize.y / 2 + (capsuleSize.y / 2 - capsuleSize.x / 2)))
+					{
+						return true;
+					}
+					else if (((capsulePos - boxPos).abs()
+						- Vector2(boxSize.x / 2, boxSize.y / 2 + capsuleSize.y / 2 - capsuleSize.x / 2)
+						).length()
+						<= capsuleSize.x / 2)
+					{
+						return true;
+					}
+				}
 			}
 		}
 

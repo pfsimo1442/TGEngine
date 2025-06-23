@@ -104,8 +104,17 @@ namespace tg
 
 	void PlayerScript::OnCollisionEnter(Collider* other)
 	{
+		if (mPosSetter)
+		{
+			other->GetOwner()->GetComponent<Transform>()->SetPosition(Vector2(400.0f, 500.0f));
+			mPosSetter = false;
+		}
+		else
+		{
+			other->GetOwner()->GetComponent<Transform>()->SetPosition(Vector2(100.0f, 200.0f));
+			mPosSetter = true;
+		}
 		
-		other->GetOwner()->GetComponent<Transform>()->SetPosition(Vector2(400.0f, 500.0f));
 	}
 
 	void PlayerScript::OnCollisionStay(Collider* other)
