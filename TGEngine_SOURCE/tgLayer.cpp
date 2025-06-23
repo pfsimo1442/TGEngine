@@ -79,23 +79,10 @@ namespace tg
 
 	void Layer::Destroy()
 	{
-		for (GameObjIter iter = mGameObjects.begin()
-			; iter != mGameObjects.end();)
-		{
-			GameObject::eState activeState = (*iter)->GetActiveState();
-			if (activeState == GameObject::eState::Dead)
-			{
-				GameObject* deathObj = (*iter);
-				iter = mGameObjects.erase(iter);
-
-				delete deathObj;
-				deathObj = nullptr;
-				
-				continue;
-			}
-
-			iter++;
-		}
+		std::vector<GameObject*> deleteObjects = {};
+		findDeadGameObjects(deleteObjects);
+		eraseDeadGameObject();
+		deleteGameObjects(deleteObjects);
 	}
 
 	void Layer::AddGameObject(GameObject* gameObject)
@@ -104,5 +91,42 @@ namespace tg
 			return;
 
 		mGameObjects.push_back(gameObject);
+	}
+
+	void Layer::EraseGameObject(GameObject* eraseGameObj)
+	{
+		std::erase_if(mGameObjects,
+			[=](GameObject* gameObj)
+			{
+				return gameObj == eraseGameObj;
+			});
+	}
+
+	void Layer::findDeadGameObjects(OUT std::vector<GameObject*>& gameObjs)
+	{
+		for (GameObject* gameObj : mGameObjects)
+		{
+			GameObject::eState activeState = gameObj->GetActiveState();
+			if (activeState == GameObject::eState::Dead)
+				gameObjs.push_back(gameObj);
+		}
+	}
+
+	void Layer::deleteGameObjects(std::vector<GameObject*> deleteObjs)
+	{
+		for (GameObject* obj : deleteObjs)
+		{
+			delete obj;
+			obj = nullptr;
+		}
+	}
+
+	void Layer::eraseDeadGameObject()
+	{
+		std::erase_if(mGameObjects,
+			[](GameObject* gameObj)
+			{
+				return gameObj->IsDead();
+			});
 	}
 }

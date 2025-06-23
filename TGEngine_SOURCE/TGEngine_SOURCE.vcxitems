@@ -25,6 +25,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgCollider.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgCollisionManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgDontDestroyOnLoad.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgEnums.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgGameObject.h" />
@@ -54,6 +55,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgCollider.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgCollisionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgDontDestroyOnLoad.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgInput.cpp" />

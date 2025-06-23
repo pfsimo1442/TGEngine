@@ -17,6 +17,7 @@ namespace tg
 
 	GameObject::GameObject()
 		: mState(eState::Active)
+		, mLayerType(eLayerType::None)
 	{
 		mComponents.resize((UINT)eComponentType::End);
 		initializeTransform();

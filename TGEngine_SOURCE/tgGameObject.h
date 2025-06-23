@@ -56,12 +56,14 @@ namespace tg
 			return component;
 		}
 
-		eState GetActiveState() { return mState; }
 		void SetActiveState(bool power)
 		{
 			if (power == true) mState = eState::Active;
 			if (power == false) mState = eState::Pause;
 		}
+		eState GetActiveState() { return mState; }
+		void SetLayerType(eLayerType layerType) { mLayerType = layerType; }
+		eLayerType GetLayerType() { return mLayerType; }
 
 		bool IsActive() { return mState == eState::Active; }
 		bool IsPause() { return mState == eState::Pause; }
@@ -74,5 +76,6 @@ namespace tg
 	private:
 		eState mState;
 		std::vector<Component*> mComponents;
+		eLayerType mLayerType;
 	};
 }

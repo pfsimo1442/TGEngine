@@ -20,6 +20,7 @@ namespace tg
 		}
 		static Scene* LoadScene(const std::wstring& name);
 		static Scene* GetActiveScene() { return mActiveScene; }
+		static Scene* GetDontDestroyOnLoad() { return mDontDestroyOnLoad; }
 
 		static void Initialize();
 		static void Update();
@@ -28,19 +29,9 @@ namespace tg
 		static void Destroy();
 		static void Release();
 
-	//	static SceneManager& GetInst()
-	//	{
-	//		static SceneManager sceneManager;
-	//		return sceneManager;
-	//	}
-
-	//private:
-	//	SceneManager();
-	//	~SceneManager();
-
 	private:
-		//static std::vector<Scene*> mScene;
 		static std::map<std::wstring, Scene*> mScene;
 		static Scene* mActiveScene;
+		static Scene* mDontDestroyOnLoad;
 	};
 }

@@ -41,6 +41,7 @@ namespace tg
 
 		//// Player
 		mPlayer = object::Instantiate<Player>(enums::eLayerType::Player);
+		object::DontDestroyOnLoad(mPlayer);
 		PlayerScript* playerScript = mPlayer->AddComponent<PlayerScript>();
 		//BoxCollider2D* playerCollider = mPlayer->AddComponent<BoxCollidessr2D>();
 		//CircleCollider2D* playerCollider = mPlayer->AddComponent<CircleCollider2D>();

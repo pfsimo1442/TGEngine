@@ -9,9 +9,10 @@
 namespace tg::object
 {
 	template <typename T>
-	static T* Instantiate(tg::enums::eLayerType type)
+	static T* Instantiate(eLayerType type)
 	{
 		T* gameObject = new T();
+		gameObject->SetLayerType(type);
 		Scene* activeScene = SceneManager::GetActiveScene();
 		Layer* layer = activeScene->GetLayer(type);
 		layer->AddGameObject(gameObject);
@@ -20,9 +21,10 @@ namespace tg::object
 	}
 
 	template <typename T>
-	static T* Instantiate(tg::enums::eLayerType type, math::Vector2 position)
+	static T* Instantiate(eLayerType type, math::Vector2 position)
 	{
 		T* gameObject = new T();
+		gameObject->SetLayerType(type);
 		Scene* activeScene = SceneManager::GetActiveScene();
 		Layer* layer = activeScene->GetLayer(type);
 		layer->AddGameObject(gameObject);
@@ -33,11 +35,13 @@ namespace tg::object
 		return gameObject;
 	}
 
-	//static void Destroy(GameObject* obj)
-	//{
-	//	if(obj == nullptr)
-	//		return;		
-	//
-	//	obj->Death();
-	//}
+	static void DontDestroyOnLoad(GameObject* gameObject)
+	{
+		Scene* activeScene = SceneManager::GetActiveScene();
+
+		activeScene->EraseGameObject(gameObject);
+
+		Scene* dontDestroyOnLoad = SceneManager::GetDontDestroyOnLoad();
+		dontDestroyOnLoad->AddGameObject(gameObject, gameObject->GetLayerType());
+	}
 }

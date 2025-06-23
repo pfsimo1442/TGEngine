@@ -74,6 +74,9 @@
       <Filter>Component\Collider</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgCollisionManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgDontDestroyOnLoad.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -158,6 +161,9 @@
       <Filter>Component\Collider</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgCollisionManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgDontDestroyOnLoad.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
