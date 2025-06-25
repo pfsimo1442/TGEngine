@@ -20,10 +20,12 @@ namespace tg
 		void SetSize(Vector2 size) { mSize = size; TileSize = mTileSize * mSize; }
 		
 		void SetCellCoordination(Vector2 coord) { mCell = coord; }
-		void SetTileSize(Vector2 size) { mTileSize = size; TileSize = mTileSize * mSize; }
+		void SetTileSize(Vector2 size) { mTileSize = size; TileSize = mTileSize * mSize; OriginTileSize = mTileSize;}
 
 	public:
 		static Vector2 TileSize;
+		static Vector2 OriginTileSize;
+		static Vector2 SelectedCell;
 
 	private:
 

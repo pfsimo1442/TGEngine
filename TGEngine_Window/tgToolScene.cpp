@@ -52,10 +52,10 @@ namespace tg
 			Tile* tile = object::Instantiate<Tile>(enums::eLayerType::Tile);
 			tile->GetComponent<Transform>()->SetPositionStyle(Vector2(0.0f, 0.0f));
 			TilemapRenderer* tmRenderer = tile->AddComponent<TilemapRenderer>();
-			tmRenderer->SetSize(Vector2(3.0f, 3.0f));
+			tmRenderer->SetSize(Vector2(4.0f, 4.0f));
 			tmRenderer->SetTileSize(Vector2(16.0f, 16.0f));
 			tmRenderer->SetTexture(Resources::Find<graphics::Texture>(L"PlatformSpringSDV"));
-			tmRenderer->SetCellCoordination(Vector2(7, 0));
+			tmRenderer->SetCellCoordination(TilemapRenderer::SelectedCell);
 
 			tile->SetTilePosition(coord);
 		}
@@ -96,7 +96,16 @@ LRESULT CALLBACK WndToolProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 	{
 	case WM_LBUTTONDOWN:
 	{
-		
+		POINT mousePos = { };
+		GetCursorPos(&mousePos);
+		ScreenToClient(hWnd, &mousePos);
+
+		tg::math::Vector2 mousePosition;
+		mousePosition.x = mousePos.x;
+		mousePosition.y = mousePos.y;
+
+		tg::math::Vector2 coord = (mousePosition / tg::TilemapRenderer::OriginTileSize).integer();
+		tg::TilemapRenderer::SelectedCell = coord;
 	}
 	break;
 	case WM_PAINT:

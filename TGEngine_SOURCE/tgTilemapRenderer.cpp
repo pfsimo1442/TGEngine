@@ -8,6 +8,8 @@
 namespace tg
 {
 	Vector2 TilemapRenderer::TileSize = Vector2::One;
+	Vector2 TilemapRenderer::OriginTileSize = Vector2::One;
+	Vector2 TilemapRenderer::SelectedCell = Vector2(-1.0f, -1.0f);
 
 	TilemapRenderer::TilemapRenderer()
 		: Component(eComponentType::SpriteRenderer)
@@ -17,6 +19,7 @@ namespace tg
 		, mTileSize(Vector2::One)
 	{
 		TileSize = mTileSize * mSize;
+		OriginTileSize = mTileSize;
 	}
 	TilemapRenderer::~TilemapRenderer()
 	{
@@ -73,35 +76,10 @@ namespace tg
 					, pos.x - (mTileSize.x * posStyle.x * mSize.x), pos.y - (mTileSize.y * posStyle.y * mSize.y)
 					, mTileSize.x * mSize.x, mTileSize.y * mSize.y
 					, mTexture->GetHdc()
-					, mCell.x * mTileSize.x, mCell.y * mTileSize.y
-					, mTileSize.x, mTileSize.y
+					, mCell.x * OriginTileSize.x, mCell.y * OriginTileSize.y
+					, OriginTileSize.x, OriginTileSize.y
 					, RGB(255, 0, 255));
 			}
 		}
-		//else if (mTexture->GetTextureType() == graphics::Texture::eTextureType::Png)
-		//{
-		//	Gdiplus::ImageAttributes imgAtt = {};
-		//	imgAtt.SetColorKey(Gdiplus::Color(230, 230, 230), Gdiplus::Color(255, 255, 255));
-
-		//	Gdiplus::Graphics graphics(hdc);
-
-		//	graphics.TranslateTransform(pos.x, pos.y);
-		//	graphics.RotateTransform(rot);
-		//	graphics.TranslateTransform(-pos.x, -pos.y);
-
-		//	graphics.DrawImage(mTexture->GetImage()
-		//		, Gdiplus::Rect
-		//		(
-		//			pos.x - (mTileSize.x * posStyle.x * mSize.x)
-		//			, pos.y - (mTileSize.y * posStyle.y * mSize.y)
-		//			, mTileSize.x * mSize.x
-		//			, mTileSize.y * mSize.y
-		//		)
-		//		, mCell.x * mTileSize.x, mCell.y * mTileSize.y
-		//		, mTileSize.x, mTileSize.y
-		//		, Gdiplus::UnitPixel
-		//		, nullptr
-		//	);
-		//}
 	}
 }
