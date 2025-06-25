@@ -8,5 +8,6 @@ namespace tg
 	{
 		Resources::Load<graphics::Texture>(L"Cat", L"..\\Resources\\CatAlpha.bmp");
 		Resources::Load<graphics::Texture>(L"PlayerSDV", L"..\\Resources\\Player.bmp");
+		Resources::Load<graphics::Texture>(L"PlatformSpringSDV", L"..\\Resources\\SpringFloor.bmp");
 	}
 }

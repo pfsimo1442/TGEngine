@@ -41,7 +41,7 @@
       <Filter>Component\Script</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgSpriteRenderer.cpp">
-      <Filter>Component\ScriptRenderer</Filter>
+      <Filter>Component\SpriteRenderer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgTransform.cpp">
       <Filter>Component\Transform</Filter>
@@ -76,6 +76,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgCollisionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgDontDestroyOnLoad.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgTilemapRenderer.cpp">
+      <Filter>Component\TilemapRenderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,7 +131,7 @@
       <Filter>Component\Script</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgSpriteRenderer.h">
-      <Filter>Component\ScriptRenderer</Filter>
+      <Filter>Component\SpriteRenderer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgTransform.h">
       <Filter>Component\Transform</Filter>
@@ -164,6 +167,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgDontDestroyOnLoad.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgTilemapRenderer.h">
+      <Filter>Component\TilemapRenderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -196,9 +202,6 @@
     <Filter Include="Component\Script">
       <UniqueIdentifier>{74c45902-81ff-41fc-a50a-ae63147506e0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Component\ScriptRenderer">
-      <UniqueIdentifier>{ca32572d-9b01-4d1a-94e9-460ae3d24b4f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Component\Transform">
       <UniqueIdentifier>{03bc858c-e87e-4cf9-93af-547dcf2abef7}</UniqueIdentifier>
     </Filter>
@@ -216,6 +219,12 @@
     </Filter>
     <Filter Include="Component\Component">
       <UniqueIdentifier>{9f8dcd2c-b94b-40c4-a96e-efa1be3ab4f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\TilemapRenderer">
+      <UniqueIdentifier>{906ace6a-458a-438f-b48c-e7b1beb0e880}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\SpriteRenderer">
+      <UniqueIdentifier>{ca32572d-9b01-4d1a-94e9-460ae3d24b4f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

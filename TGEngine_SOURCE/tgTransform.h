@@ -16,11 +16,11 @@ namespace tg
         void LateUpdate()  override;
         void Render(HDC hdc)  override;
 
-        void SetPosition(Vector2 pos) { mPosition.x = pos.x; mPosition.y = pos.y; }
+        void SetPosition(Vector2 pos) { mPosition = pos; }
         Vector2 GetPosition() { return mPosition; }
-        void SetScale(Vector2 scale) { mScale.x = scale.x; mScale.y = scale.y; }
+        void SetScale(Vector2 scale) { mScale = scale; }
         Vector2 GetScale() { return mScale; }
-        void SetPositionStyle(Vector2 define) { mPositionStyle.x = define.x; mPositionStyle.y = define.y; }
+        void SetPositionStyle(Vector2 define) { mPositionStyle = define; }
         Vector2 GetPositionStyle() { return mPositionStyle; }
         void SetRotation(float rotate) { mRotation = rotate; }
         float GetRotation() { return mRotation; }

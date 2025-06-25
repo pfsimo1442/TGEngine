@@ -1,23 +1,23 @@
-#include "tgPlayer.h"
+#include "tgTile.h"
 
-namespace tg 
+namespace tg
 {
-    void Player::Initialize()
+    void Tile::Initialize()
     {
         GameObject::Initialize();
     }
 
-    void Player::Update()
+    void Tile::Update()
     {
         GameObject::Update();
     }
 
-    void Player::LateUpdate()
+    void Tile::LateUpdate()
     {
         GameObject::LateUpdate();
     }
 
-    void Player::Render(HDC hdc)
+    void Tile::Render(HDC hdc)
     {
         GameObject::Render(hdc);
     }

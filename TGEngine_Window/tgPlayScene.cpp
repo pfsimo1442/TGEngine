@@ -133,6 +133,7 @@ namespace tg
 			
 			//TextOut(hdc, 0, 0, str, 10);
 	}
+
 	void PlayScene::OnEnter()
 	{
 

@@ -17,6 +17,7 @@ namespace tg::enums
 	{
 		None,
 		BackGround,
+		Tile,
 		// Monster,
 		Pet, 
 		Player,

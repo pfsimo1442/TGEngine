@@ -41,6 +41,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgSpriteRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgTexture.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgTilemapRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgTransform.h" />
   </ItemGroup>
@@ -69,6 +70,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgSpriteRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgTexture.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgTilemapRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgTransform.cpp" />
   </ItemGroup>

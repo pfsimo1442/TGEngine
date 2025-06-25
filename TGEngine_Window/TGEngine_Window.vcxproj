@@ -139,7 +139,9 @@
     <ClInclude Include="tgPlayer.h" />
     <ClInclude Include="tgPlayerScript.h" />
     <ClInclude Include="tgPlayScene.h" />
+    <ClInclude Include="tgTile.h" />
     <ClInclude Include="tgTitleScene.h" />
+    <ClInclude Include="tgToolScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tgCat.cpp" />
@@ -147,7 +149,9 @@
     <ClCompile Include="tgPlayer.cpp" />
     <ClCompile Include="tgPlayerScript.cpp" />
     <ClCompile Include="tgPlayScene.cpp" />
+    <ClCompile Include="tgTile.cpp" />
     <ClCompile Include="tgTitleScene.cpp" />
+    <ClCompile Include="tgToolScene.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
