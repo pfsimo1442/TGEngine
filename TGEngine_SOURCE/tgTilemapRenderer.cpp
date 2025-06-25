@@ -7,6 +7,8 @@
 
 namespace tg
 {
+	Vector2 TilemapRenderer::TileSize = Vector2::One;
+
 	TilemapRenderer::TilemapRenderer()
 		: Component(eComponentType::SpriteRenderer)
 		, mTexture(nullptr)
@@ -14,6 +16,7 @@ namespace tg
 		, mCell(Vector2::Zero)
 		, mTileSize(Vector2::One)
 	{
+		TileSize = mTileSize * mSize;
 	}
 	TilemapRenderer::~TilemapRenderer()
 	{

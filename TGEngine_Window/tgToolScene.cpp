@@ -1,4 +1,4 @@
-#include "tgToolScene.h"
+﻿#include "tgToolScene.h"
 #include "tgApplication.h"
 #include "tgObject.h"
 #include "tgTile.h"
@@ -7,6 +7,7 @@
 #include "tgTexture.h"
 #include "tgCamera.h"
 #include "tgRenderer.h"
+#include "tgInput.h"
 
 extern tg::Application application;
 
@@ -26,18 +27,6 @@ namespace tg
 		Camera* cameraComp = camera->AddComponent<Camera>();
 		renderer::mainCamera = cameraComp;
 
-
-		//// Tilemap
-		Tile* tile = object::Instantiate<Tile>(enums::eLayerType::Tile);
-		tile->GetComponent<Transform>()->SetPosition(Vector2(128.0f, 128.0f));
-		tile->GetComponent<Transform>()->SetPositionStyle(Vector2(0.0f, 0.0f));
-		TilemapRenderer* tmRenderer = tile->AddComponent<TilemapRenderer>();
-		tmRenderer->SetSize(Vector2(4.0f, 4.0f));
-		tmRenderer->SetTileSize(Vector2(16.0f, 16.0f));
-		tmRenderer->SetCellCoordination(Vector2(7, 0));
-
-		/*graphics::Texture* tmTexture = */tmRenderer->SetTexture(Resources::Find<graphics::Texture>(L"PlatformSpringSDV"));
-
 		////main camera - set target
 		//cameraComp->SetTarget(tile);
 
@@ -52,6 +41,25 @@ namespace tg
 	void ToolScene::LateUpdate()
 	{
 		Scene::LateUpdate();
+
+		if (Input::GetKeyUp(eKeyCode::Mouse_Left))
+		{
+			Vector2 pos = Input::GetMousePosition();
+
+			Vector2 coord = (pos / TilemapRenderer::TileSize).integer();
+
+			//// Tilemap
+			Tile* tile = object::Instantiate<Tile>(enums::eLayerType::Tile);
+			tile->GetComponent<Transform>()->SetPositionStyle(Vector2(0.0f, 0.0f));
+			TilemapRenderer* tmRenderer = tile->AddComponent<TilemapRenderer>();
+			tmRenderer->SetSize(Vector2(3.0f, 3.0f));
+			tmRenderer->SetTileSize(Vector2(16.0f, 16.0f));
+			tmRenderer->SetTexture(Resources::Find<graphics::Texture>(L"PlatformSpringSDV"));
+			tmRenderer->SetCellCoordination(Vector2(7, 0));
+
+			tile->SetTilePosition(coord);
+		}
+	
 	}
 	
 	void ToolScene::Render(HDC hdc)
@@ -61,13 +69,13 @@ namespace tg
 		// grid
 		for (size_t ni = 0; ni < 50; ni++)
 		{
-			MoveToEx(hdc, (16 * 4) * ni, 0, NULL);
-			LineTo(hdc, (16 * 4) * ni, 1000);
+			MoveToEx(hdc, TilemapRenderer::TileSize.x * ni, 0, NULL);
+			LineTo(hdc, TilemapRenderer::TileSize.x * ni, 1000);
 		}
 		for (size_t ni = 0; ni < 50; ni++)
 		{
-			MoveToEx(hdc, 0, (16 * 4) * ni,  NULL);
-			LineTo(hdc, 1000, (16 * 4) * ni);
+			MoveToEx(hdc, 0, TilemapRenderer::TileSize.y * ni,  NULL);
+			LineTo(hdc, 1000, TilemapRenderer::TileSize.y * ni);
 		}
 	}
 
@@ -80,4 +88,42 @@ namespace tg
 	{
 		Scene::OnExit();
 	}
+}
+
+LRESULT CALLBACK WndToolProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	switch (message)
+	{
+	case WM_LBUTTONDOWN:
+	{
+		
+	}
+	break;
+	case WM_PAINT:
+	{
+		PAINTSTRUCT ps;
+		HDC hdc = BeginPaint(hWnd, &ps);
+
+		// TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+		tg::graphics::Texture* tilemapTexture
+			= tg::Resources::Find<tg::graphics::Texture>(L"PlatformSpringSDV");
+
+		TransparentBlt(hdc
+			, 0, 0
+			, tilemapTexture->GetWidth(), tilemapTexture->GetHeight()
+			, tilemapTexture->GetHdc()
+			, 0, 0
+			, tilemapTexture->GetWidth(), tilemapTexture->GetHeight()
+			, RGB(255, 0, 255));
+
+		EndPaint(hWnd, &ps);
+	}
+	break;
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		break;
+	default:
+		return DefWindowProc(hWnd, message, wParam, lParam);
+	}
+	return 0;
 }

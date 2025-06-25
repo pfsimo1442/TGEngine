@@ -5,8 +5,12 @@
 #include "Editor_Window.h"
 
 #include "..\\TGEngine_SOURCE\\tgApplication.h"
+#include "..\\TGEngine_SOURCE\\tgResources.h"
+#include "..\\TGEngine_SOURCE\\tgTexture.h"
+
 #include "..\\TGEngine_Window\\tgLoadResources.h"
 #include "..\\TGEngine_Window\\tgLoadScenes.h"
+#include "..\\TGEngine_Window\\tgToolScene.h"
 
 tg::Application application;
 
@@ -24,7 +28,6 @@ WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름�
 ATOM                MyRegisterClass(HINSTANCE hInstance, const wchar_t* name, WNDPROC proc);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
-LRESULT CALLBACK    WndToolProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -131,7 +134,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
       CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
 
    HWND toolHWnd = CreateWindowW(L"TOOLWINDOW", L"Tool_Window", WS_OVERLAPPEDWINDOW,
-       CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
+       CW_USEDEFAULT, 0, 100, height, nullptr, nullptr, hInstance, nullptr);
 
    application.Initialize(hWnd, width, height);
 
@@ -143,8 +146,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 
-   ShowWindow(toolHWnd, nCmdShow);
-   UpdateWindow(toolHWnd);
+   //ShowWindow(toolHWnd, nCmdShow);
    
    Gdiplus::GdiplusStartup(&gpToken, &gpsi, NULL);
 
@@ -153,7 +155,22 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    tg::LoadScenes();
 
    int ad = 0;
-   srand((unsigned int)(& ad));
+   srand((unsigned int)(&ad));
+
+   // tool window size 
+   tg::graphics::Texture* tilemapTexture 
+       = tg::Resources::Find<tg::graphics::Texture>(L"PlatformSpringSDV");
+
+   RECT rect = { 0, 0, tilemapTexture->GetWidth(), tilemapTexture->GetHeight() };
+       AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
+
+   UINT toolWidth = rect.right - rect.left;
+   UINT toolHeight = rect.bottom - rect.top;
+
+   SetWindowPos(toolHWnd, nullptr, width, 0, toolWidth, toolHeight, 0);
+   ShowWindow(toolHWnd, true);
+   UpdateWindow(toolHWnd);
+
 
    return TRUE;
 }
@@ -208,45 +225,55 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     return 0;
 }
 
-LRESULT CALLBACK WndToolProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
-{
-    switch (message)
-    {
-    case WM_COMMAND:
-    {
-        int wmId = LOWORD(wParam);
-        // 메뉴 선택을 구문 분석합니다:
-        switch (wmId)
-        {
-        case IDM_ABOUT:
-            DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-            break;
-        case IDM_EXIT:
-            DestroyWindow(hWnd);
-            break;
-        default:
-            return DefWindowProc(hWnd, message, wParam, lParam);
-        }
-    }
-    break;
-    case WM_PAINT:
-    {
-        PAINTSTRUCT ps;
-        HDC hdc = BeginPaint(hWnd, &ps);
-
-        // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
-
-        EndPaint(hWnd, &ps);
-    }
-    break;
-    case WM_DESTROY:
-        PostQuitMessage(0);
-        break;
-    default:
-        return DefWindowProc(hWnd, message, wParam, lParam);
-    }
-    return 0;
-}
+//LRESULT CALLBACK WndToolProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+//{
+//    switch (message)
+//    {
+//    case WM_COMMAND:
+//    {
+//        int wmId = LOWORD(wParam);
+//        // 메뉴 선택을 구문 분석합니다:
+//        switch (wmId)
+//        {
+//        case IDM_ABOUT:
+//            DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+//            break;
+//        case IDM_EXIT:
+//            DestroyWindow(hWnd);
+//            break;
+//        default:
+//            return DefWindowProc(hWnd, message, wParam, lParam);
+//        }
+//    }
+//    break;
+//    case WM_PAINT:
+//    {
+//        PAINTSTRUCT ps;
+//        HDC hdc = BeginPaint(hWnd, &ps);
+//
+//        // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+//        tg::graphics::Texture* tilemapTexture
+//            = tg::Resources::Find<tg::graphics::Texture>(L"PlatformSpringSDV");
+//
+//        TransparentBlt(hdc
+//            , 0, 0
+//            , tilemapTexture->GetWidth(), tilemapTexture->GetHeight()
+//            , tilemapTexture->GetHdc()
+//            , 0, 0
+//            , tilemapTexture->GetWidth(), tilemapTexture->GetHeight()
+//            , RGB(255, 0, 255));
+//
+//        EndPaint(hWnd, &ps);
+//    }
+//    break;
+//    case WM_DESTROY:
+//        PostQuitMessage(0);
+//        break;
+//    default:
+//        return DefWindowProc(hWnd, message, wParam, lParam);
+//    }
+//    return 0;
+//}
 
 // 정보 대화 상자의 메시지 처리기입니다.
 INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)

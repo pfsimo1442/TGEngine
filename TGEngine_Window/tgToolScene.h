@@ -21,3 +21,5 @@ namespace tg
 
 	};
 }
+
+LRESULT CALLBACK WndToolProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);

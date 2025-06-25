@@ -17,12 +17,16 @@ namespace tg
 		void Render(HDC hdc) override;
 
 		void SetTexture(graphics::Texture* texture) { mTexture = texture; }
-		void SetSize(Vector2 size) { mSize = size; }
+		void SetSize(Vector2 size) { mSize = size; TileSize = mTileSize * mSize; }
 		
 		void SetCellCoordination(Vector2 coord) { mCell = coord; }
-		void SetTileSize(Vector2 size) { mTileSize = size; }
+		void SetTileSize(Vector2 size) { mTileSize = size; TileSize = mTileSize * mSize; }
+
+	public:
+		static Vector2 TileSize;
 
 	private:
+
 		graphics::Texture* mTexture;
 		Vector2 mSize;
 

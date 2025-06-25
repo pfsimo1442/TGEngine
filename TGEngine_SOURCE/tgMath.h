@@ -54,18 +54,36 @@ namespace tg::math
 
 		}
 
+		Vector2 operator+(float value)
+		{
+			return Vector2(x + value, y + value);
+		}
 		Vector2 operator+(Vector2 other)
 		{
 			return Vector2(x + other.x, y + other.y);
+		}
+		void operator+=(float value)
+		{
+			x += value;
+			y += value;
 		}
 		void operator+=(Vector2 other)
 		{
 			x += other.x;
 			y += other.y;
 		}
+		Vector2 operator-(float value)
+		{
+			return Vector2(x - value, y - value);
+		}
 		Vector2 operator-(Vector2 other)
 		{
 			return Vector2(x - other.x, y - other.y);
+		}
+		void operator-=(float value)
+		{
+			x -= value;
+			y -= value;
 		}
 		void operator-=(Vector2 other)
 		{
@@ -76,10 +94,19 @@ namespace tg::math
 		{
 			return Vector2(x / value, y / value);
 		}
+		Vector2 operator/(Vector2 v)
+		{
+			return Vector2(x / v.x, y / v.y);
+		}
 		void operator/=(float value)
 		{
 			x /= value;
 			y /= value;
+		}
+		void operator/=(Vector2 v)
+		{
+			x /= v.x;
+			y /= v.y;
 		}
 		Vector2 operator*(float value)
 		{
@@ -114,6 +141,14 @@ namespace tg::math
 		Vector2 abs()
 		{
 			return Vector2(fabs(x), fabs(y));
+		}
+
+		Vector2 integer()
+		{
+			x = (float)((int)x);
+			y = (float)((int)y);
+
+			return *this;
 		}
 
 		Vector2 normalize()
