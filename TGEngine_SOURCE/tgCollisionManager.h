@@ -26,6 +26,7 @@ namespace tg
 		static void Update();
 		static void LateUpdate();
 		static void Render(HDC hdc);
+		static void Clear();
 
 		static void CollisionLayerCheck(eLayerType left, eLayerType right, bool enable);
 		static void LayerCollision(class Scene* scene, eLayerType left, eLayerType right);
@@ -36,7 +37,7 @@ namespace tg
 		//static bool isBump(Vector2 leftPos, Vector2 rigtPos, Vector2 leftSize, Vector2 rightSize);
 
 	private:
-		static std::bitset<(UINT)eLayerType::Max> mCollisionLayMatrix[(UINT)eLayerType::Max];
+		static std::bitset<(UINT)eLayerType::Max> mCollisionLayerMatrix[(UINT)eLayerType::Max];
 		static std::unordered_map<UINT64, bool> mCollisionMap;
 	};
 }

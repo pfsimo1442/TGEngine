@@ -8,7 +8,7 @@
 
 namespace tg
 {
-	std::bitset<(UINT)eLayerType::Max> CollisionManager::mCollisionLayMatrix[(UINT)eLayerType::Max] = {};
+	std::bitset<(UINT)eLayerType::Max> CollisionManager::mCollisionLayerMatrix[(UINT)eLayerType::Max] = {};
 	std::unordered_map<UINT64, bool> CollisionManager::mCollisionMap = {};
 
 	void CollisionManager::Initialize()
@@ -23,7 +23,7 @@ namespace tg
 		{
 			for (UINT col = 0; col < (UINT)eLayerType::Max; col++)
 			{
-				if (mCollisionLayMatrix[row][col] == true)
+				if (mCollisionLayerMatrix[row][col] == true)
 				{
 					LayerCollision(scene, (eLayerType)row, (eLayerType)col);
 				}
@@ -40,6 +40,13 @@ namespace tg
 	{
 		
 	}
+
+	void CollisionManager::Clear()
+	{
+		mCollisionMap.clear();
+		mCollisionLayerMatrix->reset();
+	}
+
 	void CollisionManager::CollisionLayerCheck(eLayerType left, eLayerType right, bool enable)
 	{
 		int row = 0;
@@ -56,13 +63,13 @@ namespace tg
 			col = (UINT)left;
 		}
 
-		mCollisionLayMatrix[row][col] = enable;
+		mCollisionLayerMatrix[row][col] = enable;
 	}
 
 	void CollisionManager::LayerCollision(Scene* scene, eLayerType left, eLayerType right)
 	{
-		const std::vector<GameObject*>& lefts = scene->GetLayer(left)->GetGameObjects();
-		const std::vector<GameObject*>& rights = scene->GetLayer(right)->GetGameObjects();
+		const std::vector<GameObject*>& lefts = SceneManager::GetGameObjects(left);
+		const std::vector<GameObject*>& rights = SceneManager::GetGameObjects(right);
 		
 		for (GameObject* left : lefts)
 		{

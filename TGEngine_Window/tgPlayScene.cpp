@@ -32,6 +32,7 @@ namespace tg
 
 	void PlayScene::Initialize()
 	{
+		/*
 		FILE* pFile = nullptr;
 		_wfopen_s(&pFile, L"..\\Resources\\TileSaves\\Test", L"rb");
 
@@ -63,9 +64,8 @@ namespace tg
 		}
 
 		fclose(pFile);
+		*/
 
-		//// Collision Manager
-		CollisionManager::CollisionLayerCheck(enums::eLayerType::Player, enums::eLayerType::Pet, true);
 
 		//// Main Camera
 		GameObject* camera = object::Instantiate<GameObject>(enums::eLayerType::None, Vector2(344.0f, 442.0f));
@@ -170,12 +170,17 @@ namespace tg
 
 	void PlayScene::OnEnter()
 	{
+		Scene::OnEnter();
 
+		//// Collision Manager
+		CollisionManager::CollisionLayerCheck(enums::eLayerType::Player, enums::eLayerType::Pet, true);
 	}
 
 	void PlayScene::OnExit()
 	{
-	//	Transform* tr = mPlayer->GetComponent<Transform>();
-	//	tr->SetPosition(Vector2(0, 0));
+		Scene::OnExit();
+
+		//Transform* tr = mPlayer->GetComponent<Transform>();
+		//tr->SetPosition(Vector2(0, 0));
 	}
 }

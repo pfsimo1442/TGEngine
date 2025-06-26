@@ -1,4 +1,5 @@
 #include "tgScene.h"
+#include "tgCollisionManager.h"
 
 namespace tg
 {
@@ -98,9 +99,6 @@ namespace tg
 
 	void Scene::OnExit()
 	{
-
+		CollisionManager::Clear();
 	}
-
-	
-
 }

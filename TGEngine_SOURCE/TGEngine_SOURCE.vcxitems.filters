@@ -73,12 +73,14 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgCircleCollider2D.cpp">
       <Filter>Component\Collider</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)tgCollisionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgDontDestroyOnLoad.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgTilemapRenderer.cpp">
       <Filter>Component\TilemapRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgCollisionManager.cpp">
+      <Filter>Component\Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -163,12 +165,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgCircleCollider2D.h">
       <Filter>Component\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)tgCollisionManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgDontDestroyOnLoad.h">
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgTilemapRenderer.h">
       <Filter>Component\TilemapRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgCollisionManager.h">
+      <Filter>Component\Collider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
