@@ -6,6 +6,7 @@
 #include "tgResources.h"
 #include "tgTexture.h"
 #include "tgCamera.h"
+#include "tgCameraScript.h"
 #include "tgRenderer.h"
 #include "tgInput.h"
 
@@ -25,6 +26,7 @@ namespace tg
 		//// Main Camera
 		GameObject* camera = object::Instantiate<GameObject>(enums::eLayerType::None, Vector2((float)application.GetWidth() / 2, (float)application.GetHeight() / 2));
 		Camera* cameraComp = camera->AddComponent<Camera>();
+		CameraScript* camScr = camera->AddComponent<CameraScript>();
 		renderer::mainCamera = cameraComp;
 
 		////main camera - set target
@@ -39,12 +41,14 @@ namespace tg
 	}
 
 	void ToolScene::LateUpdate()
-	{
+	{		
 		Scene::LateUpdate();
 
-		if (Input::GetKeyDown(eKeyCode::Mouse_Left) && Input::IsMouseOnWindow())
+		if (Input::GetKeyDown(eKeyCode::Mouse_Left) && Input::IsMouseOnWindow() && TilemapRenderer::SelectedCell.x != -1.0f)
 		{
+
 			Vector2 pos = Input::GetMousePosition();
+			pos = renderer::mainCamera->CalculateTilePosition(pos);
 
 			Vector2 coord = (pos / TilemapRenderer::TileSize).integer();
 
@@ -79,13 +83,17 @@ namespace tg
 		// grid
 		for (size_t ni = 0; ni < 50; ni++)
 		{
-			MoveToEx(hdc, TilemapRenderer::TileSize.x * ni, 0, NULL);
-			LineTo(hdc, TilemapRenderer::TileSize.x * ni, 1000);
+			Vector2 gridPos = renderer::mainCamera->CalculatePosition(Vector2(TilemapRenderer::TileSize.x * ni, 0.0f));
+			
+			MoveToEx(hdc, gridPos.x, 0, NULL);
+			LineTo(hdc, gridPos.x, 1000);
 		}
 		for (size_t ni = 0; ni < 50; ni++)
 		{
-			MoveToEx(hdc, 0, TilemapRenderer::TileSize.y * ni,  NULL);
-			LineTo(hdc, 1000, TilemapRenderer::TileSize.y * ni);
+			Vector2 gridPos = renderer::mainCamera->CalculatePosition(Vector2(0.0f, TilemapRenderer::TileSize.y * ni));
+
+			MoveToEx(hdc, 0, gridPos.y,  NULL);
+			LineTo(hdc, 1000, gridPos.y);
 		}
 	}
 
@@ -129,7 +137,7 @@ namespace tg
 			TilemapRenderer* tmr = tile->GetComponent<TilemapRenderer>();
 			Transform* tr = tile->GetComponent<Transform>();
 
-			Vector2 sourceCellCoord = tmr->SetCellCoordination();
+			Vector2 sourceCellCoord = tmr->GetCellCoordination();
 			Vector2 pos = tr->GetPosition();
 
 			int cellCoordX = (int)(sourceCellCoord.x);
@@ -186,7 +194,7 @@ namespace tg
 			if (fread(&posY, sizeof(int), 1, pFile) == NULL)
 				break;
 
-			Tile* tile = object::Instantiate<Tile>(enums::eLayerType::Tile);
+			Tile* tile = object::Instantiate<Tile>(enums::eLayerType::Tile, Vector2((float)posX, (float)posY));
 			tile->GetComponent<Transform>()->SetPositionStyle(Vector2(0.0f, 0.0f));
 			TilemapRenderer* tmRenderer = tile->AddComponent<TilemapRenderer>();
 			tmRenderer->SetSize(Vector2(3.0f, 3.0f));
@@ -194,7 +202,6 @@ namespace tg
 			tmRenderer->SetTexture(Resources::Find<graphics::Texture>(L"PlatformSpringSDV"));
 			tmRenderer->SetCellCoordination(Vector2((float)cellCoordX, (float)cellCoordY));
 
-			tile->SetTilePosition(Vector2((float)posX, (float)posY));
 			mTiles.push_back(tile);
 		}
 

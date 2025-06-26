@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="tgCameraScript.h" />
     <ClInclude Include="tgCat.h" />
     <ClInclude Include="tgCatScript.h" />
     <ClInclude Include="tgLoadResources.h" />
@@ -144,6 +145,7 @@
     <ClInclude Include="tgToolScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="tgCameraScript.cpp" />
     <ClCompile Include="tgCat.cpp" />
     <ClCompile Include="tgCatScript.cpp" />
     <ClCompile Include="tgPlayer.cpp" />

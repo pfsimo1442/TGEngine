@@ -12,9 +12,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="tgLoadScenes.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="tgPlayScene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
@@ -24,7 +21,6 @@
     <ClInclude Include="tgTitleScene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="tgLoadResources.h" />
     <ClInclude Include="tgPlayerScript.h">
       <Filter>Scripts</Filter>
     </ClInclude>
@@ -40,6 +36,11 @@
     <ClInclude Include="tgTile.h">
       <Filter>Contents</Filter>
     </ClInclude>
+    <ClInclude Include="tgCameraScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="tgLoadScenes.h" />
+    <ClInclude Include="tgLoadResources.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tgPlayScene.cpp">
@@ -65,6 +66,9 @@
     </ClCompile>
     <ClCompile Include="tgTile.cpp">
       <Filter>Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="tgCameraScript.cpp">
+      <Filter>Scripts</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

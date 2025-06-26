@@ -17,6 +17,8 @@
 #include "tgCatScript.h"
 #include "tgBoxCollider2D.h"
 #include "tgCollisionManager.h"
+#include "tgTile.h"
+#include "tgTilemapRenderer.h"
 
 namespace tg
 {
@@ -30,6 +32,38 @@ namespace tg
 
 	void PlayScene::Initialize()
 	{
+		FILE* pFile = nullptr;
+		_wfopen_s(&pFile, L"..\\Resources\\TileSaves\\Test", L"rb");
+
+		while (true)
+		{
+			int cellCoordX = 0;
+			int cellCoordY = 0;
+			int posX = 0;
+			int posY = 0;
+
+			if (fread(&cellCoordX, sizeof(int), 1, pFile) == NULL)
+				break;
+			if (fread(&cellCoordY, sizeof(int), 1, pFile) == NULL)
+				break;
+			if (fread(&posX, sizeof(int), 1, pFile) == NULL)
+				break;
+			if (fread(&posY, sizeof(int), 1, pFile) == NULL)
+				break;
+
+			Tile* tile = object::Instantiate<Tile>(enums::eLayerType::Tile, Vector2((float)posX, (float)posY));
+			tile->GetComponent<Transform>()->SetPositionStyle(Vector2(0.0f, 0.0f));
+			TilemapRenderer* tmRenderer = tile->AddComponent<TilemapRenderer>();
+			tmRenderer->SetSize(Vector2(3.0f, 3.0f));
+			tmRenderer->SetTileSize(Vector2(16.0f, 16.0f));
+			tmRenderer->SetTexture(Resources::Find<graphics::Texture>(L"PlatformSpringSDV"));
+			tmRenderer->SetCellCoordination(Vector2((float)cellCoordX, (float)cellCoordY));
+
+			//mTiles.push_back(tile);
+		}
+
+		fclose(pFile);
+
 		//// Collision Manager
 		CollisionManager::CollisionLayerCheck(enums::eLayerType::Player, enums::eLayerType::Pet, true);
 

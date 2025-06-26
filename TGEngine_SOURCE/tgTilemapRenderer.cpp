@@ -47,8 +47,8 @@ namespace tg
 
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector2 pos = tr->GetPosition();
-		Vector2 posStyle = tr->GetPositionStyle();
 		float rot = tr->GetRotation();
+		Vector2 scale = tr->GetScale();
 
 		pos = renderer::mainCamera->CalculatePosition(pos);
 
@@ -63,18 +63,18 @@ namespace tg
 				func.SourceConstantAlpha = 255; // 0(transparent) ~ 255(Opaque)
 
 				AlphaBlend(hdc
-					, pos.x - (mTileSize.x * posStyle.x * mSize.x), pos.y - (mTileSize.y * posStyle.y * mSize.y)
-					, mTileSize.x * mSize.x, mTileSize.y * mSize.y
+					, pos.x, pos.y
+					, mTileSize.x * mSize.x * scale.x, mTileSize.y * mSize.y * scale.y
 					, mTexture->GetHdc()
-					, mCell.x * mTileSize.x, mCell.y * mTileSize.y
-					, mTileSize.x, mTileSize.y
+					, mCell.x * OriginTileSize.x, mCell.y * OriginTileSize.y
+					, OriginTileSize.x, OriginTileSize.y
 					, func);
 			}
 			else
 			{
 				TransparentBlt(hdc
-					, pos.x - (mTileSize.x * posStyle.x * mSize.x), pos.y - (mTileSize.y * posStyle.y * mSize.y)
-					, mTileSize.x * mSize.x, mTileSize.y * mSize.y
+					, pos.x, pos.y
+					, mTileSize.x * mSize.x * scale.x, mTileSize.y * mSize.y * scale.y
 					, mTexture->GetHdc()
 					, mCell.x * OriginTileSize.x, mCell.y * OriginTileSize.y
 					, OriginTileSize.x, OriginTileSize.y
