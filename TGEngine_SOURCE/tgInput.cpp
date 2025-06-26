@@ -7,6 +7,8 @@ namespace tg
 {
 	std::vector<Input::Key> Input::Keys = {};
 	math::Vector2 Input::mMousePosition = math::Vector2::Zero;
+	math::Vector2 Input::mOnMousePosition = math::Vector2::Zero;
+	bool Input::mbMouseOnWindow = false;
 
 	int ASCII[(int)eKeyCode::End] =
 	{
@@ -89,6 +91,16 @@ namespace tg
 		POINT mousePos = {};
 		GetCursorPos(&mousePos);
 		ScreenToClient(application.GetHwnd(), &mousePos);
+
+		if (0 < mousePos.x && mousePos.x < application.GetWidth()
+			&& 0 < mousePos.y && mousePos.y < application.GetHeight())
+		{
+			mbMouseOnWindow = true;
+			mOnMousePosition.x = (float)(mousePos.x);
+			mOnMousePosition.y = (float)(mousePos.y);
+		}
+		else
+			mbMouseOnWindow = false;
 
 		mMousePosition.x = (float)(mousePos.x);
 		mMousePosition.y = (float)(mousePos.y);

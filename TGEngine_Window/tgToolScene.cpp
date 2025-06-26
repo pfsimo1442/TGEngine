@@ -42,7 +42,7 @@ namespace tg
 	{
 		Scene::LateUpdate();
 
-		if (Input::GetKeyDown(eKeyCode::Mouse_Left))
+		if (Input::GetKeyDown(eKeyCode::Mouse_Left) && Input::IsMouseOnWindow())
 		{
 			Vector2 pos = Input::GetMousePosition();
 
