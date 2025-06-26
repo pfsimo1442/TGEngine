@@ -1,5 +1,6 @@
 #pragma once
 #include "..\\TGEngine_SOURCE\\tgScene.h"
+#include "tgTile.h"
 
 namespace tg
 {
@@ -21,7 +22,7 @@ namespace tg
 		void Load();
 
 	private:
-
+		std::vector<Tile*> mTiles;
 	};
 }
 

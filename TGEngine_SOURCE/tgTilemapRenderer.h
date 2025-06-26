@@ -20,6 +20,7 @@ namespace tg
 		void SetSize(Vector2 size) { mSize = size; TileSize = mTileSize * mSize; }
 		
 		void SetCellCoordination(Vector2 coord) { mCell = coord; }
+		Vector2 SetCellCoordination() { return mCell; }
 		void SetTileSize(Vector2 size) { mTileSize = size; TileSize = mTileSize * mSize; OriginTileSize = mTileSize;}
 
 	public:
