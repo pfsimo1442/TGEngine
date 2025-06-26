@@ -17,6 +17,9 @@ namespace tg
 		void OnEnter() override;
 		void OnExit() override;
 
+		void Save();
+		void Load();
+
 	private:
 
 	};

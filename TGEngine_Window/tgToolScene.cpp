@@ -88,6 +88,16 @@ namespace tg
 	{
 		Scene::OnExit();
 	}
+
+	void ToolScene::Save()
+	{
+
+	}
+	
+	void ToolScene::Load()
+	{
+
+	}
 }
 
 LRESULT CALLBACK WndToolProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
