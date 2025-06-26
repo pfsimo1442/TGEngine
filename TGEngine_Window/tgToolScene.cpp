@@ -74,6 +74,9 @@ namespace tg
 			if (Input::GetKeyDown(eKeyCode::L))
 				Load();
 		}
+
+		if (Input::GetKeyDown(eKeyCode::N))
+			SceneManager::LoadScene(L"PlayScene");
 	}
 	
 	void ToolScene::Render(HDC hdc)

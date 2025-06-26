@@ -7,6 +7,7 @@
 #include "..\\TGEngine_SOURCE\\tgApplication.h"
 #include "..\\TGEngine_SOURCE\\tgResources.h"
 #include "..\\TGEngine_SOURCE\\tgTexture.h"
+#include "..\\TGEngine_SOURCE\\tgSceneManager.h"
 
 #include "..\\TGEngine_Window\\tgLoadResources.h"
 #include "..\\TGEngine_Window\\tgLoadScenes.h"
@@ -133,9 +134,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
 
-   HWND toolHWnd = CreateWindowW(L"TOOLWINDOW", L"Tilemap_Pallete", WS_OVERLAPPEDWINDOW,
-       CW_USEDEFAULT, 0, 100, height, nullptr, nullptr, hInstance, nullptr);
-
    application.Initialize(hWnd, width, height);
 
    if (!hWnd)
@@ -145,8 +143,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
-
-   //ShowWindow(toolHWnd, nCmdShow);
    
    Gdiplus::GdiplusStartup(&gpToken, &gpsi, NULL);
 
@@ -157,20 +153,28 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    int ad = 0;
    srand((unsigned int)(&ad));
 
-   // tool window size 
-   tg::graphics::Texture* tilemapTexture 
-       = tg::Resources::Find<tg::graphics::Texture>(L"PlatformSpringSDV");
+   tg::Scene* activeScene = tg::SceneManager::GetActiveScene();
 
-   RECT rect = { 0, 0, tilemapTexture->GetWidth(), tilemapTexture->GetHeight() };
+   std::wstring name = activeScene->GetName();
+   if (name == L"ToolScene")
+   {
+       HWND toolHWnd = CreateWindowW(L"TOOLWINDOW", L"Tilemap_Pallete", WS_OVERLAPPEDWINDOW,
+           CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
+
+       // tilemap pallete window size adjusting
+       tg::graphics::Texture* tilemapPalleteTexture
+           = tg::Resources::Find<tg::graphics::Texture>(L"PlatformSpringSDV");
+
+       RECT rect = { 0, 0, tilemapPalleteTexture->GetWidth(), tilemapPalleteTexture->GetHeight() };
        AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
 
-   UINT toolWidth = rect.right - rect.left;
-   UINT toolHeight = rect.bottom - rect.top;
+       UINT toolWidth = rect.right - rect.left;
+       UINT toolHeight = rect.bottom - rect.top;
 
-   SetWindowPos(toolHWnd, nullptr, width, 0, toolWidth, toolHeight, 0);
-   ShowWindow(toolHWnd, true);
-   UpdateWindow(toolHWnd);
-
+       SetWindowPos(toolHWnd, nullptr, width, 0, toolWidth, toolHeight, 0);
+       ShowWindow(toolHWnd, true);
+       UpdateWindow(toolHWnd);
+   }
 
    return TRUE;
 }

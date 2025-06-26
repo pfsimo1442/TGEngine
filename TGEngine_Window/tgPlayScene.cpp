@@ -155,9 +155,9 @@ namespace tg
 		Scene::LateUpdate();
 
 		if (Input::GetKeyDown(eKeyCode::N))
-		{
 			SceneManager::LoadScene(L"TitleScene");
-		}
+		if (Input::GetKeyDown(eKeyCode::T))
+			SceneManager::LoadScene(L"ToolScene");
 	}
 
 	void PlayScene::Render(HDC hdc)

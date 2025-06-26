@@ -27,9 +27,9 @@ namespace tg
 		Scene::LateUpdate();
 
 		if (Input::GetKeyDown(eKeyCode::N))
-		{
 			SceneManager::LoadScene(L"PlayScene");
-		}
+		if (Input::GetKeyDown(eKeyCode::T))
+			SceneManager::LoadScene(L"ToolScene");
 	}
 
 	void TitleScene::Render(HDC hdc)
