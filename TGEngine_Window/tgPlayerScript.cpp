@@ -8,6 +8,7 @@
 #include "tgCatScript.h"
 #include "tgObject.h"
 #include "tgResources.h"
+#include "tgRigidbody.h"
 
 namespace tg
 {
@@ -137,104 +138,126 @@ namespace tg
 			Vector2 mousePos = Input::GetMousePosition();
 		}
 
-		Transform* tr = GetOwner()->GetComponent<Transform>();
-		Vector2 pos = tr->GetPosition();
+		//Transform* tr = GetOwner()->GetComponent<Transform>();
+		//Vector2 pos = tr->GetPosition();
+
+		//if (Input::GetKey(eKeyCode::D))
+		//{
+		//	pos.x += 100.0f * Time::DeltaTime();
+		//	mCurrentWS = PlayerScript::eWalkState::Right;
+		//}
+		//if (Input::GetKey(eKeyCode::A))
+		//{
+		//	pos.x -= 100.0f * Time::DeltaTime();
+		//	mCurrentWS = PlayerScript::eWalkState::Left;
+		//}
+		//if (Input::GetKey(eKeyCode::W))
+		//{
+		//	pos.y -= 100.0f * Time::DeltaTime();
+		//	mCurrentWS = PlayerScript::eWalkState::Up;
+		//}
+		//if (Input::GetKey(eKeyCode::S))
+		//{
+		//	pos.y += 100.0f * Time::DeltaTime();
+		//	mCurrentWS = PlayerScript::eWalkState::Down;
+		//}
+
+		//tr->SetPosition(pos);
+
+		Rigidbody* rb = GetOwner()->GetComponent<Rigidbody>();
+		Vector2 dir = Vector2::Zero;
+		float spd = 500.0f;
 
 		if (Input::GetKey(eKeyCode::D))
-		{
-			pos.x += 100.0f * Time::DeltaTime();
-			mCurrentWS = PlayerScript::eWalkState::Right;
-		}
+			dir += Vector2::Right;
 		if (Input::GetKey(eKeyCode::A))
-		{
-			pos.x -= 100.0f * Time::DeltaTime();
-			mCurrentWS = PlayerScript::eWalkState::Left;
-		}
+			dir += Vector2::Left;
 		if (Input::GetKey(eKeyCode::W))
-		{
-			pos.y -= 100.0f * Time::DeltaTime();
-			mCurrentWS = PlayerScript::eWalkState::Up;
-		}
+			dir += Vector2::Up;
 		if (Input::GetKey(eKeyCode::S))
-		{
-			pos.y += 100.0f * Time::DeltaTime();
-			mCurrentWS = PlayerScript::eWalkState::Down;
-		}
+			dir += Vector2::Down;
 
-		tr->SetPosition(pos);
+		rb->AddForce(dir.normalize() * spd);
 	}
 
 	void PlayerScript::move()
 	{
-		Transform* tr = GetOwner()->GetComponent<Transform>();
-		Vector2 pos = tr->GetPosition();
-
+		//Transform* tr = GetOwner()->GetComponent<Transform>();
+		//Vector2 pos = tr->GetPosition();
+		Rigidbody* rb = GetOwner()->GetComponent<Rigidbody>();
+		Vector2 dir = Vector2::Zero;
+		float spd = 500.0f;
+		
 		if (Input::GetKey(eKeyCode::D))
 		{
-			pos.x += 100.0f * Time::DeltaTime();
-			mCurrentWS = PlayerScript::eWalkState::Right;
+			//pos.x += 100.0f * Time::DeltaTime();
+			//mCurrentWS = PlayerScript::eWalkState::Right;
+			dir += Vector2::Right;
+			
 		}
 		if (Input::GetKey(eKeyCode::A))
 		{
-			pos.x -= 100.0f * Time::DeltaTime();
-			mCurrentWS = PlayerScript::eWalkState::Left;
+			//pos.x -= 100.0f * Time::DeltaTime();
+			//mCurrentWS = PlayerScript::eWalkState::Left;
+			dir += Vector2::Left;
 		}
 		if (Input::GetKey(eKeyCode::W))
 		{
-			pos.y -= 100.0f * Time::DeltaTime();
-			mCurrentWS = PlayerScript::eWalkState::Up;
+			//pos.y -= 100.0f * Time::DeltaTime();
+			//mCurrentWS = PlayerScript::eWalkState::Up;
+			dir += Vector2::Up;
 		}
 		if (Input::GetKey(eKeyCode::S))
 		{
-			pos.y += 100.0f * Time::DeltaTime();
-			mCurrentWS = PlayerScript::eWalkState::Down;
+			//pos.y += 100.0f * Time::DeltaTime();
+			//mCurrentWS = PlayerScript::eWalkState::Down;
+			dir += Vector2::Down;
 		}
 
+		rb->AddForce(dir.normalize() * spd);
+		//tr->SetPosition(pos);
 
-		bool chkDA = false;
-		bool chkWS = false;
-		if (Input::GetKey(eKeyCode::D) && Input::GetKey(eKeyCode::A))
-			chkDA = true;
-		if (Input::GetKey(eKeyCode::W) && Input::GetKey(eKeyCode::S))
-			chkWS = true;
+		//bool chkDA = false;
+		//bool chkWS = false;
+		//if (Input::GetKey(eKeyCode::D) && Input::GetKey(eKeyCode::A))
+		//	chkDA = true;
+		//if (Input::GetKey(eKeyCode::W) && Input::GetKey(eKeyCode::S))
+		//	chkWS = true;
 
-		if (chkDA == true)
-		{
-			mCurrentWS = PlayerScript::eWalkState::Null;
-			if (Input::GetKey(eKeyCode::W) && chkWS == false)
-				mCurrentWS = PlayerScript::eWalkState::Up;
-			if (Input::GetKey(eKeyCode::S) && chkWS == false)
-				mCurrentWS = PlayerScript::eWalkState::Down;
-			if (chkWS == true)
-				mCurrentWS = PlayerScript::eWalkState::Null;
-		}
-		else if (chkWS == true)
-		{
-			mCurrentWS = PlayerScript::eWalkState::Null;
-			if (Input::GetKey(eKeyCode::D))
-				mCurrentWS = PlayerScript::eWalkState::Right;
-			if (Input::GetKey(eKeyCode::A))
-				mCurrentWS = PlayerScript::eWalkState::Left;
-		}
+		//if (chkDA == true)
+		//{
+		//	mCurrentWS = PlayerScript::eWalkState::Null;
+		//	if (Input::GetKey(eKeyCode::W) && chkWS == false)
+		//		mCurrentWS = PlayerScript::eWalkState::Up;
+		//	if (Input::GetKey(eKeyCode::S) && chkWS == false)
+		//		mCurrentWS = PlayerScript::eWalkState::Down;
+		//	if (chkWS == true)
+		//		mCurrentWS = PlayerScript::eWalkState::Null;
+		//}
+		//else if (chkWS == true)
+		//{
+		//	mCurrentWS = PlayerScript::eWalkState::Null;
+		//	if (Input::GetKey(eKeyCode::D))
+		//		mCurrentWS = PlayerScript::eWalkState::Right;
+		//	if (Input::GetKey(eKeyCode::A))
+		//		mCurrentWS = PlayerScript::eWalkState::Left;
+		//}
 
-		tr->SetPosition(pos);
+		//if (mCurrentWS != mLastWS)
+		//{
+		//	if (mCurrentWS == PlayerScript::eWalkState::Right)
+		//		mAnimator->PlayAnimation(L"CatRightWalk");
+		//	if (mCurrentWS == PlayerScript::eWalkState::Left)
+		//		mAnimator->PlayAnimation(L"CatLeftWalk");
+		//	if (mCurrentWS == PlayerScript::eWalkState::Up)
+		//		mAnimator->PlayAnimation(L"CatUpWalk");
+		//	if (mCurrentWS == PlayerScript::eWalkState::Down)
+		//		mAnimator->PlayAnimation(L"CatDownWalk");
+		//	if (mCurrentWS == PlayerScript::eWalkState::Null)
+		//		mAnimator->PlayAnimation(L"CatSitDown", false);
+		//}
 
-
-		if (mCurrentWS != mLastWS)
-		{
-			if (mCurrentWS == PlayerScript::eWalkState::Right)
-				mAnimator->PlayAnimation(L"CatRightWalk");
-			if (mCurrentWS == PlayerScript::eWalkState::Left)
-				mAnimator->PlayAnimation(L"CatLeftWalk");
-			if (mCurrentWS == PlayerScript::eWalkState::Up)
-				mAnimator->PlayAnimation(L"CatUpWalk");
-			if (mCurrentWS == PlayerScript::eWalkState::Down)
-				mAnimator->PlayAnimation(L"CatDownWalk");
-			if (mCurrentWS == PlayerScript::eWalkState::Null)
-				mAnimator->PlayAnimation(L"CatSitDown", false);
-		}
-
-		mLastWS = mCurrentWS;
+		//mLastWS = mCurrentWS;
 
 		if ((Input::GetKeyUp(eKeyCode::W) && !(Input::GetKey(eKeyCode::S) || Input::GetKey(eKeyCode::A) || Input::GetKey(eKeyCode::D)))
 			|| (Input::GetKeyUp(eKeyCode::S) && !(Input::GetKey(eKeyCode::W) || Input::GetKey(eKeyCode::A) || Input::GetKey(eKeyCode::D)))

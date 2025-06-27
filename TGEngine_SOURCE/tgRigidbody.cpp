@@ -8,7 +8,7 @@ namespace tg
 	Rigidbody::Rigidbody()
 		: Component(enums::eComponentType::Rigidbody)
 		, mMass(1.0f)
-		, mFriction(10.0f)
+		, mFriction(0.0f)
 		, mForce(Vector2::Zero)
 		, mAcceleration(Vector2::Zero)
 		, mVelocity(Vector2::Zero)

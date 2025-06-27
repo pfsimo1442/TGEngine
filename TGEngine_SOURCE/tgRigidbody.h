@@ -14,6 +14,10 @@ namespace tg
 		virtual void LateUpdate();
 		virtual void Render(HDC hdc);
 
+		void SetMass(float mass) { mMass = mass; }
+		void SetFriction(float friction) { mFriction = friction; }
+		void AddForce(Vector2 force) { mForce += force; }
+
 	private:
 		float mMass;
 		float mFriction;
