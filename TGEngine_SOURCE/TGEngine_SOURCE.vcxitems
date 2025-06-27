@@ -36,6 +36,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgResources.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgRigidbody.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgSceneManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgScript.h" />
@@ -62,9 +63,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgMath.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgResources.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgRigidbody.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgSceneManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgScript.cpp" />

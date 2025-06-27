@@ -6,6 +6,7 @@ namespace tg::enums
 	{
 		Transform,
 		Collider, 
+		Rigidbody,
 		Script, 
 		SpriteRenderer,
 		Animator, 

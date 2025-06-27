@@ -54,6 +54,15 @@ namespace tg::math
 
 		}
 
+		Vector2 operator+()
+		{
+			return Vector2(x, y);
+		}
+		Vector2 operator-()
+		{
+			return Vector2(-x, -y);
+		}
+
 		Vector2 operator+(float value)
 		{
 			return Vector2(x + value, y + value);
@@ -62,6 +71,31 @@ namespace tg::math
 		{
 			return Vector2(x + other.x, y + other.y);
 		}
+		Vector2 operator-(float value)
+		{
+			return Vector2(x - value, y - value);
+		}
+		Vector2 operator-(Vector2 other)
+		{
+			return Vector2(x - other.x, y - other.y);
+		}
+		Vector2 operator*(float value)
+		{
+			return Vector2(x * value, y * value);
+		}
+		Vector2 operator*(Vector2 v)
+		{
+			return Vector2(x * v.x, y * v.y);
+		}
+		Vector2 operator/(float value)
+		{
+			return Vector2(x / value, y / value);
+		}
+		Vector2 operator/(Vector2 v)
+		{
+			return Vector2(x / v.x, y / v.y);
+		}
+
 		void operator+=(float value)
 		{
 			x += value;
@@ -71,14 +105,6 @@ namespace tg::math
 		{
 			x += other.x;
 			y += other.y;
-		}
-		Vector2 operator-(float value)
-		{
-			return Vector2(x - value, y - value);
-		}
-		Vector2 operator-(Vector2 other)
-		{
-			return Vector2(x - other.x, y - other.y);
 		}
 		void operator-=(float value)
 		{
@@ -90,13 +116,15 @@ namespace tg::math
 			x -= other.x;
 			y -= other.y;
 		}
-		Vector2 operator/(float value)
+		void operator*=(float value)
 		{
-			return Vector2(x / value, y / value);
+			x *= value;
+			y *= value;
 		}
-		Vector2 operator/(Vector2 v)
+		void operator*=(Vector2 v)
 		{
-			return Vector2(x / v.x, y / v.y);
+			x *= v.x;
+			y *= v.y;
 		}
 		void operator/=(float value)
 		{
@@ -108,23 +136,14 @@ namespace tg::math
 			x /= v.x;
 			y /= v.y;
 		}
-		Vector2 operator*(float value)
+
+		bool operator==(Vector2 v)
 		{
-			return Vector2(x * value, y * value);
+			return (x == v.x) && (y == v.y);
 		}
-		Vector2 operator*(Vector2 v)
+		bool operator!=(Vector2 v)
 		{
-			return Vector2(x * v.x, y * v.y);
-		}
-		void operator*=(float value)
-		{
-			x *= value;
-			y *= value;
-		}
-		void operator*=(Vector2 v)
-		{
-			x *= v.x;
-			y *= v.y;
+			return (x != v.x) || (y != v.y);
 		}
 
 		void clear()

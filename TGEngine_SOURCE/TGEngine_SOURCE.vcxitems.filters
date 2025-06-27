@@ -10,9 +10,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)tgSceneManager.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgGameObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
@@ -49,9 +46,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgRenderer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)tgAnimation.cpp">
-      <Filter>Resource</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgAnimator.cpp">
       <Filter>Component\Animatior</Filter>
     </ClCompile>
@@ -79,8 +73,20 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgTilemapRenderer.cpp">
       <Filter>Component\TilemapRenderer</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgRigidbody.cpp">
+      <Filter>Component\Rigidbody</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgAnimation.cpp">
+      <Filter>Component\Animatior</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgSceneManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgCollisionManager.cpp">
-      <Filter>Component\Collider</Filter>
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgObject.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -94,9 +100,6 @@
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)tgSceneManager.h">
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgGameObject.h">
@@ -115,9 +118,6 @@
       <Filter>Layer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgEnums.h">
-      <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)tgObject.h">
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgResources.h">
@@ -140,9 +140,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgRenderer.h">
       <Filter>Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)tgAnimation.h">
-      <Filter>Resource</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgAnimator.h">
       <Filter>Component\Animatior</Filter>
@@ -171,8 +168,20 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgTilemapRenderer.h">
       <Filter>Component\TilemapRenderer</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgRigidbody.h">
+      <Filter>Component\Rigidbody</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgAnimation.h">
+      <Filter>Component\Animatior</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgSceneManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgCollisionManager.h">
-      <Filter>Component\Collider</Filter>
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgObject.h">
+      <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +238,15 @@
     </Filter>
     <Filter Include="Component\SpriteRenderer">
       <UniqueIdentifier>{ca32572d-9b01-4d1a-94e9-460ae3d24b4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Rigidbody">
+      <UniqueIdentifier>{74b74a56-fa94-47cc-8101-d3908e1967ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{b35effc3-0031-4241-8e37-d9790c5ce2b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{5c06b3d6-1788-4107-a6d7-8266dd53872e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
