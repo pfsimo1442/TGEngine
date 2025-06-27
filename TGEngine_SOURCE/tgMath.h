@@ -10,6 +10,7 @@ namespace tg::math
 
 	struct Vector2
 	{
+		// Static Funtions
 		static Vector2 Rotate(Vector2 vector, float degree)
 		{
 			float radian = (degree / 180) * PI;
@@ -28,6 +29,7 @@ namespace tg::math
 			return v1.x * v2.y - v1.y * v2.x;
 		}
 
+		// Stocks
 		static Vector2 One;
 		static Vector2 Zero;
 		static Vector2 Right;
@@ -49,6 +51,7 @@ namespace tg::math
 		{
 		}
 
+		// Signed Operator
 		Vector2 operator+()
 		{
 			return Vector2(x, y);
@@ -58,6 +61,7 @@ namespace tg::math
 			return Vector2(-x, -y);
 		}
 
+		// Arithmetic Operator
 		Vector2 operator+(float value)
 		{
 			return Vector2(x + value, y + value);
@@ -91,6 +95,7 @@ namespace tg::math
 			return Vector2(x / v.x, y / v.y);
 		}
 
+		// Assignment Operator
 		void operator+=(float value)
 		{
 			x += value;
@@ -132,6 +137,7 @@ namespace tg::math
 			y /= v.y;
 		}
 
+		// Comparison Operator
 		bool operator==(Vector2 v)
 		{
 			return (x == v.x) && (y == v.y);
@@ -141,6 +147,7 @@ namespace tg::math
 			return (x != v.x) || (y != v.y);
 		}
 
+		// Funtions
 		void clear()
 		{
 			x = 0.0f;
@@ -181,6 +188,7 @@ namespace tg::math
 
 	struct Vector3
 	{
+		// Stocks
 		static Vector3 One;
 		static Vector3 Zero;
 
@@ -201,6 +209,7 @@ namespace tg::math
 		{
 		}
 
+		// Signed Operator
 		Vector3 operator+()
 		{
 			return Vector3(x, y, z);
@@ -210,6 +219,7 @@ namespace tg::math
 			return Vector3(-x, -y, -z);
 		}
 
+		// Arithmetic Operator
 		Vector3 operator+(float value)
 		{
 			return Vector3(x + value, y + value, z + value);
@@ -243,6 +253,7 @@ namespace tg::math
 			return Vector3(x / v.x, y / v.y, z / v.z);
 		}
 
+		// Assignment Operator
 		void operator+=(float value)
 		{
 			x += value;
@@ -291,7 +302,8 @@ namespace tg::math
 			y /= v.y;
 			z /= v.z;
 		}
-
+		
+		// Comparison Operator
 		bool operator==(Vector3 v)
 		{
 			return (x == v.x) && (y == v.y) && (z == v.z);
@@ -299,6 +311,47 @@ namespace tg::math
 		bool operator!=(Vector3 v)
 		{
 			return (x != v.x) || (y != v.y) || (z != v.z);
+		}
+
+		// Funtions
+		void clear()
+		{
+			x = 0.0f;
+			y = 0.0f;
+			z = 0.0f;
+		}
+
+		float length()
+		{
+			return sqrtf(x * x + y * y + z * z);
+		}
+
+		Vector3 abs()
+		{
+			return Vector3(fabs(x), fabs(y), fabs(z));
+		}
+		Vector3 integer()
+		{
+			x = (float)((int)x);
+			y = (float)((int)y);
+			z = (float)((int)z);
+
+			return *this;
+		}
+		Vector3 normalize()
+		{
+			float len = length();
+
+			if (len == 0.0f)
+				return Vector3::Zero;
+			else
+			{
+				x /= len;
+				y /= len;
+				z /= len;
+
+				return *this;
+			}
 		}
 	};
 }
