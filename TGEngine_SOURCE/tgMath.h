@@ -19,12 +19,10 @@ namespace tg::math
 		
 			return Vector2(x, y);
 		}
-		
 		static float Dot(Vector2& v1, Vector2& v2)
 		{
 			return v1.x * v2.x + v1.y * v2.y;
 		}
-		
 		static float Cross(Vector2& v1, Vector2& v2)
 		{
 			return v1.x * v2.y - v1.y * v2.x;
@@ -44,14 +42,11 @@ namespace tg::math
 			: x(0.0f)
 			, y(0.0f)
 		{
-
 		}
-
 		Vector2(float _x, float _y)
 			: x(_x)
 			, y(_y)
 		{
-
 		}
 
 		Vector2 operator+()
@@ -161,7 +156,6 @@ namespace tg::math
 		{
 			return Vector2(fabs(x), fabs(y));
 		}
-
 		Vector2 integer()
 		{
 			x = (float)((int)x);
@@ -169,7 +163,6 @@ namespace tg::math
 
 			return *this;
 		}
-
 		Vector2 normalize()
 		{
 			float len = length();
@@ -183,6 +176,129 @@ namespace tg::math
 
 				return *this;
 			}
+		}
+	};
+
+	struct Vector3
+	{
+		static Vector3 One;
+		static Vector3 Zero;
+
+		float x;
+		float y;
+		float z;
+
+		Vector3()
+			: x(0.0f)
+			, y(0.0f)
+			, z(0.0f)
+		{
+		}
+		Vector3(float _x, float _y, float _z)
+			: x(_x)
+			, y(_y)
+			, z(_z)
+		{
+		}
+
+		Vector3 operator+()
+		{
+			return Vector3(x, y, z);
+		}
+		Vector3 operator-()
+		{
+			return Vector3(-x, -y, -z);
+		}
+
+		Vector3 operator+(float value)
+		{
+			return Vector3(x + value, y + value, z + value);
+		}
+		Vector3 operator+(Vector3 other)
+		{
+			return Vector3(x + other.x, y + other.y, z + other.z);
+		}
+		Vector3 operator-(float value)
+		{
+			return Vector3(x - value, y - value, z - value);
+		}
+		Vector3 operator-(Vector3 other)
+		{
+			return Vector3(x - other.x, y - other.y, z - other.z);
+		}
+		Vector3 operator*(float value)
+		{
+			return Vector3(x * value, y * value, z * value);
+		}
+		Vector3 operator*(Vector3 v)
+		{
+			return Vector3(x * v.x, y * v.y, z *v.z);
+		}
+		Vector3 operator/(float value)
+		{
+			return Vector3(x / value, y / value, z / value);
+		}
+		Vector3 operator/(Vector3 v)
+		{
+			return Vector3(x / v.x, y / v.y, z / v.z);
+		}
+
+		void operator+=(float value)
+		{
+			x += value;
+			y += value;
+			z += value;
+		}
+		void operator+=(Vector3 other)
+		{
+			x += other.x;
+			y += other.y;
+			z += other.z;
+		}
+		void operator-=(float value)
+		{
+			x -= value;
+			y -= value;
+			z -= value;
+		}
+		void operator-=(Vector3 other)
+		{
+			x -= other.x;
+			y -= other.y;
+			z -= other.z;
+		}
+		void operator*=(float value)
+		{
+			x *= value;
+			y *= value;
+			z *= value;
+		}
+		void operator*=(Vector3 v)
+		{
+			x *= v.x;
+			y *= v.y;
+			z *= v.z;
+		}
+		void operator/=(float value)
+		{
+			x /= value;
+			y /= value;
+			z /= value;
+		}
+		void operator/=(Vector3 v)
+		{
+			x /= v.x;
+			y /= v.y;
+			z /= v.z;
+		}
+
+		bool operator==(Vector3 v)
+		{
+			return (x == v.x) && (y == v.y) && (z == v.z);
+		}
+		bool operator!=(Vector3 v)
+		{
+			return (x != v.x) || (y != v.y) || (z != v.z);
 		}
 	};
 }
