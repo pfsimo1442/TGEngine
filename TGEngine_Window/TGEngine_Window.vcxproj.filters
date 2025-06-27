@@ -41,6 +41,12 @@
     </ClInclude>
     <ClInclude Include="tgLoadScenes.h" />
     <ClInclude Include="tgLoadResources.h" />
+    <ClInclude Include="tgPlatform.h">
+      <Filter>Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="tgPlatformScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tgPlayScene.cpp">
@@ -68,6 +74,12 @@
       <Filter>Contents</Filter>
     </ClCompile>
     <ClCompile Include="tgCameraScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="tgPlatform.cpp">
+      <Filter>Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="tgPlatformScript.cpp">
       <Filter>Scripts</Filter>
     </ClCompile>
   </ItemGroup>

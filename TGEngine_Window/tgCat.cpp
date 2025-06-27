@@ -1,7 +1,4 @@
 #include "tgCat.h"
-#include "tgInput.h"
-#include "tgTransform.h"
-#include "tgTime.h"
 
 namespace tg
 {

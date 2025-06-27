@@ -105,17 +105,22 @@ namespace tg
 
 	void PlayerScript::OnCollisionEnter(Collider* other)
 	{
-		if (mPosSetter)
+		if (!(other->GetOwner()->GetLayerType() == eLayerType::None
+			|| other->GetOwner()->GetLayerType() == eLayerType::BackGround
+			|| other->GetOwner()->GetLayerType() == eLayerType::Platform
+			|| other->GetOwner()->GetLayerType() == eLayerType::Tile))
 		{
-			other->GetOwner()->GetComponent<Transform>()->SetPosition(Vector2(400.0f, 500.0f));
-			mPosSetter = false;
+			if (mPosSetter)
+			{
+				other->GetOwner()->GetComponent<Transform>()->SetPosition(Vector2(400.0f, 500.0f));
+				mPosSetter = false;
+			}
+			else
+			{
+				other->GetOwner()->GetComponent<Transform>()->SetPosition(Vector2(100.0f, 200.0f));
+				mPosSetter = true;
+			}
 		}
-		else
-		{
-			other->GetOwner()->GetComponent<Transform>()->SetPosition(Vector2(100.0f, 200.0f));
-			mPosSetter = true;
-		}
-		
 	}
 
 	void PlayerScript::OnCollisionStay(Collider* other)
@@ -138,32 +143,6 @@ namespace tg
 			Vector2 mousePos = Input::GetMousePosition();
 		}
 
-		//Transform* tr = GetOwner()->GetComponent<Transform>();
-		//Vector2 pos = tr->GetPosition();
-
-		//if (Input::GetKey(eKeyCode::D))
-		//{
-		//	pos.x += 100.0f * Time::DeltaTime();
-		//	mCurrentWS = PlayerScript::eWalkState::Right;
-		//}
-		//if (Input::GetKey(eKeyCode::A))
-		//{
-		//	pos.x -= 100.0f * Time::DeltaTime();
-		//	mCurrentWS = PlayerScript::eWalkState::Left;
-		//}
-		//if (Input::GetKey(eKeyCode::W))
-		//{
-		//	pos.y -= 100.0f * Time::DeltaTime();
-		//	mCurrentWS = PlayerScript::eWalkState::Up;
-		//}
-		//if (Input::GetKey(eKeyCode::S))
-		//{
-		//	pos.y += 100.0f * Time::DeltaTime();
-		//	mCurrentWS = PlayerScript::eWalkState::Down;
-		//}
-
-		//tr->SetPosition(pos);
-
 		Rigidbody* rb = GetOwner()->GetComponent<Rigidbody>();
 		Vector2 dir = Vector2::Zero;
 		float spd = 500.0f;
@@ -172,12 +151,23 @@ namespace tg
 			dir += Vector2::Right;
 		if (Input::GetKey(eKeyCode::A))
 			dir += Vector2::Left;
-		if (Input::GetKey(eKeyCode::W))
-			dir += Vector2::Up;
-		if (Input::GetKey(eKeyCode::S))
-			dir += Vector2::Down;
-
+		
 		rb->AddForce(dir.normalize() * spd);
+
+		float V = 450.0f;
+		//float jumpForce = V * rb->GetMass() / Time::DeltaTime() - rb->GetFriction() * rb->GetMass() * rb->GetMass();
+		//if (jumpForce < 0.0f)
+		//	jumpForce = 0.0f;
+
+		if ((Input::GetKeyDown(eKeyCode::W) || Input::GetKey(eKeyCode::W)) && rb->IsOnGround())
+		{
+			//rb->AddForce(Vector2::Up.normalize() * jumpForce);
+			rb->AddVelocity(Vector2::Up.normalize() * V);
+			rb->SetIsOnGround(false);
+		}
+		/*if (Input::GetKey(eKeyCode::S))
+			dir += Vector2::Down;*/
+
 	}
 
 	void PlayerScript::move()

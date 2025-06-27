@@ -137,6 +137,8 @@
     <ClInclude Include="tgCatScript.h" />
     <ClInclude Include="tgLoadResources.h" />
     <ClInclude Include="tgLoadScenes.h" />
+    <ClInclude Include="tgPlatform.h" />
+    <ClInclude Include="tgPlatformScript.h" />
     <ClInclude Include="tgPlayer.h" />
     <ClInclude Include="tgPlayerScript.h" />
     <ClInclude Include="tgPlayScene.h" />
@@ -148,6 +150,8 @@
     <ClCompile Include="tgCameraScript.cpp" />
     <ClCompile Include="tgCat.cpp" />
     <ClCompile Include="tgCatScript.cpp" />
+    <ClCompile Include="tgPlatform.cpp" />
+    <ClCompile Include="tgPlatformScript.cpp" />
     <ClCompile Include="tgPlayer.cpp" />
     <ClCompile Include="tgPlayerScript.cpp" />
     <ClCompile Include="tgPlayScene.cpp" />
