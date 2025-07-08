@@ -15,7 +15,7 @@ namespace tg
 		, mForce(Vector2::Zero)
 		, mAcceleration(Vector2::Zero)
 		, mVelocity(Vector2::Zero)
-		, mLimitedVelocity(700.0f)
+		, mLimitedVelocity(Vector2(500.0f, 700.0f))
 		, mGravitationalAcceleration(Vector2(0.0f, 1000.0f))
 	{	
 	}
