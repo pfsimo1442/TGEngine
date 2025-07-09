@@ -79,14 +79,20 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgAnimation.cpp">
       <Filter>Component\Animatior</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)tgSceneManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)tgCollisionManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgObject.cpp">
       <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgSceneManager.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgCollisionManager.cpp">
+      <Filter>Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgUIManager.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgUIBase.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -174,14 +180,20 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgAnimation.h">
       <Filter>Component\Animatior</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)tgSceneManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)tgCollisionManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgObject.h">
       <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgSceneManager.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgCollisionManager.h">
+      <Filter>Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgUIManager.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgUIBase.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -242,11 +254,11 @@
     <Filter Include="Component\Rigidbody">
       <UniqueIdentifier>{74b74a56-fa94-47cc-8101-d3908e1967ca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Manager">
-      <UniqueIdentifier>{b35effc3-0031-4241-8e37-d9790c5ce2b8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object">
       <UniqueIdentifier>{5c06b3d6-1788-4107-a6d7-8266dd53872e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{c7171640-1677-4db1-9225-e144cd521c8e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

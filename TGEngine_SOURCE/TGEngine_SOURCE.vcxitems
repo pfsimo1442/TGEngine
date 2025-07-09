@@ -45,6 +45,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgTilemapRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgTransform.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgUIBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgUIManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgAnimation.cpp" />
@@ -76,5 +78,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgTilemapRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgTransform.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgUIBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgUIManager.cpp" />
   </ItemGroup>
 </Project>

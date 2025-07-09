@@ -47,4 +47,15 @@ namespace tg::enums
 		Capsule2D,
 		End,
 	};
+
+	enum class eUIType
+	{
+		Button,
+		Image,
+		Text,
+		InputField,
+		Toggle,
+		Slider,
+		End,
+	};
 }
