@@ -9,6 +9,7 @@
 #include "tgObject.h"
 #include "tgResources.h"
 #include "tgRigidbody.h"
+#include "tgUIManager.h"
 
 namespace tg
 {
@@ -168,6 +169,18 @@ namespace tg
 		/*if (Input::GetKey(eKeyCode::S))
 			dir += Vector2::Down;*/
 
+		if (Input::GetKeyDown(eKeyCode::I))
+		{
+			UIManager::Push(eUIType::HUD);
+			//UIManager::Push(eUIType::Button);
+
+		}
+
+		if (Input::GetKeyDown(eKeyCode::O))
+		{
+			UIManager::Pop(eUIType::HUD);
+
+		}
 	}
 
 	void PlayerScript::move()

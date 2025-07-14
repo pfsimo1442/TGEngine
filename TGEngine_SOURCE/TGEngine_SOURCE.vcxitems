@@ -46,6 +46,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgTransform.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgUIBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgUIButton.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgUIHUD.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgUIManager.h" />
   </ItemGroup>
   <ItemGroup>
@@ -79,6 +81,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgTransform.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgUIBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgUIButton.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgUIHUD.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgUIManager.cpp" />
   </ItemGroup>
 </Project>

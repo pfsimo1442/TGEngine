@@ -1,4 +1,6 @@
 #include "tgUIManager.h"
+#include "tgUIHUD.h"
+#include "tgUIButton.h"
 
 namespace tg
 {
@@ -9,7 +11,12 @@ namespace tg
 
 	void UIManager::Initialize()
 	{
+		// Create UI object 
+		UIHUD* hud = new UIHUD();
+		mUIs.insert(std::make_pair(enums::eUIType::HUD, hud));
 
+		UIButton* button = new UIButton();
+		mUIs.insert(std::make_pair(enums::eUIType::Button, button));
 	}
 
 	void UIManager::Onload(enums::eUIType type)
@@ -107,6 +114,15 @@ namespace tg
 		mActiveUI = nullptr;
 	}
 
+	void UIManager::Release()
+	{
+		for (auto iter : mUIs)
+		{
+			delete iter.second;
+			iter.second = nullptr;
+		}
+	}
+
 	void UIManager::Push(enums::eUIType type)
 	{
 		mRequestUIQueue.push(type);
@@ -117,11 +133,43 @@ namespace tg
 		if (mUIBases.size() <= 0)
 			return;
 
+		std::stack<UIBase*> tempStack;
+
 		UIBase* uiBase = nullptr;
-		while (mUIBases.size() < 0)
+		while (mUIBases.size() > 0)
 		{
 			uiBase = mUIBases.top();
 			mUIBases.pop();
+
+			if (uiBase->GetType() != type)
+			{
+				tempStack.push(uiBase);
+				continue;
+			}
+
+			if (uiBase->IsFullScreen())
+			{
+				std::stack<UIBase*> uiBases = mUIBases;
+				while (!uiBases.empty())
+				{
+					UIBase* uiBase = uiBases.top();
+					uiBases.pop();
+					if (uiBase)
+					{
+						uiBase->Active();
+						break;
+					}
+				}
+			}
+
+			uiBase->UIClear();
+		}
+
+		while (tempStack.size() > 0)
+		{
+			uiBase = tempStack.top();
+			tempStack.pop();
+			mUIBases.push(uiBase);
 		}
 	}
 

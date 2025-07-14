@@ -94,6 +94,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgUIBase.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgUIHUD.cpp">
+      <Filter>UI\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgUIButton.cpp">
+      <Filter>UI\Button</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -195,6 +201,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgUIBase.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgUIHUD.h">
+      <Filter>UI\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgUIButton.h">
+      <Filter>UI\Button</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -259,6 +271,12 @@
     </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{c7171640-1677-4db1-9225-e144cd521c8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\HUD">
+      <UniqueIdentifier>{6166c4cf-61ed-4c69-959f-1cba6c4ef2ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Button">
+      <UniqueIdentifier>{e438c438-d015-40a2-8b23-cb9cc204c820}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

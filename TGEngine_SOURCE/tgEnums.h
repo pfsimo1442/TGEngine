@@ -50,6 +50,7 @@ namespace tg::enums
 
 	enum class eUIType
 	{
+		HUD,
 		Button,
 		Image,
 		Text,

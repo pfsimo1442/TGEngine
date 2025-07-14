@@ -83,13 +83,6 @@ namespace tg
 
 	void Rigidbody::Render(HDC hdc)
 	{
-		wchar_t str1[50] = L"";
-		swprintf_s(str1, 50, L"Time: %f", mForce.y);
-		int len1 = wcsnlen_s(str1, 50);
-
-		TextOut(hdc, 0, 0, str1, len1);
-
-
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector2 pos = tr->GetPosition();
 

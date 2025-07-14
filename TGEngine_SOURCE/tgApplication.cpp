@@ -1,9 +1,10 @@
 #include "tgApplication.h"
 #include "tgInput.h"
 #include "tgTime.h"
-#include "tgSceneManager.h"
 #include "tgResources.h"
+#include "tgSceneManager.h"
 #include "tgCollisionManager.h"
+#include "tgUIManager.h"
 
 namespace tg
 {
@@ -27,6 +28,7 @@ namespace tg
 		initializeEtc();
 		
 		CollisionManager::Initialize();
+		UIManager::Initialize();
 		SceneManager::Initialize();
 	}
 
@@ -45,12 +47,14 @@ namespace tg
 		Time::Update();
 
 		CollisionManager::Update();
+		UIManager::Update();
 		SceneManager::Update();
 	}
 
 	void Application::LateUpdate()
 	{
 		CollisionManager::LateUpdate();
+		UIManager::LateUpdate();
 		SceneManager::LateUpdate();
 	}
 
@@ -58,8 +62,9 @@ namespace tg
 	{
 		clearRenderTarget();
 
-		//Time::Render(mBackHdc);
+		Time::Render(mBackHdc);
 		CollisionManager::Render(mBackHdc);
+		UIManager::Render(mBackHdc);
 		SceneManager::Render(mBackHdc);
 
 		copyRenderTarget(mBackHdc, mHdc);
@@ -73,6 +78,7 @@ namespace tg
 	void Application::Release()
 	{
 		SceneManager::Release();
+		UIManager::Release();
 		Resources::Release();
 	}
 
