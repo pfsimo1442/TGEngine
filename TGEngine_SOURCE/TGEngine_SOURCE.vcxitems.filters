@@ -100,6 +100,19 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgUIButton.cpp">
       <Filter>UI\Button</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgFmod.cpp">
+      <Filter>Fmod</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgAudioListener.cpp">
+      <Filter>Component\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgAudioSource.cpp">
+      <Filter>Component\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgAudioClip.cpp">
+      <Filter>Resource\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgAudioFilter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -207,6 +220,19 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgUIButton.h">
       <Filter>UI\Button</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgFmod.h">
+      <Filter>Fmod</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgAudioListener.h">
+      <Filter>Component\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgAudioSource.h">
+      <Filter>Component\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgAudioClip.h">
+      <Filter>Resource\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgAudioFilter.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -277,6 +303,15 @@
     </Filter>
     <Filter Include="UI\Button">
       <UniqueIdentifier>{e438c438-d015-40a2-8b23-cb9cc204c820}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fmod">
+      <UniqueIdentifier>{a5a9d08e-8f6a-40e1-b11d-14e42fbf3116}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Audio">
+      <UniqueIdentifier>{2456b81c-ede8-4639-a871-fb5f246abe24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Audio">
+      <UniqueIdentifier>{332bd131-383a-425a-9f7a-c3821d195c4a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -5,6 +5,7 @@
 #include "tgSceneManager.h"
 #include "tgCollisionManager.h"
 #include "tgUIManager.h"
+#include "tgFmod.h"
 
 namespace tg
 {
@@ -27,6 +28,7 @@ namespace tg
 		createBuffer(width, height);
 		initializeEtc();
 		
+		Fmod::Initialize();
 		CollisionManager::Initialize();
 		UIManager::Initialize();
 		SceneManager::Initialize();

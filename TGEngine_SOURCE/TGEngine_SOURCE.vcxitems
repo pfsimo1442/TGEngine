@@ -18,6 +18,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgAnimation.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgAnimator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgAudioClip.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgAudioFilter.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgAudioListener.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgAudioSource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgBoxCollider2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgCapsuleCollider2D.h" />
@@ -28,6 +32,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgDontDestroyOnLoad.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgEnums.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgFmod.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgGameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgLayer.h" />
@@ -54,6 +59,10 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgAnimation.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgAudioClip.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgAudioFilter.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgAudioListener.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgAudioSource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgBoxCollider2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgCapsuleCollider2D.cpp" />
@@ -63,6 +72,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgDontDestroyOnLoad.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgEntity.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgFmod.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgLayer.cpp" />
