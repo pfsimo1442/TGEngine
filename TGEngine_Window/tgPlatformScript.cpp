@@ -2,6 +2,7 @@
 #include "tgTransform.h"
 #include "tgGameObject.h"
 #include "tgRigidbody.h"
+#include "tgAudioSource.h"
 
 namespace tg
 {
@@ -90,10 +91,12 @@ namespace tg
 			}
 		}
 		
-
 		//float len = fabs(otherTr->GetPosition().y - platformTr->GetPosition().y);
 
 		otherRb->SetIsOnGround(true);
+
+		AudioSource* platformAS = this->GetOwner()->GetComponent<AudioSource>();
+		platformAS->Play();
 	}
 
 	void PlatformScript::OnCollisionStay(Collider* other)
@@ -159,5 +162,8 @@ namespace tg
 		Rigidbody* rb = other->GetOwner()->GetComponent<Rigidbody>();
 
 		rb->SetIsOnGround(false);
+
+		AudioSource* platformAS = this->GetOwner()->GetComponent<AudioSource>();
+		platformAS->Stop();
 	}
 }

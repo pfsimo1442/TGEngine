@@ -19,6 +19,7 @@ namespace tg
 		void Render(HDC hdc) override;
 		
 		void SetTarget(GameObject* target) { mTarget = target; }
+		GameObject* GetTarget() { return mTarget; }
 
 	private:
 		//std::vector<GameObject*> mGameObjects;

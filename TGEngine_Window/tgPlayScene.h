@@ -19,5 +19,6 @@ namespace tg
 
 	private:
 		class Player* mPlayer;
+		class Camera* mMainCamera;
 	};
 }

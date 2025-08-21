@@ -185,7 +185,6 @@ namespace tg::math
 			}
 		}
 	};
-
 	struct Vector3
 	{
 		// Stocks
@@ -353,5 +352,13 @@ namespace tg::math
 				return *this;
 			}
 		}
+	};
+
+	static Vector2 ConvertWindowCSToFModCS(Vector2 winSize, Vector2 pos)
+	{
+		return Vector2(
+			pos.x / winSize.x * 2 - 1
+			, pos.y / winSize.y * 2 - 1
+		);
 	};
 }

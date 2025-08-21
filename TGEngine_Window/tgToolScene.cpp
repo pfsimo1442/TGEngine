@@ -25,9 +25,8 @@ namespace tg
 	{
 		//// Main Camera
 		GameObject* camera = object::Instantiate<GameObject>(enums::eLayerType::None, Vector2((float)application.GetWidth() / 2, (float)application.GetHeight() / 2));
-		Camera* cameraComp = camera->AddComponent<Camera>();
+		mMainCamera = camera->AddComponent<Camera>();
 		CameraScript* camScr = camera->AddComponent<CameraScript>();
-		renderer::mainCamera = cameraComp;
 
 		////main camera - set target
 		//cameraComp->SetTarget(tile);
@@ -103,6 +102,8 @@ namespace tg
 	void ToolScene::OnEnter()
 	{
 		Scene::OnEnter();
+
+		renderer::mainCamera = mMainCamera;
 	}
 	
 	void ToolScene::OnExit()

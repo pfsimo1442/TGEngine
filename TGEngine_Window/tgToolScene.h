@@ -22,6 +22,7 @@ namespace tg
 		void Load();
 
 	private:
+		class Camera* mMainCamera;
 		std::vector<Tile*> mTiles;
 	};
 }

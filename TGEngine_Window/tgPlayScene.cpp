@@ -23,6 +23,9 @@
 #include "tgRigidbody.h"
 #include "tgPlatform.h"
 #include "tgPlatformScript.h"
+#include "tgAudioClip.h"
+#include "tgAudioListener.h"
+#include "tgAudioSource.h"
 
 namespace tg
 {
@@ -73,9 +76,7 @@ namespace tg
 
 		//// Main Camera
 		GameObject* camera = object::Instantiate<GameObject>(enums::eLayerType::None, Vector2(344.0f, 442.0f));
-		Camera*  cameraComp = camera->AddComponent<Camera>();
-		renderer::mainCamera = cameraComp;
-
+		mMainCamera = camera->AddComponent<Camera>();
 
 		//// Player
 		mPlayer = object::Instantiate<Player>(enums::eLayerType::Player);
@@ -94,6 +95,8 @@ namespace tg
 			, Vector2(2000.0f, 250.0f), Vector2(250.0f, 250.0f), Vector2::Zero, 1, 0.1f);
 		playerAni->CreateAnimationBySpriteSize(L"PlayerWaterDown", playerTex
 			, Vector2(0.0f, 2000.f), Vector2(250.0f, 250.0f), Vector2::Zero, 12, 0.1f);
+
+		AudioListener* playerAL = mPlayer->AddComponent<AudioListener>();
 
 		mPlayer->GetComponent<Transform>()->SetPosition(Vector2(500.0f, 150.0f));
 		//mPlayer->GetComponent<Transform>()->SetPositionStyle(Vector2(0.375f, 0.25f));
@@ -115,13 +118,19 @@ namespace tg
 		platformCol->SetSize(Vector2(1000.0f, 500.0f));
 		PlatformScript* platformScr = platform->AddComponent<PlatformScript>();
 
+		AudioSource* platformAS = platform->AddComponent<AudioSource>();
+
+		AudioClip* bgSound = Resources::Find<AudioClip>(L"BGSound");
+
+		platformAS->SetClip(bgSound);
+		//platformAS->Play();
 
 		////main camera - set target
-		//cameraComp->SetTarget(cat);
+		mMainCamera->SetTarget(mPlayer);
 
 		Scene::Initialize();
 	}
-
+	
 	void PlayScene::Update()
 	{
 		Scene::Update();
@@ -148,6 +157,8 @@ namespace tg
 	void PlayScene::OnEnter()
 	{
 		Scene::OnEnter();
+
+		renderer::mainCamera = mMainCamera;
 
 		//// Collision Manager
 		CollisionManager::CollisionLayerCheck(enums::eLayerType::Player, enums::eLayerType::Pet, true);

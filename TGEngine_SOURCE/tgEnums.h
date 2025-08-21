@@ -11,6 +11,8 @@ namespace tg::enums
 		SpriteRenderer,
 		Animator, 
 		Camera,
+		AudioListener,
+		AudioSource,
 		End,
 	};
 

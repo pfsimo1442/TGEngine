@@ -14,7 +14,8 @@ namespace tg
 
 		void Play();
 		void Stop();
-		void Set3DAttributes(const Vector2 pos);
+
+		void Set2DAttributes(const Vector2 pos, const Vector2 vel);
 		void SetLoop(bool loop) { mbLoop = loop; }
 
 	private:
