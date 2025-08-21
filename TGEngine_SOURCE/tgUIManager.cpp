@@ -70,15 +70,25 @@ namespace tg
 
 	void UIManager::Render(HDC hdc)
 	{
-		std::stack<UIBase*> uiBases = mUIBases;
-		while (!uiBases.empty())
+		if (mUIBases.size() <= 0)
+			return;
+
+		std::vector<UIBase*> buff;
+
+		UIBase* uibase = nullptr;
+		while (mUIBases.size() > 0)
 		{
-			UIBase* uiBase = uiBases.top();
-			if (uiBase)
-			{
-				uiBase->Render(hdc);
-				uiBases.pop();
-			}
+			uibase = mUIBases.top();
+			mUIBases.pop();
+
+			buff.push_back(uibase);
+		}
+		std::reverse(buff.begin(), buff.end());
+
+		for (UIBase* ui : buff)
+		{
+			ui->Render(hdc);
+			mUIBases.push(ui);
 		}
 	}
 
