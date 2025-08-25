@@ -1,7 +1,6 @@
 #include "tgSpriteRenderer.h"
 #include "tgGameObject.h"
 #include "tgTransform.h"
-#include "tgTexture.h"
 #include "tgRenderer.h"
 #include "tgCamera.h"
 
@@ -114,5 +113,4 @@ namespace tg
 		//Gdiplus::Graphics graphics(hdc);
 		//graphics.DrawImage(mImage, Gdiplus::Rect(pos.x, pos.y, mWidth, mHeight));
 	}
-
 }

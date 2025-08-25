@@ -1,5 +1,6 @@
 #pragma once
 #include "..\\TGEngine_SOURCE\\tgScript.h"
+#include "..\\TGEngine_SOURCE\\tgTexture.h"
 
 namespace tg
 {
@@ -40,6 +41,8 @@ namespace tg
 		void OnCollisionStay(Collider* other) override;
 		void OnCollisionExit(Collider* other) override;
 
+		void SetPixelMapTexture(graphics::Texture* texture) { mPixelMap = texture; }
+
 	private:
 		void idle();
 		void move();
@@ -50,6 +53,7 @@ namespace tg
 		eWalkState mCurrentWS;
 		eWalkState mLastWS;
 		class Animator* mAnimator;
+		graphics::Texture* mPixelMap;
 
 		bool mPosSetter;
 	};

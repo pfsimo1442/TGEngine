@@ -78,54 +78,66 @@ namespace tg
 		GameObject* camera = object::Instantiate<GameObject>(enums::eLayerType::None, Vector2(344.0f, 442.0f));
 		mMainCamera = camera->AddComponent<Camera>();
 
+
 		//// Player
 		mPlayer = object::Instantiate<Player>(enums::eLayerType::Player);
 		object::DontDestroyOnLoad(mPlayer);
+		object::DontDestroyOnLoad(mPlayer);
 		PlayerScript* playerScr = mPlayer->AddComponent<PlayerScript>();
+
+		Transform* playerTr = mPlayer->GetComponent<Transform>();
+		playerTr->SetPosition(Vector2(500.0f, 150.0f));
+		//playerTr->SetPositionStyle(Vector2(0.375f, 0.25f));
+		playerTr->SetScale(Vector2(0.5f, 0.5f));
+
+		Rigidbody* playerRig = mPlayer->AddComponent<Rigidbody>();
+		playerRig->SetFriction(200.0f);
+		playerRig->SetLimitedVelocity(Vector2(400.0f, 1000.0f));
+
 		//BoxCollider2D* playerCol = mPlayer->AddComponent<BoxCollidessr2D>();
 		//CircleCollider2D* playerCol = mPlayer->AddComponent<CircleCollider2D>();
 		CapsuleCollider2D* playerCol = mPlayer->AddComponent<CapsuleCollider2D>();
 		playerCol->SetSize(Vector2(50.0f, 100.0f));
 		//playerCol->SetOffset(Vector2(-50.0f, -100.0f));
 
-		graphics::Texture* playerTex = Resources::Find<graphics::Texture>(L"PlayerSDV");
+		graphics::Texture* playerAniSheetTex = Resources::Find<graphics::Texture>(L"PlayerSDV");
 		Animator* playerAni = mPlayer->AddComponent<Animator>();
 
-		playerAni->CreateAnimationBySpriteSize(L"PlayerIdle", playerTex
+		playerAni->CreateAnimationBySpriteSize(L"PlayerIdle", playerAniSheetTex
 			, Vector2(2000.0f, 250.0f), Vector2(250.0f, 250.0f), Vector2::Zero, 1, 0.1f);
-		playerAni->CreateAnimationBySpriteSize(L"PlayerWaterDown", playerTex
+		playerAni->CreateAnimationBySpriteSize(L"PlayerWaterDown", playerAniSheetTex
 			, Vector2(0.0f, 2000.f), Vector2(250.0f, 250.0f), Vector2::Zero, 12, 0.1f);
+
+		playerAni->PlayAnimation(L"PlayerIdle");
+		playerAni->GetCompleteEvent(L"PlayerWaterDown") = std::bind(&PlayerScript::AttackEffect, playerScr);
 
 		AudioListener* playerAL = mPlayer->AddComponent<AudioListener>();
 
-		mPlayer->GetComponent<Transform>()->SetPosition(Vector2(500.0f, 150.0f));
-		//mPlayer->GetComponent<Transform>()->SetPositionStyle(Vector2(0.375f, 0.25f));
-		mPlayer->GetComponent<Transform>()->SetScale(Vector2(0.5f, 0.5f));
-
-		Rigidbody* playerRig = mPlayer->AddComponent<Rigidbody>();
-		playerRig->SetFriction(200.0f);
-		playerRig->SetLimitedVelocity(Vector2(400.0f, 1000.0f));
-	
-		playerAni->PlayAnimation(L"PlayerIdle");
-		
-		playerAni->GetCompleteEvent(L"PlayerWaterDown") = std::bind(&PlayerScript::AttackEffect, playerScr);
-		
 
 		//// Platform
-		Platform* platform = object::Instantiate<Platform>(eLayerType::Platform, Vector2(700.0f, 750.0f));
-		//platform->GetComponent<Transform>()->SetPositionStyle(Vector2(0.0f, 0.0f));
-		BoxCollider2D* platformCol = platform->AddComponent<BoxCollider2D>();
-		platformCol->SetSize(Vector2(1000.0f, 500.0f));
-		PlatformScript* platformScr = platform->AddComponent<PlatformScript>();
+		Platform* platform = object::Instantiate<Platform>(eLayerType::Platform, Vector2(0.0f, 0.0f));
+		//PlatformScript* platformScr = platform->AddComponent<PlatformScript>();
+
+		Transform* platformTr = platform->GetComponent<Transform>();
+		platformTr->SetPositionStyle(Vector2(0.0f, 0.0f));
+		
+		//BoxCollider2D* platformCol = platform->AddComponent<BoxCollider2D>();
+		//platformCol->SetSize(Vector2(1000.0f, 500.0f));
+
+		SpriteRenderer* platformSR = platform->AddComponent<SpriteRenderer>();
+		platformSR->SetTexture(Resources::Find<graphics::Texture>(L"PixelMap"));
 
 		AudioSource* platformAS = platform->AddComponent<AudioSource>();
-
-		AudioClip* bgSound = Resources::Find<AudioClip>(L"BGSound");
-
-		platformAS->SetClip(bgSound);
+		AudioClip* pfColSnd = Resources::Find<AudioClip>(L"BGSound");
+		platformAS->SetClip(pfColSnd);
 		//platformAS->Play();
 
-		////main camera - set target
+
+		//// ex
+		playerScr->SetPixelMapTexture(Resources::Find<graphics::Texture>(L"PixelMap"));
+
+
+		//// Main Camera - set target
 		mMainCamera->SetTarget(mPlayer);
 
 		Scene::Initialize();

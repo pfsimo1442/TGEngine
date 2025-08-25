@@ -353,7 +353,7 @@ namespace tg::math
 			}
 		}
 	};
-
+	
 	static Vector2 ConvertWindowCSToFModCS(Vector2 winSize, Vector2 pos)
 	{
 		return Vector2(
