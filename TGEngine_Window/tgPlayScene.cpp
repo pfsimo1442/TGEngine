@@ -82,7 +82,6 @@ namespace tg
 		//// Player
 		mPlayer = object::Instantiate<Player>(enums::eLayerType::Player);
 		object::DontDestroyOnLoad(mPlayer);
-		object::DontDestroyOnLoad(mPlayer);
 		PlayerScript* playerScr = mPlayer->AddComponent<PlayerScript>();
 
 		Transform* playerTr = mPlayer->GetComponent<Transform>();
@@ -116,7 +115,7 @@ namespace tg
 
 		//// Platform
 		Platform* platform = object::Instantiate<Platform>(eLayerType::Platform, Vector2(0.0f, 0.0f));
-		//PlatformScript* platformScr = platform->AddComponent<PlatformScript>();
+		PlatformScript* platformScr = platform->AddComponent<PlatformScript>();
 
 		Transform* platformTr = platform->GetComponent<Transform>();
 		platformTr->SetPositionStyle(Vector2(0.0f, 0.0f));
