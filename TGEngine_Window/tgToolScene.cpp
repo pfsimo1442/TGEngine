@@ -12,6 +12,11 @@
 
 extern tg::Application application;
 
+static Vector2 TransInt(Vector2 a)
+{
+	return Vector2((float)(int)a.x, (float)(int)a.y);
+}
+
 namespace tg
 {
 	ToolScene::ToolScene()
@@ -49,7 +54,8 @@ namespace tg
 			Vector2 pos = Input::GetMousePosition();
 			pos = renderer::mainCamera->CalculateTilePosition(pos);
 
-			Vector2 coord = (pos / TilemapRenderer::TileSize).integer();
+			Vector2 coord = (pos / TilemapRenderer::TileSize);
+			coord = TransInt(coord);
 
 			//// Tilemap
 			Tile* tile = object::Instantiate<Tile>(enums::eLayerType::Tile);
@@ -227,7 +233,8 @@ LRESULT CALLBACK WndToolProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 		mousePosition.x = mousePos.x;
 		mousePosition.y = mousePos.y;
 
-		tg::math::Vector2 coord = (mousePosition / tg::TilemapRenderer::OriginTileSize).integer();
+		tg::math::Vector2 coord = (mousePosition / tg::TilemapRenderer::OriginTileSize);
+		coord = TransInt(coord);
 		tg::TilemapRenderer::SelectedCell = coord;
 	}
 	break;

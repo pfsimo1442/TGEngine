@@ -1,6 +1,14 @@
 #include "tgAudioClip.h"
 #include "tgAudioSource.h"
 
+static tg::math::Vector2 ConvertWindowCSToFModCS(tg::math::Vector2 winSize, tg::math::Vector2 pos)
+{
+	return tg::math::Vector2(
+		pos.x / winSize.x * 2 - 1
+		, pos.y / winSize.y * 2 - 1
+	);
+};
+
 namespace tg
 {
 	tg::AudioClip::AudioClip()

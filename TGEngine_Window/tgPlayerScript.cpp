@@ -170,7 +170,8 @@ namespace tg
 		if (Input::GetKey(eKeyCode::A))
 			dir += Vector2::Left;
 		
-		rb->AddForce(dir.normalize() * spd);
+		dir.Normalize();
+		rb->AddForce(dir * spd);
 
 		float V = 450.0f;
 		//float jumpForce = V * rb->GetMass() / Time::DeltaTime() - rb->GetFriction() * rb->GetMass() * rb->GetMass();
@@ -180,7 +181,7 @@ namespace tg
 		if ((Input::GetKeyDown(eKeyCode::W) || Input::GetKey(eKeyCode::W)) && rb->IsOnGround())
 		{
 			//rb->AddForce(Vector2::Up.normalize() * jumpForce);
-			rb->AddVelocity(Vector2::Up.normalize() * V);
+			rb->AddVelocity(Vector2::Up * V);
 			rb->SetIsOnGround(false);
 		}
 		/*if (Input::GetKey(eKeyCode::S))
@@ -234,7 +235,8 @@ namespace tg
 			dir += Vector2::Down;
 		}
 
-		rb->AddForce(dir.normalize() * spd);
+		dir.Normalize();
+		rb->AddForce(dir * spd);
 		//tr->SetPosition(pos);
 
 		//bool chkDA = false;

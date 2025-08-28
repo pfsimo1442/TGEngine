@@ -51,7 +51,7 @@ namespace tg
             , pos.x + offset.x + radius, pos.y + offset.y - (height / 2) + 2 * radius
             , pos.x + offset.x + radius, pos.y + offset.y - (height / 2 - radius)
             , pos.x + offset.x - radius, pos.y + offset.y - (height / 2 - radius));
-        Rectangle(hdc
+        ::Rectangle(hdc
             , pos.x + offset.x - radius, pos.y + offset.y - (height / 2 - radius)
             , pos.x + offset.x + radius, pos.y + offset.y + (height / 2 - radius));
         Arc(hdc

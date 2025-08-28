@@ -103,7 +103,8 @@ namespace tg
 			dest = mousePos - plTr->GetPosition();
 		}
 
-		pos += dest.normalize() * (100.0f * Time::DeltaTime());
+		dest.Normalize();
+		pos += dest * (100.0f * Time::DeltaTime());
 
 		tr->SetPosition(pos);
 

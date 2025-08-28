@@ -36,9 +36,9 @@ namespace tg
 		if (mbIsOnGround)
 		{
 			Vector2 gravity = mGravitationalAcceleration;
-			gravity.normalize();
+			gravity.Normalize();
 
-			float dot = Vector2::Dot(mVelocity, gravity);
+			float dot = mVelocity.Dot(gravity);
 			mVelocity -= gravity * dot;
 		}
 		else
@@ -47,8 +47,8 @@ namespace tg
 		}
 
 		Vector2 gravity = mGravitationalAcceleration;
-		gravity.normalize();
-		float dot = Vector2::Dot(mVelocity, gravity);
+		gravity.Normalize();
+		float dot = mVelocity.Dot(gravity);
 		gravity *= dot;
 
 		Vector2 sideVelocity = mVelocity - gravity;
@@ -60,9 +60,10 @@ namespace tg
 		if (mVelocity != Vector2::Zero)
 		{
 			Vector2 friction = -mVelocity;
-			friction = friction.normalize() * mFriction * mMass * Time::DeltaTime();
+			friction.Normalize();
+			friction = friction * mFriction * mMass * Time::DeltaTime();
 
-			if (mVelocity.length() <= friction.length())
+			if (mVelocity.Length() <= friction.Length())
 				mVelocity = Vector2::Zero;
 			else
 				mVelocity += friction;
@@ -73,7 +74,7 @@ namespace tg
 		pos += mVelocity * Time::DeltaTime();
 		tr->SetPosition(pos);
 
-		mForce.clear();
+		mForce = Vector2::Zero;
 	}
 
 	void Rigidbody::LateUpdate()

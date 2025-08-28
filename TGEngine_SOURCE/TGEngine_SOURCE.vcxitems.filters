@@ -4,9 +4,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgEntity.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)tgMath.cpp">
-      <Filter>Common</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -113,15 +110,15 @@
       <Filter>Resource\Audio</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgAudioFilter.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgMath.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgEntity.h">
-      <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)tgMath.h">
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgScene.h">
@@ -233,6 +230,9 @@
       <Filter>Resource\Audio</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgAudioFilter.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgMath.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">

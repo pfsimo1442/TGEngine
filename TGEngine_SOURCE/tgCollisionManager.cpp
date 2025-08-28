@@ -167,7 +167,7 @@ namespace tg
 			else if(leftColliderType == eColliderType::Circle2D && rightColliderType == eColliderType::Circle2D)
 			{
 				// circle to circle
-				float cir2cirDistance = (leftPos - rightPos).length();
+				float cir2cirDistance = (leftPos - rightPos).Length();
 				if (cir2cirDistance <= leftSize.x / 2 + rightSize.x / 2)
 				{
 					return true;
@@ -188,9 +188,12 @@ namespace tg
 					}
 					else
 					{
-						float cap2capDistance = ((leftPos - rightPos).abs()
-							- Vector2(0, leftSize.y / 2 + rightSize.y / 2 - (leftSize.x / 2 + rightSize.x / 2)
-							)).length();
+
+						Vector2 diff = leftPos - rightPos;
+						diff.Abs();
+
+						float cap2capDistance = (diff - Vector2(0, leftSize.y / 2 + rightSize.y / 2 - (leftSize.x / 2 + rightSize.x / 2)
+							)).Length();
 						if (cap2capDistance <= leftSize.x / 2 + rightSize.x / 2)
 						{
 							return true;
@@ -228,6 +231,9 @@ namespace tg
 					&& boxPos.y - boxSize.y / 2 - circleRadius <= circlePos.y
 					&& circlePos.y <= boxPos.y + boxSize.y / 2 + circleRadius)
 				{
+					Vector2 diff = circlePos - boxPos;
+					diff.Abs();
+
 					if ((boxPos.x - boxSize.x / 2 <= circlePos.x
 						&& circlePos.x <= boxPos.x + boxSize.x / 2)
 						|| (boxPos.y - boxSize.y / 2 <= circlePos.y
@@ -235,9 +241,8 @@ namespace tg
 					{
 						return true;
 					}
-					else if (((circlePos - boxPos).abs()
-						- Vector2(boxSize.x / 2, boxSize.y / 2)
-						).length() 
+					else if ((diff - Vector2(boxSize.x / 2, boxSize.y / 2)
+						).Length() 
 						<= circleRadius)
 					{
 						return true;
@@ -273,14 +278,16 @@ namespace tg
 					&& capsulePos.y - capsuleSize.y / 2 - circleRadius <= circlePos.y
 					&& circlePos.y <= capsulePos.y + capsuleSize.y / 2 + circleRadius)
 				{
+					Vector2 diff = capsulePos - circlePos;
+					diff.Abs();
+
 					if (capsulePos.y - capsuleSize.y / 2 + capsuleSize.x / 2<= circlePos.y
 						&& circlePos.y <= capsulePos.y + capsuleSize.y / 2 - capsuleSize.x / 2)
 					{
 						return true;
 					}
-					else if (((capsulePos - circlePos).abs()
-						- Vector2(0, capsuleSize.y / 2 - capsuleSize.x / 2)
-						).length()
+					else if ((diff - Vector2(0, capsuleSize.y / 2 - capsuleSize.x / 2)
+						).Length()
 						<= capsuleSize.x / 2 + circleRadius)
 					{
 						return true;
@@ -316,6 +323,9 @@ namespace tg
 					&& boxPos.y - boxSize.y / 2 - capsuleSize.y / 2 <= capsulePos.y
 					&& capsulePos.y <= boxPos.y + boxSize.y / 2 + capsuleSize.y / 2)
 				{
+					Vector2 diff = capsulePos - boxPos;
+					diff.Abs();	
+
 					if ((boxPos.x - boxSize.x / 2 <= capsulePos.x
 						&& capsulePos.x <= boxPos.x + boxSize.x / 2)
 						|| (boxPos.y - boxSize.y / 2 - (capsuleSize.y / 2 - capsuleSize.x / 2) <= capsulePos.y
@@ -323,9 +333,8 @@ namespace tg
 					{
 						return true;
 					}
-					else if (((capsulePos - boxPos).abs()
-						- Vector2(boxSize.x / 2, boxSize.y / 2 + capsuleSize.y / 2 - capsuleSize.x / 2)
-						).length()
+					else if ((diff - Vector2(boxSize.x / 2, boxSize.y / 2 + capsuleSize.y / 2 - capsuleSize.x / 2)
+						).Length()
 						<= capsuleSize.x / 2)
 					{
 						return true;

@@ -34,7 +34,8 @@ namespace tg
 		if (Input::GetKey(eKeyCode::Arrow_Down))
 			direction += Vector2::Down;
 
-		pos += (direction.normalize() * speed * Time::DeltaTime());
+		direction.Normalize();
+		pos += (direction * speed * Time::DeltaTime());
 		tr->SetPosition(pos);
 	}
 

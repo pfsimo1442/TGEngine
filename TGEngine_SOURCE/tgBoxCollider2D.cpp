@@ -44,7 +44,7 @@ namespace tg
         HPEN greenPen = CreatePen(PS_SOLID, 2, RGB(0, 255, 0));
         HPEN oldPen = (HPEN)SelectObject(hdc, greenPen);
 
-        Rectangle(hdc
+        ::Rectangle(hdc
             , pos.x + offset.x - (size.x / 2), pos.y + offset.y - (size.y / 2)
             , pos.x + offset.x + (size.x / 2), pos.y + offset.y + (size.y / 2));
         
