@@ -120,11 +120,11 @@ namespace tg
 		Transform* platformTr = platform->GetComponent<Transform>();
 		platformTr->SetPositionStyle(Vector2(0.0f, 0.0f));
 		
-		//BoxCollider2D* platformCol = platform->AddComponent<BoxCollider2D>();
-		//platformCol->SetSize(Vector2(1000.0f, 500.0f));
+		BoxCollider2D* platformCol = platform->AddComponent<BoxCollider2D>();
+		platformCol->SetSize(Vector2(1000.0f, 500.0f));
 
-		SpriteRenderer* platformSR = platform->AddComponent<SpriteRenderer>();
-		platformSR->SetTexture(Resources::Find<graphics::Texture>(L"PixelMap"));
+		//SpriteRenderer* platformSR = platform->AddComponent<SpriteRenderer>();
+		//platformSR->SetTexture(Resources::Find<graphics::Texture>(L"PixelMap"));
 
 		AudioSource* platformAS = platform->AddComponent<AudioSource>();
 		AudioClip* pfColSnd = Resources::Find<AudioClip>(L"BGSound");
@@ -133,7 +133,7 @@ namespace tg
 
 
 		//// ex
-		playerScr->SetPixelMapTexture(Resources::Find<graphics::Texture>(L"PixelMap"));
+		//playerScr->SetPixelMapTexture(Resources::Find<graphics::Texture>(L"PixelMap"));
 
 
 		//// Main Camera - set target
