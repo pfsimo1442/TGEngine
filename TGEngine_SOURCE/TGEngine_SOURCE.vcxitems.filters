@@ -113,6 +113,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgMath.cpp">
       <Filter>Common</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgGraphicDevice_DX11.cpp">
+      <Filter>GraphicDevice</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -233,6 +236,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgMath.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgGraphicDevice_DX11.h">
+      <Filter>GraphicDevice</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -312,6 +318,9 @@
     </Filter>
     <Filter Include="Resource\Audio">
       <UniqueIdentifier>{332bd131-383a-425a-9f7a-c3821d195c4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GraphicDevice">
+      <UniqueIdentifier>{6229596a-732d-41dd-ace9-53f0737171a1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

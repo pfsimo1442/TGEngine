@@ -24,3 +24,5 @@
 #pragma comment(lib, "gdiplus.lib")
 
 #include "tgEnums.h"
+
+#include <wrl.h>

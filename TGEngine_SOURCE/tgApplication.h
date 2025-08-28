@@ -1,5 +1,6 @@
 #pragma once
 #include "tgGameObject.h"
+#include "tgGraphicDevice_DX11.h"
 
 namespace tg
 {
@@ -32,6 +33,8 @@ namespace tg
 		void initializeEtc();
 
 	private:
+		std::unique_ptr<graphics::GraphicDevice_DX11> mGraphicDevice;
+
 		HWND mHwnd;
 		HDC mHdc;
 		
