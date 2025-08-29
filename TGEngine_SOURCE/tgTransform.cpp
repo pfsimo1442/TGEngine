@@ -4,7 +4,7 @@ namespace tg
 {
     Transform::Transform()
         : Component(eComponentType::Transform)
-        , mPositionStyle(Vector2(0.5f, 0.5f))
+        , mPositionStyle(Vector2(0.0f, 0.0f))
         , mScale(Vector2::One)
         , mRotation(0.0f)
     {
@@ -23,5 +23,10 @@ namespace tg
     }
     void Transform::Render(HDC hdc)
     {
+        Ellipse(hdc
+            , (int)(mPosition.x - 5.0f), (int)(mPosition.y - 5.0f)
+			, (int)(mPosition.x + 5.0f), (int)(mPosition.y + 5.0f));
+        
+        int a = 0;
     }
 }

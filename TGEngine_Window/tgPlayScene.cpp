@@ -75,9 +75,8 @@ namespace tg
 
 
 		//// Main Camera
-		GameObject* camera = object::Instantiate<GameObject>(enums::eLayerType::None, Vector2(344.0f, 442.0f));
+		GameObject* camera = object::Instantiate<GameObject>(enums::eLayerType::None, Vector2(800.f, 450.f));
 		mMainCamera = camera->AddComponent<Camera>();
-
 
 		//// Player
 		mPlayer = object::Instantiate<Player>(enums::eLayerType::Player);
@@ -85,8 +84,8 @@ namespace tg
 		PlayerScript* playerScr = mPlayer->AddComponent<PlayerScript>();
 
 		Transform* playerTr = mPlayer->GetComponent<Transform>();
-		playerTr->SetPosition(Vector2(500.0f, 150.0f));
-		//playerTr->SetPositionStyle(Vector2(0.375f, 0.25f));
+		playerTr->SetPosition(Vector2(500.0f, 100.0f));
+		playerTr->SetPositionStyle(Vector2(0.5f, 0.5f));
 		playerTr->SetScale(Vector2(0.5f, 0.5f));
 
 		Rigidbody* playerRig = mPlayer->AddComponent<Rigidbody>();
@@ -114,11 +113,17 @@ namespace tg
 
 
 		//// Platform
-		Platform* platform = object::Instantiate<Platform>(eLayerType::Platform, Vector2(0.0f, 0.0f));
+		//GameObject* empty = object::Instantiate<GameObject>(enums::eLayerType::None);
+		//Transform* emptyTr = empty->GetComponent<Transform>();
+		//emptyTr->SetPosition(Vector2(750.0f, 750.0f));
+		//emptyTr->SetPositionStyle(Vector2(.5f, .5f));
+
+		Platform* platform = object::Instantiate<Platform>(eLayerType::Platform);
 		PlatformScript* platformScr = platform->AddComponent<PlatformScript>();
 
 		Transform* platformTr = platform->GetComponent<Transform>();
-		platformTr->SetPositionStyle(Vector2(0.0f, 0.0f));
+		platformTr->SetPosition(Vector2(750.0f, 750.0f));
+		platformTr->SetPositionStyle(Vector2(0.5f, 0.5f));
 		
 		BoxCollider2D* platformCol = platform->AddComponent<BoxCollider2D>();
 		platformCol->SetSize(Vector2(1000.0f, 500.0f));
@@ -137,7 +142,7 @@ namespace tg
 
 
 		//// Main Camera - set target
-		mMainCamera->SetTarget(mPlayer);
+		//mMainCamera->SetTarget(mPlayer);
 
 		Scene::Initialize();
 	}

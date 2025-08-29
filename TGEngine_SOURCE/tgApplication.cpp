@@ -71,6 +71,11 @@ namespace tg
 		UIManager::Render(mBackHdc);
 		SceneManager::Render(mBackHdc);
 
+		//MoveToEx(mBackHdc, 0, 450, nullptr);
+		//LineTo(mBackHdc, 1600, 450);
+		//MoveToEx(mBackHdc, 800, 0, nullptr);
+		//LineTo(mBackHdc, 800, 900);
+
 		copyRenderTarget(mBackHdc, mHdc);
 	}
 
