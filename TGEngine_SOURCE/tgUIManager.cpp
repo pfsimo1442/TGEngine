@@ -11,12 +11,12 @@ namespace tg
 
 	void UIManager::Initialize()
 	{
-		// Create UI object 
-		UIHUD* hud = new UIHUD();
-		mUIs.insert(std::make_pair(enums::eUIType::HUD, hud));
+		//// Create UI object 
+		//UIHUD* hud = new UIHUD();
+		//mUIs.insert(std::make_pair(enums::eUIType::HUD, hud));
 
-		UIButton* button = new UIButton();
-		mUIs.insert(std::make_pair(enums::eUIType::Button, button));
+		//UIButton* button = new UIButton();
+		//mUIs.insert(std::make_pair(enums::eUIType::Button, button));
 	}
 
 	void UIManager::Onload(enums::eUIType type)

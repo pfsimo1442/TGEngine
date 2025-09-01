@@ -74,75 +74,75 @@ namespace tg
 		*/
 
 
-		//// Main Camera
-		GameObject* camera = object::Instantiate<GameObject>(enums::eLayerType::None, Vector2(800.f, 450.f));
-		mMainCamera = camera->AddComponent<Camera>();
+		////// Main Camera
+		//GameObject* camera = object::Instantiate<GameObject>(enums::eLayerType::None, Vector2(800.f, 450.f));
+		//mMainCamera = camera->AddComponent<Camera>();
 
-		//// Player
-		mPlayer = object::Instantiate<Player>(enums::eLayerType::Player);
-		object::DontDestroyOnLoad(mPlayer);
-		PlayerScript* playerScr = mPlayer->AddComponent<PlayerScript>();
+		////// Player
+		//mPlayer = object::Instantiate<Player>(enums::eLayerType::Player);
+		//object::DontDestroyOnLoad(mPlayer);
+		//PlayerScript* playerScr = mPlayer->AddComponent<PlayerScript>();
 
-		Transform* playerTr = mPlayer->GetComponent<Transform>();
-		playerTr->SetPosition(Vector2(500.0f, 100.0f));
-		playerTr->SetPositionStyle(Vector2(0.5f, 0.5f));
-		playerTr->SetScale(Vector2(0.5f, 0.5f));
+		//Transform* playerTr = mPlayer->GetComponent<Transform>();
+		//playerTr->SetPosition(Vector2(500.0f, 100.0f));
+		//playerTr->SetPositionStyle(Vector2(0.5f, 0.5f));
+		//playerTr->SetScale(Vector2(0.5f, 0.5f));
 
-		Rigidbody* playerRig = mPlayer->AddComponent<Rigidbody>();
-		playerRig->SetFriction(200.0f);
-		playerRig->SetLimitedVelocity(Vector2(400.0f, 1000.0f));
+		//Rigidbody* playerRig = mPlayer->AddComponent<Rigidbody>();
+		//playerRig->SetFriction(200.0f);
+		//playerRig->SetLimitedVelocity(Vector2(400.0f, 1000.0f));
 
-		//BoxCollider2D* playerCol = mPlayer->AddComponent<BoxCollidessr2D>();
-		//CircleCollider2D* playerCol = mPlayer->AddComponent<CircleCollider2D>();
-		CapsuleCollider2D* playerCol = mPlayer->AddComponent<CapsuleCollider2D>();
-		playerCol->SetSize(Vector2(50.0f, 100.0f));
-		//playerCol->SetOffset(Vector2(-50.0f, -100.0f));
+		////BoxCollider2D* playerCol = mPlayer->AddComponent<BoxCollidessr2D>();
+		////CircleCollider2D* playerCol = mPlayer->AddComponent<CircleCollider2D>();
+		//CapsuleCollider2D* playerCol = mPlayer->AddComponent<CapsuleCollider2D>();
+		//playerCol->SetSize(Vector2(50.0f, 100.0f));
+		////playerCol->SetOffset(Vector2(-50.0f, -100.0f));
 
-		graphics::Texture* playerAniSheetTex = Resources::Find<graphics::Texture>(L"PlayerSDV");
-		Animator* playerAni = mPlayer->AddComponent<Animator>();
+		//graphics::Texture* playerAniSheetTex = Resources::Find<graphics::Texture>(L"PlayerSDV");
+		//Animator* playerAni = mPlayer->AddComponent<Animator>();
 
-		playerAni->CreateAnimationBySpriteSize(L"PlayerIdle", playerAniSheetTex
-			, Vector2(2000.0f, 250.0f), Vector2(250.0f, 250.0f), Vector2::Zero, 1, 0.1f);
-		playerAni->CreateAnimationBySpriteSize(L"PlayerWaterDown", playerAniSheetTex
-			, Vector2(0.0f, 2000.f), Vector2(250.0f, 250.0f), Vector2::Zero, 12, 0.1f);
+		//playerAni->CreateAnimationBySpriteSize(L"PlayerIdle", playerAniSheetTex
+		//	, Vector2(2000.0f, 250.0f), Vector2(250.0f, 250.0f), Vector2::Zero, 1, 0.1f);
+		//playerAni->CreateAnimationBySpriteSize(L"PlayerWaterDown", playerAniSheetTex
+		//	, Vector2(0.0f, 2000.f), Vector2(250.0f, 250.0f), Vector2::Zero, 12, 0.1f);
 
-		playerAni->PlayAnimation(L"PlayerIdle");
-		playerAni->GetCompleteEvent(L"PlayerWaterDown") = std::bind(&PlayerScript::AttackEffect, playerScr);
+		//playerAni->PlayAnimation(L"PlayerIdle");
+		//playerAni->GetCompleteEvent(L"PlayerWaterDown") = std::bind(&PlayerScript::AttackEffect, playerScr);
 
-		AudioListener* playerAL = mPlayer->AddComponent<AudioListener>();
-
-
-		//// Platform
-		//GameObject* empty = object::Instantiate<GameObject>(enums::eLayerType::None);
-		//Transform* emptyTr = empty->GetComponent<Transform>();
-		//emptyTr->SetPosition(Vector2(750.0f, 750.0f));
-		//emptyTr->SetPositionStyle(Vector2(.5f, .5f));
-
-		Platform* platform = object::Instantiate<Platform>(eLayerType::Platform);
-		PlatformScript* platformScr = platform->AddComponent<PlatformScript>();
-
-		Transform* platformTr = platform->GetComponent<Transform>();
-		platformTr->SetPosition(Vector2(750.0f, 750.0f));
-		platformTr->SetPositionStyle(Vector2(0.5f, 0.5f));
-		
-		BoxCollider2D* platformCol = platform->AddComponent<BoxCollider2D>();
-		platformCol->SetSize(Vector2(1000.0f, 500.0f));
-
-		//SpriteRenderer* platformSR = platform->AddComponent<SpriteRenderer>();
-		//platformSR->SetTexture(Resources::Find<graphics::Texture>(L"PixelMap"));
-
-		AudioSource* platformAS = platform->AddComponent<AudioSource>();
-		AudioClip* pfColSnd = Resources::Find<AudioClip>(L"BGSound");
-		platformAS->SetClip(pfColSnd);
-		//platformAS->Play();
+		//AudioListener* playerAL = mPlayer->AddComponent<AudioListener>();
 
 
-		//// ex
-		//playerScr->SetPixelMapTexture(Resources::Find<graphics::Texture>(L"PixelMap"));
+		////// Platform
+		////GameObject* empty = object::Instantiate<GameObject>(enums::eLayerType::None);
+		////Transform* emptyTr = empty->GetComponent<Transform>();
+		////emptyTr->SetPosition(Vector2(750.0f, 750.0f));
+		////emptyTr->SetPositionStyle(Vector2(.5f, .5f));
+
+		//Platform* platform = object::Instantiate<Platform>(eLayerType::Platform);
+		//PlatformScript* platformScr = platform->AddComponent<PlatformScript>();
+
+		//Transform* platformTr = platform->GetComponent<Transform>();
+		//platformTr->SetPosition(Vector2(750.0f, 750.0f));
+		//platformTr->SetPositionStyle(Vector2(0.5f, 0.5f));
+		//
+		//BoxCollider2D* platformCol = platform->AddComponent<BoxCollider2D>();
+		//platformCol->SetSize(Vector2(1000.0f, 500.0f));
+
+		////SpriteRenderer* platformSR = platform->AddComponent<SpriteRenderer>();
+		////platformSR->SetTexture(Resources::Find<graphics::Texture>(L"PixelMap"));
+
+		//AudioSource* platformAS = platform->AddComponent<AudioSource>();
+		//AudioClip* pfColSnd = Resources::Find<AudioClip>(L"BGSound");
+		//platformAS->SetClip(pfColSnd);
+		////platformAS->Play();
 
 
-		//// Main Camera - set target
-		//mMainCamera->SetTarget(mPlayer);
+		////// ex
+		////playerScr->SetPixelMapTexture(Resources::Find<graphics::Texture>(L"PixelMap"));
+
+
+		////// Main Camera - set target
+		////mMainCamera->SetTarget(mPlayer);
 
 		Scene::Initialize();
 	}
