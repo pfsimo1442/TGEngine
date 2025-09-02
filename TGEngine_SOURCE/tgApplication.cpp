@@ -29,6 +29,7 @@ namespace tg
 		initializeEtc();
 
 		mGraphicDevice = std::make_unique<graphics::GraphicDevice_DX11>();
+		mGraphicDevice->Initialize();
 		
 		Fmod::Initialize();
 		CollisionManager::Initialize();
@@ -64,7 +65,8 @@ namespace tg
 
 	void Application::Render()
 	{
-		clearRenderTarget();
+		//clearRenderTarget();
+		mGraphicDevice->Draw();
 
 		Time::Render(mBackHdc);
 		CollisionManager::Render(mBackHdc);
@@ -76,7 +78,7 @@ namespace tg
 		//MoveToEx(mBackHdc, 800, 0, nullptr);
 		//LineTo(mBackHdc, 800, 900);
 
-		copyRenderTarget(mBackHdc, mHdc);
+		//copyRenderTarget(mBackHdc, mHdc);
 	}
 
 	void Application::Destroy()
