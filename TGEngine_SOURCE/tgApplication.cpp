@@ -1,4 +1,5 @@
 #include "tgApplication.h"
+#include "tgRenderer.h"
 #include "tgInput.h"
 #include "tgTime.h"
 #include "tgResources.h"
