@@ -1,5 +1,5 @@
 #include "tgRenderer.h"
-#include "yaGraphicDevice_DX11.h"
+#include "tgGraphicDevice_DX11.h"
 
 namespace tg::renderer
 {
@@ -10,6 +10,7 @@ namespace tg::renderer
 
 	ID3D11Buffer* vertexBuffer = nullptr;
 	ID3D11Buffer* indexBuffer = nullptr;
+	ID3D11Buffer* constantBuffer = nullptr;
 
 	ID3DBlob* vsBlob = nullptr;
 	ID3D11VertexShader* vsShader = nullptr;

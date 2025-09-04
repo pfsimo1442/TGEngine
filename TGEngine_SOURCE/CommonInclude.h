@@ -13,8 +13,6 @@
 #include <filesystem>
 #include <math.h>
 
-#include "tgMath.h"
-
 #include <mmsystem.h>
 #include <dinput.h>
 #pragma comment(lib, "Msimg32.lib")
@@ -24,5 +22,5 @@
 #pragma comment(lib, "gdiplus.lib")
 
 #include "tgEnums.h"
-
-#include <wrl.h>
+#include "tgMath.h"
+#include "tgGraphics.h"

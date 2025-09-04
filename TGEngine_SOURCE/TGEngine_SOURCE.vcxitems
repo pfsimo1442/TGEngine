@@ -35,6 +35,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgFmod.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgGameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgGraphicDevice_DX11.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgGraphics.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgMath.h" />

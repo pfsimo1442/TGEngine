@@ -239,6 +239,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgGraphicDevice_DX11.h">
       <Filter>GraphicDevice</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgGraphics.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
