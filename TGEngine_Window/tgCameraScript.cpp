@@ -4,6 +4,8 @@
 #include "tgTime.h"
 #include "tgGameObject.h"
 
+int a = 0;
+
 namespace tg
 {
 	CameraScript::CameraScript()
