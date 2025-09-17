@@ -30,4 +30,3 @@ namespace tg::renderer
 	void Initialize();
 	void Release();
 }
-

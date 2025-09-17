@@ -1,4 +1,4 @@
-#include "tgGraphicDevice_DX11.h"
+﻿#include "tgGraphicDevice_DX11.h"
 #include "tgApplication.h"
 #include "tgRenderer.h"
 
@@ -8,7 +8,7 @@ namespace tg::graphics
 {
 	GraphicDevice_DX11::GraphicDevice_DX11()
 	{
-		tg::graphics::GetDevice() = this;
+		GetDevice() = this;
 	}
 	GraphicDevice_DX11::~GraphicDevice_DX11()
 	{
@@ -103,8 +103,7 @@ namespace tg::graphics
 			return false;
 		}
 
-		if(FAILED(mDevice->CreateVertexShader((*ppCode)->GetBufferPointer()
-			, (*ppCode)->GetBufferSize(), nullptr, ppVertexShader)))
+		if (FAILED(mDevice->CreateVertexShader((*ppCode)->GetBufferPointer(), (*ppCode)->GetBufferSize(), nullptr, ppVertexShader)))
 			return false;
 
 		return true;
@@ -120,7 +119,7 @@ namespace tg::graphics
 		const std::wstring shaderFilePath = L"..\\Shaders_SOURCE\\";
 		D3DCompileFromFile((shaderFilePath + fileName).c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE
 			, "main", "ps_5_0", shaderFlags, 0, ppCode, &errorBlob);
-		
+
 		if (errorBlob)
 		{
 			OutputDebugStringA((char*)errorBlob->GetBufferPointer());
@@ -129,14 +128,14 @@ namespace tg::graphics
 			return false;
 		}
 
-		if (FAILED(mDevice->CreatePixelShader((*ppCode)->GetBufferPointer()
-			, (*ppCode)->GetBufferSize(), nullptr, ppPixelShader)))
+		if (FAILED(mDevice->CreatePixelShader((*ppCode)->GetBufferPointer(), (*ppCode)->GetBufferSize(), nullptr, ppPixelShader)))
 			return false;
 
 		return true;
 	}
 
-	bool GraphicDevice_DX11::CreateInputLayout(const D3D11_INPUT_ELEMENT_DESC* pInputElementDescs, UINT NumElements, const void* pShaderBytecodeWithInputSignature, SIZE_T BytecodeLength, ID3D11InputLayout** ppInputLayout)
+	bool GraphicDevice_DX11::CreateInputLayout(const D3D11_INPUT_ELEMENT_DESC* pInputElementDescs, UINT NumElements
+		, const void* pShaderBytecodeWithInputSignature, SIZE_T BytecodeLength, ID3D11InputLayout** ppInputLayout)
 	{
 		if (FAILED(mDevice->CreateInputLayout(pInputElementDescs, NumElements
 			, pShaderBytecodeWithInputSignature
@@ -233,7 +232,7 @@ namespace tg::graphics
 
 		if (!(GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)mRenderTarget.GetAddressOf())))
 			assert(NULL && "Couldn't bring rendertarget!");
-		
+
 		if (!(CreateRenderTargetView(mRenderTarget.Get(), nullptr, mRTV.GetAddressOf())))
 			assert(NULL && "Create RenderTargetView Failed!");
 

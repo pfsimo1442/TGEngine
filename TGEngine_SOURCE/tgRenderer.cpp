@@ -18,7 +18,6 @@ namespace tg::renderer
 	ID3D11PixelShader* psShader = nullptr;
 	ID3D11InputLayout* inputLayouts = nullptr;
 
-
 	void LoadTriangleMesh()
 	{
 		renderer::vertexes[0].pos = Vector3(0.f, 0.5f, 0.0f);
