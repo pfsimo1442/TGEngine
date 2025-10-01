@@ -9,7 +9,6 @@
 #include "..\\TGEngine_SOURCE\\tgTexture.h"
 #include "..\\TGEngine_SOURCE\\tgSceneManager.h"
 
-#include "..\\TGEngine_Window\\tgLoadResources.h"
 #include "..\\TGEngine_Window\\tgLoadScenes.h"
 #include "..\\TGEngine_Window\\tgToolScene.h"
 
@@ -147,7 +146,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    Gdiplus::GdiplusStartup(&gpToken, &gpsi, NULL);
 
    //load Scenes
-   tg::LoadResources();
    tg::LoadScenes();
 
    int ad = 0;

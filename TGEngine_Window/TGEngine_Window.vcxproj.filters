@@ -40,12 +40,14 @@
       <Filter>Scripts</Filter>
     </ClInclude>
     <ClInclude Include="tgLoadScenes.h" />
-    <ClInclude Include="tgLoadResources.h" />
     <ClInclude Include="tgPlatform.h">
       <Filter>Contents</Filter>
     </ClInclude>
     <ClInclude Include="tgPlatformScript.h">
       <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="tgLoadingScene.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +83,9 @@
     </ClCompile>
     <ClCompile Include="tgPlatformScript.cpp">
       <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="tgLoadingScene.cpp">
+      <Filter>Scenes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

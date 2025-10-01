@@ -177,15 +177,15 @@ namespace tg
 		renderer::mainCamera = mMainCamera;
 
 		//// Collision Manager
-		CollisionManager::CollisionLayerCheck(enums::eLayerType::Player, enums::eLayerType::Pet, true);
-		CollisionManager::CollisionLayerCheck(enums::eLayerType::Player, enums::eLayerType::Platform, true);
+		//CollisionManager::CollisionLayerCheck(enums::eLayerType::Player, enums::eLayerType::Pet, true);
+		//CollisionManager::CollisionLayerCheck(enums::eLayerType::Player, enums::eLayerType::Platform, true);
 
-		UIManager::Push(eUIType::Button);
+		//UIManager::Push(eUIType::Button);
 	}
 
 	void PlayScene::OnExit()
 	{
-		UIManager::Pop(eUIType::Button);
+		//UIManager::Pop(eUIType::Button);
 
 		Scene::OnExit();
 

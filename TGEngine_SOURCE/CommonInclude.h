@@ -11,6 +11,8 @@
 #include <bitset>
 #include <functional>
 #include <filesystem>
+#include <mutex>
+#include <thread>
 #include <math.h>
 
 #include <mmsystem.h>
