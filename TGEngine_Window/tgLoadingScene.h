@@ -22,7 +22,7 @@ namespace tg
 
 	private:
 		bool mbLoadCompleted;
-		std::thread* mResourcesLoad;
-		std::mutex mMutex;
+		std::thread* mResourcesLoadThread;
+		std::mutex mMutualExclusion;
 	};
 }

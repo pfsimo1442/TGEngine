@@ -9,25 +9,27 @@ namespace tg
 {
 	LoadingScene::LoadingScene()
 		: mbLoadCompleted(false)
+		, mMutualExclusion()
+		, mResourcesLoadThread()
 	{
 	}
 	LoadingScene::~LoadingScene()
 	{
-		delete mResourcesLoad;
-		mResourcesLoad = nullptr;
+		delete mResourcesLoadThread;
+		mResourcesLoadThread = nullptr;
 	}
 
 	void LoadingScene::Initialize()
 	{
-		mResourcesLoad = new std::thread(&LoadingScene::resourcesLoad, this, std::ref(mMutex));
+		mResourcesLoadThread = new std::thread(&LoadingScene::resourcesLoad, this, std::ref(mMutualExclusion));
 	}
 
 	void LoadingScene::Update()
 	{
 		if (mbLoadCompleted)
 		{
-			mResourcesLoad->join();
-			//mResourcesLoad->detach();
+			mResourcesLoadThread->join();
+			//mResourcesLoadThread->detach();
 
 			SceneManager::LoadScene(L"PlayScene");
 		}
