@@ -1,4 +1,12 @@
 #pragma once
+#include <d3d11.h>
+#include <d3dcompiler.h>
+#include <wrl.h>
+
+#pragma comment(lib, "d3d11.lib")
+#pragma comment(lib, "d3dcompiler.lib")
+
+#include "CommonInclude.h"
 
 namespace tg::graphics
 {
