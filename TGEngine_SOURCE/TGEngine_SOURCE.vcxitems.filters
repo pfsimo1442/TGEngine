@@ -116,6 +116,15 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgGraphicDevice_DX11.cpp">
       <Filter>GraphicDevice</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgShader.cpp">
+      <Filter>Resource\Graphics\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgMaterial.cpp">
+      <Filter>Resource\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgMesh.cpp">
+      <Filter>Resource\Mesh</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -242,6 +251,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgGraphics.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgShader.h">
+      <Filter>Resource\Graphics\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgMaterial.h">
+      <Filter>Resource\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgMesh.h">
+      <Filter>Resource\Mesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -324,6 +342,18 @@
     </Filter>
     <Filter Include="GraphicDevice">
       <UniqueIdentifier>{6229596a-732d-41dd-ace9-53f0737171a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Graphics">
+      <UniqueIdentifier>{922032d2-0418-45c9-b1ee-7cb5a4f69be2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Graphics\Shader">
+      <UniqueIdentifier>{790ba090-d172-4168-9a9c-06b0cbd1049b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Material">
+      <UniqueIdentifier>{147b337a-294d-421c-b272-1ec1502c1b74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Mesh">
+      <UniqueIdentifier>{631e2917-4201-499c-aadc-5411f7c85a69}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
