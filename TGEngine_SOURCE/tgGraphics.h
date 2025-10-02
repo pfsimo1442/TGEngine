@@ -22,6 +22,15 @@ namespace tg::graphics
 		End,
 	};
 
+	struct GpuBuffer
+	{
+		Microsoft::WRL::ComPtr<ID3D11Buffer> buffer;
+		D3D11_BUFFER_DESC desc;
+
+		GpuBuffer() = default;
+		virtual ~GpuBuffer() = default;
+	};
+
 	enum class eCBType
 	{
 		Transform,
