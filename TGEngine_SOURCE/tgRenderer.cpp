@@ -1,6 +1,9 @@
 #include "tgRenderer.h"
 #include "tgGraphicDevice_DX11.h"
 
+#include "tgResources.h"
+#include "tgShader.h"
+
 namespace tg::renderer
 {
 	Camera* mainCamera = nullptr;
@@ -12,10 +15,6 @@ namespace tg::renderer
 	ID3D11Buffer* indexBuffer = nullptr;
 	ID3D11Buffer* constantBuffer = nullptr;
 
-	ID3DBlob* vsBlob = nullptr;
-	ID3D11VertexShader* vsShader = nullptr;
-	ID3DBlob* psBlob = nullptr;
-	ID3D11PixelShader* psShader = nullptr;
 	ID3D11InputLayout* inputLayouts = nullptr;
 
 	void LoadTriangleMesh()
@@ -39,18 +38,20 @@ namespace tg::renderer
 		LoadTriangleMesh();
 	}
 
+	void LoadShaders()
+	{
+		tg::Resources::Load<graphics::Shader>(L"TriangleShader", L"..\\Shaders_SOURCE\\Triangle");
+	}
+
 	void Initialize()
 	{
 		LoadMeshes();
+		LoadShaders();
 	}
 
 	void Release()
 	{
 		vertexBuffer->Release();
-		vsBlob->Release();
-		vsShader->Release();
-		psBlob->Release();
-		psShader->Release();
 		inputLayouts->Release();
 		indexBuffer->Release();
 		constantBuffer->Release();

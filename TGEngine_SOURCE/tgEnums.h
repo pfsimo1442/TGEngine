@@ -34,10 +34,10 @@ namespace tg::enums
 	enum class eResourceType
 	{
 		Texture,
-		// Mash, 
-		// Shader, 
-		AudioClip,
 		Animation,
+		AudioClip,
+		Shader, 
+		// Mesh, 
 		Prefab, 
 		End,
 	};

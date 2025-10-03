@@ -143,13 +143,13 @@ namespace tg::math
 		XMStoreFloat4(&result, XMQuaternionMultiply(q2, q1));
 	}
 
-
+	
 	/****************************************************************************
 	*
 	* Viewport
 	*
 	****************************************************************************/
-
+	
 #if defined(__d3d11_h__) || defined(__d3d11_x_h__)
 	static_assert(sizeof(DirectX::SimpleMath::Viewport) == sizeof(D3D11_VIEWPORT), "Size mismatch");
 	static_assert(offsetof(DirectX::SimpleMath::Viewport, x) == offsetof(D3D11_VIEWPORT, TopLeftX), "Layout mismatch");
