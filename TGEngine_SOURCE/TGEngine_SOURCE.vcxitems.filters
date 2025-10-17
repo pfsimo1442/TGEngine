@@ -114,7 +114,7 @@
       <Filter>Common</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgGraphicDevice_DX11.cpp">
-      <Filter>GraphicDevice</Filter>
+      <Filter>Graphics\GraphicDevice</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgShader.cpp">
       <Filter>Resource\Graphics\Shader</Filter>
@@ -124,6 +124,15 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgMesh.cpp">
       <Filter>Resource\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgConstantBuffer.cpp">
+      <Filter>Graphics\GpuBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgIndexBuffer.cpp">
+      <Filter>Graphics\GpuBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgVertexBuffer.cpp">
+      <Filter>Graphics\GpuBuffer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -246,10 +255,7 @@
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgGraphicDevice_DX11.h">
-      <Filter>GraphicDevice</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)tgGraphics.h">
-      <Filter>Common</Filter>
+      <Filter>Graphics\GraphicDevice</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgShader.h">
       <Filter>Resource\Graphics\Shader</Filter>
@@ -259,6 +265,18 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgMesh.h">
       <Filter>Resource\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgGraphics.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgConstantBuffer.h">
+      <Filter>Graphics\GpuBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgIndexBuffer.h">
+      <Filter>Graphics\GpuBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgVertexBuffer.h">
+      <Filter>Graphics\GpuBuffer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -340,9 +358,6 @@
     <Filter Include="Resource\Audio">
       <UniqueIdentifier>{332bd131-383a-425a-9f7a-c3821d195c4a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GraphicDevice">
-      <UniqueIdentifier>{6229596a-732d-41dd-ace9-53f0737171a1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource\Graphics">
       <UniqueIdentifier>{922032d2-0418-45c9-b1ee-7cb5a4f69be2}</UniqueIdentifier>
     </Filter>
@@ -354,6 +369,15 @@
     </Filter>
     <Filter Include="Resource\Mesh">
       <UniqueIdentifier>{631e2917-4201-499c-aadc-5411f7c85a69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{8fb21f49-069e-4ee9-94d4-ebfa8b4958ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\GraphicDevice">
+      <UniqueIdentifier>{6229596a-732d-41dd-ace9-53f0737171a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\GpuBuffer">
+      <UniqueIdentifier>{94a0f166-cf27-439f-b6fa-ea120ac25740}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
