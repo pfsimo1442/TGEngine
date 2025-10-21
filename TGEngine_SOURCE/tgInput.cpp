@@ -92,8 +92,8 @@ namespace tg
 		GetCursorPos(&mousePos);
 		ScreenToClient(application.GetHwnd(), &mousePos);
 
-		if (0 < mousePos.x && mousePos.x < application.GetWidth()
-			&& 0 < mousePos.y && mousePos.y < application.GetHeight())
+		if (0 < mousePos.x && (UINT)mousePos.x < application.GetWidth()
+			&& 0 < mousePos.y && (UINT)mousePos.y < application.GetHeight())
 		{
 			mbMouseOnWindow = true;
 			mOnMousePosition.x = (float)(mousePos.x);

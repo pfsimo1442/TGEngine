@@ -145,7 +145,7 @@ namespace tg
 		UINT sheetHeight = imageHeight;
 		graphics::Texture* spriteSheet = graphics::Texture::Create(name, sheetWidth, sheetHeight);
 
-		for (size_t ni = 0; ni < images.size(); ni++)
+		for (int ni = 0; ni < images.size(); ni++)
 		{
 			BitBlt(spriteSheet->GetHdc()
 				, imageWidth * ni, 0

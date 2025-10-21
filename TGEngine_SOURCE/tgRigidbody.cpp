@@ -95,8 +95,8 @@ namespace tg
 		HPEN redPen = CreatePen(PS_SOLID, 2, RGB(255, 0, 0));
 		HPEN oldPen = (HPEN)SelectObject(hdc, redPen);
 
-		MoveToEx(hdc, pos.x, pos.y, nullptr);
-		LineTo(hdc, lineEndPos.x, lineEndPos.y);
+		MoveToEx(hdc, (int)pos.x, (int)pos.y, nullptr);
+		LineTo(hdc, (int)lineEndPos.x, (int)lineEndPos.y);
 
 		SelectObject(hdc, oldPen);
 		DeleteObject(redPen);

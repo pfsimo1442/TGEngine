@@ -21,8 +21,8 @@ namespace tg
 
 	void Camera::Initialize()
 	{
-		mResolution.x = application.GetWidth();
-		mResolution.y = application.GetHeight();
+		mResolution.x = (float)application.GetWidth();
+		mResolution.y = (float)application.GetHeight();
 		//mResolution.x = 1600;
 		//mResolution.y = 900;
 	}
