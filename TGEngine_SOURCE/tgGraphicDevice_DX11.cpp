@@ -303,11 +303,11 @@ namespace tg::graphics
 		//sub.pSysMem = renderer::vertexes;
 #pragma endregion
 		if (!(CreateBuffer(&bufferDesc, &sub, &renderer::vertexBuffer)))
-			assert(NULL, "Create vertex buffer failed!");
+		assert(NULL && "Create vertex buffer failed!");
 
 #pragma region index buffer desc
 		D3D11_BUFFER_DESC indexBufferdesc = {};
-		indexBufferdesc.ByteWidth = sizeof(UINT) * renderer::indices.size();
+		indexBufferdesc.ByteWidth = sizeof(UINT) * (UINT)renderer::indices.size();
 		indexBufferdesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_INDEX_BUFFER;
 		indexBufferdesc.Usage = D3D11_USAGE_DEFAULT;
 		indexBufferdesc.CPUAccessFlags = 0;
@@ -341,7 +341,7 @@ namespace tg::graphics
 
 		D3D11_VIEWPORT viewPort =
 		{
-			0, 0, application.GetWidth(), application.GetHeight(),
+			0.0f, 0.0f, (FLOAT)application.GetWidth(), (FLOAT)application.GetHeight(),
 			0.0f, 1.0f
 		};
 		mContext->RSSetViewports(1, &viewPort);

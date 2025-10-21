@@ -45,8 +45,8 @@ namespace tg
         HPEN oldPen = (HPEN)SelectObject(hdc, greenPen);
 
         ::Rectangle(hdc
-            , pos.x + offset.x - (size.x / 2), pos.y + offset.y - (size.y / 2)
-            , pos.x + offset.x + (size.x / 2), pos.y + offset.y + (size.y / 2));
+            , (int)(pos.x + offset.x - (size.x / 2)), (int)(pos.y + offset.y - (size.y / 2))
+            , (int)(pos.x + offset.x + (size.x / 2)), (int)(pos.y + offset.y + (size.y / 2)));
         
         SelectObject(hdc, oldBrush);
         SelectObject(hdc, oldPen);

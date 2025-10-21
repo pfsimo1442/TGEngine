@@ -63,21 +63,21 @@ namespace tg
 				func.SourceConstantAlpha = 255; // 0(transparent) ~ 255(Opaque)
 
 				AlphaBlend(hdc
-					, pos.x, pos.y
-					, mTileSize.x * mSize.x * scale.x, mTileSize.y * mSize.y * scale.y
+					, (int)pos.x, (int)pos.y
+					, (int)(mTileSize.x * mSize.x * scale.x), (int)(mTileSize.y * mSize.y * scale.y)
 					, mTexture->GetHdc()
-					, mCell.x * OriginTileSize.x, mCell.y * OriginTileSize.y
-					, OriginTileSize.x, OriginTileSize.y
+					, (int)(mCell.x * OriginTileSize.x), (int)(mCell.y * OriginTileSize.y)
+					, (int)OriginTileSize.x, (int)OriginTileSize.y
 					, func);
 			}
 			else
 			{
 				TransparentBlt(hdc
-					, pos.x, pos.y
-					, mTileSize.x * mSize.x * scale.x, mTileSize.y * mSize.y * scale.y
+					, (int)pos.x, (int)pos.y
+					, (int)(mTileSize.x * mSize.x * scale.x), (int)(mTileSize.y * mSize.y * scale.y)
 					, mTexture->GetHdc()
-					, mCell.x * OriginTileSize.x, mCell.y * OriginTileSize.y
-					, OriginTileSize.x, OriginTileSize.y
+					, (int)(mCell.x * OriginTileSize.x), (int)(mCell.y * OriginTileSize.y)
+					, (int)OriginTileSize.x, (int)OriginTileSize.y
 					, RGB(255, 0, 255));
 			}
 		}

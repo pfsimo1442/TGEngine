@@ -55,7 +55,7 @@ namespace tg
 	{
 		::Rectangle(hdc
 			, (int)mPosition.x, (int)mPosition.y
-			, mPosition.x + mSize.x, mPosition.y + mSize.y);
+			, (int)(mPosition.x + mSize.x), (int)(mPosition.y + mSize.y));
 	}
 
 	void UIButton::OnClear()

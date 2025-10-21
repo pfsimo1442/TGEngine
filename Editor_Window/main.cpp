@@ -146,9 +146,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    //load Scenes
    tg::LoadScenes();
 
-   int ad = 0;
-   srand((unsigned int)(&ad));
-
    tg::Scene* activeScene = tg::SceneManager::GetActiveScene();
 
    std::wstring name = activeScene->GetName();
@@ -161,7 +158,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
        tg::graphics::Texture* tilemapPalleteTexture
            = tg::Resources::Find<tg::graphics::Texture>(L"PlatformSpringSDV");
 
-       RECT rect = { 0, 0, tilemapPalleteTexture->GetWidth(), tilemapPalleteTexture->GetHeight() };
+       RECT rect = { 0, 0, (LONG)tilemapPalleteTexture->GetWidth(), (LONG)tilemapPalleteTexture->GetHeight() };
        AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
 
        UINT toolWidth = rect.right - rect.left;

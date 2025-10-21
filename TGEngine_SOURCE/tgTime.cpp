@@ -35,12 +35,12 @@ namespace tg
 		swprintf_s(str1, 50, L"Time: %f", time);
 		swprintf_s(str2, 50, L"DeltaTime: %f", DeltaTimeValue);
 		swprintf_s(str3, 50, L"FPS: %d", (int)fps);
-		int len1 = wcsnlen_s(str1, 50);
-		int len2 = wcsnlen_s(str2, 50);
-		int len3 = wcsnlen_s(str3, 50);
+		size_t len1 = wcsnlen_s(str1, 50);
+		size_t len2 = wcsnlen_s(str2, 50);
+		size_t len3 = wcsnlen_s(str3, 50);
 
-		TextOut(hdc, 0, 0, str1, len1);
-		TextOut(hdc, 0, 20, str2, len2);
-		TextOut(hdc, 0, 40, str3, len3);
+		TextOut(hdc, 0, 0, str1, (int)len1);
+		TextOut(hdc, 0, 20, str2, (int)len2);
+		TextOut(hdc, 0, 40, str3, (int)len3);
 	}
 }

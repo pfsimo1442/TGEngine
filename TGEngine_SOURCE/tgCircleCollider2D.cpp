@@ -46,8 +46,8 @@ namespace tg
         HPEN oldPen = (HPEN)SelectObject(hdc, greenPen);
 
         Ellipse(hdc
-            , pos.x + offset.x - radius, pos.y + offset.y - radius
-            , pos.x + offset.x + radius, pos.y + offset.y + radius);
+            , (int)(pos.x + offset.x - radius), (int)(pos.y + offset.y - radius)
+            , (int)(pos.x + offset.x + radius), (int)(pos.y + offset.y + radius));
 
         SelectObject(hdc, oldBrush);
         SelectObject(hdc, oldPen);

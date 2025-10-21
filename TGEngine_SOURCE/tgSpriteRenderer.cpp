@@ -55,21 +55,21 @@ namespace tg
 				func.SourceConstantAlpha = 255; // 0(transparent) ~ 255(Opaque)
 
 				AlphaBlend(hdc
-					, pos.x - (mTexture->GetWidth() * posStyle.x * scale.x), pos.y - (mTexture->GetHeight() * posStyle.y * scale.y)
-					, mTexture->GetWidth() * mSize.x * scale.x, mTexture->GetHeight() * mSize.y * scale.y
+					, (int)(pos.x - (mTexture->GetWidth() * posStyle.x * scale.x)), (int)(pos.y - (mTexture->GetHeight() * posStyle.y * scale.y))
+					, (int)(mTexture->GetWidth() * mSize.x * scale.x), (int)(mTexture->GetHeight() * mSize.y * scale.y)
 					, mTexture->GetHdc()
 					, 0, 0
-					, mTexture->GetWidth(), mTexture->GetHeight()
+					, (int)mTexture->GetWidth(), (int)mTexture->GetHeight()
 					, func);
 			}
 			else
 			{
 				TransparentBlt(hdc
-					, pos.x - (mTexture->GetWidth() * posStyle.x * scale.x), pos.y - (mTexture->GetHeight() * posStyle.y * scale.y)
-					, mTexture->GetWidth() * mSize.x * scale.x, mTexture->GetHeight() * mSize.y * scale.y
+					, (int)(pos.x - (mTexture->GetWidth() * posStyle.x * scale.x)), (int)(pos.y - (mTexture->GetHeight() * posStyle.y * scale.y))
+					, (int)(mTexture->GetWidth() * mSize.x * scale.x), (int)(mTexture->GetHeight() * mSize.y * scale.y)
 					, mTexture->GetHdc()
 					, 0, 0
-					, mTexture->GetWidth(), mTexture->GetHeight()
+					, (int)mTexture->GetWidth(), (int)mTexture->GetHeight()
 					, RGB(255, 0, 255));
 			}
 		}
@@ -87,9 +87,9 @@ namespace tg
 			graphics.DrawImage(mTexture->GetImage()
 				, Gdiplus::Rect
 				(
-					pos.x - (mTexture->GetWidth() * posStyle.x * scale.x), pos.y - (mTexture->GetHeight() * posStyle.y * scale.y)
-					, mTexture->GetWidth() * mSize.x * scale.x
-					, mTexture->GetHeight() * mSize.y * scale.y
+					(INT)(pos.x - (mTexture->GetWidth() * posStyle.x * scale.x)), (INT)(pos.y - (mTexture->GetHeight() * posStyle.y * scale.y))
+					, (INT)(mTexture->GetWidth() * mSize.x * scale.x)
+					, (INT)(mTexture->GetHeight() * mSize.y * scale.y)
 				)
 				, 0, 0
 				, mTexture->GetWidth(), mTexture->GetHeight()

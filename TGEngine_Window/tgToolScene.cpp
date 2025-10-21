@@ -93,15 +93,15 @@ namespace tg
 		{
 			Vector2 gridPos = renderer::mainCamera->CalculatePosition(Vector2(TilemapRenderer::TileSize.x * ni, 0.0f));
 			
-			MoveToEx(hdc, gridPos.x, 0, NULL);
-			LineTo(hdc, gridPos.x, 1000);
+			MoveToEx(hdc, (int)gridPos.x, 0, NULL);
+			LineTo(hdc, (int)gridPos.x, 1000);
 		}
 		for (size_t ni = 0; ni < 50; ni++)
 		{
 			Vector2 gridPos = renderer::mainCamera->CalculatePosition(Vector2(0.0f, TilemapRenderer::TileSize.y * ni));
 
-			MoveToEx(hdc, 0, gridPos.y,  NULL);
-			LineTo(hdc, 1000, gridPos.y);
+			MoveToEx(hdc, 0, (int)gridPos.y,  NULL);
+			LineTo(hdc, 1000, (int)gridPos.y);
 		}
 	}
 
@@ -150,6 +150,9 @@ namespace tg
 			Vector2 sourceCellCoord = tmr->GetCellCoordination();
 			Vector2 pos = tr->GetPosition();
 
+			if (pFile == nullptr)
+				break;
+
 			int cellCoordX = (int)(sourceCellCoord.x);
 			int cellCoordY = (int)(sourceCellCoord.y);
 			int posX = (int)(pos.x);
@@ -160,7 +163,8 @@ namespace tg
 			fwrite(&posY, sizeof(int), 1, pFile);
 		}
 
-		fclose(pFile);
+		if (pFile)
+			fclose(pFile);
 	}
 	
 	void ToolScene::Load()
@@ -195,6 +199,9 @@ namespace tg
 			int posX = 0;
 			int posY = 0;
 
+			if (pFile == nullptr)
+				break;
+
 			if (fread(&cellCoordX, sizeof(int), 1, pFile) == NULL)
 				break;
 			if (fread(&cellCoordY, sizeof(int), 1, pFile) == NULL)
@@ -215,7 +222,8 @@ namespace tg
 			mTiles.push_back(tile);
 		}
 
-		fclose(pFile);
+		if (pFile)
+			fclose(pFile);
 	}
 }
 
@@ -230,8 +238,8 @@ LRESULT CALLBACK WndToolProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 		ScreenToClient(hWnd, &mousePos);
 
 		tg::math::Vector2 mousePosition;
-		mousePosition.x = mousePos.x;
-		mousePosition.y = mousePos.y;
+		mousePosition.x = (float)mousePos.x;
+		mousePosition.y = (float)mousePos.y;
 
 		tg::math::Vector2 coord = (mousePosition / tg::TilemapRenderer::OriginTileSize);
 		coord = TransInt(coord);

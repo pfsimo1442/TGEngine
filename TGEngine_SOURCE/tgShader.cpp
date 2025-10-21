@@ -12,8 +12,8 @@ namespace tg::graphics
 
 	HRESULT Shader::Load(const std::wstring& path)
 	{
-		int fineNameBeginOffset = path.rfind(L"\\") + 1;
-		int fineNameEndOffset = path.length() - fineNameBeginOffset;
+		int fineNameBeginOffset = (int)(path.rfind(L"\\")) + 1;
+		int fineNameEndOffset = (int)path.length() - fineNameBeginOffset;
 		const std::wstring fileName(path.substr(fineNameBeginOffset, fineNameEndOffset));
 
 		if (!Create(eShaderStage::VS, fileName))

@@ -75,21 +75,21 @@ namespace tg
 				func.SourceConstantAlpha = 255; // 0(transparent) ~ 255(Opaque)
 
 				AlphaBlend(hdc
-					, pos.x - (sprite.size.x * posStyle.x * scale.x) + sprite.offset.x, pos.y - (sprite.size.y * posStyle.y * scale.y) + sprite.offset.y
-					, sprite.size.x * scale.x, sprite.size.y * scale.y
+					, (int)(pos.x - (sprite.size.x * posStyle.x * scale.x) + sprite.offset.x), (int)(pos.y - (sprite.size.y * posStyle.y * scale.y) + sprite.offset.y)
+					, (int)(sprite.size.x * scale.x), (int)(sprite.size.y * scale.y)
 					, imgHdc
-					, sprite.leftTop.x, sprite.leftTop.y
-					, sprite.size.x, sprite.size.y
+					, (int)sprite.leftTop.x, (int)sprite.leftTop.y
+					, (int)sprite.size.x, (int)sprite.size.y
 					, func);
 			}
 			else
 			{
 				TransparentBlt(hdc
-					, pos.x - (sprite.size.x * posStyle.x * scale.x) + sprite.offset.x, pos.y - (sprite.size.y * posStyle.y * scale.y) + sprite.offset.y
-					, sprite.size.x * scale.x, sprite.size.y * scale.y
+					, (int)(pos.x - (sprite.size.x * posStyle.x * scale.x) + sprite.offset.x), (int)(pos.y - (sprite.size.y * posStyle.y * scale.y) + sprite.offset.y)
+					, (int)(sprite.size.x * scale.x), (int)(sprite.size.y * scale.y)
 					, imgHdc
-					, sprite.leftTop.x, sprite.leftTop.y
-					, sprite.size.x, sprite.size.y
+					, (int)sprite.leftTop.x, (int)sprite.leftTop.y
+					, (int)sprite.size.x, (int)sprite.size.y
 					, RGB(255, 0, 255));
 			}
 
@@ -112,11 +112,11 @@ namespace tg
 			graphics.DrawImage(mTexture->GetImage()
 				, Gdiplus::Rect
 				(
-					pos.x - (sprite.size.x * posStyle.x * scale.x), pos.y - (sprite.size.y * posStyle.y * scale.y)
-					, sprite.size.x * scale.x, sprite.size.y * scale.y
+					(INT)(pos.x - (sprite.size.x * posStyle.x * scale.x)), (INT)(pos.y - (sprite.size.y * posStyle.y * scale.y))
+					, (INT)(sprite.size.x * scale.x), (INT)(sprite.size.y * scale.y)
 				)
-				, sprite.leftTop.x, sprite.leftTop.y
-				, sprite.size.x, sprite.size.y
+				, (INT)sprite.leftTop.x, (INT)sprite.leftTop.y
+				, (INT)sprite.size.x, (INT)sprite.size.y
 				, Gdiplus::UnitPixel
 				, nullptr/*&imgAtt*/
 			);
