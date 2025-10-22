@@ -25,4 +25,3 @@
 
 #include "tgEnums.h"
 #include "tgMath.h"
-#include "tgGraphics.h"
