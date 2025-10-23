@@ -159,6 +159,14 @@ namespace tg::graphics
 		return true;
 	}
 
+	void GraphicDevice_DX11::SetDataBuffer(ID3D11Buffer* buffer, void* data, UINT size)
+	{
+		D3D11_MAPPED_SUBRESOURCE sub = {};
+		mContext->Map(buffer, 0, D3D11_MAP::D3D11_MAP_WRITE_DISCARD, 0, &sub);
+		memcpy(sub.pData, data, size);
+		mContext->Unmap(buffer, 0);
+	}
+
 	void GraphicDevice_DX11::BindVS(ID3D11VertexShader* pVertexShader)
 	{
 		mContext->VSSetShader(pVertexShader, 0, 0);
@@ -310,20 +318,6 @@ namespace tg::graphics
 #pragma endregion
 		if (!(graphics::GetDevice()->CreateBuffer(&indexBufferdesc, &indicesData, &renderer::indexBuffer)))
 			assert(NULL && "indices buffer create fail!!");
-
-#pragma region constant buffer desc
-		D3D11_BUFFER_DESC constantBufferDesc = {};
-		constantBufferDesc.ByteWidth = sizeof(Vector4); // constant buffer 
-		constantBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-		constantBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
-		constantBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-
-		Vector4 pos(0.5f, 0.0f, 0.0f, 1.0f);
-		D3D11_SUBRESOURCE_DATA constantBufferData = {};
-		constantBufferData.pSysMem = &pos;
-#pragma endregion
-		if (!(graphics::GetDevice()->CreateBuffer(&constantBufferDesc, &constantBufferData, &renderer::constantBuffer)))
-			assert(NULL && "indices buffer create fail!!");
 	}
 
 	void GraphicDevice_DX11::Draw()
@@ -347,6 +341,10 @@ namespace tg::graphics
 
 		renderer::vertexBuffer.Bind();
 		mContext->IASetIndexBuffer(renderer::indexBuffer, DXGI_FORMAT_R32_UINT, 0);
+
+		Vector4 pos(0.5f, 0.0f, 0.0f, 1.0f);
+		renderer::constantBuffers[(UINT)eCBType::Transform].SetData(&pos);
+		renderer::constantBuffers[(UINT)eCBType::Transform].Bind(eShaderStage::VS);
 
 		graphics::Shader* triangle = Resources::Find<graphics::Shader>(L"TriangleShader");
 		triangle->Bind();
