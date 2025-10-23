@@ -30,7 +30,7 @@ namespace tg
 		virtual void Initialize();
 		virtual void Update();
 		virtual void LateUpdate();
-		virtual void Render(HDC hdc);
+		virtual void Render();
 
 		template <typename T>
 		T* AddComponent()
@@ -61,13 +61,13 @@ namespace tg
 			if (power == true) mState = eState::Active;
 			if (power == false) mState = eState::Pause;
 		}
-		eState GetActiveState() { return mState; }
+		eState GetActiveState() const { return mState; }
 		void SetLayerType(eLayerType layerType) { mLayerType = layerType; }
-		eLayerType GetLayerType() { return mLayerType; }
+		eLayerType GetLayerType() const { return mLayerType; }
 
-		bool IsActive() { return mState == eState::Active; }
-		bool IsPause() { return mState == eState::Pause; }
-		bool IsDead() { return mState == eState::Dead; }
+		bool IsActive() const { return mState == eState::Active; }
+		bool IsPause() const { return mState == eState::Pause; }
+		bool IsDead() const { return mState == eState::Dead; }
 
 	private:
 		void initializeTransform();
