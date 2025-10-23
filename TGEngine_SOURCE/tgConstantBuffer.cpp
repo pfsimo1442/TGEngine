@@ -30,7 +30,7 @@ namespace tg::graphics
 			succes = GetDevice()->CreateBuffer(&desc, &sub, buffer.GetAddressOf());
 
 		if (!succes)
-			assert(NULL, "Create constant buffer failed!");
+			assert(NULL && "Create constant buffer failed!");
 
 		return true;
 	}

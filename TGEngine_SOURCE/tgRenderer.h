@@ -17,9 +17,9 @@ namespace tg::renderer
 	extern std::vector<UINT> indices;
 
 	extern VertexBuffer vertexBuffer;
+	extern IndexBuffer indexBuffer;
 	extern ConstantBuffer constantBuffers[(UINT)eCBType::End];
 
-	extern ID3D11Buffer* indexBuffer;
 	extern ID3D11Buffer* constantBuffer;
 	extern ID3D11InputLayout* inputLayouts;
 

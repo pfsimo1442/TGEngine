@@ -182,6 +182,11 @@ namespace tg::graphics
 		mContext->IASetVertexBuffers(StartSlot, NumBuffers, ppVertexBuffers, pStrides, pOffsets);
 	}
 
+	void GraphicDevice_DX11::BindIndexBuffer(ID3D11Buffer* pIndexBuffer, DXGI_FORMAT Format, UINT Offset)
+	{
+		mContext->IASetIndexBuffer(pIndexBuffer, Format, Offset);
+	}
+
 	void GraphicDevice_DX11::BindConstantBuffer(eShaderStage stage, eCBType type, ID3D11Buffer* buffer)
 	{
 		UINT slot = (UINT)type;
@@ -305,19 +310,7 @@ namespace tg::graphics
 			assert(NULL && "Create input layout failed!");
 
 		renderer::vertexBuffer.Create(renderer::vertexes);
-
-#pragma region index buffer desc
-		D3D11_BUFFER_DESC indexBufferdesc = {};
-		indexBufferdesc.ByteWidth = sizeof(UINT) * (UINT)renderer::indices.size();
-		indexBufferdesc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_INDEX_BUFFER;
-		indexBufferdesc.Usage = D3D11_USAGE_DEFAULT;
-		indexBufferdesc.CPUAccessFlags = 0;
-
-		D3D11_SUBRESOURCE_DATA indicesData = {};
-		indicesData.pSysMem = renderer::indices.data();
-#pragma endregion
-		if (!(graphics::GetDevice()->CreateBuffer(&indexBufferdesc, &indicesData, &renderer::indexBuffer)))
-			assert(NULL && "indices buffer create fail!!");
+		renderer::indexBuffer.Create(renderer::indices);
 	}
 
 	void GraphicDevice_DX11::Draw()
@@ -340,7 +333,7 @@ namespace tg::graphics
 		mContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 		renderer::vertexBuffer.Bind();
-		mContext->IASetIndexBuffer(renderer::indexBuffer, DXGI_FORMAT_R32_UINT, 0);
+		renderer::indexBuffer.Bind();
 
 		Vector4 pos(0.5f, 0.0f, 0.0f, 1.0f);
 		renderer::constantBuffers[(UINT)eCBType::Transform].SetData(&pos);
