@@ -3,8 +3,16 @@
 
 namespace tg::graphics
 {
-	class VertexBuffer
+	class VertexBuffer : public GpuBuffer
 	{
+	public:
+		VertexBuffer();
+		~VertexBuffer();
+
+		bool Create(const std::vector<Vertex>& vertexes);
+		void Bind();
+
+	private:
 
 	};
 }

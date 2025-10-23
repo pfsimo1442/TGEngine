@@ -3,8 +3,16 @@
 
 namespace tg::graphics
 {
-	class IndexBuffer
+	class IndexBuffer : public GpuBuffer
 	{
+	public:
+		IndexBuffer();
+		~IndexBuffer();
+
+		bool Create(const std::vector<UINT>& indices);
+		void Bind();
+
+	private:
 
 	};
 }
