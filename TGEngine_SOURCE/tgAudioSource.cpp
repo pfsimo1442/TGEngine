@@ -7,6 +7,7 @@ namespace tg
 {
 	AudioSource::AudioSource()
 		: Component(enums::eComponentType::AudioSource)
+		, mAudioClip(nullptr)
 	{
 	}
 	AudioSource::~AudioSource()
@@ -29,10 +30,10 @@ namespace tg
 		Vector2 pos = tr->GetPosition();
 		Vector2 vel = Vector2(0.0f, 0.0f);
 
-		mAudioClip->Set2DAttributes(pos, vel);
+		//mAudioClip->Set2DAttributes(pos, vel);
 	}
 
-	void AudioSource::Render(HDC hdc)
+	void AudioSource::Render()
 	{
 
 	}

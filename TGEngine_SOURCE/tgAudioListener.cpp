@@ -27,17 +27,19 @@ namespace tg
 
 	void AudioListener::LateUpdate()
 	{
-		Transform* tr = GetOwner()->GetComponent<Transform>();
+		Transform* tr = nullptr;
+		tr = GetOwner()->GetComponent<Transform>();
 		//Rigidbody* rg = GetOwner()->GetComponent<Rigidbody>();
-		Vector2 pos = tr->GetPosition();
-		Vector2 vel = Vector2(0.0f, 0.0f);
+		//Vector2 vel = Vector2(0.0f, 0.0f);
 		//if (mbIsVel == true)
 		//	vel = rg->GetVelocity();
 			
-		Fmod::Set2DListenerAttributes(&pos, &vel);
+		Vector3 pos;
+		Vector3 vel;
+		Fmod::Set2DListenerAttributes(pos, vel);
 	}
 
-	void AudioListener::Render(HDC hdc)
+	void AudioListener::Render()
 	{
 
 	}

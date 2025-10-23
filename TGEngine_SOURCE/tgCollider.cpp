@@ -32,7 +32,7 @@ namespace tg
         
     }
     
-    void Collider::Render(HDC hdc)
+    void Collider::Render()
     {
         
     }

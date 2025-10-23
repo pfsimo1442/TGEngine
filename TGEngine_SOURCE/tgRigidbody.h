@@ -12,7 +12,7 @@ namespace tg
 		virtual void Initialize();
 		virtual void Update();
 		virtual void LateUpdate();
-		virtual void Render(HDC hdc);
+		virtual void Render();
 
 		void SetMass(float mass) { mMass = mass; }
 		float GetMass() { return mMass; }
