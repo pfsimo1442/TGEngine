@@ -38,13 +38,28 @@ namespace tg
 		mCoreSystem->playSound(sound, 0, false, channel);
 	}
 
-	void Fmod::Set2DListenerAttributes(const Vector2* pos, const Vector2* vel)
+	void Fmod::Set2DListenerAttributes(const Vector2& pos, const Vector2& vel)
 	{
 		
-		Vector2 fcsPos = ConvertWindowCSToFModCS(Vector2(672.0f, 846.0f), Vector2(pos->x, pos->y));
+		Vector2 fcsPos = ConvertWindowCSToFModCS(Vector2(672.0f, 846.0f), Vector2(pos.x, pos.y));
 
 		FMOD_VECTOR fmodPos(fcsPos.x, fcsPos.y, 0.3f);
-		FMOD_VECTOR fmodVel(vel->x, vel->y, 0.0f);
+		FMOD_VECTOR fmodVel(vel.x, vel.y, 0.0f);
+		//FMOD_VECTOR fmodPos(0.0f, 0.0f, 0.3f);
+		//FMOD_VECTOR fmodVel(0.0f, 0.0f, 0.0f);
+		FMOD_VECTOR fmodForward(0.0f, 0.0f, 1.0f);
+		FMOD_VECTOR fmodUp(0.0f, 1.0f, 0.0f);
+
+		mCoreSystem->set3DListenerAttributes(0, &fmodPos, &fmodVel, &fmodForward, &fmodUp);
+	}
+
+	void Fmod::Set3DListenerAttributes(const Vector3& pos, const Vector3& vel)
+	{
+		
+		//Vector3 fcsPos = ConvertWindowCSToFModCS(Vector2(672.0f, 846.0f), Vector2(pos->x, pos->y));
+
+		FMOD_VECTOR fmodPos(pos.x, pos.y, pos.z);
+		FMOD_VECTOR fmodVel(vel.x, vel.y, vel.z);
 		//FMOD_VECTOR fmodPos(0.0f, 0.0f, 0.3f);
 		//FMOD_VECTOR fmodVel(0.0f, 0.0f, 0.0f);
 		FMOD_VECTOR fmodForward(0.0f, 0.0f, 1.0f);

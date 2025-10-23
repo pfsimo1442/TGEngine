@@ -36,7 +36,7 @@ namespace tg
 			
 		Vector3 pos;
 		Vector3 vel;
-		Fmod::Set2DListenerAttributes(pos, vel);
+		Fmod::Set3DListenerAttributes(pos, vel);
 	}
 
 	void AudioListener::Render()
