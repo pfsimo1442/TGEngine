@@ -48,7 +48,7 @@ namespace tg
 		
 	}
 
-	void Camera::Render(HDC hdc)
+	void Camera::Render()
 	{
 
 	}

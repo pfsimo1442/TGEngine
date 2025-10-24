@@ -21,12 +21,7 @@ namespace tg
     void Transform::LateUpdate()
     {
     }
-    void Transform::Render(HDC hdc)
+    void Transform::Render()
     {
-        Ellipse(hdc
-            , (int)(mPosition.x - 5.0f), (int)(mPosition.y - 5.0f)
-			, (int)(mPosition.x + 5.0f), (int)(mPosition.y + 5.0f));
-        
-        int a = 0;
     }
 }

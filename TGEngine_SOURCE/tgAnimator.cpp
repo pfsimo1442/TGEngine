@@ -54,10 +54,10 @@ namespace tg
 		
 	}
 
-	void Animator::Render(HDC hdc)
+	void Animator::Render()
 	{
-		if (mActiveAnimation)
-			mActiveAnimation->Render(hdc);
+		//if (mActiveAnimation)
+		//	mActiveAnimation->Render(hdc);
 	}
 
 	void Animator::CreateAnimationBySpriteSize(const std::wstring& name
@@ -114,50 +114,50 @@ namespace tg
 		mAnimations.insert(std::make_pair(name, animation));
 	}*/
 
-	void Animator::CreateAnimationByFolder(const std::wstring& name
+	void Animator::CreateAnimationByFolder(/*const std::wstring& name
 		, const std::wstring& path
 		, Vector2 offset
-		, float duration)
+		, float duration*/)
 	{
-		Animation* animation = nullptr;
-		animation = FindAnimation(name);
-		if (animation != nullptr)
-			return;
+		//Animation* animation = nullptr;
+		//animation = FindAnimation(name);
+		//if (animation != nullptr)
+		//	return;
 
-		int fileCount = 0;
-		std::filesystem::path fs(path);
-		std::vector<graphics::Texture*> images = {};
-		for (auto& p : std::filesystem::recursive_directory_iterator(fs))
-		{
-			std::wstring fileName = p.path().filename();
-			std::wstring fullName = p.path();
+		//int fileCount = 0;
+		//std::filesystem::path fs(path);
+		//std::vector<graphics::Texture*> images = {};
+		//for (auto& p : std::filesystem::recursive_directory_iterator(fs))
+		//{
+		//	std::wstring fileName = p.path().filename();
+		//	std::wstring fullName = p.path();
 
-			graphics::Texture* texture = Resources::Load<graphics::Texture>(fileName, fullName);
-			images.push_back(texture);
+		//	graphics::Texture* texture = Resources::Load<graphics::Texture>(fileName, fullName);
+		//	images.push_back(texture);
 
-			fileCount++;
-		}
+		//	fileCount++;
+		//}
 
-		UINT imageWidth = images[0]->GetWidth();
-		UINT imageHeight = images[0]->GetHeight();
-		Vector2 imageSize = Vector2((float)imageWidth, (float)imageHeight);
-		UINT sheetWidth = imageWidth * fileCount;
-		UINT sheetHeight = imageHeight;
-		graphics::Texture* spriteSheet = graphics::Texture::Create(name, sheetWidth, sheetHeight);
+		//UINT imageWidth = images[0]->GetWidth();
+		//UINT imageHeight = images[0]->GetHeight();
+		//Vector2 imageSize = Vector2((float)imageWidth, (float)imageHeight);
+		//UINT sheetWidth = imageWidth * fileCount;
+		//UINT sheetHeight = imageHeight;
+		//graphics::Texture* spriteSheet = graphics::Texture::Create(name, sheetWidth, sheetHeight);
 
-		for (int ni = 0; ni < images.size(); ni++)
-		{
-			BitBlt(spriteSheet->GetHdc()
-				, imageWidth * ni, 0
-				, imageWidth, imageHeight
-				, images[ni]->GetHdc()
-				, 0, 0
-				, SRCCOPY);
-		}
-		
-		CreateAnimationBySpriteSize(name, spriteSheet
-			, Vector2::Zero, imageSize
-			, offset, fileCount, duration);
+		//for (int ni = 0; ni < images.size(); ni++)
+		//{
+		//	BitBlt(spriteSheet->GetHdc()
+		//		, imageWidth * ni, 0
+		//		, imageWidth, imageHeight
+		//		, images[ni]->GetHdc()
+		//		, 0, 0
+		//		, SRCCOPY);
+		//}
+		//
+		//CreateAnimationBySpriteSize(name, spriteSheet
+		//	, Vector2::Zero, imageSize
+		//	, offset, fileCount, duration);
 	}
 
 	Animation* Animator::FindAnimation(const std::wstring& name)

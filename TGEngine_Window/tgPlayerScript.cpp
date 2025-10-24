@@ -30,31 +30,31 @@ namespace tg
 
 	void PlayerScript::Update()
 	{
-		if (mAnimator == nullptr)
-			mAnimator = GetOwner()->GetComponent<Animator>();
-		
-		switch (mState)
-		{
-		case PlayerScript::eState::Idle:
-			idle();
-			break;
-		case PlayerScript::eState::Walk:
-			move();
-			break;
-		case PlayerScript::eState::Leak:
-			break;
-		case PlayerScript::eState::Tired:
-			break;
-		case PlayerScript::eState::Sleep:
-			break;
-		case PlayerScript::eState::Water:
-			water();
-			break;
-		case PlayerScript::eState::Stretch:
-			break;
-		default:
-			break;
-		}
+		//if (mAnimator == nullptr)
+		//	mAnimator = GetOwner()->GetComponent<Animator>();
+		//
+		//switch (mState)
+		//{
+		//case PlayerScript::eState::Idle:
+		//	idle();
+		//	break;
+		//case PlayerScript::eState::Walk:
+		//	move();
+		//	break;
+		//case PlayerScript::eState::Leak:
+		//	break;
+		//case PlayerScript::eState::Tired:
+		//	break;
+		//case PlayerScript::eState::Sleep:
+		//	break;
+		//case PlayerScript::eState::Water:
+		//	water();
+		//	break;
+		//case PlayerScript::eState::Stretch:
+		//	break;
+		//default:
+		//	break;
+		//}
 
 		//Transform* tr = GetOwner()->GetComponent<Transform>();
 		//Vector2 pos = tr->GetPosition();
@@ -79,14 +79,14 @@ namespace tg
 		
 	}
 
-	void PlayerScript::Render(HDC hdc)
+	void PlayerScript::Render()
 	{
 
 	}
 
 	void PlayerScript::AttackEffect()
 	{
-		Cat* mCat = object::Instantiate<Cat>(enums::eLayerType::Pet);
+		/*Cat* mCat = object::Instantiate<Cat>(enums::eLayerType::Pet);
 		CatScript* catScr = mCat->AddComponent<CatScript>();
 
 		catScr->SetPlayer(GetOwner());
@@ -118,27 +118,27 @@ namespace tg
 		mCat->GetComponent<Transform>()->SetPosition(tr->GetPosition());
 		mCat->GetComponent<Transform>()->SetScale(Vector2(2.0f, 2.0f));
 
-		catAni->PlayAnimation(L"CatSit", false);
+		catAni->PlayAnimation(L"CatSit", false);*/
 	}
 
 	void PlayerScript::OnCollisionEnter(Collider* other)
 	{
-		if (!(other->GetOwner()->GetLayerType() == eLayerType::None
-			|| other->GetOwner()->GetLayerType() == eLayerType::BackGround
-			|| other->GetOwner()->GetLayerType() == eLayerType::Platform
-			|| other->GetOwner()->GetLayerType() == eLayerType::Tile))
-		{
-			if (mPosSetter)
-			{
-				other->GetOwner()->GetComponent<Transform>()->SetPosition(Vector2(400.0f, 500.0f));
-				mPosSetter = false;
-			}
-			else
-			{
-				other->GetOwner()->GetComponent<Transform>()->SetPosition(Vector2(100.0f, 200.0f));
-				mPosSetter = true;
-			}
-		}
+		//if (!(other->GetOwner()->GetLayerType() == eLayerType::None
+		//	|| other->GetOwner()->GetLayerType() == eLayerType::BackGround
+		//	|| other->GetOwner()->GetLayerType() == eLayerType::Platform
+		//	|| other->GetOwner()->GetLayerType() == eLayerType::Tile))
+		//{
+		//	if (mPosSetter)
+		//	{
+		//		other->GetOwner()->GetComponent<Transform>()->SetPosition(Vector2(400.0f, 500.0f));
+		//		mPosSetter = false;
+		//	}
+		//	else
+		//	{
+		//		other->GetOwner()->GetComponent<Transform>()->SetPosition(Vector2(100.0f, 200.0f));
+		//		mPosSetter = true;
+		//	}
+		//}
 	}
 
 	void PlayerScript::OnCollisionStay(Collider* other)
@@ -153,52 +153,52 @@ namespace tg
 
 	void PlayerScript::idle()
 	{
-		if (Input::GetKeyDown(eKeyCode::Mouse_Left))
-		{
-			mState = PlayerScript::eState::Water;
-			mAnimator->PlayAnimation(L"PlayerWaterDown", false);
+		//if (Input::GetKeyDown(eKeyCode::Mouse_Left))
+		//{
+		//	mState = PlayerScript::eState::Water;
+		//	mAnimator->PlayAnimation(L"PlayerWaterDown", false);
 
-			Vector2 mousePos = Input::GetMousePosition();
-		}
+		//	Vector2 mousePos = Input::GetMousePosition();
+		//}
 
-		Rigidbody* rb = GetOwner()->GetComponent<Rigidbody>();
-		Vector2 dir = Vector2::Zero;
-		float spd = 500.0f;
+		//Rigidbody* rb = GetOwner()->GetComponent<Rigidbody>();
+		//Vector2 dir = Vector2::Zero;
+		//float spd = 500.0f;
 
-		if (Input::GetKey(eKeyCode::D))
-			dir += Vector2::Right;
-		if (Input::GetKey(eKeyCode::A))
-			dir += Vector2::Left;
-		
-		dir.Normalize();
-		rb->AddForce(dir * spd);
+		//if (Input::GetKey(eKeyCode::D))
+		//	dir += Vector2::Right;
+		//if (Input::GetKey(eKeyCode::A))
+		//	dir += Vector2::Left;
+		//
+		//dir.Normalize();
+		//rb->AddForce(dir * spd);
 
-		float V = 450.0f;
-		//float jumpForce = V * rb->GetMass() / Time::DeltaTime() - rb->GetFriction() * rb->GetMass() * rb->GetMass();
-		//if (jumpForce < 0.0f)
-		//	jumpForce = 0.0f;
+		//float V = 450.0f;
+		////float jumpForce = V * rb->GetMass() / Time::DeltaTime() - rb->GetFriction() * rb->GetMass() * rb->GetMass();
+		////if (jumpForce < 0.0f)
+		////	jumpForce = 0.0f;
 
-		if ((Input::GetKeyDown(eKeyCode::W) || Input::GetKey(eKeyCode::W)) && rb->IsOnGround())
-		{
-			//rb->AddForce(Vector2::Up.normalize() * jumpForce);
-			rb->AddVelocity(Vector2::Up * V);
-			rb->SetIsOnGround(false);
-		}
-		/*if (Input::GetKey(eKeyCode::S))
-			dir += Vector2::Down;*/
+		//if ((Input::GetKeyDown(eKeyCode::W) || Input::GetKey(eKeyCode::W)) && rb->IsOnGround())
+		//{
+		//	//rb->AddForce(Vector2::Up.normalize() * jumpForce);
+		//	rb->AddVelocity(Vector2::Up * V);
+		//	rb->SetIsOnGround(false);
+		//}
+		///*if (Input::GetKey(eKeyCode::S))
+		//	dir += Vector2::Down;*/
 
-		if (Input::GetKeyDown(eKeyCode::I))
-		{
-			UIManager::Push(eUIType::HUD);
-			//UIManager::Push(eUIType::Button);
+		//if (Input::GetKeyDown(eKeyCode::I))
+		//{
+		//	UIManager::Push(eUIType::HUD);
+		//	//UIManager::Push(eUIType::Button);
 
-		}
+		//}
 
-		if (Input::GetKeyDown(eKeyCode::O))
-		{
-			UIManager::Pop(eUIType::HUD);
+		//if (Input::GetKeyDown(eKeyCode::O))
+		//{
+		//	UIManager::Pop(eUIType::HUD);
 
-		}
+		//}
 	}
 
 	void PlayerScript::move()

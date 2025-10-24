@@ -28,7 +28,7 @@ namespace tg
 
 	}
 
-	void PlatformScript::Render(HDC hdc)
+	void PlatformScript::Render()
 	{
 
 	}
@@ -40,9 +40,9 @@ namespace tg
 		Transform* otherTr = other->GetOwner()->GetComponent<Transform>();
 		Collider* otherCol = other;
 
-		Rigidbody* platformRb = this->GetOwner()->GetComponent<Rigidbody>();
-		Transform* platformTr = this->GetOwner()->GetComponent<Transform>();
-		Collider* platformCol = this->GetOwner()->GetComponent<Collider>();
+		Rigidbody* platformRb = GetOwner()->GetComponent<Rigidbody>();
+		Transform* platformTr = GetOwner()->GetComponent<Transform>();
+		Collider* platformCol = GetOwner()->GetComponent<Collider>();
 
 		Vector2 otherPos = otherTr->GetPosition();
 		Vector2 otherSize = otherCol->GetSize();

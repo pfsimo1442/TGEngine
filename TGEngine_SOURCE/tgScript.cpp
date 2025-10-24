@@ -26,7 +26,7 @@ namespace tg
 
 	}
 
-	void Script::Render(HDC hdc)
+	void Script::Render()
 	{
 
 	}

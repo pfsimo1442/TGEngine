@@ -79,8 +79,8 @@ namespace tg
 		//mMainCamera = camera->AddComponent<Camera>();
 
 		////// Player
-		//mPlayer = object::Instantiate<Player>(enums::eLayerType::Player);
-		//object::DontDestroyOnLoad(mPlayer);
+		mPlayer = object::Instantiate<Player>(enums::eLayerType::Player);
+		object::DontDestroyOnLoad(mPlayer);
 		//PlayerScript* playerScr = mPlayer->AddComponent<PlayerScript>();
 
 		//Transform* playerTr = mPlayer->GetComponent<Transform>();
@@ -162,9 +162,9 @@ namespace tg
 			SceneManager::LoadScene(L"ToolScene");
 	}
 
-	void PlayScene::Render(HDC hdc)
+	void PlayScene::Render()
 	{
-			Scene::Render(hdc);
+			Scene::Render();
 			//wchar_t str[50] = L"Play Scene ";
 			
 			//TextOut(hdc, 0, 0, str, 10);

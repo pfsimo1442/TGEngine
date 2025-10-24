@@ -14,16 +14,17 @@ namespace tg
         void Initialize() override;
         void Update()  override;
         void LateUpdate()  override;
-        void Render(HDC hdc)  override;
+        void Render()  override;
 
         void SetPosition(Vector2 pos) { mPosition = pos; }
-        Vector2 GetPosition() { return mPosition; }
         void SetScale(Vector2 scale) { mScale = scale; }
-        Vector2 GetScale() { return mScale; }
         void SetPositionStyle(Vector2 define) { mPositionStyle = define; }
-        Vector2 GetPositionStyle() { return mPositionStyle; }
         void SetRotation(float rotate) { mRotation = rotate; }
-        float GetRotation() { return mRotation; }
+        
+        Vector2 GetPosition() const { return mPosition; }
+        Vector2 GetScale() const { return mScale; }
+        Vector2 GetPositionStyle() const { return mPositionStyle; }
+        float GetRotation() const { return mRotation; }
         
     private:
         Vector2 mPosition;

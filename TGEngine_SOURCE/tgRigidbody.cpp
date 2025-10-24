@@ -82,7 +82,7 @@ namespace tg
 
 	}
 
-	void Rigidbody::Render(HDC hdc)
+	void Rigidbody::Render()
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector2 pos = tr->GetPosition();

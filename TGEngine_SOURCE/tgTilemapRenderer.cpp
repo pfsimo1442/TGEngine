@@ -40,46 +40,46 @@ namespace tg
 
 	}
 
-	void TilemapRenderer::Render(HDC hdc)
+	void TilemapRenderer::Render()
 	{
 		if (mTexture == nullptr)
 			assert(false);
 
-		Transform* tr = GetOwner()->GetComponent<Transform>();
-		Vector2 pos = tr->GetPosition();
-		float rot = tr->GetRotation();
-		Vector2 scale = tr->GetScale();
+		//Transform* tr = GetOwner()->GetComponent<Transform>();
+		//Vector2 pos = tr->GetPosition();
+		//float rot = tr->GetRotation();
+		//Vector2 scale = tr->GetScale();
 
-		pos = renderer::mainCamera->CalculatePosition(pos);
+		//pos = renderer::mainCamera->CalculatePosition(pos);
 
-		if (mTexture->GetTextureType() == graphics::Texture::eTextureType::Bmp)
-		{
-			if (mTexture->IsAlpha())
-			{
-				BLENDFUNCTION func = {};
-				func.BlendOp = AC_SRC_OVER;
-				func.BlendFlags = 0;
-				func.AlphaFormat = AC_SRC_ALPHA;
-				func.SourceConstantAlpha = 255; // 0(transparent) ~ 255(Opaque)
+		//if (mTexture->GetTextureType() == graphics::Texture::eTextureType::Bmp)
+		//{
+		//	if (mTexture->IsAlpha())
+		//	{
+		//		BLENDFUNCTION func = {};
+		//		func.BlendOp = AC_SRC_OVER;
+		//		func.BlendFlags = 0;
+		//		func.AlphaFormat = AC_SRC_ALPHA;
+		//		func.SourceConstantAlpha = 255; // 0(transparent) ~ 255(Opaque)
 
-				AlphaBlend(hdc
-					, (int)pos.x, (int)pos.y
-					, (int)(mTileSize.x * mSize.x * scale.x), (int)(mTileSize.y * mSize.y * scale.y)
-					, mTexture->GetHdc()
-					, (int)(mCell.x * OriginTileSize.x), (int)(mCell.y * OriginTileSize.y)
-					, (int)OriginTileSize.x, (int)OriginTileSize.y
-					, func);
-			}
-			else
-			{
-				TransparentBlt(hdc
-					, (int)pos.x, (int)pos.y
-					, (int)(mTileSize.x * mSize.x * scale.x), (int)(mTileSize.y * mSize.y * scale.y)
-					, mTexture->GetHdc()
-					, (int)(mCell.x * OriginTileSize.x), (int)(mCell.y * OriginTileSize.y)
-					, (int)OriginTileSize.x, (int)OriginTileSize.y
-					, RGB(255, 0, 255));
-			}
-		}
+		//		AlphaBlend(hdc
+		//			, (int)pos.x, (int)pos.y
+		//			, (int)(mTileSize.x * mSize.x * scale.x), (int)(mTileSize.y * mSize.y * scale.y)
+		//			, mTexture->GetHdc()
+		//			, (int)(mCell.x * OriginTileSize.x), (int)(mCell.y * OriginTileSize.y)
+		//			, (int)OriginTileSize.x, (int)OriginTileSize.y
+		//			, func);
+		//	}
+		//	else
+		//	{
+		//		TransparentBlt(hdc
+		//			, (int)pos.x, (int)pos.y
+		//			, (int)(mTileSize.x * mSize.x * scale.x), (int)(mTileSize.y * mSize.y * scale.y)
+		//			, mTexture->GetHdc()
+		//			, (int)(mCell.x * OriginTileSize.x), (int)(mCell.y * OriginTileSize.y)
+		//			, (int)OriginTileSize.x, (int)OriginTileSize.y
+		//			, RGB(255, 0, 255));
+		//	}
+		//}
 	}
 }

@@ -51,14 +51,14 @@ namespace tg
 		}
 	}
 
-	void Scene::Render(HDC hdc)
+	void Scene::Render()
 	{
 		for (Layer* layer : mLayers)
 		{
 			if (layer == nullptr)
 				continue;
 
-			layer->Render(hdc);
+			layer->Render();
 		}
 	}
 

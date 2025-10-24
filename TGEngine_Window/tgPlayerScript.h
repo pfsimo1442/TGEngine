@@ -33,15 +33,13 @@ namespace tg
 		void Initialize() override;
 		void Update() override;
 		void LateUpdate() override;
-		void Render(HDC hdc) override;
+		void Render() override;
 
 		void AttackEffect();
 
 		void OnCollisionEnter(Collider* other) override;
 		void OnCollisionStay(Collider* other) override;
 		void OnCollisionExit(Collider* other) override;
-
-		//void SetPixelMapTexture(graphics::Texture* texture) { mPixelMap = texture; }
 
 	private:
 		void idle();
@@ -53,7 +51,6 @@ namespace tg
 		eWalkState mCurrentWS;
 		eWalkState mLastWS;
 		class Animator* mAnimator;
-		//graphics::Texture* mPixelMap;
 
 		bool mPosSetter;
 	};

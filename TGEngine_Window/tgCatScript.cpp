@@ -71,7 +71,7 @@ namespace tg
 
 	}
 
-	void CatScript::Render(HDC hdc)
+	void CatScript::Render()
 	{
 
 	}

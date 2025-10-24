@@ -24,8 +24,8 @@ namespace tg
         GameObject::LateUpdate();
     }
 
-    void Platform::Render(HDC hdc)
+    void Platform::Render()
     {
-        GameObject::Render(hdc);
+        GameObject::Render();
     }
 }

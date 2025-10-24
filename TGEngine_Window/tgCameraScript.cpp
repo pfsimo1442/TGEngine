@@ -44,7 +44,7 @@ namespace tg
 		
 	}
 
-	void CameraScript::Render(HDC hdc)
+	void CameraScript::Render()
 	{
 		
 	}

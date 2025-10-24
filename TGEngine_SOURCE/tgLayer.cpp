@@ -61,7 +61,7 @@ namespace tg
 		}
 	}
 
-	void Layer::Render(HDC hdc)
+	void Layer::Render()
 	{		
 		for (GameObject* gameObj : mGameObjects)
 		{
@@ -73,7 +73,7 @@ namespace tg
 				|| state == GameObject::eState::Dead)
 				continue;
 
-			gameObj->Render(hdc);
+			gameObj->Render();
 		}
 	}
 
