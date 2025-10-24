@@ -19,9 +19,9 @@ namespace tg
         GameObject::LateUpdate();
     }
 
-    void Tile::Render(HDC hdc)
+    void Tile::Render()
     {
-        GameObject::Render(hdc);
+        GameObject::Render();
     }
 
     void Tile::SetTilePosition(Vector2 coord)
