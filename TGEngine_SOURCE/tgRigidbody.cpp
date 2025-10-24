@@ -84,21 +84,6 @@ namespace tg
 
 	void Rigidbody::Render()
 	{
-		Transform* tr = GetOwner()->GetComponent<Transform>();
-		Vector2 pos = tr->GetPosition();
-
-		if (renderer::mainCamera)
-			pos = renderer::mainCamera->CalculatePosition(pos);
-
-		Vector2 lineEndPos = pos + mVelocity / 5.0f;
-
-		HPEN redPen = CreatePen(PS_SOLID, 2, RGB(255, 0, 0));
-		HPEN oldPen = (HPEN)SelectObject(hdc, redPen);
-
-		MoveToEx(hdc, (int)pos.x, (int)pos.y, nullptr);
-		LineTo(hdc, (int)lineEndPos.x, (int)lineEndPos.y);
-
-		SelectObject(hdc, oldPen);
-		DeleteObject(redPen);
+		
 	}
 }
