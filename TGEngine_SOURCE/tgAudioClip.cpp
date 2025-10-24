@@ -63,4 +63,16 @@ namespace tg
 
 		mChannel->set3DAttributes(&fmodPos, &fmodVel);
 	}
+
+	void AudioClip::Set3DAttributes(const Vector3 pos, const Vector3 vel)
+	{
+		//Vector2 fcsPos = ConvertWindowCSToFModCS(Vector2(672.0f, 846.0f), pos);
+
+		FMOD_VECTOR fmodPos(pos.x, pos.y, pos.z);
+		FMOD_VECTOR fmodVel(vel.x, vel.y, vel.z);
+		//FMOD_VECTOR fmodPos(0.0f, 0.0f, 0.0f);
+		//FMOD_VECTOR fmodVel(0.0f, 0.0f, 0.0f);
+
+		mChannel->set3DAttributes(&fmodPos, &fmodVel);
+	}
 }
