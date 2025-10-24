@@ -18,6 +18,7 @@ namespace tg::graphics
 		Texture();
 		~Texture();
 
+		virtual HRESULT Save(const std::wstring& path) override;
 		virtual HRESULT Load(const std::wstring& path) override;
 		//COLORREF GetPixel(int x, int y);
 
