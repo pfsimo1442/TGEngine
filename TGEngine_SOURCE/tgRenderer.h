@@ -2,8 +2,7 @@
 #include "tgCamera.h"
 #include "tgGraphicDevice_DX11.h"
 
-#include "tgVertexBuffer.h"
-#include "tgIndexBuffer.h"
+#include "tgMesh.h"
 #include "tgConstantBuffer.h"
 
 using namespace tg::math;
@@ -16,8 +15,7 @@ namespace tg::renderer
 	extern std::vector<Vertex> vertexes;
 	extern std::vector<UINT> indices;
 
-	extern VertexBuffer vertexBuffer;
-	extern IndexBuffer indexBuffer;
+	extern Mesh* mesh;
 	extern ConstantBuffer constantBuffers[(UINT)eCBType::End];
 
 	extern ID3D11Buffer* constantBuffer;

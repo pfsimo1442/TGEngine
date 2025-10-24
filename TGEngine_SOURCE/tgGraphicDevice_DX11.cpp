@@ -168,6 +168,11 @@ namespace tg::graphics
 		mContext->Unmap(buffer, 0);
 	}
 
+	void GraphicDevice_DX11::BindPrimitiveTopology(const D3D11_PRIMITIVE_TOPOLOGY topology)
+	{
+		mContext->IASetPrimitiveTopology(topology);
+	}
+
 	void GraphicDevice_DX11::BindVS(ID3D11VertexShader* pVertexShader)
 	{
 		mContext->VSSetShader(pVertexShader, 0, 0);
@@ -309,9 +314,6 @@ namespace tg::graphics
 			, triangle->GetVSBlob()->GetBufferSize()
 			, &renderer::inputLayouts)))
 			assert(NULL && "Create input layout failed!");
-
-		renderer::vertexBuffer.Create(renderer::vertexes);
-		renderer::indexBuffer.Create(renderer::indices);
 	}
 
 	void GraphicDevice_DX11::Draw()
@@ -331,10 +333,8 @@ namespace tg::graphics
 		BindConstantBuffer(eShaderStage::VS, eCBType::Transform, renderer::constantBuffer);
 
 		mContext->IASetInputLayout(renderer::inputLayouts);
-		mContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-		renderer::vertexBuffer.Bind();
-		renderer::indexBuffer.Bind();
+		
+		renderer::mesh->Bind();
 
 		Vector4 pos(0.5f, 0.0f, 0.0f, 1.0f);
 		renderer::constantBuffers[(UINT)eCBType::Transform].SetData(&pos);
