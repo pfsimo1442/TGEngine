@@ -37,7 +37,7 @@ namespace tg
 		void Inactive();
 		void Update();
 		void LateUpdate();
-		void Render(HDC hdc);
+		void Render();
 		/// <summary>
 		/// Clears the UI elements. This method is called to reset the UI state.
 		/// </summary>
@@ -48,7 +48,7 @@ namespace tg
 		virtual void OnInactive();
 		virtual void OnUpdate();
 		virtual void OnLateUpdate();
-		virtual void OnRender(HDC hdc);
+		virtual void OnRender();
 		virtual void OnClear();
 
 		enums::eUIType GetType() { return mType; }

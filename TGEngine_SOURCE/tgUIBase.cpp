@@ -40,10 +40,10 @@ namespace tg
 			OnLateUpdate();
 	}
 
-	void UIBase::Render(HDC hdc)
+	void UIBase::Render()
 	{
 		if (mbActive)
-			OnRender(hdc);
+			OnRender();
 	}
 
 	void UIBase::UIClear()
@@ -76,7 +76,7 @@ namespace tg
 
 	}
 
-	void UIBase::OnRender(HDC hdc)
+	void UIBase::OnRender()
 	{
 
 	}
