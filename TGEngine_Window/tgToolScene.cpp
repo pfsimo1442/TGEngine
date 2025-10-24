@@ -50,24 +50,7 @@ namespace tg
 
 		if (Input::GetKeyDown(eKeyCode::Mouse_Left) && Input::IsMouseOnWindow() && TilemapRenderer::SelectedCell.x != -1.0f)
 		{
-
-			Vector2 pos = Input::GetMousePosition();
-			pos = renderer::mainCamera->CalculateTilePosition(pos);
-
-			Vector2 coord = (pos / TilemapRenderer::TileSize);
-			coord = TransInt(coord);
-
-			//// Tilemap
-			Tile* tile = object::Instantiate<Tile>(enums::eLayerType::Tile);
-			tile->GetComponent<Transform>()->SetPositionStyle(Vector2(0.0f, 0.0f));
-			TilemapRenderer* tmRenderer = tile->AddComponent<TilemapRenderer>();
-			tmRenderer->SetSize(Vector2(3.0f, 3.0f));
-			tmRenderer->SetTileSize(Vector2(16.0f, 16.0f));
-			tmRenderer->SetTexture(Resources::Find<graphics::Texture>(L"PlatformSpringSDV"));
-			tmRenderer->SetCellCoordination(TilemapRenderer::SelectedCell);
-
-			tile->SetTilePosition(coord);
-			mTiles.push_back(tile);
+			createTileObject();
 		}
 
 		// Command
@@ -84,25 +67,10 @@ namespace tg
 			SceneManager::LoadScene(L"PlayScene");
 	}
 	
-	void ToolScene::Render(HDC hdc)
+	void ToolScene::Render()
 	{
-		Scene::Render(hdc);
-
-		// grid
-		for (size_t ni = 0; ni < 50; ni++)
-		{
-			Vector2 gridPos = renderer::mainCamera->CalculatePosition(Vector2(TilemapRenderer::TileSize.x * ni, 0.0f));
-			
-			MoveToEx(hdc, (int)gridPos.x, 0, NULL);
-			LineTo(hdc, (int)gridPos.x, 1000);
-		}
-		for (size_t ni = 0; ni < 50; ni++)
-		{
-			Vector2 gridPos = renderer::mainCamera->CalculatePosition(Vector2(0.0f, TilemapRenderer::TileSize.y * ni));
-
-			MoveToEx(hdc, 0, (int)gridPos.y,  NULL);
-			LineTo(hdc, 1000, (int)gridPos.y);
-		}
+		Scene::Render();
+		renderGreed();
 	}
 
 	void ToolScene::OnEnter()
@@ -165,6 +133,53 @@ namespace tg
 
 		if (pFile)
 			fclose(pFile);
+	}
+
+	void ToolScene::renderGreed()
+	{
+		//// grid
+		//for (size_t ni = 0; ni < 50; ni++)
+		//{
+		//	Vector2 gridPos = renderer::mainCamera->CalculatePosition(Vector2(TilemapRenderer::TileSize.x * ni, 0.0f));
+
+		//	MoveToEx(hdc, (int)gridPos.x, 0, NULL);
+		//	LineTo(hdc, (int)gridPos.x, 1000);
+		//}
+		//for (size_t ni = 0; ni < 50; ni++)
+		//{
+		//	Vector2 gridPos = renderer::mainCamera->CalculatePosition(Vector2(0.0f, TilemapRenderer::TileSize.y * ni));
+
+		//	MoveToEx(hdc, 0, (int)gridPos.y, NULL);
+		//	LineTo(hdc, 1000, (int)gridPos.y);
+		//}
+	}
+
+	void ToolScene::createTileObject()
+	{
+		Vector2 pos = Input::GetMousePosition();
+		pos = renderer::mainCamera->CalculateTilePosition(pos);
+
+		if (pos.x >= 0.0f && pos.y >= 0.0f)
+		{
+			Vector2 coord = (pos / TilemapRenderer::TileSize);
+			coord = TransInt(coord);
+
+			//// Tilemap
+			Tile* tile = object::Instantiate<Tile>(enums::eLayerType::Tile);
+			tile->GetComponent<Transform>()->SetPositionStyle(Vector2(0.0f, 0.0f));
+			TilemapRenderer* tmRenderer = tile->AddComponent<TilemapRenderer>();
+			tmRenderer->SetSize(Vector2(3.0f, 3.0f));
+			tmRenderer->SetTileSize(Vector2(16.0f, 16.0f));
+			tmRenderer->SetTexture(Resources::Find<graphics::Texture>(L"PlatformSpringSDV"));
+			tmRenderer->SetCellCoordination(TilemapRenderer::SelectedCell);
+
+			tile->SetTilePosition(coord);
+			mTiles.push_back(tile);
+		}
+		else
+		{
+			//
+		}
 	}
 	
 	void ToolScene::Load()
@@ -249,19 +264,7 @@ LRESULT CALLBACK WndToolProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 	case WM_PAINT:
 	{
 		PAINTSTRUCT ps;
-		HDC hdc = BeginPaint(hWnd, &ps);
-
-		// TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
-		tg::graphics::Texture* tilemapTexture
-			= tg::Resources::Find<tg::graphics::Texture>(L"PlatformSpringSDV");
-
-		TransparentBlt(hdc
-			, 0, 0
-			, tilemapTexture->GetWidth(), tilemapTexture->GetHeight()
-			, tilemapTexture->GetHdc()
-			, 0, 0
-			, tilemapTexture->GetWidth(), tilemapTexture->GetHeight()
-			, RGB(255, 0, 255));
+		/*HDC hdc = */BeginPaint(hWnd, &ps);
 
 		EndPaint(hWnd, &ps);
 	}
