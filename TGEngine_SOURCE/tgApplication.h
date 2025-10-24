@@ -19,11 +19,11 @@ namespace tg
 		void Destroy();
 		void Release();
 
-		HWND GetHwnd() { return mHwnd; }
-		HDC GetHdc() { return mHdc; }
+		HWND GetHwnd() const { return mHwnd; }
+		HDC GetHdc() const { return mHdc; }
 
-		UINT GetWidth() { return mWidth; }
-		UINT GetHeight() { return mHeight; }
+		UINT GetWidth() const { return mWidth; }
+		UINT GetHeight() const { return mHeight; }
 
 	private:
 		void clearRenderTarget();

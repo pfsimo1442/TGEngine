@@ -70,10 +70,10 @@ namespace tg
 		//clearRenderTarget();
 		mGraphicDevice->Draw();
 
-		Time::Render(mBackHdc);
-		CollisionManager::Render(mBackHdc);
-		UIManager::Render(mBackHdc);
-		SceneManager::Render(mBackHdc);
+		Time::Render();
+		CollisionManager::Render();
+		UIManager::Render();
+		SceneManager::Render();
 
 		//MoveToEx(mBackHdc, 0, 450, nullptr);
 		//LineTo(mBackHdc, 1600, 450);
