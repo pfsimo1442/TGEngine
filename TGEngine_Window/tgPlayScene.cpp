@@ -26,6 +26,7 @@
 #include "tgAudioClip.h"
 #include "tgAudioListener.h"
 #include "tgAudioSource.h"
+#include "tgGraphicDevice_DX11.h"
 
 namespace tg
 {
@@ -165,9 +166,8 @@ namespace tg
 	void PlayScene::Render()
 	{
 			Scene::Render();
-			//wchar_t str[50] = L"Play Scene ";
-			
-			//TextOut(hdc, 0, 0, str, 10);
+
+			graphics::GetDevice()->Draw();
 	}
 
 	void PlayScene::OnEnter()
