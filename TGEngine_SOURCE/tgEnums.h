@@ -35,6 +35,7 @@ namespace tg::enums
 	{
 		Texture,
 		Mesh, 
+		Material,
 		Animation,
 		AudioClip,
 		Shader, 

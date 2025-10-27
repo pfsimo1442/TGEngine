@@ -2,19 +2,18 @@
 #include "tgGraphicDevice_DX11.h"
 
 #include "tgResources.h"
+#include "tgMesh.h"
 #include "tgShader.h"
+#include "tgMaterial.h"
 
 namespace tg::renderer
 {
 	Camera* mainCamera = nullptr;
 
-	Mesh* mesh = nullptr;
-
 	ConstantBuffer constantBuffers[(UINT)eCBType::End] = {};
 	Microsoft::WRL::ComPtr<ID3D11SamplerState> samplerStates[(UINT)eSamplerType::End] = {};
 
-	ID3D11Buffer* constantBuffer = nullptr;
-	ID3D11InputLayout* inputLayouts = nullptr;
+	Microsoft::WRL::ComPtr<ID3D11InputLayout> inputLayout = nullptr;
 
 	void LoadStates()
 	{
@@ -55,7 +54,7 @@ namespace tg::renderer
 
 	void LoadTriangleMesh()
 	{
-		mesh = new Mesh();
+		Mesh* mesh = new Mesh();
 
 		std::vector<graphics::Vertex> vertexes = {};
 		std::vector<UINT> indices = {};
@@ -76,11 +75,13 @@ namespace tg::renderer
 
 		mesh->CreateVB(vertexes);
 		mesh->CreateIB(indices);
+
+		tg::Resources::Insert(L"TriangleMesh", mesh);
 	}
 
 	void LoadRectMesh()
 	{
-		mesh = new Mesh();
+		Mesh* mesh = new Mesh();
 
 		std::vector<graphics::Vertex> vertexes = {};
 		std::vector<UINT> indices = {};
@@ -113,6 +114,8 @@ namespace tg::renderer
 
 		mesh->CreateVB(vertexes);
 		mesh->CreateIB(indices);
+
+		tg::Resources::Insert(L"RectMesh", mesh);
 	}
 
 	void LoadMeshes()
@@ -127,6 +130,14 @@ namespace tg::renderer
 		tg::Resources::Load<graphics::Shader>(L"SpriteShader", L"..\\Shaders_SOURCE\\Sprite");
 	}
 
+	void LoadMaterials()
+	{
+		Material* spriteMaterial = new Material();
+		tg::Resources::Insert(L"SpriteMaterial", spriteMaterial);
+
+		spriteMaterial->SetShader(tg::Resources::Find<graphics::Shader>(L"SpriteShader"));
+	}
+
 	void LoadConstantBuffers()
 	{
 		constantBuffers[(UINT)eCBType::Transform].Create(eCBType::Transform, sizeof(Vector4));
@@ -137,12 +148,12 @@ namespace tg::renderer
 		LoadStates();
 		LoadMeshes();
 		LoadShaders();
+		LoadMaterials();
 		LoadConstantBuffers();
 	}
 
 	void Release()
 	{
-		inputLayouts->Release();
-		delete mesh;
+		
 	}
 }

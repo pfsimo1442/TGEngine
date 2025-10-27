@@ -2,7 +2,9 @@
 #include "tgApplication.h"
 #include "tgRenderer.h"
 #include "tgShader.h"
+#include "tgMesh.h"
 #include "tgTexture.h"
+#include "tgMaterial.h"
 #include "tgResources.h"
 
 extern tg::Application application;
@@ -379,20 +381,12 @@ namespace tg::graphics
 		inputLayoutDesces[2].SemanticIndex = 0;
 #pragma endregion
 
-		graphics::Shader* triangle = Resources::Find<graphics::Shader>(L"TriangleShader");
-
-		if (!(CreateInputLayout(inputLayoutDesces, 2
-			, triangle->GetVSBlob()->GetBufferPointer()
-			, triangle->GetVSBlob()->GetBufferSize()
-			, &renderer::inputLayouts)))
-			assert(NULL && "Create input layout failed!");
-
 		graphics::Shader* sprite = Resources::Find<graphics::Shader>(L"SpriteShader");
 
 		if (!(CreateInputLayout(inputLayoutDesces, 3
 			, sprite->GetVSBlob()->GetBufferPointer()
 			, sprite->GetVSBlob()->GetBufferSize()
-			, &renderer::inputLayouts)))
+			, renderer::inputLayout.GetAddressOf())))
 			assert(NULL && "Create input layout failed!");
 	}
 
@@ -410,18 +404,17 @@ namespace tg::graphics
 		mContext->RSSetViewports(1, &viewPort);
 		mContext->OMSetRenderTargets(1, mRenderTargetView.GetAddressOf(), mDepthStencilView.Get());
 
-		BindConstantBuffer(eShaderStage::VS, eCBType::Transform, renderer::constantBuffer);
-
-		mContext->IASetInputLayout(renderer::inputLayouts);
+		mContext->IASetInputLayout(renderer::inputLayout.Get());
 		
-		renderer::mesh->Bind();
+		Mesh* mesh = Resources::Find<Mesh>(L"RectMesh");
+		mesh->Bind();
 
 		Vector4 pos(0.0f, 0.0f, 0.0f, 1.0f);
 		renderer::constantBuffers[(UINT)eCBType::Transform].SetData(&pos);
 		renderer::constantBuffers[(UINT)eCBType::Transform].Bind(eShaderStage::VS);
 
-		graphics::Shader* triangle = Resources::Find<graphics::Shader>(L"SpriteShader");
-		triangle->Bind();
+		Material* material = tg::Resources::Find<Material>(L"SpriteMaterial");
+		material->Bind();
 
 		graphics::Texture* texture = Resources::Find<graphics::Texture>(L"Player");
 		if (texture)

@@ -2,7 +2,6 @@
 #include "tgCamera.h"
 #include "tgGraphicDevice_DX11.h"
 
-#include "tgMesh.h"
 #include "tgConstantBuffer.h"
 
 using namespace tg::math;
@@ -12,12 +11,9 @@ namespace tg::renderer
 {
 	extern Camera* mainCamera;
 
-	extern Mesh* mesh;
-
 	extern ConstantBuffer constantBuffers[(UINT)eCBType::End];
 
-	extern ID3D11Buffer* constantBuffer;
-	extern ID3D11InputLayout* inputLayouts;
+	extern Microsoft::WRL::ComPtr <ID3D11InputLayout> inputLayout;
 
 	void Initialize();
 	void Release();
