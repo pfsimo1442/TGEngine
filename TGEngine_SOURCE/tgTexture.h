@@ -1,7 +1,7 @@
 #pragma once
 #include <DirectXTex.h>
 #include <DirectXTex.inl>
-//#include <DirectXTexEXR.h>
+#include <DirectXTexEXR.h>
 
 #include "tgResource.h"
 #include "tgGraphicDevice_DX11.h"
