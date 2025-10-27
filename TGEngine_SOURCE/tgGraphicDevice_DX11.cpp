@@ -1,8 +1,11 @@
 ﻿#include "tgGraphicDevice_DX11.h"
 #include "tgApplication.h"
 #include "tgRenderer.h"
-#include "tgResources.h"
 #include "tgShader.h"
+#include "tgMesh.h"
+#include "tgTexture.h"
+#include "tgMaterial.h"
+#include "tgResources.h"
 
 extern tg::Application application;
 
@@ -90,6 +93,14 @@ namespace tg::graphics
 		return true;
 	}
 
+	bool GraphicDevice_DX11::CreateSamplerState(const D3D11_SAMPLER_DESC* pSamplerDesc, ID3D11SamplerState** ppSamplerState)
+	{
+		if (FAILED(mDevice->CreateSamplerState(pSamplerDesc, ppSamplerState)))
+			return false;
+
+		return true;
+	}
+
 	bool GraphicDevice_DX11::CreateVertexShader(const std::wstring& fileName, ID3DBlob** ppCode, ID3D11VertexShader** ppVertexShader)
 	{
 		DWORD shaderFlags = D3DCOMPILE_ENABLE_STRICTNESS;
@@ -160,12 +171,41 @@ namespace tg::graphics
 		return true;
 	}
 
-	void GraphicDevice_DX11::SetDataBuffer(ID3D11Buffer* buffer, void* data, UINT size)
+	bool GraphicDevice_DX11::CreateShaderResourceView(ID3D11Resource* pResource, const D3D11_SHADER_RESOURCE_VIEW_DESC* pDesc, ID3D11ShaderResourceView** ppSRView)
+	{
+		if (FAILED(mDevice->CreateShaderResourceView(pResource, pDesc, ppSRView)))
+			return false;
+
+		return true;
+	}
+
+	void GraphicDevice_DX11::SetDataGpuBuffer(ID3D11Buffer* buffer, void* data, UINT size)
 	{
 		D3D11_MAPPED_SUBRESOURCE sub = {};
 		mContext->Map(buffer, 0, D3D11_MAP::D3D11_MAP_WRITE_DISCARD, 0, &sub);
 		memcpy(sub.pData, data, size);
 		mContext->Unmap(buffer, 0);
+	}
+
+	void GraphicDevice_DX11::SetShaderResource(eShaderStage stage, UINT startSlot, ID3D11ShaderResourceView** ppSRV)
+	{
+		if ((UINT)eShaderStage::VS & (UINT)stage)
+			mContext->VSSetShaderResources(startSlot, 1, ppSRV);
+
+		if ((UINT)eShaderStage::HS & (UINT)stage)
+			mContext->HSSetShaderResources(startSlot, 1, ppSRV);
+
+		if ((UINT)eShaderStage::DS & (UINT)stage)
+			mContext->DSSetShaderResources(startSlot, 1, ppSRV);
+
+		if ((UINT)eShaderStage::GS & (UINT)stage)
+			mContext->GSSetShaderResources(startSlot, 1, ppSRV);
+
+		if ((UINT)eShaderStage::PS & (UINT)stage)
+			mContext->PSSetShaderResources(startSlot, 1, ppSRV);
+
+		if ((UINT)eShaderStage::CS & (UINT)stage)
+			mContext->CSSetShaderResources(startSlot, 1, ppSRV);
 	}
 
 	void GraphicDevice_DX11::BindPrimitiveTopology(const D3D11_PRIMITIVE_TOPOLOGY topology)
@@ -229,6 +269,33 @@ namespace tg::graphics
 		}
 	}
 
+	void GraphicDevice_DX11::BindSampler(eShaderStage stage, UINT StartSlot, UINT NumSamplers, ID3D11SamplerState* const* ppSamplers)
+	{
+		if (eShaderStage::VS == stage)
+			mContext->VSSetSamplers(StartSlot, NumSamplers, ppSamplers);
+
+		if (eShaderStage::HS == stage)
+			mContext->HSSetSamplers(StartSlot, NumSamplers, ppSamplers);
+
+		if (eShaderStage::DS == stage)
+			mContext->DSSetSamplers(StartSlot, NumSamplers, ppSamplers);
+
+		if (eShaderStage::GS == stage)
+			mContext->GSSetSamplers(StartSlot, NumSamplers, ppSamplers);
+
+		if (eShaderStage::PS == stage)
+			mContext->PSSetSamplers(StartSlot, NumSamplers, ppSamplers);
+	}
+
+	void GraphicDevice_DX11::BindSamplers(UINT StartSlot, UINT NumSamplers, ID3D11SamplerState* const* ppSamplers)
+	{
+		BindSampler(eShaderStage::VS, StartSlot, NumSamplers, ppSamplers);
+		BindSampler(eShaderStage::HS, StartSlot, NumSamplers, ppSamplers);
+		BindSampler(eShaderStage::DS, StartSlot, NumSamplers, ppSamplers);
+		BindSampler(eShaderStage::GS, StartSlot, NumSamplers, ppSamplers);
+		BindSampler(eShaderStage::PS, StartSlot, NumSamplers, ppSamplers);
+	}
+
 	void GraphicDevice_DX11::Initialize()
 	{
 #pragma region swapchain desc
@@ -269,7 +336,7 @@ namespace tg::graphics
 		if (!(GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)mRenderTarget.GetAddressOf())))
 			assert(NULL && "Couldn't bring rendertarget!");
 
-		if (!(CreateRenderTargetView(mRenderTarget.Get(), nullptr, mRTV.GetAddressOf())))
+		if (!(CreateRenderTargetView(mRenderTarget.Get(), nullptr, mRenderTargetView.GetAddressOf())))
 			assert(NULL && "Create RenderTargetView Failed!");
 
 #pragma region depthstencil desc
@@ -286,11 +353,11 @@ namespace tg::graphics
 		if (!(CreateTexture2D(&depthStencilDesc, nullptr, mDepthStencil.GetAddressOf())))
 			assert(NULL && "Create depthstencil texture failed!");
 
-		if (!(CreateDepthStencilView(mDepthStencil.Get(), nullptr, mDSV.GetAddressOf())))
+		if (!(CreateDepthStencilView(mDepthStencil.Get(), nullptr, mDepthStencilView.GetAddressOf())))
 			assert(NULL && "Create depthstencilview failed!");
 
 #pragma region inputLayout Desc
-		D3D11_INPUT_ELEMENT_DESC inputLayoutDesces[2] = {};
+		D3D11_INPUT_ELEMENT_DESC inputLayoutDesces[3] = {};
 
 		inputLayoutDesces[0].AlignedByteOffset = 0;
 		inputLayoutDesces[0].Format = DXGI_FORMAT_R32G32B32_FLOAT;
@@ -305,22 +372,29 @@ namespace tg::graphics
 		inputLayoutDesces[1].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
 		inputLayoutDesces[1].SemanticName = "COLOR";
 		inputLayoutDesces[1].SemanticIndex = 0;
+
+		inputLayoutDesces[2].AlignedByteOffset = 28; //12 + 16
+		inputLayoutDesces[2].Format = DXGI_FORMAT_R32G32_FLOAT;
+		inputLayoutDesces[2].InputSlot = 0;
+		inputLayoutDesces[2].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+		inputLayoutDesces[2].SemanticName = "TEXCOORD";
+		inputLayoutDesces[2].SemanticIndex = 0;
 #pragma endregion
 
-		graphics::Shader* triangle = Resources::Find<graphics::Shader>(L"TriangleShader");
+		graphics::Shader* sprite = Resources::Find<graphics::Shader>(L"SpriteShader");
 
-		if (!(CreateInputLayout(inputLayoutDesces, 2
-			, triangle->GetVSBlob()->GetBufferPointer()
-			, triangle->GetVSBlob()->GetBufferSize()
-			, &renderer::inputLayouts)))
+		if (!(CreateInputLayout(inputLayoutDesces, 3
+			, sprite->GetVSBlob()->GetBufferPointer()
+			, sprite->GetVSBlob()->GetBufferSize()
+			, renderer::inputLayout.GetAddressOf())))
 			assert(NULL && "Create input layout failed!");
 	}
 
 	void GraphicDevice_DX11::Draw()
 	{
 		FLOAT backgroundColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
-		mContext->ClearRenderTargetView(mRTV.Get(), backgroundColor);
-		mContext->ClearDepthStencilView(mDSV.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
+		mContext->ClearRenderTargetView(mRenderTargetView.Get(), backgroundColor);
+		mContext->ClearDepthStencilView(mDepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 
 		D3D11_VIEWPORT viewPort =
 		{
@@ -328,22 +402,25 @@ namespace tg::graphics
 			0.0f, 1.0f
 		};
 		mContext->RSSetViewports(1, &viewPort);
-		mContext->OMSetRenderTargets(1, mRTV.GetAddressOf(), mDSV.Get());
+		mContext->OMSetRenderTargets(1, mRenderTargetView.GetAddressOf(), mDepthStencilView.Get());
 
-		BindConstantBuffer(eShaderStage::VS, eCBType::Transform, renderer::constantBuffer);
-
-		mContext->IASetInputLayout(renderer::inputLayouts);
+		mContext->IASetInputLayout(renderer::inputLayout.Get());
 		
-		renderer::mesh->Bind();
+		Mesh* mesh = Resources::Find<Mesh>(L"RectMesh");
+		mesh->Bind();
 
-		Vector4 pos(0.5f, 0.0f, 0.0f, 1.0f);
+		Vector4 pos(0.0f, 0.0f, 0.0f, 1.0f);
 		renderer::constantBuffers[(UINT)eCBType::Transform].SetData(&pos);
 		renderer::constantBuffers[(UINT)eCBType::Transform].Bind(eShaderStage::VS);
 
-		graphics::Shader* triangle = Resources::Find<graphics::Shader>(L"TriangleShader");
-		triangle->Bind();
+		Material* material = tg::Resources::Find<Material>(L"SpriteMaterial");
+		material->Bind();
 
-		mContext->Draw(3, 0);
+		graphics::Texture* texture = Resources::Find<graphics::Texture>(L"Player");
+		if (texture)
+			texture->Bind(eShaderStage::PS, 0);
+
+		mContext->DrawIndexed(6, 0, 0);
 
 		mSwapChain->Present(1, 0);
 	}

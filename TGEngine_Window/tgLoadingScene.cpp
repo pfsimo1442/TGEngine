@@ -4,6 +4,9 @@
 #include "tgResources.h"
 #include "tgTexture.h"
 #include "tgAudioClip.h"
+#include "tgApplication.h"
+
+extern tg::Application application;
 
 namespace tg
 {
@@ -26,13 +29,7 @@ namespace tg
 
 	void LoadingScene::Update()
 	{
-		if (mbLoadCompleted)
-		{
-			mResourcesLoadThread->join();
-			//mResourcesLoadThread->detach();
-
-			SceneManager::LoadScene(L"PlayScene");
-		}
+		
 	}
 
 	void LoadingScene::LateUpdate()
@@ -42,7 +39,13 @@ namespace tg
 
 	void LoadingScene::Render()
 	{
+		if (mbLoadCompleted)
+		{
+			mResourcesLoadThread->join();
+			//mResourcesLoadThread->detach();
 
+			SceneManager::LoadScene(L"PlayScene");
+		}
 	}
 
 	void LoadingScene::OnEnter()
@@ -54,17 +57,15 @@ namespace tg
 
 	void LoadingScene::resourcesLoad(std::mutex& m)
 	{
+		while (true)
+		{
+			if (application.IsLoaded() == true)
+				break;
+		}
+
 		m.lock();
 		{
-			// Textures
-			Resources::Load<graphics::Texture>(L"Cat", L"..\\Resources\\CatAlpha.bmp");
-			Resources::Load<graphics::Texture>(L"PlayerSDV", L"..\\Resources\\Player.bmp");
-			Resources::Load<graphics::Texture>(L"PlatformSpringSDV", L"..\\Resources\\SpringFloor.bmp");
-			Resources::Load<graphics::Texture>(L"HPBAR", L"..\\Resources\\HPBAR.bmp");
-			Resources::Load<graphics::Texture>(L"PixelMap", L"..\\Resources\\pixelMap.bmp");
-
-			// Audios
-			Resources::Load<AudioClip>(L"BGSound", L"..\\Resources\\Sound\\smw_bonus_game_end.wav");
+			Resources::Load<graphics::Texture>(L"Player", L"..\\Resources\\CloudOcean.png");
 		}
 		m.unlock();
 

@@ -17,6 +17,7 @@ namespace tg
 		, mHeight(0)
 		, mBackHdc(NULL)
 		, mBackBitmap(NULL)
+		, mbLoaded(false)
 	{
 	}
 	Application::~Application()
@@ -25,9 +26,8 @@ namespace tg
 
 	void Application::Initialize(HWND hwnd, UINT width, UINT height)
 	{
-		adjustWindowRect(hwnd, width, height);
-		createBuffer(width, height);
-		initializeEtc();
+		AdjustWindowRect(hwnd, width, height);
+		InitializeEtc();
 
 		mGraphicDevice = std::make_unique<graphics::GraphicDevice_DX11>();
 		renderer::Initialize();
@@ -39,8 +39,32 @@ namespace tg
 		SceneManager::Initialize();
 	}
 
+	void Application::AdjustWindowRect(HWND hwnd, UINT width, UINT height)
+	{
+		mHwnd = hwnd;
+		mHdc = GetDC(hwnd);
+
+		RECT rect = { 0, 0, (LONG)width, (LONG)height };
+		::AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
+
+		mWidth = rect.right - rect.left;
+		mHeight = rect.bottom - rect.top;
+
+		SetWindowPos(hwnd, nullptr, 0, 0, mWidth, mHeight, 0);
+		ShowWindow(hwnd, true);
+	}
+
+	void Application::InitializeEtc()
+	{
+		Input::Initialze();
+		Time::Initialize();
+	}
+
 	void Application::Run()
 	{
+		if (mbLoaded == false)
+			mbLoaded = true;
+
 		Update();
 		LateUpdate();
 		Render();
@@ -67,20 +91,10 @@ namespace tg
 
 	void Application::Render()
 	{
-		//clearRenderTarget();
-		mGraphicDevice->Draw();
-
 		Time::Render();
 		CollisionManager::Render();
 		UIManager::Render();
 		SceneManager::Render();
-
-		//MoveToEx(mBackHdc, 0, 450, nullptr);
-		//LineTo(mBackHdc, 1600, 450);
-		//MoveToEx(mBackHdc, 800, 0, nullptr);
-		//LineTo(mBackHdc, 800, 900);
-
-		//copyRenderTarget(mBackHdc, mHdc);
 	}
 
 	void Application::Destroy()
@@ -93,48 +107,5 @@ namespace tg
 		SceneManager::Release();
 		UIManager::Release();
 		Resources::Release();
-	}
-
-	void Application::clearRenderTarget()
-	{
-		HBRUSH grayBrush = (HBRUSH)CreateSolidBrush(RGB(128, 128, 128));
-		HBRUSH oldBrush = (HBRUSH)SelectObject(mBackHdc, grayBrush);
-
-		::Rectangle(mBackHdc, -1, -1, GetWidth() + 1, GetHeight() + 1);
-
-		SelectObject(mBackHdc, oldBrush);
-		DeleteObject(grayBrush);
-	}
-	void Application::copyRenderTarget(HDC source, HDC dest)
-	{
-		BitBlt(dest, 0, 0, mWidth, mHeight
-			, source, 0, 0, SRCCOPY);
-	}
-	void Application::adjustWindowRect(HWND hwnd, UINT width, UINT height)
-	{
-		mHwnd = hwnd;
-		mHdc = GetDC(hwnd);
-
-		RECT rect = { 0, 0, (LONG)width, (LONG)height };
-		AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
-
-		mWidth = rect.right - rect.left;
-		mHeight = rect.bottom - rect.top;
-
-		SetWindowPos(hwnd, nullptr, 0, 0, mWidth, mHeight, 0);
-		ShowWindow(hwnd, true);
-	}
-	void Application::createBuffer(UINT width, UINT height)
-	{
-		mBackBitmap = CreateCompatibleBitmap(mHdc, width, height);
-		mBackHdc = CreateCompatibleDC(mHdc);
-
-		HBITMAP oldBitmap = (HBITMAP)SelectObject(mBackHdc, mBackBitmap);
-		DeleteObject(oldBitmap);
-	}
-	void Application::initializeEtc()
-	{
-		Input::Initialze();
-		Time::Initialize();
 	}
 }

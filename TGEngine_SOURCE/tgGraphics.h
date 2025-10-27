@@ -14,6 +14,7 @@ namespace tg::graphics
 	{
 		math::Vector3 pos;
 		math::Vector4 color;
+		math::Vector2 uv;
 	};
 
 	enum class eShaderStage
@@ -32,6 +33,24 @@ namespace tg::graphics
 	{
 		Transform,
 		None,
+		End,
+	};
+
+	enum class eSamplerType
+	{
+		Point,
+		Linear,
+		Anisotropic,
+		PostProcess,
+		End,
+	};
+
+	enum class eRenderingMode
+	{
+		Opaque,
+		CutOut,
+		Transparent,
+		PostProcess,
 		End,
 	};
 
