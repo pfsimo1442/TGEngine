@@ -12,10 +12,8 @@ namespace tg::renderer
 {
 	extern Camera* mainCamera;
 
-	extern std::vector<Vertex> vertexes;
-	extern std::vector<UINT> indices;
-
 	extern Mesh* mesh;
+
 	extern ConstantBuffer constantBuffers[(UINT)eCBType::End];
 
 	extern ID3D11Buffer* constantBuffer;

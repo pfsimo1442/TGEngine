@@ -58,6 +58,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_EDITORWINDOW));
     
     MSG msg;
+    tg::LoadScenes();
 
     // Peek Message Loop
     while (true)
@@ -78,8 +79,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             application.Run();
         }
     }
-
-    Gdiplus::GdiplusShutdown(gpToken);
     application.Release();
 
     return (int) msg.wParam;
@@ -125,54 +124,54 @@ ATOM MyRegisterClass(HINSTANCE hInstance, const wchar_t* name, WNDPROC proc)
 //
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
-   hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
+    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
-   const UINT width = 1600;
-   const UINT height = 900;
+    const UINT width = 1600;
+    const UINT height = 900;
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
+    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+        CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
 
-   application.Initialize(hWnd, width, height);
+    if (!hWnd)
+    {
+        return FALSE;
+    }
 
-   if (!hWnd)
-   {
-      return FALSE;
-   }
+    ShowWindow(hWnd, nCmdShow);
+    UpdateWindow(hWnd);
 
-   ShowWindow(hWnd, nCmdShow);
-   UpdateWindow(hWnd);
-   
-   Gdiplus::GdiplusStartup(&gpToken, &gpsi, NULL);
+    application.Initialize(hWnd, width, height);
 
-   //load Scenes
-   tg::LoadScenes();
-
-   tg::Scene* activeScene = tg::SceneManager::GetActiveScene();
-
-   std::wstring name = activeScene->GetName();
-   if (name == L"ToolScene")
-   {
-       HWND toolHWnd = CreateWindowW(L"TOOLWINDOW", L"Tilemap_Pallete", WS_OVERLAPPEDWINDOW,
-           CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
-
-       // tilemap pallete window size adjusting
-       tg::graphics::Texture* tilemapPalleteTexture
-           = tg::Resources::Find<tg::graphics::Texture>(L"PlatformSpringSDV");
-
-       RECT rect = { 0, 0, (LONG)tilemapPalleteTexture->GetWidth(), (LONG)tilemapPalleteTexture->GetHeight() };
-       AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
-
-       UINT toolWidth = rect.right - rect.left;
-       UINT toolHeight = rect.bottom - rect.top;
-
-       SetWindowPos(toolHWnd, nullptr, width, 0, toolWidth, toolHeight, 0);
-       ShowWindow(toolHWnd, true);
-       UpdateWindow(toolHWnd);
-   }
-
-   return TRUE;
+    return TRUE;
 }
+
+//BOOL InitToolScene(HINSTANCE hInstance)
+//{
+//    tg::Scene* activeScene = tg::SceneManager::GetActiveScene();
+//    std::wstring name = activeScene->GetName();
+//   
+//    if (name == L"ToolScene")
+//    {
+//        HWND toolHWnd = CreateWindowW(L"TOOLWINDOW", L"Tilemap_Pallete", WS_OVERLAPPEDWINDOW,
+//            0, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+//
+//        // tilemap pallete window size adjusting
+//        tg::graphics::Texture* tilemapPalleteTexture
+//            = tg::Resources::Find<tg::graphics::Texture>(L"PlatformSpringSDV");
+//
+//        RECT rect = { 0, 0, (LONG)tilemapPalleteTexture->GetWidth(), (LONG)tilemapPalleteTexture->GetHeight() };
+//        AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
+//
+//        UINT toolWidth = rect.right - rect.left;
+//        UINT toolHeight = rect.bottom - rect.top;
+//
+//        SetWindowPos(toolHWnd, nullptr, 672, 0, toolWidth, toolHeight, 0);
+//        ShowWindow(toolHWnd, true);
+//        UpdateWindow(toolHWnd);
+//    }
+//
+//    return TRUE;
+//}
 
 //
 //  함수: WndProc(HWND, UINT, WPARAM, LPARAM)
@@ -208,7 +207,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_PAINT:
         {
             PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hWnd, &ps);
+            HDC hdc = NULL;
+            hdc = BeginPaint(hWnd, &ps);
 
             // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
 
