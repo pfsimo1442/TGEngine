@@ -134,6 +134,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgVertexBuffer.cpp">
       <Filter>Graphics\GpuBuffer</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgInputLayout.cpp">
+      <Filter>Graphics\InputLayout</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -278,6 +281,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgVertexBuffer.h">
       <Filter>Graphics\GpuBuffer</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgInputLayout.h">
+      <Filter>Graphics\InputLayout</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -378,6 +384,9 @@
     </Filter>
     <Filter Include="Graphics\GpuBuffer">
       <UniqueIdentifier>{94a0f166-cf27-439f-b6fa-ea120ac25740}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\InputLayout">
+      <UniqueIdentifier>{bd59ea2d-f267-4d19-9bac-42cab8e84963}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

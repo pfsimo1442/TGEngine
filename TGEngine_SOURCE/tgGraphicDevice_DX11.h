@@ -25,6 +25,7 @@ namespace tg::graphics
 		void SetDataGpuBuffer(ID3D11Buffer* buffer, void* data, UINT size);
 		void SetShaderResource(eShaderStage stage, UINT startSlot, ID3D11ShaderResourceView** ppSRV);
 
+		void BindInputLayout(ID3D11InputLayout* pInputLayout);
 		void BindPrimitiveTopology(const D3D11_PRIMITIVE_TOPOLOGY topology);
 		void BindVS(ID3D11VertexShader* pVertexShader);
 		void BindPS(ID3D11PixelShader* pPixelShader);
