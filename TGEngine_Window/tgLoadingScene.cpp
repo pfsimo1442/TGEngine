@@ -66,6 +66,8 @@ namespace tg
 		m.lock();
 		{
 			Resources::Load<graphics::Texture>(L"Player", L"..\\Resources\\CloudOcean.png");
+
+			renderer::Initialize();
 		}
 		m.unlock();
 

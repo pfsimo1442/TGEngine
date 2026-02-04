@@ -185,14 +185,17 @@ namespace tg::renderer
 	void LoadMaterials()
 	{
 		Material* triangleMaterial = new Material();
-		tg::Resources::Insert(L"TriangleMaterial", triangleMaterial);
 
 		triangleMaterial->SetShader(tg::Resources::Find<graphics::Shader>(L"TriangleShader"));
+		tg::Resources::Insert(L"TriangleMaterial", triangleMaterial);
 
 		Material* spriteMaterial = new Material();
-		tg::Resources::Insert(L"SpriteMaterial", spriteMaterial);
 
+		graphics::Texture* texture = Resources::Find<graphics::Texture>(L"Player");
+		spriteMaterial->SetAlbedoTexture(texture);
 		spriteMaterial->SetShader(tg::Resources::Find<graphics::Shader>(L"SpriteShader"));
+
+		tg::Resources::Insert(L"SpriteMaterial", spriteMaterial);
 	}
 
 	void LoadConstantBuffers()

@@ -30,7 +30,7 @@ namespace tg
 		InitializeEtc();
 
 		mGraphicDevice = std::make_unique<graphics::GraphicDevice_DX11>();
-		renderer::Initialize();
+		//renderer::Initialize();
 		mGraphicDevice->Initialize();
 		
 		Fmod::Initialize();

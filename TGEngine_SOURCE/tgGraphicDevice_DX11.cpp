@@ -387,10 +387,6 @@ namespace tg::graphics
 		Material* material = tg::Resources::Find<Material>(L"SpriteMaterial");
 		material->Bind();
 
-		graphics::Texture* texture = Resources::Find<graphics::Texture>(L"Player");
-		if (texture)
-			texture->Bind(eShaderStage::PS, 0);
-
 		mContext->DrawIndexed(6, 0, 0);
 
 		// Draw Triangle

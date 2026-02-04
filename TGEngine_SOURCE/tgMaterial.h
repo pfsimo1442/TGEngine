@@ -22,11 +22,13 @@ namespace tg
 		void Bind();
 
 		void SetShader(graphics::Shader* shader) { mShader = shader; }
+		void SetAlbedoTexture(graphics::Texture* texture) { mAlbedoTexture = texture; mData.albedo = texture->GetName(); }
 
 	private:
 		graphics::eRenderingMode mMode;
 		Material::Data mData;
 
+		graphics::Texture* mAlbedoTexture;
 		graphics::Shader* mShader;
 	};
 }
