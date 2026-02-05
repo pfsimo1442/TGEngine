@@ -30,7 +30,7 @@ namespace tg
 		InitializeEtc();
 
 		mGraphicDevice = std::make_unique<graphics::GraphicDevice_DX11>();
-		renderer::Initialize();
+		//renderer::Initialize();
 		mGraphicDevice->Initialize();
 		
 		Fmod::Initialize();
@@ -91,10 +91,17 @@ namespace tg
 
 	void Application::Render()
 	{
+		graphics::GetDevice()->ClearRenderTargetView();
+		graphics::GetDevice()->ClearDepthStencilView();
+		graphics::GetDevice()->BindViewPort();
+		graphics::GetDevice()->BindDefaultRenderTarget();
+
 		Time::Render();
 		CollisionManager::Render();
 		UIManager::Render();
 		SceneManager::Render();
+	
+		graphics::GetDevice()->Present();
 	}
 
 	void Application::Destroy()

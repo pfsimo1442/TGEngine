@@ -1,5 +1,6 @@
 #pragma once
 #include "tgResource.h"
+#include "tgInputLayout.h"
 #include "tgVertexBuffer.h"
 #include "tgIndexBuffer.h"
 
@@ -27,9 +28,14 @@ namespace tg
 
 		bool CreateVB(const std::vector<graphics::Vertex>& vertices);
 		bool CreateIB(const std::vector<UINT>& indices);
+		void SetVertexBufferParams(UINT vertexCount, D3D11_INPUT_ELEMENT_DESC* layout, const void* pShaderBytecodeWithInputSignature, SIZE_T BytecodeLength);
+
 		void Bind();
 
+		UINT GetIndexCount() const { return mIB.GetIndexCount(); }
+
 	private:
+		graphics::InputLayout mInputLayout;
 		graphics::VertexBuffer mVB;
 		graphics::IndexBuffer mIB;
 

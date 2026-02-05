@@ -3,6 +3,7 @@
 namespace tg::graphics
 {
 	IndexBuffer::IndexBuffer()
+		: mIndexCount(0)
 	{
 	}
 	IndexBuffer::~IndexBuffer()
@@ -11,6 +12,8 @@ namespace tg::graphics
 
 	bool IndexBuffer::Create(const std::vector<UINT>& indices)
 	{
+		mIndexCount = (UINT)indices.size();
+
 		desc.ByteWidth = sizeof(UINT) * (UINT)indices.size();
 		desc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_INDEX_BUFFER;
 		desc.Usage = D3D11_USAGE_DEFAULT;

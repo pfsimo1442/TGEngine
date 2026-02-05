@@ -25,6 +25,7 @@ namespace tg::graphics
 		void SetDataGpuBuffer(ID3D11Buffer* buffer, void* data, UINT size);
 		void SetShaderResource(eShaderStage stage, UINT startSlot, ID3D11ShaderResourceView** ppSRV);
 
+		void BindInputLayout(ID3D11InputLayout* pInputLayout);
 		void BindPrimitiveTopology(const D3D11_PRIMITIVE_TOPOLOGY topology);
 		void BindVS(ID3D11VertexShader* pVertexShader);
 		void BindPS(ID3D11PixelShader* pPixelShader);
@@ -33,9 +34,17 @@ namespace tg::graphics
 		void BindConstantBuffer(eShaderStage stage, eCBType type, ID3D11Buffer* buffer);
 		void BindSampler(eShaderStage stage, UINT StartSlot, UINT NumSamplers, ID3D11SamplerState* const* ppSamplers);
 		void BindSamplers(UINT StartSlot, UINT NumSamplers, ID3D11SamplerState* const* ppSamplers);
+		void BindViewPort();
+		void BindRenderTarget(UINT NumViews = 1, ID3D11RenderTargetView* const* ppRTViews = nullptr, ID3D11DepthStencilView* pDSView = nullptr);
+		void BindDefaultRenderTarget();
+
+		void ClearRenderTargetView();
+		void ClearDepthStencilView();
 
 		void Initialize();
 		void Draw();
+		void DrawIndexed(UINT IndexCount, UINT StartIndexLocation, INT BaseVertexLocation);
+		void Present();
 
 	public:
 		Microsoft::WRL::ComPtr<ID3D11Device> GetID3D11Device() { return mDevice; }

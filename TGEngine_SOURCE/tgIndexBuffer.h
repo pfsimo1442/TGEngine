@@ -12,7 +12,9 @@ namespace tg::graphics
 		bool Create(const std::vector<UINT>& indices);
 		void Bind() const;
 
-	private:
+		UINT GetIndexCount() const { return mIndexCount; }
 
+	private:
+		UINT mIndexCount;
 	};
 }
