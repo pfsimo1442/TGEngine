@@ -21,6 +21,8 @@ namespace tg
 	void SpriteRenderer::Initialize()
 	{
 		mMesh = Resources::Find<Mesh>(L"RectMesh");
+
+		mMaterial = Resources::Find<Material>(L"Sprite-Default-Material");
 	}
 
 	void SpriteRenderer::Update()
