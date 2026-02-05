@@ -6,6 +6,9 @@
 #include "tgAudioClip.h"
 #include "tgApplication.h"
 
+#include "tgTitleScene.h"
+#include "tgPlayScene.h"
+
 extern tg::Application application;
 
 namespace tg
@@ -68,6 +71,9 @@ namespace tg
 			Resources::Load<graphics::Texture>(L"Player", L"..\\Resources\\CloudOcean.png");
 
 			renderer::Initialize();
+
+			SceneManager::CreateScene<TitleScene>(L"TitleScene");
+			SceneManager::CreateScene<PlayScene>(L"PlayScene");
 		}
 		m.unlock();
 

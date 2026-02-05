@@ -301,6 +301,39 @@ namespace tg::graphics
 		BindSampler(eShaderStage::PS, StartSlot, NumSamplers, ppSamplers);
 	}
 
+	void GraphicDevice_DX11::BindViewPort()
+	{
+		D3D11_VIEWPORT viewPort =
+		{
+			0.0f, 0.0f, (FLOAT)application.GetWidth(), (FLOAT)application.GetHeight(),
+			0.0f, 1.0f
+		};
+
+		mContext->RSSetViewports(1, &viewPort);
+	}
+
+	void GraphicDevice_DX11::BindRenderTarget(UINT Numviews
+		, ID3D11RenderTargetView* const* ppRTViews, ID3D11DepthStencilView* pDSView)
+	{
+		mContext->OMSetRenderTargets(Numviews, ppRTViews, pDSView);
+	}
+
+	void GraphicDevice_DX11::BindDefaultRenderTarget()
+	{
+		mContext->OMSetRenderTargets(1, mRenderTargetView.GetAddressOf(), mDepthStencilView.Get());
+	}
+
+	void GraphicDevice_DX11::ClearRenderTargetView()
+	{
+		FLOAT backgroundColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
+		mContext->ClearRenderTargetView(mRenderTargetView.Get(), backgroundColor);
+	}
+
+	void GraphicDevice_DX11::ClearDepthStencilView()
+	{
+		mContext->ClearDepthStencilView(mDepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
+	}
+
 	void GraphicDevice_DX11::Initialize()
 	{
 #pragma region swapchain desc
@@ -364,18 +397,6 @@ namespace tg::graphics
 
 	void GraphicDevice_DX11::Draw()
 	{
-		FLOAT backgroundColor[4] = { 0.2f, 0.2f, 0.2f, 1.0f };
-		mContext->ClearRenderTargetView(mRenderTargetView.Get(), backgroundColor);
-		mContext->ClearDepthStencilView(mDepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
-
-		D3D11_VIEWPORT viewPort =
-		{
-			0.0f, 0.0f, (FLOAT)application.GetWidth(), (FLOAT)application.GetHeight(),
-			0.0f, 1.0f
-		};
-		mContext->RSSetViewports(1, &viewPort);
-		mContext->OMSetRenderTargets(1, mRenderTargetView.GetAddressOf(), mDepthStencilView.Get());
-
 		// Draw Rect
 		Mesh* mesh = Resources::Find<Mesh>(L"RectMesh");
 		mesh->Bind();
@@ -401,7 +422,15 @@ namespace tg::graphics
 		material->Bind();
 
 		mContext->DrawIndexed(3, 0, 0);
+	}
 
+	void GraphicDevice_DX11::DrawIndexed(UINT IndexCount, UINT StartIndexLocation, INT BaseVertexLocation)
+	{
+		mContext->DrawIndexed(IndexCount, StartIndexLocation, BaseVertexLocation);
+	}
+
+	void GraphicDevice_DX11::Present()
+	{
 		mSwapChain->Present(1, 0);
 	}
 }

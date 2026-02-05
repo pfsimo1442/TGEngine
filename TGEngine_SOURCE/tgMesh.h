@@ -32,6 +32,8 @@ namespace tg
 
 		void Bind();
 
+		UINT GetIndexCount() const { return mIB.GetIndexCount(); }
+
 	private:
 		graphics::InputLayout mInputLayout;
 		graphics::VertexBuffer mVB;
