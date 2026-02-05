@@ -161,7 +161,7 @@ namespace tg::renderer
 		inputLayoutDesces[2].SemanticName = "TEXCOORD";
 		inputLayoutDesces[2].SemanticIndex = 0;
 
-		graphics::Shader* spriteShader = Resources::Find<graphics::Shader>(L"SpriteShader");
+		graphics::Shader* spriteShader = Resources::Find<graphics::Shader>(L"Sprite-Default-Shader");
 		mesh->SetVertexBufferParams(3, inputLayoutDesces, spriteShader->GetVSBlob()->GetBufferPointer(), spriteShader->GetVSBlob()->GetBufferSize());
 
 		mesh->CreateVB(vertexes);
@@ -179,7 +179,7 @@ namespace tg::renderer
 	void LoadShaders()
 	{
 		tg::Resources::Load<graphics::Shader>(L"TriangleShader", L"..\\Shaders_SOURCE\\Triangle");
-		tg::Resources::Load<graphics::Shader>(L"SpriteShader", L"..\\Shaders_SOURCE\\Sprite");
+		tg::Resources::Load<graphics::Shader>(L"Sprite-Default-Shader", L"..\\Shaders_SOURCE\\Sprite-Default");
 	}
 
 	void LoadMaterials()
@@ -193,9 +193,9 @@ namespace tg::renderer
 
 		graphics::Texture* texture = Resources::Find<graphics::Texture>(L"Player");
 		spriteMaterial->SetAlbedoTexture(texture);
-		spriteMaterial->SetShader(tg::Resources::Find<graphics::Shader>(L"SpriteShader"));
+		spriteMaterial->SetShader(tg::Resources::Find<graphics::Shader>(L"Sprite-Default-Shader"));
 
-		tg::Resources::Insert(L"SpriteMaterial", spriteMaterial);
+		tg::Resources::Insert(L"Sprite-Default-Material", spriteMaterial);
 	}
 
 	void LoadConstantBuffers()
