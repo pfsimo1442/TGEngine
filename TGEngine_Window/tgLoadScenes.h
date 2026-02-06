@@ -4,7 +4,6 @@
 #include "tgLoadingScene.h"
 #include "tgPlayScene.h"
 #include "tgTitleScene.h"
-#include "tgToolScene.h"
 
 namespace tg
 {

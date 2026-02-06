@@ -15,14 +15,12 @@
 #include "tgRenderer.h"
 #include "tgAnimator.h"
 #include "tgCat.h"
-#include "tgCatScript.h"
 #include "tgBoxCollider2D.h"
 #include "tgCollisionManager.h"
 #include "tgTile.h"
 #include "tgTilemapRenderer.h"
 #include "tgRigidbody.h"
 #include "tgPlatform.h"
-#include "tgPlatformScript.h"
 #include "tgAudioClip.h"
 #include "tgAudioListener.h"
 #include "tgAudioSource.h"
@@ -51,9 +49,6 @@ namespace tg
 
 		SpriteRenderer* sr = mPlayer->AddComponent<SpriteRenderer>();
 		sr->SetSprite(Resources::Find<graphics::Texture>(L"Player"));
-
-
-		Scene::Initialize();
 	}
 
 	void PlayScene::Update()

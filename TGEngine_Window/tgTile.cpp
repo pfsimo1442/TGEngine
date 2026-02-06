@@ -23,11 +23,4 @@ namespace tg
     {
         GameObject::Render();
     }
-
-    void Tile::SetTilePosition(Vector2 coord)
-    {
-        Transform* tr = GetComponent<Transform>();
-        Vector2 pos = coord * TilemapRenderer::TileSize;
-        tr->SetPosition(pos);
-    }
 }

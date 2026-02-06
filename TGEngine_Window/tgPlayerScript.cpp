@@ -5,7 +5,6 @@
 #include "tgGameObject.h"
 #include "tgAnimator.h"
 #include "tgCat.h"
-#include "tgCatScript.h"
 #include "tgObject.h"
 #include "tgResources.h"
 #include "tgRigidbody.h"
