@@ -30,7 +30,7 @@ namespace tg::graphics
 		void SetShaderResource(eShaderStage stage, UINT startSlot, ID3D11ShaderResourceView** ppSRV);
 
 		void BindInputLayout(ID3D11InputLayout* pInputLayout);
-		void BindPrimitiveTopology(const D3D11_PRIMITIVE_TOPOLOGY topology);
+		void BindPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY topology);
 		void BindVS(ID3D11VertexShader* pVertexShader);
 		void BindPS(ID3D11PixelShader* pPixelShader);
 		void BindVertexBuffer(UINT StartSlot, UINT NumBuffers, ID3D11Buffer* const* ppVertexBuffers, const UINT* pStrides, const UINT* pOffsets);
@@ -42,19 +42,18 @@ namespace tg::graphics
 		void BindBlendState(ID3D11BlendState* pBlendState, const FLOAT BlendFactor[4], UINT SampleMask);
 		void BindDepthStencilState(ID3D11DepthStencilState* pDepthStencilState, UINT StencilRef);
 		void BindViewPort();
-		void BindRenderTarget(UINT NumViews = 1, ID3D11RenderTargetView* const* ppRTViews = nullptr, ID3D11DepthStencilView* pDSView = nullptr);
+		void BindRenderTargets(UINT NumViews = 1, ID3D11RenderTargetView* const* ppRTViews = nullptr, ID3D11DepthStencilView* pDSView = nullptr);
 		void BindDefaultRenderTarget();
 
 		void ClearRenderTargetView();
 		void ClearDepthStencilView();
 
 		void Initialize();
-		void Draw(UINT VertexCount, UINT StartVertexLocation);
-		void DrawIndexed(UINT IndexCount, UINT StartIndexLocation, INT BaseVertexLocation);
-		void Present();
+		void Draw(UINT vertexCount, UINT startVertexLocation) const;
+		void DrawIndexed(UINT indexCount, UINT startIndexLocation, INT baseVertexLocation) const;
+		void Present() const;
 
-	public:
-		Microsoft::WRL::ComPtr<ID3D11Device> GetID3D11Device() { return mDevice; }
+		[[discard]] Microsoft::WRL::ComPtr<ID3D11Device> GetID3D11Device() { return mDevice; }
 
 	private:
 		Microsoft::WRL::ComPtr<ID3D11Device> mDevice;

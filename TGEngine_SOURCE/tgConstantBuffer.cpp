@@ -23,13 +23,13 @@ namespace tg::graphics
 		D3D11_SUBRESOURCE_DATA sub = {};
 		sub.pSysMem = data;
 
-		bool succes = false;
-		if (data == NULL)
-			succes = GetDevice()->CreateBuffer(&desc, nullptr, buffer.GetAddressOf());
+		bool success = false;
+		if (data == nullptr)
+			success = GetDevice()->CreateBuffer(&desc, nullptr, buffer.GetAddressOf());
 		else
-			succes = GetDevice()->CreateBuffer(&desc, &sub, buffer.GetAddressOf());
+			success = GetDevice()->CreateBuffer(&desc, &sub, buffer.GetAddressOf());
 
-		if (!succes)
+		if (!success)
 			assert(NULL && "Create constant buffer failed!");
 
 		return true;
