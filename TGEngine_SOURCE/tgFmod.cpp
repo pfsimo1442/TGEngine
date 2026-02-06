@@ -27,7 +27,7 @@ namespace tg
 
 	bool Fmod::CreateSound(const std::string& path, FMOD::Sound** sound)
 	{
-		if (FMOD_OK != mCoreSystem->createSound(path.c_str(), FMOD_3D, 0, sound))
+		if (FMOD_OK != mCoreSystem->createSound(path.c_str(), FMOD_3D, nullptr, sound))
 			return false;
 
 		return true;
@@ -35,7 +35,7 @@ namespace tg
 
 	void Fmod::SoundPlay(FMOD::Sound* sound, FMOD::Channel** channel)
 	{
-		mCoreSystem->playSound(sound, 0, false, channel);
+		mCoreSystem->playSound(sound, nullptr, false, channel);
 	}
 
 	void Fmod::Set2DListenerAttributes(const Vector2& pos, const Vector2& vel)
@@ -55,7 +55,6 @@ namespace tg
 
 	void Fmod::Set3DListenerAttributes(const Vector3& pos, const Vector3& vel)
 	{
-		
 		//Vector3 fcsPos = ConvertWindowCSToFModCS(Vector2(672.0f, 846.0f), Vector2(pos->x, pos->y));
 
 		FMOD_VECTOR fmodPos(pos.x, pos.y, pos.z);
