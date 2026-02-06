@@ -1,6 +1,6 @@
 #include "tgScene.h"
-#include "tgRenderer.h"
 #include "tgCollisionManager.h"
+#include "tgSceneManager.h"
 
 namespace tg
 {
@@ -20,13 +20,8 @@ namespace tg
 
 	void Scene::Initialize()
 	{
-		for (Layer* layer : mLayers)
-		{
-			if (layer == nullptr)
-				continue;
-
-			layer->Initialize();
-		}
+		const std::wstring& sceneName = GetName();
+		SceneManager::SetActiveScene(sceneName);
 	}
 
 	void Scene::Update()

@@ -27,8 +27,8 @@ namespace tg
 	void AudioSource::LateUpdate()
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
-		Vector2 pos = tr->GetPosition();
-		Vector2 vel = Vector2(0.0f, 0.0f);
+		Vector3 pos = tr->GetPosition();
+		Vector3 vel = Vector3::Zero;
 
 		//mAudioClip->Set2DAttributes(pos, vel);
 	}

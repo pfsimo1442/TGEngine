@@ -10,7 +10,6 @@
 #include "..\\TGEngine_SOURCE\\tgSceneManager.h"
 
 #include "..\\TGEngine_Window\\tgLoadScenes.h"
-#include "..\\TGEngine_Window\\tgToolScene.h"
 
 tg::Application application;
 
@@ -46,7 +45,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_EDITORWINDOW, szWindowClass, MAX_LOADSTRING);
     MyRegisterClass(hInstance, szWindowClass, WndProc);
-    MyRegisterClass(hInstance, L"TOOLWINDOW", WndToolProc);
 
 
     // 애플리케이션 초기화를 수행합니다:
@@ -146,34 +144,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
     return TRUE;
 }
-
-//BOOL InitToolScene(HINSTANCE hInstance)
-//{
-//    tg::Scene* activeScene = tg::SceneManager::GetActiveScene();
-//    std::wstring name = activeScene->GetName();
-//   
-//    if (name == L"ToolScene")
-//    {
-//        HWND toolHWnd = CreateWindowW(L"TOOLWINDOW", L"Tilemap_Pallete", WS_OVERLAPPEDWINDOW,
-//            0, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
-//
-//        // tilemap pallete window size adjusting
-//        tg::graphics::Texture* tilemapPalleteTexture
-//            = tg::Resources::Find<tg::graphics::Texture>(L"PlatformSpringSDV");
-//
-//        RECT rect = { 0, 0, (LONG)tilemapPalleteTexture->GetWidth(), (LONG)tilemapPalleteTexture->GetHeight() };
-//        AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
-//
-//        UINT toolWidth = rect.right - rect.left;
-//        UINT toolHeight = rect.bottom - rect.top;
-//
-//        SetWindowPos(toolHWnd, nullptr, 672, 0, toolWidth, toolHeight, 0);
-//        ShowWindow(toolHWnd, true);
-//        UpdateWindow(toolHWnd);
-//    }
-//
-//    return TRUE;
-//}
 
 //
 //  함수: WndProc(HWND, UINT, WPARAM, LPARAM)

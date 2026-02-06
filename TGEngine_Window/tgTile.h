@@ -11,8 +11,6 @@ namespace tg
 		void LateUpdate() override;
 		void Render() override;
 
-		void SetTilePosition(Vector2 coord);
-
 	private:
 
 	};

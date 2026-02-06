@@ -179,6 +179,30 @@ namespace tg::graphics
 		return true;
 	}
 
+	bool GraphicDevice_DX11::CreateRasterizerState(const D3D11_RASTERIZER_DESC* pRasterizerDesc, ID3D11RasterizerState** ppRasterizerState)
+	{
+		if (FAILED(mDevice->CreateRasterizerState(pRasterizerDesc, ppRasterizerState)))
+			return false;
+
+		return true;
+	}
+
+	bool GraphicDevice_DX11::CreateBlendState(const D3D11_BLEND_DESC* pBlendState, ID3D11BlendState** ppBlendState)
+	{
+		if (FAILED(mDevice->CreateBlendState(pBlendState, ppBlendState)))
+			return false;
+
+		return true;
+	}
+
+	bool GraphicDevice_DX11::CreateDepthStencilState(const D3D11_DEPTH_STENCIL_DESC* pDepthStencilDesc, ID3D11DepthStencilState** ppDepthStencilState)
+	{
+		if (FAILED(mDevice->CreateDepthStencilState(pDepthStencilDesc, ppDepthStencilState)))
+			return false;
+
+		return true;
+	}
+
 	void GraphicDevice_DX11::SetDataGpuBuffer(ID3D11Buffer* buffer, void* data, UINT size)
 	{
 		D3D11_MAPPED_SUBRESOURCE sub = {};
@@ -301,6 +325,21 @@ namespace tg::graphics
 		BindSampler(eShaderStage::PS, StartSlot, NumSamplers, ppSamplers);
 	}
 
+	void GraphicDevice_DX11::BindRasterizerState(ID3D11RasterizerState* pRasterizerState)
+	{
+		mContext->RSSetState(pRasterizerState);
+	}
+
+	void GraphicDevice_DX11::BindBlendState(ID3D11BlendState* pBlendState, const FLOAT BlendFactor[4], UINT SampleMask)
+	{
+		mContext->OMSetBlendState(pBlendState, BlendFactor, SampleMask);
+	}
+
+	void GraphicDevice_DX11::BindDepthStencilState(ID3D11DepthStencilState* pDepthStencilState, UINT StencilRef)
+	{
+		mContext->OMSetDepthStencilState(pDepthStencilState, StencilRef);
+	}
+
 	void GraphicDevice_DX11::BindViewPort()
 	{
 		D3D11_VIEWPORT viewPort =
@@ -395,33 +434,9 @@ namespace tg::graphics
 			assert(NULL && "Create depthstencilview failed!");
 	}
 
-	void GraphicDevice_DX11::Draw()
+	void GraphicDevice_DX11::Draw(UINT VertexCount, UINT StartVertexLocation)
 	{
-		// Draw Rect
-		Mesh* mesh = Resources::Find<Mesh>(L"RectMesh");
-		mesh->Bind();
-
-		Vector4 pos(-0.2f, 0.0f, 0.0f, 0.5f);
-		renderer::constantBuffers[(UINT)eCBType::Transform].SetData(&pos);
-		renderer::constantBuffers[(UINT)eCBType::Transform].Bind(eShaderStage::VS);
-
-		Material* material = tg::Resources::Find<Material>(L"SpriteMaterial");
-		material->Bind();
-
-		mContext->DrawIndexed(6, 0, 0);
-
-		// Draw Triangle
-		mesh = Resources::Find<Mesh>(L"TriangleMesh");
-		mesh->Bind();
-
-		pos = Vector4(0.2f, 0.0f, 0.0f, 1.0f);
-		renderer::constantBuffers[(UINT)eCBType::Transform].SetData(&pos);
-		renderer::constantBuffers[(UINT)eCBType::Transform].Bind(eShaderStage::VS);
-
-		material = tg::Resources::Find<Material>(L"TriangleMaterial");
-		material->Bind();
-
-		mContext->DrawIndexed(3, 0, 0);
+		mContext->Draw(VertexCount, StartVertexLocation);
 	}
 
 	void GraphicDevice_DX11::DrawIndexed(UINT IndexCount, UINT StartIndexLocation, INT BaseVertexLocation)

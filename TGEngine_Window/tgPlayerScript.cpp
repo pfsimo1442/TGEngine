@@ -5,7 +5,6 @@
 #include "tgGameObject.h"
 #include "tgAnimator.h"
 #include "tgCat.h"
-#include "tgCatScript.h"
 #include "tgObject.h"
 #include "tgResources.h"
 #include "tgRigidbody.h"
@@ -203,40 +202,40 @@ namespace tg
 
 	void PlayerScript::move()
 	{
-		//Transform* tr = GetOwner()->GetComponent<Transform>();
-		//Vector2 pos = tr->GetPosition();
+		Transform* tr = GetOwner()->GetComponent<Transform>();
+		Vector3 pos = tr->GetPosition();
 		Rigidbody* rb = GetOwner()->GetComponent<Rigidbody>();
-		Vector2 dir = Vector2::Zero;
+		Vector3 dir = Vector3::Zero;
 		float spd = 500.0f;
 		
-		if (Input::GetKey(eKeyCode::D))
+		if (Input::GetKey(eKeyCode::Arrow_Right))
 		{
 			//pos.x += 100.0f * Time::DeltaTime();
 			//mCurrentWS = PlayerScript::eWalkState::Right;
-			dir += Vector2::Right;
+			rb->AddForce(Vector2(200.0f, 0.0f));
 			
 		}
-		if (Input::GetKey(eKeyCode::A))
+		if (Input::GetKey(eKeyCode::Arrow_Left))
 		{
 			//pos.x -= 100.0f * Time::DeltaTime();
 			//mCurrentWS = PlayerScript::eWalkState::Left;
-			dir += Vector2::Left;
+			rb->AddForce(Vector2(-200.0f, 0.0f));
 		}
-		if (Input::GetKey(eKeyCode::W))
+		if (Input::GetKey(eKeyCode::Arrow_Up))
 		{
 			//pos.y -= 100.0f * Time::DeltaTime();
 			//mCurrentWS = PlayerScript::eWalkState::Up;
-			dir += Vector2::Up;
+			rb->AddForce(Vector2(0.0f, 200.0f));
 		}
-		if (Input::GetKey(eKeyCode::S))
+		if (Input::GetKey(eKeyCode::Arrow_Down))
 		{
 			//pos.y += 100.0f * Time::DeltaTime();
 			//mCurrentWS = PlayerScript::eWalkState::Down;
-			dir += Vector2::Down;
+			rb->AddForce(Vector2(0.0f, -200.0f));
 		}
 
-		dir.Normalize();
-		rb->AddForce(dir * spd);
+		//dir.Normalize();
+		//rb->AddForce(dir * spd);
 		//tr->SetPosition(pos);
 
 		//bool chkDA = false;

@@ -21,21 +21,25 @@ namespace tg
 	void CameraScript::Update()
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
-		Vector2 pos = tr->GetPosition();
-		Vector2 direction = Vector2::Zero;
-		float speed = 500.0f;
+		Vector3 pos = tr->GetPosition();
+		Vector3 dir = Vector3::Zero;
+		float spd = 500.0f;
 
-		if (Input::GetKey(eKeyCode::Arrow_Right))
-			direction += Vector2::Right;
-		if (Input::GetKey(eKeyCode::Arrow_Left))
-			direction += Vector2::Left;
-		if (Input::GetKey(eKeyCode::Arrow_Up))
-			direction += Vector2::Up;
-		if (Input::GetKey(eKeyCode::Arrow_Down))
-			direction += Vector2::Down;
+		if (Input::GetKey(eKeyCode::A))
+			dir += -tr->Right();
+		if (Input::GetKey(eKeyCode::W))
+			dir += tr->Foward();
+		if (Input::GetKey(eKeyCode::D))
+			dir += tr->Right();
+		if (Input::GetKey(eKeyCode::S))
+			dir += -tr->Foward();
+		if (Input::GetKey(eKeyCode::E))
+			dir += tr->Up();
+		if (Input::GetKey(eKeyCode::Q))
+			dir += -tr->Up();
 
-		direction.Normalize();
-		pos += (direction * speed * Time::DeltaTime());
+		dir.Normalize();
+		pos += dir * spd * Time::DeltaTime();
 		tr->SetPosition(pos);
 	}
 

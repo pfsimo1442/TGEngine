@@ -15,18 +15,17 @@
 #include "tgRenderer.h"
 #include "tgAnimator.h"
 #include "tgCat.h"
-#include "tgCatScript.h"
 #include "tgBoxCollider2D.h"
 #include "tgCollisionManager.h"
 #include "tgTile.h"
 #include "tgTilemapRenderer.h"
 #include "tgRigidbody.h"
 #include "tgPlatform.h"
-#include "tgPlatformScript.h"
 #include "tgAudioClip.h"
 #include "tgAudioListener.h"
 #include "tgAudioSource.h"
 #include "tgGraphicDevice_DX11.h"
+#include "tgCameraScript.h"
 #include "tgMaterial.h"
 
 namespace tg
@@ -41,9 +40,16 @@ namespace tg
 
 	void PlayScene::Initialize()
 	{
+		Scene::Initialize();
+
 		//// Main Camera
-		//GameObject* camera = object::Instantiate<GameObject>(enums::eLayerType::None, Vector2(800.f, 450.f));
-		//mMainCamera = camera->AddComponent<Camera>();
+		GameObject* camera = object::Instantiate<GameObject>(enums::eLayerType::None, Vector3(0.0f, 0.0f, -10.0f));
+		Camera* cameraComp = camera->AddComponent<Camera>();
+		cameraComp->SetProjectionType(Camera::eProjectionType::Orthographic);
+		cameraComp->SetSize(200.0f);
+
+		CameraScript* cameraScript = camera->AddComponent<CameraScript>();
+		renderer::mainCamera = cameraComp;
 
 		//// Player
 		mPlayer = object::Instantiate<Player>(enums::eLayerType::Player);
@@ -51,9 +57,6 @@ namespace tg
 
 		SpriteRenderer* sr = mPlayer->AddComponent<SpriteRenderer>();
 		sr->SetSprite(Resources::Find<graphics::Texture>(L"Player"));
-
-
-		Scene::Initialize();
 	}
 
 	void PlayScene::Update()

@@ -33,26 +33,6 @@ namespace tg
     void CircleCollider2D::Render()
     {
         Transform* tr = GetOwner()->GetComponent<Transform>();
-        Vector2 pos = tr->GetPosition();
-        
-        //if (renderer::mainCamera)
-        //    pos = renderer::mainCamera->CalculatePosition(pos);
-        //Vector2 offset = GetOffset();
-
-        //float radius = GetSize().x / 2;
-
-        //HBRUSH transparentBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
-        //HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, transparentBrush);
-
-        //HPEN greenPen = CreatePen(PS_SOLID, 2, RGB(0, 255, 0));
-        //HPEN oldPen = (HPEN)SelectObject(hdc, greenPen);
-
-        //Ellipse(hdc
-        //    , (int)(pos.x + offset.x - radius), (int)(pos.y + offset.y - radius)
-        //    , (int)(pos.x + offset.x + radius), (int)(pos.y + offset.y + radius));
-
-        //SelectObject(hdc, oldBrush);
-        //SelectObject(hdc, oldPen);
-        //DeleteObject(greenPen);
+        Vector3 pos = tr->GetPosition();
     }
 }

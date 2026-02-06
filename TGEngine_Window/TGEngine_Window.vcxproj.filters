@@ -27,12 +27,6 @@
     <ClInclude Include="tgCat.h">
       <Filter>Contents</Filter>
     </ClInclude>
-    <ClInclude Include="tgCatScript.h">
-      <Filter>Scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="tgToolScene.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="tgTile.h">
       <Filter>Contents</Filter>
     </ClInclude>
@@ -42,9 +36,6 @@
     <ClInclude Include="tgLoadScenes.h" />
     <ClInclude Include="tgPlatform.h">
       <Filter>Contents</Filter>
-    </ClInclude>
-    <ClInclude Include="tgPlatformScript.h">
-      <Filter>Scripts</Filter>
     </ClInclude>
     <ClInclude Include="tgLoadingScene.h">
       <Filter>Scenes</Filter>
@@ -66,12 +57,6 @@
     <ClCompile Include="tgCat.cpp">
       <Filter>Contents</Filter>
     </ClCompile>
-    <ClCompile Include="tgCatScript.cpp">
-      <Filter>Scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="tgToolScene.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="tgTile.cpp">
       <Filter>Contents</Filter>
     </ClCompile>
@@ -80,9 +65,6 @@
     </ClCompile>
     <ClCompile Include="tgPlatform.cpp">
       <Filter>Contents</Filter>
-    </ClCompile>
-    <ClCompile Include="tgPlatformScript.cpp">
-      <Filter>Scripts</Filter>
     </ClCompile>
     <ClCompile Include="tgLoadingScene.cpp">
       <Filter>Scenes</Filter>
