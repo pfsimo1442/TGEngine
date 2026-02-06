@@ -44,7 +44,7 @@ namespace tg
 			mMaterial->BindShader();
 
 		if (mSprite)
-			mSprite->Bind(eShaderStage::PS, (UINT)eTextureType::Albedo);
+			mSprite->Bind(eShaderStage::PS, (UINT)eTextureType::Sprite);
 
 		if (mMesh)
 			graphics::GetDevice()->DrawIndexed(mMesh->GetIndexCount(), 0, 0);

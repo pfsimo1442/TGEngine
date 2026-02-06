@@ -57,11 +57,35 @@ namespace tg::graphics
 	enum class eTextureType
 	{
 		Albedo,
+		Sprite,
 		Normal,
 		Specular,
 		Smoothness,
 		Metallic,
 		Emissive,
+		End,
+	};
+
+	enum class eRasterizerState
+	{
+		SolidBack,
+		SolidFront,
+		SolidNone,
+		WireFrame,
+		End,
+	};
+
+	enum class eBlendState
+	{
+		AlphaBlend,
+		OneOne,
+		End,
+	};
+
+	enum class eDepthStencilState
+	{
+		DepthNone,
+		LessEqual,
 		End,
 	};
 
