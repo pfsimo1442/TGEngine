@@ -7,7 +7,7 @@ namespace tg
 	{
 	public:
 		Script();
-		~Script();
+		virtual ~Script();
 
 		void Initialize() override;
 		void Update() override;
