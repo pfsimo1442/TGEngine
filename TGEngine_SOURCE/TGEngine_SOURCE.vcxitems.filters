@@ -44,7 +44,7 @@
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgAnimator.cpp">
-      <Filter>Component\Animatior</Filter>
+      <Filter>Component\Animator</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgCamera.cpp">
       <Filter>Component\Camera</Filter>
@@ -74,7 +74,7 @@
       <Filter>Component\Rigidbody</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgAnimation.cpp">
-      <Filter>Component\Animatior</Filter>
+      <Filter>Component\Animator</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgObject.cpp">
       <Filter>Object</Filter>
@@ -188,7 +188,7 @@
       <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgAnimator.h">
-      <Filter>Component\Animatior</Filter>
+      <Filter>Component\Animator</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgCamera.h">
       <Filter>Component\Camera</Filter>
@@ -218,7 +218,7 @@
       <Filter>Component\Rigidbody</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgAnimation.h">
-      <Filter>Component\Animatior</Filter>
+      <Filter>Component\Animator</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgObject.h">
       <Filter>Object</Filter>
@@ -322,9 +322,6 @@
     <Filter Include="Renderer">
       <UniqueIdentifier>{2b4c1c80-9d69-414d-9c09-87ed07b238ad}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Component\Animatior">
-      <UniqueIdentifier>{d044ac2f-cba6-48c6-9691-5328b993a74f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Component\Camera">
       <UniqueIdentifier>{9aa43296-fcab-46c9-a8a8-bb7e11048cca}</UniqueIdentifier>
     </Filter>
@@ -387,6 +384,9 @@
     </Filter>
     <Filter Include="Graphics\InputLayout">
       <UniqueIdentifier>{bd59ea2d-f267-4d19-9bac-42cab8e84963}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Animator">
+      <UniqueIdentifier>{d044ac2f-cba6-48c6-9691-5328b993a74f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
