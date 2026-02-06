@@ -41,7 +41,7 @@ namespace tg
 			if (mActiveAnimation->IsComplete() == true)
 			{
 				if (events)
-					events->completeEvent();
+					events->CompleteEvent();
 
 				if (mbLoop == true)
 					mActiveAnimation->Reset();
@@ -91,8 +91,8 @@ namespace tg
 		, Vector2 leftTop
 		, Vector2 rightBottom
 		, Vector2 cellCount
-		, Vector2 offset
-		, float duration)
+		, Vector2 Offset
+		, float Duration)
 	{
 		Animation* animation = nullptr;
 		animation = FindAnimation(name);
@@ -104,7 +104,7 @@ namespace tg
 		animation = new Animation();
 		animation->SetName(name);
 		animation->CreateAnimation(name, spriteSheet
-			, leftTop, size, offset, spriteLength, duration);
+			, leftTop, size, Offset, spriteLength, Duration);
 
 		animation->SetAnimator(this);
 
@@ -116,8 +116,8 @@ namespace tg
 
 	void Animator::CreateAnimationByFolder(/*const std::wstring& name
 		, const std::wstring& path
-		, Vector2 offset
-		, float duration*/)
+		, Vector2 Offset
+		, float Duration*/)
 	{
 		//Animation* animation = nullptr;
 		//animation = FindAnimation(name);
@@ -145,7 +145,7 @@ namespace tg
 		//UINT sheetHeight = imageHeight;
 		//graphics::Texture* spriteSheet = graphics::Texture::Create(name, sheetWidth, sheetHeight);
 
-		//for (int ni = 0; ni < images.size(); ni++)
+		//for (int ni = 0; ni < images.Size(); ni++)
 		//{
 		//	BitBlt(spriteSheet->GetHdc()
 		//		, imageWidth * ni, 0
@@ -157,7 +157,7 @@ namespace tg
 		//
 		//CreateAnimationBySpriteSize(name, spriteSheet
 		//	, Vector2::Zero, imageSize
-		//	, offset, fileCount, duration);
+		//	, Offset, fileCount, Duration);
 	}
 
 	Animation* Animator::FindAnimation(const std::wstring& name)
@@ -180,12 +180,12 @@ namespace tg
 		{
 			Events* currentEvents = FindEvents(mActiveAnimation->GetName());
 			if (currentEvents)
-				currentEvents->endEvent();
+				currentEvents->EndEvent();
 		}
 
 		Events* nextEvents = FindEvents(animation->GetName());
 		if (nextEvents)
-			nextEvents->startEvent();
+			nextEvents->StartEvent();
 
 		mActiveAnimation = animation;
 		mActiveAnimation->Reset();
@@ -205,18 +205,18 @@ namespace tg
 	std::function<void()>& Animator::GetStartEvent(const std::wstring& name)
 	{
 		Events* events = FindEvents(name);
-		return events->startEvent.mEvent;
+		return events->StartEvent.Action;
 	}
 
 	std::function<void()>& Animator::GetCompleteEvent(const std::wstring& name)
 	{
 		Events* events = FindEvents(name);
-		return events->completeEvent.mEvent;
+		return events->CompleteEvent.Action;
 	}
 
 	std::function<void()>& Animator::GetEndEvent(const std::wstring& name)
 	{
 		Events* events = FindEvents(name);
-		return events->endEvent.mEvent;
+		return events->EndEvent.Action;
 	}
 }
