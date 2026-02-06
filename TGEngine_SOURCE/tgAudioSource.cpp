@@ -28,7 +28,7 @@ namespace tg
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector3 pos = tr->GetPosition();
-		Vector3 vel = Vector3(0.0f, 0.0f);
+		Vector3 vel = Vector3::Zero;
 
 		//mAudioClip->Set2DAttributes(pos, vel);
 	}

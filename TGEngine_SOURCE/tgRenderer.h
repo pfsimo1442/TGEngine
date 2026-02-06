@@ -10,7 +10,7 @@ using namespace tg::graphics;
 namespace tg::renderer
 {
 	extern Camera* mainCamera;
-	extern ConstantBuffer constantBuffers[(UINT)eCBType::End];
+	extern ConstantBuffer* constantBuffers[(UINT)eCBType::End];
 
 	extern Microsoft::WRL::ComPtr<ID3D11SamplerState> samplerStates[(UINT)eSamplerType::End];
 	extern Microsoft::WRL::ComPtr<ID3D11RasterizerState> rasterizerStates[(UINT)eRasterizerState::End];

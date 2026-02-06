@@ -21,7 +21,7 @@ namespace tg::object
 	}
 
 	template <typename T>
-	static T* Instantiate(eLayerType type, math::Vector2 position)
+	static T* Instantiate(eLayerType type, math::Vector3 position)
 	{
 		T* gameObject = new T();
 		gameObject->SetLayerType(type);

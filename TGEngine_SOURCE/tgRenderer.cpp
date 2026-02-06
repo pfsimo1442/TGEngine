@@ -10,7 +10,7 @@ namespace tg::renderer
 {
 	Camera* mainCamera = nullptr;
 
-	ConstantBuffer constantBuffers[(UINT)eCBType::End] = {};
+	ConstantBuffer* constantBuffers[(UINT)eCBType::End] = {};
 	Microsoft::WRL::ComPtr<ID3D11SamplerState> samplerStates[(UINT)eSamplerType::End] = {};
 
 	Microsoft::WRL::ComPtr<ID3D11RasterizerState> rasterizerStates[(UINT)eRasterizerState::End] = {};
@@ -265,7 +265,8 @@ namespace tg::renderer
 
 	void LoadConstantBuffers()
 	{
-		constantBuffers[(UINT)eCBType::Transform].Create(eCBType::Transform, sizeof(Vector4));
+		constantBuffers[CBSLOT_TRANSFORM] = new ConstantBuffer(eCBType::Transform);
+		constantBuffers[CBSLOT_TRANSFORM]->Create(sizeof(TransformCB));
 	}
 
 	void Initialize()
@@ -279,9 +280,10 @@ namespace tg::renderer
 
 	void Release()
 	{
-		//for (int ni = 0; ni < (UINT)eCBType::End; ni++)
-		//{
-		//	constantBuffers[ni].Release();
-		//}
+		for (UINT i = 0; i < (UINT)eCBType::End; i++)
+		{
+			delete constantBuffers[i];
+			constantBuffers[i] = nullptr;
+		}
 	}
 }

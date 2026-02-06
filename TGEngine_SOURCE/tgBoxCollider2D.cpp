@@ -32,24 +32,6 @@ namespace tg
     void BoxCollider2D::Render()
     {
         Transform* tr = GetOwner()->GetComponent<Transform>();
-        Vector2 pos = tr->GetPosition();
-        //if (renderer::mainCamera)
-        //    pos = renderer::mainCamera->CalculatePosition(pos);
-        //Vector2 offset = GetOffset();
-
-        //Vector2 size = GetSize();
-
-        //HBRUSH transparentBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
-        //HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, transparentBrush);
-        //HPEN greenPen = CreatePen(PS_SOLID, 2, RGB(0, 255, 0));
-        //HPEN oldPen = (HPEN)SelectObject(hdc, greenPen);
-
-        //::Rectangle(hdc
-        //    , (int)(pos.x + offset.x - (size.x / 2)), (int)(pos.y + offset.y - (size.y / 2))
-        //    , (int)(pos.x + offset.x + (size.x / 2)), (int)(pos.y + offset.y + (size.y / 2)));
-        //
-        //SelectObject(hdc, oldBrush);
-        //SelectObject(hdc, oldPen);
-        //DeleteObject(greenPen);
+        Vector3 pos = tr->GetPosition();
     }
 }
