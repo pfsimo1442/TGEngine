@@ -78,7 +78,7 @@ namespace tg
 		m.unlock();
 
 		// complete
-		//SceneManager::SetActiveScene(L"LoadingScene");
+		SceneManager::SetActiveScene(L"LoadingScene");
 		mbLoadCompleted = true;
 	}
 }
