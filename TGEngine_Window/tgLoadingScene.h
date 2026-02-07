@@ -1,5 +1,5 @@
 #pragma once
-#include "..\\TGEngine_SOURCE\\tgScene.h"
+#include "..//TGEngine_SOURCE//tgScene.h"
 
 namespace tg
 {
@@ -7,7 +7,7 @@ namespace tg
 	{
 	public:
 		LoadingScene();
-		~LoadingScene();
+		virtual ~LoadingScene();
 
 		void Initialize() override;
 		void Update() override;
@@ -15,7 +15,7 @@ namespace tg
 		void Render() override;
 
 		void OnEnter() override;
-		void OnExit()  override;
+		void OnExit() override;
 
 	private:
 		void resourcesLoad(std::mutex& m);

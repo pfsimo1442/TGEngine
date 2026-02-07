@@ -28,11 +28,11 @@ namespace tg
 		if (Input::GetKey(eKeyCode::A))
 			dir += -tr->Right();
 		if (Input::GetKey(eKeyCode::W))
-			dir += tr->Foward();
+			dir += tr->Forward();
 		if (Input::GetKey(eKeyCode::D))
 			dir += tr->Right();
 		if (Input::GetKey(eKeyCode::S))
-			dir += -tr->Foward();
+			dir += -tr->Forward();
 		if (Input::GetKey(eKeyCode::E))
 			dir += tr->Up();
 		if (Input::GetKey(eKeyCode::Q))

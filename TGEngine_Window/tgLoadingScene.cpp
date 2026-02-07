@@ -21,6 +21,7 @@ namespace tg
 	}
 	LoadingScene::~LoadingScene()
 	{
+		mResourcesLoadThread->join();
 		delete mResourcesLoadThread;
 		mResourcesLoadThread = nullptr;
 	}
@@ -43,12 +44,7 @@ namespace tg
 	void LoadingScene::Render()
 	{
 		if (mbLoadCompleted)
-		{
-			mResourcesLoadThread->join();
-			//mResourcesLoadThread->detach();
-
 			SceneManager::LoadScene(L"PlayScene");
-		}
 	}
 
 	void LoadingScene::OnEnter()

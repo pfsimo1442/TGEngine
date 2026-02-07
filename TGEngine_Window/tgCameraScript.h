@@ -1,6 +1,6 @@
 #pragma once
-#include "..\\TGEngine_SOURCE\\tgScript.h"
-#include "..\\TGEngine_SOURCE\\tgTransform.h"
+#include "..//TGEngine_SOURCE//tgScript.h"
+#include "..//TGEngine_SOURCE//tgTransform.h"
 
 namespace tg
 {
@@ -8,7 +8,7 @@ namespace tg
 	{
 	public:
 		CameraScript();
-		~CameraScript();
+		virtual ~CameraScript();
 
 		void Initialize() override;
 		void Update() override;

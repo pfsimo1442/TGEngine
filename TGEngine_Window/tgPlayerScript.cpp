@@ -13,9 +13,9 @@
 namespace tg
 {
 	PlayerScript::PlayerScript()
-		: mState(PlayerScript::eState::Idle)
-		, mCurrentWS(PlayerScript::eWalkState::Null)
-		, mLastWS(PlayerScript::eWalkState::Null)
+		: mState(eState::Idle)
+		, mCurrentWS(eWalkState::Null)
+		, mLastWS(eWalkState::Null)
 		, mAnimator(nullptr)
 	{
 	}
@@ -286,17 +286,17 @@ namespace tg
 			|| (Input::GetKeyUp(eKeyCode::D) && !(Input::GetKey(eKeyCode::W) || Input::GetKey(eKeyCode::S) || Input::GetKey(eKeyCode::A)))
 			)
 		{
-			mState = PlayerScript::eState::Idle;
-			if (mLastWS != PlayerScript::eWalkState::Null)
+			mState = eState::Idle;
+			if (mLastWS != eWalkState::Null)
 				mAnimator->PlayAnimation(L"CatSitDown", false);
-			mLastWS = PlayerScript::eWalkState::Null;
+			mLastWS = eWalkState::Null;
 		}
 	}
 	void PlayerScript::water()
 	{
 		if (mAnimator->IsCompleteAnimation())
 		{
-			mState = PlayerScript::eState::Idle;
+			mState = eState::Idle;
 			mAnimator->PlayAnimation(L"PlayerIdle");
 		}
 	}
