@@ -4,7 +4,7 @@
 namespace tg::graphics
 {
 	Shader::Shader()
-		: Resource(enums::eResourceType::Shader)
+		: Resource(eResourceType::Shader)
 		, mRasterizerState(eRasterizerState::SolidBack)
 		, mBlendState(eBlendState::AlphaBlend)
 		, mDepthStencilState(eDepthStencilState::LessEqual)
