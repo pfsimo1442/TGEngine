@@ -3,11 +3,11 @@
 
 namespace tg
 {
-	class AudioListener : public Component
+	class AudioListener final : public Component
 	{
 	public:
 		AudioListener();
-		~AudioListener();
+		virtual ~AudioListener();
 
 		void Initialize() override;
 		void Update() override;

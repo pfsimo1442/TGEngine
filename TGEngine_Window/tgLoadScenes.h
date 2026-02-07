@@ -1,5 +1,5 @@
 #pragma once
-#include "..\\TGEngine_SOURCE\\tgSceneManager.h"
+#include "..//TGEngine_SOURCE//tgSceneManager.h"
 
 #include "tgLoadingScene.h"
 #include "tgPlayScene.h"

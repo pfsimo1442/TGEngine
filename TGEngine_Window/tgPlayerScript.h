@@ -1,6 +1,6 @@
 #pragma once
-#include "..\\TGEngine_SOURCE\\tgScript.h"
-//#include "..\\TGEngine_SOURCE\\tgTexture.h"
+#include "..//TGEngine_SOURCE//tgScript.h"
+//#include "..//TGEngine_SOURCE//tgTexture.h"
 
 namespace tg
 {
@@ -28,7 +28,7 @@ namespace tg
 		};
 
 		PlayerScript();
-		~PlayerScript();
+		virtual ~PlayerScript();
 
 		void Initialize() override;
 		void Update() override;

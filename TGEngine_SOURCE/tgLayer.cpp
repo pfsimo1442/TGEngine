@@ -102,13 +102,13 @@ namespace tg
 			});
 	}
 
-	void Layer::findDeadGameObjects(OUT std::vector<GameObject*>& gameObjs)
+	void Layer::findDeadGameObjects(OUT std::vector<GameObject*>& gameObjects)
 	{
 		for (GameObject* gameObj : mGameObjects)
 		{
 			GameObject::eState activeState = gameObj->GetActiveState();
 			if (activeState == GameObject::eState::Dead)
-				gameObjs.push_back(gameObj);
+				gameObjects.push_back(gameObj);
 		}
 	}
 

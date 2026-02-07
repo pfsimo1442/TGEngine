@@ -1,5 +1,5 @@
 #pragma once
-#include "..\\TGEngine_SOURCE\\tgScene.h"
+#include "..//TGEngine_SOURCE//tgScene.h"
 
 namespace tg
 {
@@ -7,7 +7,7 @@ namespace tg
 	{
 	public:
 		PlayScene();
-		~PlayScene();
+		virtual ~PlayScene();
 
 		void Initialize() override;
 		void Update() override;
@@ -19,6 +19,5 @@ namespace tg
 
 	private:
 		class Player* mPlayer;
-		class Camera* mMainCamera;
 	};
 }

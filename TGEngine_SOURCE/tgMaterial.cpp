@@ -31,7 +31,7 @@ namespace tg
 			mShader->Bind();
 
 		if (mAlbedoTexture)
-			mAlbedoTexture->Bind(graphics::eShaderStage::PS, (UINT)graphics::eTextureType::Albedo);
+			mAlbedoTexture->Bind(graphics::eShaderStage::PS, static_cast<UINT>(graphics::eTextureType::Albedo));
 	}
 
 	void Material::BindShader()
@@ -43,6 +43,6 @@ namespace tg
 	void Material::BindTextures()
 	{
 		if (mAlbedoTexture)
-			mAlbedoTexture->Bind(graphics::eShaderStage::PS, (UINT)graphics::eTextureType::Albedo);
+			mAlbedoTexture->Bind(graphics::eShaderStage::PS, static_cast<UINT>(graphics::eTextureType::Albedo));
 	}
 }

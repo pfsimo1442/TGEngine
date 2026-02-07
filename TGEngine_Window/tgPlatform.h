@@ -1,5 +1,5 @@
 #pragma once
-#include "..\\TGEngine_SOURCE\\tgGameObject.h"
+#include "..//TGEngine_SOURCE//tgGameObject.h"
 
 namespace tg
 {

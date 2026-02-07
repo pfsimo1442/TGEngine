@@ -43,7 +43,7 @@ namespace tg
 		Scene::Initialize();
 
 		//// Main Camera
-		GameObject* camera = object::Instantiate<GameObject>(enums::eLayerType::None, Vector3(0.0f, 0.0f, -10.0f));
+		GameObject* camera = object::Instantiate<GameObject>(eLayerType::None, Vector3(0.0f, 0.0f, -10.0f));
 		Camera* cameraComp = camera->AddComponent<Camera>();
 		cameraComp->SetProjectionType(Camera::eProjectionType::Orthographic);
 		cameraComp->SetSize(200.0f);
@@ -52,7 +52,7 @@ namespace tg
 		renderer::mainCamera = cameraComp;
 
 		//// Player
-		mPlayer = object::Instantiate<Player>(enums::eLayerType::Player);
+		mPlayer = object::Instantiate<Player>(eLayerType::Player);
 		object::DontDestroyOnLoad(mPlayer);
 
 		SpriteRenderer* sr = mPlayer->AddComponent<SpriteRenderer>();
@@ -81,10 +81,8 @@ namespace tg
 	{
 		Scene::OnEnter();
 
-		renderer::mainCamera = mMainCamera;
-
-		//CollisionManager::CollisionLayerCheck(enums::eLayerType::Player, enums::eLayerType::Pet, true);
-		//CollisionManager::CollisionLayerCheck(enums::eLayerType::Player, enums::eLayerType::Platform, true);
+		//CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Pet, true);
+		//CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Platform, true);
 
 		//UIManager::Push(eUIType::Button);
 	}

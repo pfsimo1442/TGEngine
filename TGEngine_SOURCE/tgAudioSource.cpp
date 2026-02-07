@@ -30,7 +30,7 @@ namespace tg
 		Vector3 pos = tr->GetPosition();
 		Vector3 vel = Vector3::Zero;
 
-		//mAudioClip->Set2DAttributes(pos, vel);
+		mAudioClip->Set3DAttributes(pos, vel);
 	}
 
 	void AudioSource::Render()
@@ -38,17 +38,17 @@ namespace tg
 
 	}
 
-	void AudioSource::Play()
+	void AudioSource::Play() const
 	{
 		mAudioClip->Play();
 	}
 
-	void AudioSource::Stop()
+	void AudioSource::Stop() const
 	{
 		mAudioClip->Stop();
 	}
 
-	void AudioSource::SetLoop(bool loop)
+	void AudioSource::SetLoop(bool loop) const
 	{
 		mAudioClip->SetLoop(loop);
 	}

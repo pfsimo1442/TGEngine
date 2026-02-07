@@ -8,12 +8,12 @@
 namespace tg
 {
 	Rigidbody::Rigidbody()
-		: Component(enums::eComponentType::Rigidbody)
+		: Component(eComponentType::Rigidbody)
 		, mbIsOnGround(false)
 		, mMass(1.0f)
 		, mFriction(0.0f)
 		, mForce(Vector2::Zero)
-		, mAcceleration(Vector2::Zero)
+		, mAccelation(Vector2::Zero)
 		, mVelocity(Vector2::Zero)
 		, mLimitedVelocity(Vector2(500.0f, 700.0f))
 		, mGravitationalAcceleration(Vector2(0.0f, 1000.0f))
@@ -30,8 +30,8 @@ namespace tg
 
 	void Rigidbody::Update()
 	{
-		//mAcceleration = mForce / mMass;
-		//mVelocity += mAcceleration * Time::DeltaTime();
+		//mAccelation = mForce / mMass;
+		//mVelocity += mAccelation * Time::DeltaTime();
 
 		//if (mbIsOnGround)
 		//{

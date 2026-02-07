@@ -7,12 +7,12 @@ namespace tg
 	{
 	public:
 		Rigidbody();
-		~Rigidbody();
+		virtual ~Rigidbody();
 
-		virtual void Initialize();
-		virtual void Update();
-		virtual void LateUpdate();
-		virtual void Render();
+		void Initialize() override;
+		void Update() override;
+		void LateUpdate() override;
+		void Render() override;
 
 		void SetMass(float mass) { mMass = mass; }
 		float GetMass() { return mMass; }
@@ -36,7 +36,7 @@ namespace tg
 		float mFriction;
 
 		Vector2 mForce;
-		Vector2 mAcceleration;
+		Vector2 mAccelation;
 		Vector2 mVelocity;
 		Vector2 mLimitedVelocity;
 		Vector2 mGravitationalAcceleration;

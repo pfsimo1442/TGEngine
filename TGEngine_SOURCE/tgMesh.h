@@ -20,10 +20,10 @@ namespace tg
 		};
 
 		Mesh();
-		~Mesh();
+		virtual ~Mesh();
 
-		virtual HRESULT Save(const std::wstring& path) override;
-		virtual HRESULT Load(const std::wstring& path) override;
+		HRESULT Save(const std::wstring& path) override;
+		HRESULT Load(const std::wstring& path) override;
 
 
 		bool CreateVB(const std::vector<graphics::Vertex>& vertices);

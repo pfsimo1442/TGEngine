@@ -32,7 +32,7 @@ namespace tg
 
     void CircleCollider2D::Render()
     {
-        Transform* tr = GetOwner()->GetComponent<Transform>();
+        const Transform* tr = GetOwner()->GetComponent<Transform>();
         Vector3 pos = tr->GetPosition();
     }
 }

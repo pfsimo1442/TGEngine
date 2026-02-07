@@ -7,12 +7,12 @@ namespace tg
 	{
 	public:
 		CapsuleCollider2D();
-		~CapsuleCollider2D();
+		virtual ~CapsuleCollider2D();
 
-		virtual void Initialize();
-		virtual void Update();
-		virtual void LateUpdate();
-		virtual void Render();
+		void Initialize() override;
+		void Update() override;
+		void LateUpdate() override;
+		void Render() override;
 		
 		//float GetHeight() { return mHeight; }
 		//void SetHeight(float height) { mHeight = height; }

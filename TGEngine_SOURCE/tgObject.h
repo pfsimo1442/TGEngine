@@ -21,7 +21,7 @@ namespace tg::object
 	}
 
 	template <typename T>
-	static T* Instantiate(eLayerType type, math::Vector3 position)
+	static T* Instantiate(eLayerType type, Vector3 position)
 	{
 		T* gameObject = new T();
 		gameObject->SetLayerType(type);
@@ -29,7 +29,7 @@ namespace tg::object
 		Layer* layer = activeScene->GetLayer(type);
 		layer->AddGameObject(gameObject);
 
-		Transform* tr = gameObject->GetComponent<Transform>();
+		Transform* tr = gameObject->template GetComponent<Transform>();
 		tr->SetPosition(position);
 
 		return gameObject;

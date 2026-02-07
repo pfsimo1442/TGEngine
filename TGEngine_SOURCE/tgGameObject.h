@@ -25,7 +25,7 @@ namespace tg
 		};
 
 		GameObject();
-		~GameObject();
+		virtual ~GameObject();
 
 		virtual void Initialize();
 		virtual void Update();
@@ -39,7 +39,7 @@ namespace tg
 			comp->Initialize();
 			comp->SetOwner(this);
 
-			mComponents[(UINT)comp->GetType()] = comp;
+			mComponents[static_cast<UINT>(comp->GetType())] = comp;
 
 			return comp;
 		}
@@ -56,18 +56,18 @@ namespace tg
 			return component;
 		}
 
+		eState GetActiveState() const { return mState; }
+
 		void SetActiveState(bool power)
 		{
 			if (power == true) mState = eState::Active;
 			if (power == false) mState = eState::Pause;
 		}
-		eState GetActiveState() const { return mState; }
-		void SetLayerType(eLayerType layerType) { mLayerType = layerType; }
-		eLayerType GetLayerType() const { return mLayerType; }
 
-		bool IsActive() const { return mState == eState::Active; }
-		bool IsPause() const { return mState == eState::Pause; }
-		bool IsDead() const { return mState == eState::Dead; }
+		[[nodiscard]] bool IsActive() const { return mState == eState::Active; }
+		[[nodiscard]] bool IsDead() const { return mState == eState::Dead; }
+		[[nodiscard]] eLayerType GetLayerType() const { return mLayerType; }
+		[[noreturn]] void SetLayerType(const eLayerType layerType) { mLayerType = layerType; }
 
 	private:
 		void initializeTransform();

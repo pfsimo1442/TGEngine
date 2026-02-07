@@ -16,8 +16,8 @@ namespace tg
 		Material();
 		virtual ~Material();
 
-		virtual HRESULT Save(const std::wstring& path) override;
-		virtual HRESULT Load(const std::wstring& path) override;
+		HRESULT Save(const std::wstring& path) override;
+		HRESULT Load(const std::wstring& path) override;
 
 		void Bind();
 		void BindShader();
@@ -28,7 +28,7 @@ namespace tg
 
 	private:
 		graphics::eRenderingMode mMode;
-		Material::Data mData;
+		Data mData;
 
 		graphics::Texture* mAlbedoTexture;
 		graphics::Shader* mShader;

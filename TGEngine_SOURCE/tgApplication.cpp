@@ -12,11 +12,8 @@ namespace tg
 {
 	Application::Application()
 		: mHwnd(nullptr)
-		, mHdc(nullptr)
 		, mWidth(0)
 		, mHeight(0)
-		, mBackHdc(NULL)
-		, mBackBitmap(NULL)
 		, mbLoaded(false)
 	{
 	}
@@ -26,10 +23,12 @@ namespace tg
 
 	void Application::Initialize(HWND hwnd, UINT width, UINT height)
 	{
+		mHwnd = hwnd;
+
 		AdjustWindowRect(hwnd, width, height);
 		InitializeEtc();
 
-		mGraphicDevice = std::make_unique<graphics::GraphicDevice_DX11>();
+		mGraphicDevice = std::make_unique<GraphicDevice_DX11>();
 		//renderer::Initialize();
 		mGraphicDevice->Initialize();
 		
@@ -41,10 +40,7 @@ namespace tg
 
 	void Application::AdjustWindowRect(HWND hwnd, UINT width, UINT height)
 	{
-		mHwnd = hwnd;
-		mHdc = GetDC(hwnd);
-
-		RECT rect = { 0, 0, (LONG)width, (LONG)height };
+		RECT rect = { 0, 0, static_cast<LONG>(width), static_cast<LONG>(height) };
 		::AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
 
 		mWidth = rect.right - rect.left;
@@ -91,17 +87,17 @@ namespace tg
 
 	void Application::Render()
 	{
-		graphics::GetDevice()->ClearRenderTargetView();
-		graphics::GetDevice()->ClearDepthStencilView();
-		graphics::GetDevice()->BindViewPort();
-		graphics::GetDevice()->BindDefaultRenderTarget();
+		GetDevice()->ClearRenderTargetView();
+		GetDevice()->ClearDepthStencilView();
+		GetDevice()->BindViewPort();
+		GetDevice()->BindDefaultRenderTarget();
 
 		Time::Render();
 		CollisionManager::Render();
 		UIManager::Render();
 		SceneManager::Render();
 	
-		graphics::GetDevice()->Present();
+		GetDevice()->Present();
 	}
 
 	void Application::Destroy()

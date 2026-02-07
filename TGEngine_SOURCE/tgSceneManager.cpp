@@ -9,7 +9,7 @@ namespace tg
 
     bool SceneManager::SetActiveScene(const std::wstring& name)
     {
-        std::map<std::wstring, Scene*>::iterator iter
+        auto iter
             = mScene.find(name);
 
         if (iter == mScene.end())

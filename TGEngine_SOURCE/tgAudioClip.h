@@ -10,15 +10,15 @@ namespace tg
 		AudioClip();
 		virtual ~AudioClip();
 
-		virtual HRESULT Save(const std::wstring& path) override;
-		virtual HRESULT Load(const std::wstring& path) override;
+		HRESULT Load(const std::wstring& path) override;
 
 		void Play();
 		void Stop();
 
-		void Set2DAttributes(const Vector2 pos, const Vector2 vel);
-		void Set3DAttributes(const Vector3 pos, const Vector3 vel);
-		void SetLoop(bool loop) { mbLoop = loop; }
+		void Set2DAttributes(Vector2 pos, Vector2 vel);
+		void Set3DAttributes(Vector3 pos, Vector3 vel);
+
+		[[noreturn]] void SetLoop(bool loop) { mbLoop = loop; }
 
 	private:
 		FMOD::Sound* mSound;
