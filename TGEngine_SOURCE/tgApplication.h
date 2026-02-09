@@ -19,6 +19,7 @@ namespace tg
 		void Update();
 		void LateUpdate();
 		void Render();
+		void Present();
 		void Destroy();
 		void Release();
 

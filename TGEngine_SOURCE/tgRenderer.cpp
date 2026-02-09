@@ -255,9 +255,9 @@ namespace tg::renderer
 
 	void LoadShaders()
 	{
-		Resources::Load<Shader>(L"TriangleShader", L"..\\Shaders_SOURCE\\Triangle");
-		Resources::Load<Shader>(L"SpriteDefaultShader", L"..\\Shaders_SOURCE\\SpriteDefault");
-		Resources::Load<Shader>(L"WireframeShader", L"..\\Shaders_SOURCE\\Wireframe");
+		Resources::Load<Shader>(L"TriangleShader", L"..//Shaders_SOURCE//Triangle");
+		Resources::Load<Shader>(L"SpriteDefaultShader", L"..//Shaders_SOURCE//SpriteDefault");
+		Resources::Load<Shader>(L"WireframeShader", L"..//Shaders_SOURCE//Wireframe");
 	}
 
 	void LoadMaterials()
@@ -270,7 +270,7 @@ namespace tg::renderer
 		Texture* texture = Resources::Find<Texture>(L"Player");
 		spriteMaterial->SetAlbedoTexture(texture);
 		spriteMaterial->SetShader(Resources::Find<Shader>(L"SpriteDefaultShader"));
-		Resources::Insert(L"Sprite-Default-Material", spriteMaterial);
+		Resources::Insert(L"SpriteDefaultMaterial", spriteMaterial);
 	}
 
 	void LoadConstantBuffers()

@@ -10,6 +10,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TGEngine_SOURCE", "TGEngine
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shaders_SOURCE", "Shaders_SOURCE\Shaders_SOURCE.vcxitems", "{2C2F8E80-61D6-4F1B-998A-13952751BE95}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Editor_SOURCE", "Editor_SOURCE\Editor_SOURCE.vcxitems", "{203BAB2C-D4AA-4DB9-8FA7-DDECFD3E4860}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -42,7 +44,9 @@ Global
 		SolutionGuid = {8BDCDE6C-9721-47A1-991C-A6C40178E23C}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Editor_SOURCE\Editor_SOURCE.vcxitems*{0cb83cbb-0fe0-4374-b9f8-4213963f877b}*SharedItemsImports = 4
 		TGEngine_SOURCE\TGEngine_SOURCE.vcxitems*{1d86f1a5-bd5b-44f9-a962-13c459eed1ef}*SharedItemsImports = 4
+		Editor_SOURCE\Editor_SOURCE.vcxitems*{203bab2c-d4aa-4db9-8fa7-ddecfd3e4860}*SharedItemsImports = 9
 		Shaders_SOURCE\Shaders_SOURCE.vcxitems*{2c2f8e80-61d6-4f1b-998a-13952751be95}*SharedItemsImports = 9
 		TGEngine_SOURCE\TGEngine_SOURCE.vcxitems*{391fad46-6027-401d-84bc-bca0b441a919}*SharedItemsImports = 9
 	EndGlobalSection
