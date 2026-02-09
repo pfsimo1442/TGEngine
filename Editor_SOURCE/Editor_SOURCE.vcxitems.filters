@@ -7,6 +7,9 @@
     <Filter Include="imgui\impl">
       <UniqueIdentifier>{b3656655-b0ef-4e78-be41-a9599455207c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="imGuizmo">
+      <UniqueIdentifier>{bb9b9607-17f1-40c0-a500-e2fd71616fce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)imconfig.h">
@@ -33,6 +36,27 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)imgui_impl_win32.h">
       <Filter>imgui\impl</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)GraphEditor.h">
+      <Filter>imGuizmo</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ImCurveEdit.h">
+      <Filter>imGuizmo</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ImGradient.h">
+      <Filter>imGuizmo</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ImGuizmo.h">
+      <Filter>imGuizmo</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ImLightRig.h">
+      <Filter>imGuizmo</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ImSequencer.h">
+      <Filter>imGuizmo</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)ImZoomSlider.h">
+      <Filter>imGuizmo</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)imgui.cpp">
@@ -55,6 +79,21 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)imgui_impl_win32.cpp">
       <Filter>imgui\impl</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)GraphEditor.cpp">
+      <Filter>imGuizmo</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ImCurveEdit.cpp">
+      <Filter>imGuizmo</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ImGradient.cpp">
+      <Filter>imGuizmo</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ImGuizmo.cpp">
+      <Filter>imGuizmo</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)ImSequencer.cpp">
+      <Filter>imGuizmo</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

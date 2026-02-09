@@ -9,12 +9,22 @@
 #include "..\\TGEngine_SOURCE\\tgResources.h"
 #include "..\\TGEngine_SOURCE\\tgTexture.h"
 #include "..\\TGEngine_SOURCE\\tgSceneManager.h"
+#include "..\\TGEngine_SOURCE\\tgRenderer.h"
+#include "..\\TGEngine_SOURCE\\tgGameObject.h"
+#include "..\\TGEngine_SOURCE\\tgTransform.h"
 
 #include "..\\TGEngine_Window\\tgLoadScenes.h"
 
+#define IMGUI_DEFINE_MATH_OPERATORS
 #include "imgui.h"
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
+
+#include "ImGuizmo.h"
+#include "ImSequencer.h"
+#include "ImZoomSlider.h"
+#include "ImCurveEdit.h"
+#include "GraphEditor.h"
 
 tg::Application application;
 
@@ -144,10 +154,50 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             //editor::Run()을 통해 에디터를 돌린다.
 
 
-        // Start the Dear ImGui frame
+            // Start the Dear ImGui frame
             ImGui_ImplDX11_NewFrame();
             ImGui_ImplWin32_NewFrame();
             ImGui::NewFrame();
+
+            //imGuizmo
+            ImGuiIO& io = ImGui::GetIO();
+
+            ImGuizmo::SetOrthographic(false/*!isPerspective*/);
+            ImGuizmo::SetDrawlist(ImGui::GetCurrentWindow()->DrawList);
+
+            ImGuizmo::BeginFrame();
+
+            UINT width = application.GetWidth();
+            UINT height = application.GetHeight();
+            float windowWidth = (float)ImGui::GetWindowWidth();
+            float windowHeight = (float)ImGui::GetWindowHeight();
+
+            RECT rect = { 0, 0, 0, 0 };
+            ::GetClientRect(application.GetHwnd(), &rect);
+
+            // Transform start
+            ImGuizmo::SetRect(0, 0, width, height);
+            //ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
+
+            Matrix viewMatirx;
+            Matrix projectionMatirx;
+
+            if (tg::renderer::mainCamera)
+            {
+                viewMatirx = tg::renderer::mainCamera->GetViewMatrix();
+                projectionMatirx = tg::renderer::mainCamera->GetProjectionMatrix();
+            }
+
+            Matrix modelMatrix;
+            if (tg::renderer::selectedObject)
+            {
+                modelMatrix = tg::renderer::selectedObject->GetComponent<tg::Transform>()->GetWorldMatrix();
+            }
+
+            ImGuizmo::Manipulate(*viewMatirx.m, *projectionMatirx.m,
+                ImGuizmo::OPERATION::TRANSLATE, ImGuizmo::LOCAL, *modelMatrix.m);
+
+            //ImGuizmo::SetDrawlist(ImGui::GetCurrentWindow()->DrawList);
 
             // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
             if (show_demo_window)
@@ -258,7 +308,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     const UINT height = 900;
 
     HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-        CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
+        0, 0, width, height, nullptr, nullptr, hInstance, nullptr);
 
     if (!hWnd)
     {
