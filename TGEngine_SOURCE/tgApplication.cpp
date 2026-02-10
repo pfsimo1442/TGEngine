@@ -29,8 +29,8 @@ namespace tg
 		InitializeEtc();
 
 		mGraphicDevice = std::make_unique<GraphicDevice_DX11>();
-		//renderer::Initialize();
 		mGraphicDevice->Initialize();
+		renderer::Initialize();
 		
 		Fmod::Initialize();
 		CollisionManager::Initialize();

@@ -268,8 +268,6 @@ namespace tg::renderer
 		Resources::Insert(L"TriangleMaterial", triangleMaterial);
 
 		auto spriteMaterial = new Material();
-		Texture* texture = Resources::Find<Texture>(L"Player");
-		spriteMaterial->SetAlbedoTexture(texture);
 		spriteMaterial->SetShader(Resources::Find<Shader>(L"SpriteDefaultShader"));
 		Resources::Insert(L"SpriteDefaultMaterial", spriteMaterial);
 	}
