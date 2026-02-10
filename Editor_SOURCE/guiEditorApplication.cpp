@@ -18,6 +18,7 @@ namespace gui
 
 	void EditorApplication::Update()
 	{
+
 	}
 
 	void EditorApplication::OnGUI()

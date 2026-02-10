@@ -26,7 +26,6 @@ namespace gui
 	void Editor::OnEnable()
 	{
 	}
-
 	void Editor::OnDisable()
 	{
 	}

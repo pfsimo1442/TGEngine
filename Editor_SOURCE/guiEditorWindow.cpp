@@ -4,6 +4,7 @@ namespace gui
 {
 	EditorWindow::EditorWindow()
 		: Entity()
+		, mFlag(ImGuiWindowFlags_None)
 	{
 	}
 	EditorWindow::~EditorWindow()
@@ -22,11 +23,17 @@ namespace gui
 
 	void EditorWindow::OnGUI()
 	{
+
 	}
+
+	void EditorWindow::Run()
+	{
+
+	}
+
 	void EditorWindow::OnEnable()
 	{
 	}
-
 	void EditorWindow::OnDisable()
 	{
 	}
