@@ -12,7 +12,7 @@ namespace tg
 
 		void Initialize(HWND hwnd, int width, int height);
 		void AdjustWindowRect(HWND hwnd, int width, int height);
-		void ReszieGraphicDevice(int width, int height);
+		void ResizeGraphicDevice();
 		void InitializeEtc();
 
 		void Run();

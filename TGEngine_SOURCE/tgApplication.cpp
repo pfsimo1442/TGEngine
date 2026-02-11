@@ -57,7 +57,7 @@ namespace tg
 		ShowWindow(hwnd, true);
 	}
 
-	void Application::ReszieGraphicDevice(int width, int height)
+	void Application::ResizeGraphicDevice()
 	{
 		if (mGraphicDevice == nullptr)
 			return;
@@ -72,8 +72,8 @@ namespace tg
 		viewport.MinDepth = 0.0f;
 		viewport.MaxDepth = 1.0f;
 
-		mWidth = width;
-		mHeight = height;
+		mWidth = viewport.Width;
+		mHeight = viewport.Height;
 
 		mGraphicDevice->Resize(viewport);
 	}
