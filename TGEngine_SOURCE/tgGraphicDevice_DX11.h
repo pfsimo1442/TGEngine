@@ -25,6 +25,7 @@ namespace tg::graphics
 		bool CreateRasterizerState(const D3D11_RASTERIZER_DESC* pRasterizerDesc, ID3D11RasterizerState** ppRasterizerState);
 		bool CreateBlendState(const D3D11_BLEND_DESC* pBlendState, ID3D11BlendState** ppBlendState);
 		bool CreateDepthStencilState(const D3D11_DEPTH_STENCIL_DESC* pDepthStencilDesc, ID3D11DepthStencilState** ppDepthStencilState);
+		bool Resize(D3D11_VIEWPORT viewport);
 
 		void SetDataGpuBuffer(ID3D11Buffer* buffer, void* data, UINT size);
 		void SetShaderResource(eShaderStage stage, UINT startSlot, ID3D11ShaderResourceView** ppSRV);
