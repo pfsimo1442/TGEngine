@@ -5,20 +5,29 @@
 #include "..\\TGEngine_SOURCE\\tgRenderer.h"
 #include "..\\TGEngine_SOURCE\\tgGameObject.h"
 #include "..\\TGEngine_SOURCE\\tgTransform.h"
+#include "..\\TGEngine_SOURCE\\tgInput.h"
 
 extern tg::Application application;
 
 namespace gui
 {
+	std::map<std::wstring, EditorWindow*> EditorApplication::mEditorWindows;
 	ImGuiWindowFlags EditorApplication::mFlag = ImGuiWindowFlags_None;
 	ImGuiDockNodeFlags EditorApplication::mDockspaceFlags = ImGuiDockNodeFlags_None;
 	EditorApplication::eState EditorApplication::mState = EditorApplication::eState::Active;
 	bool EditorApplication::mFullScreen = true;
-	std::map<std::wstring, EditorWindow*> EditorApplication::mEditorWindows;
+	tg::math::Vector2 EditorApplication::mViewportBounds[2] = {};
+	tg::math::Vector2 EditorApplication::mViewportSize;
+	bool EditorApplication::mViewportFocused = false;
+	bool EditorApplication::mViewportHovered = false;
+	int EditorApplication::mGuizmoType = -1;
+
+	tg::graphics::RenderTarget* EditorApplication::mFrameBuffer = nullptr;
 
 	bool EditorApplication::Initialize()
 	{
 		imGguiInitialize();
+		mFrameBuffer = tg::renderer::FrameBuffer;
 
 		InspectorWindow* inspector = new InspectorWindow();
 		mEditorWindows.insert(std::make_pair(L"InspectorWindow", inspector));
@@ -76,6 +85,11 @@ namespace gui
 
 	}
 
+	void EditorApplication::OpenScene(const std::filesystem::path& path)
+	{
+
+	}
+
 	bool EditorApplication::imGguiInitialize()
 	{
 		// Setup Dear ImGui context
@@ -86,6 +100,7 @@ namespace gui
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // Enable Docking
 		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;       // Enable Multi-Viewport / Platform Windows
+
 		//io.ConfigViewportsNoAutoMerge = true;
 		//io.ConfigViewportsNoTaskBarIcon = true;
 		//io.ConfigViewportsNoDefaultParent = true;
@@ -115,7 +130,40 @@ namespace gui
 
 		ImGui_ImplDX11_Init(device, device_context);
 
-		return false;
+		// Ensure we have the frame buffer reference for later sizing calculations
+		mFrameBuffer = tg::renderer::FrameBuffer;
+
+		// Initialize DisplaySize / DisplayFramebufferScale to match window and render target
+		RECT clientRect = {};
+		::GetClientRect(application.GetHwnd(), &clientRect);
+		const float clientW = static_cast<float>(clientRect.right - clientRect.left);
+		const float clientH = static_cast<float>(clientRect.bottom - clientRect.top);
+
+		float fbW = clientW;
+		float fbH = clientH;
+		if (mFrameBuffer)
+		{
+			auto& spec = mFrameBuffer->GetSpecification();
+			if (spec.Width > 0 && spec.Height > 0)
+			{
+				fbW = static_cast<float>(spec.Width);
+				fbH = static_cast<float>(spec.Height);
+			}
+		}
+
+		// io.DisplaySize should be logical (window/client) size.
+		// io.DisplayFramebufferScale = framebuffer_pixels / logical_pixels
+		io.DisplaySize = ImVec2((clientW > 0.0f) ? clientW : fbW, (clientH > 0.0f) ? clientH : fbH);
+		io.DisplayFramebufferScale = ImVec2(
+			(clientW > 0.0f) ? (fbW / clientW) : 1.0f,
+			(clientH > 0.0f) ? (fbH / clientH) : 1.0f
+		);
+
+		// Backend flags
+		io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors; // We can honor GetMouseCursor() values
+		io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos; // We can set mouse pos (optional)
+
+		return true;
 	}
 
 	void EditorApplication::imGuiRender()
@@ -145,6 +193,7 @@ namespace gui
 		ImGui_ImplDX11_NewFrame();
 		ImGui_ImplWin32_NewFrame();
 		ImGui::NewFrame();
+		ImGuizmo::BeginFrame();
 
 		// We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not dockable into,
 		// because it would be confusing to have two docking targets within each others.
@@ -237,7 +286,93 @@ namespace gui
 
 		// viewport
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
-		ImGui::Begin("Viewport");
+		ImGui::Begin("Scene");
+
+		auto viewportMinRegion = ImGui::GetWindowContentRegionMin(); // 씬뷰의 최소 좌표
+		auto viewportMaxRegion = ImGui::GetWindowContentRegionMax(); // 씬뷰의 최대 좌표
+		auto viewportOffset = ImGui::GetWindowPos(); // 씬뷰의 위치
+
+		const int letTop = 0;
+		const int rightBottom = 1;
+		mViewportBounds[letTop] = { viewportMinRegion.x + viewportOffset.x, viewportMinRegion.y + viewportOffset.y };
+		mViewportBounds[rightBottom] = { viewportMaxRegion.x + viewportOffset.x, viewportMaxRegion.y + viewportOffset.y };
+
+		// check if the mouse,keyboard is on the Sceneview
+		mViewportFocused = ImGui::IsWindowFocused();
+		mViewportHovered = ImGui::IsWindowHovered();
+
+		// to do : mouse, keyboard event
+		// 
+
+		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
+		mViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
+		tg::graphics::Texture* texture = mFrameBuffer->GetAttachmentTexture(0);
+		ImGui::Image((ImTextureID)texture->GetSRV().Get(), ImVec2{ mViewportSize.x, mViewportSize.y }
+		, ImVec2{ 0, 0 }, ImVec2{ 1, 1 });
+
+		// Open Scene by drag and drop
+		if (ImGui::BeginDragDropTarget())
+		{
+			if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("PROJECT_ITEM"))
+			{
+				const wchar_t* path = (const wchar_t*)payload->Data;
+				OpenScene(path);
+			}
+			ImGui::EndDragDropTarget();
+		}
+
+		// To do : guizmo
+		tg::GameObject* selectedObject = tg::renderer::selectedObject;
+		mGuizmoType = ImGuizmo::OPERATION::TRANSLATE;
+		if (selectedObject && mGuizmoType != -1)
+		{
+			ImGuizmo::SetOrthographic(false);
+			ImGuizmo::SetDrawlist();
+			ImGuizmo::SetRect(mViewportBounds[0].x, mViewportBounds[0].y
+				, mViewportBounds[1].x - mViewportBounds[0].x, mViewportBounds[1].y - mViewportBounds[0].y);
+
+			// To do : guizmo...
+			// game view camera setting
+
+			// Scene Camera
+			const tg::math::Matrix& viewMatrix = tg::renderer::mainCamera->GetViewMatrix();
+			const tg::math::Matrix& projectionMatrix = tg::renderer::mainCamera->GetProjectionMatrix();
+
+			// Object Transform
+			tg::Transform* transform = selectedObject->GetComponent<tg::Transform>();
+			tg::math::Matrix worldMatrix = transform->GetWorldMatrix();
+
+			// snapping
+			bool snap = tg::Input::GetKey(tg::eKeyCode::Ctrl_Left);
+			float snapValue = 0.5f;
+
+			// snap to 45 degrees for rotation
+			if (mGuizmoType == ImGuizmo::OPERATION::ROTATE)
+				snapValue = 45.0f;
+
+			float snapValues[3] = { snapValue, snapValue, snapValue };
+
+			ImGuizmo::Manipulate(*viewMatrix.m, *projectionMatrix.m, static_cast<ImGuizmo::OPERATION>(mGuizmoType)
+				, ImGuizmo::LOCAL, *worldMatrix.m, nullptr, snap ? snapValues : nullptr);
+
+			if (ImGuizmo::IsUsing())
+			{
+				// Decompose matrix to translation, rotation and scale
+				float translation[3];
+				float rotation[3];
+				float scale[3];
+				ImGuizmo::DecomposeMatrixToComponents(*worldMatrix.m, translation, rotation, scale);
+
+				// delta rotation from the current rotation
+				tg::math::Vector3 deltaRotation = Vector3(rotation) - transform->GetRotation();
+				deltaRotation = transform->GetRotation() + deltaRotation;
+
+				// set the new transform
+				transform->SetScale(Vector3(scale));
+				transform->SetRotation(Vector3(deltaRotation));
+				transform->SetPosition(Vector3(translation));
+			}
+		}
 
 		ImGui::End();
 		ImGui::PopStyleVar();

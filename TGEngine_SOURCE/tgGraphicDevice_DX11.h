@@ -22,6 +22,7 @@ namespace tg::graphics
 			, const void* pShaderBytecodeWithInputSignature, SIZE_T BytecodeLength, ID3D11InputLayout** ppInputLayout);
 		bool CreateBuffer(const D3D11_BUFFER_DESC* pDesc, const D3D11_SUBRESOURCE_DATA* pInitialData, ID3D11Buffer** ppBuffer);
 		bool CreateShaderResourceView(ID3D11Resource* pResource, const D3D11_SHADER_RESOURCE_VIEW_DESC* pDesc, ID3D11ShaderResourceView** ppSRView);
+		bool CreateUnorderedAccessView(ID3D11Resource* pResource, const D3D11_UNORDERED_ACCESS_VIEW_DESC* pDesc, ID3D11UnorderedAccessView** ppUAView);
 		bool CreateRasterizerState(const D3D11_RASTERIZER_DESC* pRasterizerDesc, ID3D11RasterizerState** ppRasterizerState);
 		bool CreateBlendState(const D3D11_BLEND_DESC* pBlendState, ID3D11BlendState** ppBlendState);
 		bool CreateDepthStencilState(const D3D11_DEPTH_STENCIL_DESC* pDepthStencilDesc, ID3D11DepthStencilState** ppDepthStencilState);
@@ -46,6 +47,8 @@ namespace tg::graphics
 		void BindRenderTargets(UINT NumViews = 1, ID3D11RenderTargetView* const* ppRTViews = nullptr, ID3D11DepthStencilView* pDSView = nullptr);
 		void BindDefaultRenderTarget();
 
+		void CopyResource(ID3D11Resource* pDstResource, ID3D11Resource* pSrcResource);
+
 		void ClearRenderTargetView();
 		void ClearDepthStencilView();
 
@@ -57,11 +60,14 @@ namespace tg::graphics
 		Microsoft::WRL::ComPtr<ID3D11Device> GetID3D11Device() { return mDevice; }
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext> GetID3D11DeviceContext() { return mContext; }
 
+		Microsoft::WRL::ComPtr<ID3D11Texture2D> GetFrameBuffer() { return mFrameBuffer; }
+
 	private:
 		Microsoft::WRL::ComPtr<ID3D11Device> mDevice;
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext> mContext;
-		Microsoft::WRL::ComPtr<ID3D11Texture2D> mRenderTarget;
-		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> mRenderTargetView;
+		Microsoft::WRL::ComPtr<ID3D11Texture2D> mFrameBuffer;
+		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> mFrameBufferView;
+
 		Microsoft::WRL::ComPtr<ID3D11Texture2D> mDepthStencil;
 		Microsoft::WRL::ComPtr<ID3D11DepthStencilView> mDepthStencilView;
 

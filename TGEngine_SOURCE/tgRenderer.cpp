@@ -5,6 +5,9 @@
 #include "tgMesh.h"
 #include "tgShader.h"
 #include "tgMaterial.h"
+#include "tgApplication.h"
+
+extern tg::Application application;
 
 namespace tg::renderer
 {
@@ -15,6 +18,8 @@ namespace tg::renderer
 	Microsoft::WRL::ComPtr<ID3D11RasterizerState> rasterizerStates[static_cast<UINT>(eRasterizerState::End)] = {};
 	Microsoft::WRL::ComPtr<ID3D11BlendState> blendStates[static_cast<UINT>(eBlendState::End)] = {};
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> depthStencilStates[static_cast<UINT>(eDepthStencilState::End)] = {};
+
+	RenderTarget* FrameBuffer = nullptr;
 
 	void LoadStates()
 	{
@@ -278,6 +283,16 @@ namespace tg::renderer
 		constantBuffers[CBSLOT_TRANSFORM]->Create(sizeof(TransformCB));
 	}
 
+	void LoadFrameBuffer()
+	{
+		RenderTargetSpecification spec;
+		spec.Attachments = { eRenderTragetFormat::RGBA8, eRenderTragetFormat::Depth };
+		spec.Width = application.GetWidth();
+		spec.Height = application.GetHeight();
+
+		FrameBuffer = RenderTarget::Create(spec);
+	}
+
 	void Initialize()
 	{
 		LoadStates();
@@ -285,10 +300,14 @@ namespace tg::renderer
 		LoadMeshes();
 		LoadMaterials();
 		LoadConstantBuffers();
+		LoadFrameBuffer();
 	}
 
 	void Release()
 	{
+		delete FrameBuffer;
+		FrameBuffer = nullptr;
+
 		for (UINT i = 0; i < static_cast<UINT>(eCBType::End); i++)
 		{
 			delete constantBuffers[i];

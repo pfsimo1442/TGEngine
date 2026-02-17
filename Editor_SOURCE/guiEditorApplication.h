@@ -2,6 +2,8 @@
 #include "guiEditor.h"
 #include "guiEditorWindow.h"
 
+#include "..//TGEngine_SOURCE//tgRenderTarget.h"
+
 namespace gui
 {
 	/// <summary>
@@ -57,16 +59,23 @@ namespace gui
 		static void NewScene();
 		static void SaveScene();
 		static void SaveSceneAs();
+		static void OpenScene(const std::filesystem::path& path);
 
 	private:
 		static bool imGguiInitialize();
 		static void imGuiRender();
 
+		static std::map<std::wstring, EditorWindow*> mEditorWindows;
 		static ImGuiWindowFlags mFlag;
 		static ImGuiDockNodeFlags mDockspaceFlags;
 		static eState mState;
 		static bool mFullScreen;
+		static tg::math::Vector2 mViewportBounds[2];
+		static tg::math::Vector2 mViewportSize;
+		static bool mViewportFocused;
+		static bool mViewportHovered;
+		static int mGuizmoType;
 
-		static std::map<std::wstring, EditorWindow*> mEditorWindows;
+		static tg::graphics::RenderTarget* mFrameBuffer;
 	};
 }

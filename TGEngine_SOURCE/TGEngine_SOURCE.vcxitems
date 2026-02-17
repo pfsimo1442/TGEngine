@@ -46,6 +46,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgMesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgRenderTarget.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgResources.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgRigidbody.h" />
@@ -94,6 +95,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgMesh.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgRenderTarget.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgResources.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgRigidbody.cpp" />
