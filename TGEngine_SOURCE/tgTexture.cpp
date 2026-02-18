@@ -13,6 +13,11 @@ namespace tg::graphics
 	}
 	Texture::~Texture()
 	{
+		mUAV.Reset();
+		mSRV.Reset();
+		mRTV.Reset();
+		mDSV.Reset();
+		mTexture.Reset();
 	}
 	
 	HRESULT Texture::Save(const std::wstring& path)

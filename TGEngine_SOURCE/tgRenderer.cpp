@@ -305,13 +305,28 @@ namespace tg::renderer
 
 	void Release()
 	{
-		delete FrameBuffer;
-		FrameBuffer = nullptr;
+		if (FrameBuffer)
+		{
+			delete FrameBuffer;
+			FrameBuffer = nullptr;
+		}
 
 		for (UINT i = 0; i < static_cast<UINT>(eCBType::End); i++)
 		{
 			delete constantBuffers[i];
 			constantBuffers[i] = nullptr;
 		}
+
+		for (UINT i = 0; i < static_cast<UINT>(eSamplerType::End); ++i)
+			samplerStates[i].Reset();
+		for (UINT i = 0; i < static_cast<UINT>(eRasterizerState::End); ++i)
+			rasterizerStates[i].Reset();
+		for (UINT i = 0; i < static_cast<UINT>(eBlendState::End); ++i)
+			blendStates[i].Reset();
+		for (UINT i = 0; i < static_cast<UINT>(eDepthStencilState::End); ++i)
+			depthStencilStates[i].Reset();
+
+		mainCamera = nullptr;
+		selectedObject = nullptr;
 	}
 }

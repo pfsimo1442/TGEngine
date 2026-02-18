@@ -169,5 +169,17 @@ namespace tg
 		SceneManager::Release();
 		UIManager::Release();
 		Resources::Release();
+
+		Fmod::Release();
+
+		renderer::Release();
+
+		if (mGraphicDevice)
+		{
+			mGraphicDevice.reset();
+		}
+
+		mbLoaded = false;
+		mbRunning = false;
 	}
 }

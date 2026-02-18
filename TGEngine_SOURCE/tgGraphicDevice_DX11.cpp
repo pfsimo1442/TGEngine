@@ -20,6 +20,24 @@ namespace tg::graphics
 	}
 	GraphicDevice_DX11::~GraphicDevice_DX11()
 	{
+		if (mContext)
+		{
+			mContext->ClearState();
+			mContext.Reset();
+		}
+
+		mFrameBufferView.Reset();
+		mFrameBuffer.Reset();
+
+		mDepthStencilView.Reset();
+		mDepthStencil.Reset();
+
+		mSwapChain.Reset();
+		mSamplers.Reset();
+
+		mDevice.Reset();
+
+		GetDevice() = nullptr;
 	}
 
 	bool GraphicDevice_DX11::CreateDevice()
