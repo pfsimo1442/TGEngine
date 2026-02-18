@@ -31,7 +31,6 @@
 namespace tg
 {
 	PlayScene::PlayScene()
-		: mPlayer(nullptr)
 	{
 	}
 	PlayScene::~PlayScene()
@@ -44,19 +43,22 @@ namespace tg
 
 		//// Main Camera
 		GameObject* camera = object::Instantiate<GameObject>(eLayerType::None, Vector3(0.0f, 0.0f, -10.0f));
+
 		Camera* cameraComp = camera->AddComponent<Camera>();
-		cameraComp->SetProjectionType(Camera::eProjectionType::Orthographic);
+		cameraComp->SetProjectionType(Camera::eProjectionType::Perspective);
 		cameraComp->SetSize(200.0f);
 
 		CameraScript* cameraScript = camera->AddComponent<CameraScript>();
 		renderer::mainCamera = cameraComp;
 
 		//// Player
-		mPlayer = object::Instantiate<Player>(eLayerType::Player);
-		object::DontDestroyOnLoad(mPlayer);
+		GameObject* player = object::Instantiate<Player>(eLayerType::Player);
+		object::DontDestroyOnLoad(player);
 
-		SpriteRenderer* sr = mPlayer->AddComponent<SpriteRenderer>();
+		SpriteRenderer* sr = player->AddComponent<SpriteRenderer>();
 		sr->SetSprite(Resources::Find<graphics::Texture>(L"Player"));
+
+		renderer::selectedObject = player;
 	}
 
 	void PlayScene::Update()

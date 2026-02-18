@@ -65,7 +65,7 @@ namespace tg
 		std::function<void()>& GetCompleteEvent(const std::wstring& name);
 		std::function<void()>& GetEndEvent(const std::wstring& name);
 
-		[[nodiscard]] bool IsCompleteAnimation() const { return mActiveAnimation->IsComplete(); }
+		bool IsCompleteAnimation() const { return mActiveAnimation->IsComplete(); }
 
 	private:
 		std::map<std::wstring, Animation*> mAnimations;

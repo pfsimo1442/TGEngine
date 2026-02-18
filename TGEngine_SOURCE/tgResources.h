@@ -54,6 +54,8 @@ namespace tg
 				delete iter.second;
 				iter.second = nullptr;
 			}
+
+			mResources.clear();
 		}
 
 	private:

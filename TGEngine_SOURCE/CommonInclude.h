@@ -16,12 +16,8 @@
 #include <math.h>
 
 #include <mmsystem.h>
+#define DIRECTINPUT_VERSION 0x0800
 #include <dinput.h>
-#pragma comment(lib, "Msimg32.lib")
-#pragma comment(lib, "winmm.lib")
-
-#include <gdiplus.h>
-#pragma comment(lib, "gdiplus.lib")
 
 #include "tgEnums.h"
 #include "tgMath.h"

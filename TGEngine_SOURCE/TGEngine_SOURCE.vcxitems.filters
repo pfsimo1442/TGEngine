@@ -137,6 +137,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgInputLayout.cpp">
       <Filter>Graphics\InputLayout</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgRenderTarget.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -283,6 +286,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgInputLayout.h">
       <Filter>Graphics\InputLayout</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgRenderTarget.h">
+      <Filter>Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

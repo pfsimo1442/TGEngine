@@ -28,7 +28,8 @@ namespace tg
 
 	HRESULT AudioClip::Load(const std::wstring& path)
 	{
-		std::string cPath(path.begin(), path.end());
+		//std::string cPath(path.begin(), path.end());
+		std::string cPath = std::filesystem::path(path).string();
 		if (!Fmod::CreateSound(cPath, &mSound))
 			return S_FALSE;
 		
