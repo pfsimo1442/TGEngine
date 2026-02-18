@@ -19,17 +19,25 @@ namespace tg::graphics
 
 		void Bind();
 
-		[[discard]] Microsoft::WRL::ComPtr<ID3DBlob> GetVSBlob() const { return mVSBlob; }
-		[[discard]] Microsoft::WRL::ComPtr<ID3DBlob> GetHSBlob() const { return mHSBlob; }
-		[[discard]] Microsoft::WRL::ComPtr<ID3DBlob> GetDSBlob() const { return mDSBlob; }
-		[[discard]] Microsoft::WRL::ComPtr<ID3DBlob> GetGSBlob() const { return mGSBlob; }
-		[[discard]] Microsoft::WRL::ComPtr<ID3DBlob> GetPSBlob() const { return mPSBlob; }
+		Microsoft::WRL::ComPtr<ID3DBlob> GetVSBlob() const { return mVSBlob; }
+		Microsoft::WRL::ComPtr<ID3DBlob> GetHSBlob() const { return mHSBlob; }
+		Microsoft::WRL::ComPtr<ID3DBlob> GetDSBlob() const { return mDSBlob; }
+		Microsoft::WRL::ComPtr<ID3DBlob> GetGSBlob() const { return mGSBlob; }
+		Microsoft::WRL::ComPtr<ID3DBlob> GetPSBlob() const { return mPSBlob; }
 
-		[[noreturn]] void SetRasterizerState(const eRasterizerState state) { mRasterizerState = state; }
-		[[noreturn]] void SetBlendState(const eBlendState state) { mBlendState = state; }
-		[[noreturn]] void SetDepthStencilState(const eDepthStencilState state) { mDepthStencilState = state; }
+		Microsoft::WRL::ComPtr<ID3D11VertexShader> GetVS() const { return mVS; }
+		Microsoft::WRL::ComPtr<ID3D11HullShader> GetHS() const { return mHS; }
+		Microsoft::WRL::ComPtr<ID3D11DomainShader> GetDS() const { return mDS; }
+		Microsoft::WRL::ComPtr<ID3D11GeometryShader> GetGS() const { return mGS; }
+		Microsoft::WRL::ComPtr<ID3D11PixelShader> GetPS() const { return mPS; }
+
+		void SetRasterizerState(const eRasterizerState state) { mRasterizerState = state; }
+		void SetBlendState(const eBlendState state) { mBlendState = state; }
+		void SetDepthStencilState(const eDepthStencilState state) { mDepthStencilState = state; }
 
 	private:
+		static bool bWireframe;
+
 		Microsoft::WRL::ComPtr<ID3DBlob> mVSBlob;
 		Microsoft::WRL::ComPtr<ID3DBlob> mHSBlob;
 		Microsoft::WRL::ComPtr<ID3DBlob> mDSBlob;

@@ -5,16 +5,12 @@
 #include "Editor_Window.h"
 
 #include "..\\TGEngine_SOURCE\\tgApplication.h"
-#include "..\\TGEngine_SOURCE\\tgResources.h"
-#include "..\\TGEngine_SOURCE\\tgTexture.h"
-#include "..\\TGEngine_SOURCE\\tgSceneManager.h"
 
 #include "..\\TGEngine_Window\\tgLoadScenes.h"
 
-tg::Application application;
+#include "guiEditorApplication.h"
 
-ULONG_PTR gpToken;
-Gdiplus::GdiplusStartupInput gpsi;
+tg::Application application;
 
 #define MAX_LOADSTRING 100
 
@@ -49,17 +45,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // 애플리케이션 초기화를 수행합니다:
     if (!InitInstance (hInstance, nCmdShow))
-    {
         return FALSE;
-    }
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_EDITORWINDOW));
     
     MSG msg;
-    tg::LoadScenes();
 
     // Peek Message Loop
-    while (true)
+    while (application.IsRunning())
     {
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
@@ -74,9 +67,17 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
         else
         {
+            // application logic
             application.Run();
+
+			// editor logic
+            gui::EditorApplication::Run();
+
+            application.Present();
         }
     }
+
+    gui::EditorApplication::Release();
     application.Release();
 
     return (int) msg.wParam;
@@ -126,15 +127,12 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     const UINT height = 900;
 
     HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-        CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
+        CW_USEDEFAULT, CW_USEDEFAULT, width, height, nullptr, nullptr, hInstance, nullptr);
 
     if (!hWnd)
     {
         return FALSE;
     }
-
-    ShowWindow(hWnd, nCmdShow);
-    UpdateWindow(hWnd);
 
     HRESULT hr = CoInitializeEx(nullptr, COINIT_MULTITHREADED);
     if (FAILED(hr))
@@ -142,8 +140,14 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
     application.Initialize(hWnd, width, height);
 
+    tg::LoadScenes();
+    gui::EditorApplication::Initialize();
+
     return TRUE;
 }
+
+// Forward declare message handler from imgui_impl_win32.cpp
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 //
 //  함수: WndProc(HWND, UINT, WPARAM, LPARAM)
@@ -157,6 +161,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+    if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam))
+        return true;
+
     switch (message)
     {
     case WM_COMMAND:
@@ -176,6 +183,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
         }
         break;
+    case WM_SIZE:
+        {
+            application.ResizeGraphicDevice();
+        }
+    break;
     case WM_PAINT:
         {
             PAINTSTRUCT ps;
@@ -185,6 +197,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
 
             EndPaint(hWnd, &ps);
+        }
+        break;
+    case WM_DPICHANGED:
+        if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_DpiEnableScaleViewports)
+        {
+            //const int dpi = HIWORD(wParam);
+            //printf("WM_DPICHANGED to %d (%.0f%%)\n", dpi, (float)dpi / 96.0f * 100.0f);
+            const RECT* suggested_rect = (RECT*)lParam;
+            ::SetWindowPos(hWnd, NULL, suggested_rect->left, suggested_rect->top
+                , suggested_rect->right - suggested_rect->left, suggested_rect->bottom - suggested_rect->top, SWP_NOZORDER | SWP_NOACTIVATE);
         }
         break;
     case WM_DESTROY:

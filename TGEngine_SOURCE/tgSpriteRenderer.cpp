@@ -22,7 +22,7 @@ namespace tg
 	{
 		mMesh = Resources::Find<Mesh>(L"RectMesh");
 
-		mMaterial = Resources::Find<Material>(L"Sprite-Default-Material");
+		mMaterial = Resources::Find<Material>(L"SpriteDefaultMaterial");
 	}
 
 	void SpriteRenderer::Update()

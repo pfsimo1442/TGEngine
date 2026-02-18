@@ -1,8 +1,11 @@
 #include "tgShader.h"
 #include "tgRenderer.h"
+#include "tgResources.h"
 
 namespace tg::graphics
 {
+	bool Shader::bWireframe = false;
+
 	Shader::Shader()
 		: Resource(eResourceType::Shader)
 		, mRasterizerState(eRasterizerState::SolidBack)
@@ -61,6 +64,23 @@ namespace tg::graphics
 
 	void Shader::Bind()
 	{
+		if (bWireframe)
+		{
+			Shader* wireframeShader = Resources::Find<Shader>(L"WireframeShader");
+			Microsoft::WRL::ComPtr<ID3D11VertexShader> wireframeShaderVS = wireframeShader->GetVS();
+			Microsoft::WRL::ComPtr<ID3D11PixelShader> wireframeShaderPS = wireframeShader->GetPS();
+			Microsoft::WRL::ComPtr<ID3D11RasterizerState> wireframeRasterizerState
+				= renderer::rasterizerStates[static_cast<UINT>(eRasterizerState::Wireframe)];
+
+			GetDevice()->BindVS(wireframeShaderVS.Get());
+			GetDevice()->BindPS(wireframeShaderPS.Get());
+			GetDevice()->BindRasterizerState(wireframeRasterizerState.Get());
+			GetDevice()->BindBlendState(renderer::blendStates[static_cast<UINT>(mBlendState)].Get(), nullptr, 0xffffff);
+			GetDevice()->BindDepthStencilState(renderer::depthStencilStates[static_cast<UINT>(mDepthStencilState)].Get(), 0);
+
+			return;
+		}
+
 		if (mVS)
 			GetDevice()->BindVS(mVS.Get());
 		if (mPS)

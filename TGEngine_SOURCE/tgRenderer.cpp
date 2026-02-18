@@ -5,15 +5,21 @@
 #include "tgMesh.h"
 #include "tgShader.h"
 #include "tgMaterial.h"
+#include "tgApplication.h"
+
+extern tg::Application application;
 
 namespace tg::renderer
 {
 	Camera* mainCamera = nullptr;
+	GameObject* selectedObject = nullptr;
 	ConstantBuffer* constantBuffers[static_cast<UINT>(eCBType::End)] = {};
 	Microsoft::WRL::ComPtr<ID3D11SamplerState> samplerStates[static_cast<UINT>(eSamplerType::End)] = {};
 	Microsoft::WRL::ComPtr<ID3D11RasterizerState> rasterizerStates[static_cast<UINT>(eRasterizerState::End)] = {};
 	Microsoft::WRL::ComPtr<ID3D11BlendState> blendStates[static_cast<UINT>(eBlendState::End)] = {};
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> depthStencilStates[static_cast<UINT>(eDepthStencilState::End)] = {};
+
+	RenderTarget* FrameBuffer = nullptr;
 
 	void LoadStates()
 	{
@@ -99,7 +105,7 @@ namespace tg::renderer
 		rsDesc.FillMode = D3D11_FILL_WIREFRAME;
 		rsDesc.CullMode = D3D11_CULL_NONE;
 		GetDevice()->CreateRasterizerState(
-			&rsDesc, rasterizerStates[static_cast<UINT>(eRasterizerState::WireFrame)].GetAddressOf());
+			&rsDesc, rasterizerStates[static_cast<UINT>(eRasterizerState::Wireframe)].GetAddressOf());
 #pragma endregion
 #pragma region blend state
 		D3D11_BLEND_DESC bsDesc = {};
@@ -199,7 +205,6 @@ namespace tg::renderer
 		vertexes[1].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
 		vertexes[1].uv = Vector2(1.0f, 0.0f);
 
-		vertexes[2].pos = Vector3(-0.5f, -0.5f, 0.0f);
 		vertexes[2].pos = Vector3(0.5f, -0.5f, 0.0f);
 		vertexes[2].color = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
 		vertexes[2].uv = Vector2(1.0f, 1.0f);
@@ -238,7 +243,7 @@ namespace tg::renderer
 		inputLayoutDesces[2].SemanticName = "TEXCOORD";
 		inputLayoutDesces[2].SemanticIndex = 0;
 
-		Shader* spriteShader = Resources::Find<Shader>(L"Sprite-Default-Shader");
+		Shader* spriteShader = Resources::Find<Shader>(L"SpriteDefaultShader");
 		mesh->SetVertexBufferParams(3, inputLayoutDesces, spriteShader->GetVSBlob()->GetBufferPointer(),
 			spriteShader->GetVSBlob()->GetBufferSize());
 
@@ -256,8 +261,9 @@ namespace tg::renderer
 
 	void LoadShaders()
 	{
-		Resources::Load<Shader>(L"TriangleShader", L"..\\Shaders_SOURCE\\Triangle");
-		Resources::Load<Shader>(L"Sprite-Default-Shader", L"..\\Shaders_SOURCE\\Sprite-Default");
+		Resources::Load<Shader>(L"TriangleShader", L"..//Shaders_SOURCE//Triangle");
+		Resources::Load<Shader>(L"SpriteDefaultShader", L"..//Shaders_SOURCE//SpriteDefault");
+		Resources::Load<Shader>(L"WireframeShader", L"..//Shaders_SOURCE//Wireframe");
 	}
 
 	void LoadMaterials()
@@ -267,16 +273,24 @@ namespace tg::renderer
 		Resources::Insert(L"TriangleMaterial", triangleMaterial);
 
 		auto spriteMaterial = new Material();
-		Texture* texture = Resources::Find<Texture>(L"Player");
-		spriteMaterial->SetAlbedoTexture(texture);
-		spriteMaterial->SetShader(Resources::Find<Shader>(L"Sprite-Default-Shader"));
-		Resources::Insert(L"Sprite-Default-Material", spriteMaterial);
+		spriteMaterial->SetShader(Resources::Find<Shader>(L"SpriteDefaultShader"));
+		Resources::Insert(L"SpriteDefaultMaterial", spriteMaterial);
 	}
 
 	void LoadConstantBuffers()
 	{
 		constantBuffers[CBSLOT_TRANSFORM] = new ConstantBuffer(eCBType::Transform);
 		constantBuffers[CBSLOT_TRANSFORM]->Create(sizeof(TransformCB));
+	}
+
+	void LoadFrameBuffer()
+	{
+		RenderTargetSpecification spec;
+		spec.Attachments = { eRenderTragetFormat::RGBA8, eRenderTragetFormat::Depth };
+		spec.Width = application.GetWidth();
+		spec.Height = application.GetHeight();
+
+		FrameBuffer = RenderTarget::Create(spec);
 	}
 
 	void Initialize()
@@ -286,14 +300,33 @@ namespace tg::renderer
 		LoadMeshes();
 		LoadMaterials();
 		LoadConstantBuffers();
+		LoadFrameBuffer();
 	}
 
 	void Release()
 	{
+		if (FrameBuffer)
+		{
+			delete FrameBuffer;
+			FrameBuffer = nullptr;
+		}
+
 		for (UINT i = 0; i < static_cast<UINT>(eCBType::End); i++)
 		{
 			delete constantBuffers[i];
 			constantBuffers[i] = nullptr;
 		}
+
+		for (UINT i = 0; i < static_cast<UINT>(eSamplerType::End); ++i)
+			samplerStates[i].Reset();
+		for (UINT i = 0; i < static_cast<UINT>(eRasterizerState::End); ++i)
+			rasterizerStates[i].Reset();
+		for (UINT i = 0; i < static_cast<UINT>(eBlendState::End); ++i)
+			blendStates[i].Reset();
+		for (UINT i = 0; i < static_cast<UINT>(eDepthStencilState::End); ++i)
+			depthStencilStates[i].Reset();
+
+		mainCamera = nullptr;
+		selectedObject = nullptr;
 	}
 }

@@ -9,10 +9,10 @@ namespace tg
 	class Mesh : public Resource
 	{
 	public:
-		struct Data
+		struct MeshData
 		{
-			Data();
-			~Data();
+			MeshData();
+			~MeshData();
 
 			D3D11_PRIMITIVE_TOPOLOGY mTopology;
 			std::vector<graphics::Vertex> vertices;
@@ -39,6 +39,6 @@ namespace tg
 		graphics::VertexBuffer mVB;
 		graphics::IndexBuffer mIB;
 
-		Data mData;
+		MeshData mData;
 	};
 }

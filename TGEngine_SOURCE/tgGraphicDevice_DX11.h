@@ -22,9 +22,11 @@ namespace tg::graphics
 			, const void* pShaderBytecodeWithInputSignature, SIZE_T BytecodeLength, ID3D11InputLayout** ppInputLayout);
 		bool CreateBuffer(const D3D11_BUFFER_DESC* pDesc, const D3D11_SUBRESOURCE_DATA* pInitialData, ID3D11Buffer** ppBuffer);
 		bool CreateShaderResourceView(ID3D11Resource* pResource, const D3D11_SHADER_RESOURCE_VIEW_DESC* pDesc, ID3D11ShaderResourceView** ppSRView);
+		bool CreateUnorderedAccessView(ID3D11Resource* pResource, const D3D11_UNORDERED_ACCESS_VIEW_DESC* pDesc, ID3D11UnorderedAccessView** ppUAView);
 		bool CreateRasterizerState(const D3D11_RASTERIZER_DESC* pRasterizerDesc, ID3D11RasterizerState** ppRasterizerState);
 		bool CreateBlendState(const D3D11_BLEND_DESC* pBlendState, ID3D11BlendState** ppBlendState);
 		bool CreateDepthStencilState(const D3D11_DEPTH_STENCIL_DESC* pDepthStencilDesc, ID3D11DepthStencilState** ppDepthStencilState);
+		bool Resize(D3D11_VIEWPORT viewport);
 
 		void SetDataGpuBuffer(ID3D11Buffer* buffer, void* data, UINT size);
 		void SetShaderResource(eShaderStage stage, UINT startSlot, ID3D11ShaderResourceView** ppSRV);
@@ -45,6 +47,8 @@ namespace tg::graphics
 		void BindRenderTargets(UINT NumViews = 1, ID3D11RenderTargetView* const* ppRTViews = nullptr, ID3D11DepthStencilView* pDSView = nullptr);
 		void BindDefaultRenderTarget();
 
+		void CopyResource(ID3D11Resource* pDstResource, ID3D11Resource* pSrcResource);
+
 		void ClearRenderTargetView();
 		void ClearDepthStencilView();
 
@@ -53,13 +57,17 @@ namespace tg::graphics
 		void DrawIndexed(UINT indexCount, UINT startIndexLocation, INT baseVertexLocation) const;
 		void Present() const;
 
-		[[discard]] Microsoft::WRL::ComPtr<ID3D11Device> GetID3D11Device() { return mDevice; }
+		Microsoft::WRL::ComPtr<ID3D11Device> GetID3D11Device() { return mDevice; }
+		Microsoft::WRL::ComPtr<ID3D11DeviceContext> GetID3D11DeviceContext() { return mContext; }
+
+		Microsoft::WRL::ComPtr<ID3D11Texture2D> GetFrameBuffer() { return mFrameBuffer; }
 
 	private:
 		Microsoft::WRL::ComPtr<ID3D11Device> mDevice;
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext> mContext;
-		Microsoft::WRL::ComPtr<ID3D11Texture2D> mRenderTarget;
-		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> mRenderTargetView;
+		Microsoft::WRL::ComPtr<ID3D11Texture2D> mFrameBuffer;
+		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> mFrameBufferView;
+
 		Microsoft::WRL::ComPtr<ID3D11Texture2D> mDepthStencil;
 		Microsoft::WRL::ComPtr<ID3D11DepthStencilView> mDepthStencilView;
 
@@ -73,6 +81,7 @@ namespace tg::graphics
 	inline GraphicDevice_DX11*& GetDevice()
 	{
 		static GraphicDevice_DX11* device = nullptr;
+		
 		return device;
 	}
 }

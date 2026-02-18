@@ -27,14 +27,20 @@ namespace tg
 
 	bool Fmod::CreateSound(const std::string& path, FMOD::Sound** sound)
 	{
-		if (FMOD_OK != mCoreSystem->createSound(path.c_str(), FMOD_3D, nullptr, sound))
-			return false;
+ 		if (mCoreSystem == nullptr)
+ 			return false;
+
+ 		if (FMOD_OK != mCoreSystem->createSound(path.c_str(), FMOD_3D, nullptr, sound))
+ 			return false;
 
 		return true;
 	}
 
 	void Fmod::SoundPlay(FMOD::Sound* sound, FMOD::Channel** channel)
 	{
+		if (mCoreSystem == nullptr)
+			return;
+
 		mCoreSystem->playSound(sound, nullptr, false, channel);
 	}
 
@@ -50,7 +56,8 @@ namespace tg
 		FMOD_VECTOR fmodForward(0.0f, 0.0f, 1.0f);
 		FMOD_VECTOR fmodUp(0.0f, 1.0f, 0.0f);
 
-		mCoreSystem->set3DListenerAttributes(0, &fmodPos, &fmodVel, &fmodForward, &fmodUp);
+		if (mCoreSystem)
+			mCoreSystem->set3DListenerAttributes(0, &fmodPos, &fmodVel, &fmodForward, &fmodUp);
 	}
 
 	void Fmod::Set3DListenerAttributes(const Vector3& pos, const Vector3& vel)
@@ -64,12 +71,19 @@ namespace tg
 		FMOD_VECTOR fmodForward(0.0f, 0.0f, 1.0f);
 		FMOD_VECTOR fmodUp(0.0f, 1.0f, 0.0f);
 
-		mCoreSystem->set3DListenerAttributes(0, &fmodPos, &fmodVel, &fmodForward, &fmodUp);
+		if (mCoreSystem)
+			mCoreSystem->set3DListenerAttributes(0, &fmodPos, &fmodVel, &fmodForward, &fmodUp);
 	}
 
 	void Fmod::Release()
 	{
-		mSystem->release();
-		mSystem = nullptr;
+		if (mSystem)
+		{
+			mSystem->unloadAll();
+			mSystem->release();
+			mSystem = nullptr;
+		}
+
+		mCoreSystem = nullptr;
 	}
 }

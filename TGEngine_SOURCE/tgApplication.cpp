@@ -1,4 +1,4 @@
-#include "tgApplication.h"
+﻿#include "tgApplication.h"
 #include "tgRenderer.h"
 #include "tgInput.h"
 #include "tgTime.h"
@@ -12,16 +12,20 @@ namespace tg
 {
 	Application::Application()
 		: mHwnd(nullptr)
+		, mWindowWidth(0)
+		, mWindowHeight(0)
 		, mWidth(0)
 		, mHeight(0)
+		, mX(0), mY(0)
 		, mbLoaded(false)
+		, mbRunning(false)
 	{
 	}
 	Application::~Application()
 	{
 	}
 
-	void Application::Initialize(HWND hwnd, UINT width, UINT height)
+	void Application::Initialize(HWND hwnd, int width, int height)
 	{
 		mHwnd = hwnd;
 
@@ -29,25 +33,66 @@ namespace tg
 		InitializeEtc();
 
 		mGraphicDevice = std::make_unique<GraphicDevice_DX11>();
-		//renderer::Initialize();
 		mGraphicDevice->Initialize();
+		renderer::Initialize();
 		
 		Fmod::Initialize();
 		CollisionManager::Initialize();
 		UIManager::Initialize();
 		SceneManager::Initialize();
+
+		mbRunning = true;
 	}
 
-	void Application::AdjustWindowRect(HWND hwnd, UINT width, UINT height)
+	void Application::InitializeWindow(HWND hwnd)
+	{
+		SetWindowPos(hwnd, nullptr, mX, mY, mWindowWidth, mWindowHeight, 0);
+		ShowWindow(hwnd, SW_SHOWDEFAULT);
+	}
+
+	void Application::AdjustWindowRect(HWND hwnd, int width, int height)
 	{
 		RECT rect = { 0, 0, static_cast<LONG>(width), static_cast<LONG>(height) };
 		::AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
+		
+		RECT winRect;
+		::GetWindowRect(mHwnd, &winRect);
 
-		mWidth = rect.right - rect.left;
-		mHeight = rect.bottom - rect.top;
+		//window position
+		mX = winRect.left;
+		mY = winRect.top;
 
-		SetWindowPos(hwnd, nullptr, 0, 0, mWidth, mHeight, 0);
-		ShowWindow(hwnd, true);
+		// window size
+		mWindowWidth = rect.right - rect.left;
+		mWindowHeight = rect.bottom - rect.top;
+
+		//client size
+		mWidth = width;
+		mHeight = height;
+
+		InitializeWindow(hwnd);
+	}
+
+	void Application::ResizeGraphicDevice()
+	{
+		if (mGraphicDevice == nullptr)
+			return;
+
+		RECT winRect;
+		::GetClientRect(mHwnd, &winRect);
+		D3D11_VIEWPORT viewport = {};
+		viewport.TopLeftX = 0.0f;
+		viewport.TopLeftY = 0.0f;
+		viewport.Width = static_cast<float>(winRect.right - winRect.left);
+		viewport.Height = static_cast<float>(winRect.bottom - winRect.top);
+		viewport.MinDepth = 0.0f;
+		viewport.MaxDepth = 1.0f;
+
+		mWidth = static_cast<UINT>(viewport.Width);
+		mHeight = static_cast<UINT>(viewport.Height);
+
+		mGraphicDevice->Resize(viewport);
+		renderer::FrameBuffer->Resize(mWidth, mHeight);
 	}
 
 	void Application::InitializeEtc()
@@ -66,6 +111,11 @@ namespace tg
 		Render();
 
 		Destroy();
+	}
+
+	void Application::Close()
+	{
+		mbRunning = false;
 	}
 
 	void Application::Update()
@@ -96,7 +146,16 @@ namespace tg
 		CollisionManager::Render();
 		UIManager::Render();
 		SceneManager::Render();
+
+		//copy back buffer
+		Microsoft::WRL::ComPtr<ID3D11Texture2D> src = GetDevice()->GetFrameBuffer();
+		Microsoft::WRL::ComPtr<ID3D11Texture2D> dst = renderer::FrameBuffer->GetAttachmentTexture(0)->GetTexture();
+
+		GetDevice()->CopyResource(dst.Get(), src.Get());
+	}
 	
+	void Application::Present()
+	{
 		GetDevice()->Present();
 	}
 
@@ -110,5 +169,17 @@ namespace tg
 		SceneManager::Release();
 		UIManager::Release();
 		Resources::Release();
+
+		Fmod::Release();
+
+		renderer::Release();
+
+		if (mGraphicDevice)
+		{
+			mGraphicDevice.reset();
+		}
+
+		mbLoaded = false;
+		mbRunning = false;
 	}
 }

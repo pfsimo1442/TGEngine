@@ -18,7 +18,7 @@ namespace tg
 		void Set2DAttributes(Vector2 pos, Vector2 vel);
 		void Set3DAttributes(Vector3 pos, Vector3 vel);
 
-		[[noreturn]] void SetLoop(bool loop) { mbLoop = loop; }
+		void SetLoop(bool loop) { mbLoop = loop; }
 
 	private:
 		FMOD::Sound* mSound;
