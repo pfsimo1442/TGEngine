@@ -137,8 +137,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgInputLayout.cpp">
       <Filter>Graphics\InputLayout</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgWindow.cpp">
+      <Filter>High Level Interface</Filter>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgRenderTarget.cpp">
-      <Filter>Renderer</Filter>
+      <Filter>Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -287,8 +290,20 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgInputLayout.h">
       <Filter>Graphics\InputLayout</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgWindow.h">
+      <Filter>High Level Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgEvent.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgApplicationEvent.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgMouseEvent.h">
+      <Filter>Event</Filter>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgRenderTarget.h">
-      <Filter>Renderer</Filter>
+      <Filter>Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -393,6 +408,9 @@
     </Filter>
     <Filter Include="Component\Animator">
       <UniqueIdentifier>{d044ac2f-cba6-48c6-9691-5328b993a74f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event">
+      <UniqueIdentifier>{f5054d37-e1f7-4cfb-996d-9a924cf19daa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

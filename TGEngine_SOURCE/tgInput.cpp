@@ -90,10 +90,10 @@ namespace tg
 	{
 		POINT mousePos = {};
 		GetCursorPos(&mousePos);
-		ScreenToClient(application.GetHwnd(), &mousePos);
+		ScreenToClient(application.GetWindow().GetHwnd(), &mousePos);
 
-		if (0 < mousePos.x && (UINT)mousePos.x < application.GetWidth()
-			&& 0 < mousePos.y && (UINT)mousePos.y < application.GetHeight())
+		if (0 < mousePos.x && (UINT)mousePos.x < application.GetWindow().GetWidth()
+			&& 0 < mousePos.y && (UINT)mousePos.y < application.GetWindow().GetHeight())
 		{
 			mbMouseOnWindow = true;
 			mOnMousePosition.x = (float)(mousePos.x);

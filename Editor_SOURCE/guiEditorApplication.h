@@ -1,8 +1,10 @@
 ﻿#pragma once
 #include "guiEditor.h"
 #include "guiEditorWindow.h"
+#include "guiImguiEditor.h"
 
 #include "..//TGEngine_SOURCE//tgRenderTarget.h"
+#include "..//TGEngine_SOURCE//tgEvent.h"
 
 namespace gui
 {
@@ -55,15 +57,24 @@ namespace gui
 		/// </summary>
 		static void Release();
 
+		/// <summary>
+		/// 이벤트를 처리합니다.
+		/// </summary>
+		static void OnEvent(tg::Event& e);
+
 		static void OpenProject();
 		static void NewScene();
 		static void SaveScene();
 		static void SaveSceneAs();
 		static void OpenScene(const std::filesystem::path& path);
 
+		static void OnImGuiRender();
+
+		//Event
+		static void SetCursorPos(double x, double y);
+
 	private:
-		static bool imGguiInitialize();
-		static void imGuiRender();
+		static ImguiEditor* mImguiEditor;
 
 		static std::map<std::wstring, EditorWindow*> mEditorWindows;
 		static ImGuiWindowFlags mFlag;
@@ -77,5 +88,6 @@ namespace gui
 		static int mGuizmoType;
 
 		static tg::graphics::RenderTarget* mFrameBuffer;
+		static tg::EventCallbackFn mEventCallback;
 	};
 }

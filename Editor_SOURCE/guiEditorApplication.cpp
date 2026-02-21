@@ -6,11 +6,13 @@
 #include "..\\TGEngine_SOURCE\\tgGameObject.h"
 #include "..\\TGEngine_SOURCE\\tgTransform.h"
 #include "..\\TGEngine_SOURCE\\tgInput.h"
+#include "..\\TGEngine_SOURCE\\tgMouseEvent.h"
 
 extern tg::Application application;
 
 namespace gui
 {
+	ImguiEditor* EditorApplication::mImguiEditor = nullptr;
 	std::map<std::wstring, EditorWindow*> EditorApplication::mEditorWindows;
 	ImGuiWindowFlags EditorApplication::mFlag = ImGuiWindowFlags_None;
 	ImGuiDockNodeFlags EditorApplication::mDockspaceFlags = ImGuiDockNodeFlags_None;
@@ -23,14 +25,16 @@ namespace gui
 	int EditorApplication::mGuizmoType = -1;
 
 	tg::graphics::RenderTarget* EditorApplication::mFrameBuffer = nullptr;
+	tg::EventCallbackFn EditorApplication::mEventCallback = nullptr;
 
 	bool EditorApplication::Initialize()
 	{
-		imGguiInitialize();
+		mImguiEditor = new ImguiEditor();
 		mFrameBuffer = tg::renderer::FrameBuffer;
-
+		mImguiEditor->Initialize();
 		InspectorWindow* inspector = new InspectorWindow();
 		mEditorWindows.insert(std::make_pair(L"InspectorWindow", inspector));
+		mEventCallback = &EditorApplication::OnEvent;
 
 		return true;
 	}
@@ -42,7 +46,9 @@ namespace gui
 
 	void EditorApplication::OnGUI()
 	{
-		imGuiRender();
+		mImguiEditor->Begin();
+		OnImGuiRender();
+		mImguiEditor->End();
 	}
 
 	void EditorApplication::Run()
@@ -60,9 +66,16 @@ namespace gui
 		}
 
 		// Cleanup
-		ImGui_ImplDX11_Shutdown();
-		ImGui_ImplWin32_Shutdown();
-		ImGui::DestroyContext();
+		delete mImguiEditor;
+		mImguiEditor = nullptr;
+	}
+
+	void EditorApplication::OnEvent(tg::Event& e)
+	{
+		if (!e.Handled)
+		{
+			mImguiEditor->OnEvent(e);
+		}
 	}
 
 	void EditorApplication::OpenProject()
@@ -90,83 +103,7 @@ namespace gui
 
 	}
 
-	bool EditorApplication::imGguiInitialize()
-	{
-		// Setup Dear ImGui context
-		IMGUI_CHECKVERSION();
-		ImGui::CreateContext();
-		ImGuiIO& io = ImGui::GetIO(); (void)io;
-		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-		io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // Enable Docking
-		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;       // Enable Multi-Viewport / Platform Windows
-
-		//io.ConfigViewportsNoAutoMerge = true;
-		//io.ConfigViewportsNoTaskBarIcon = true;
-		//io.ConfigViewportsNoDefaultParent = true;
-		//io.ConfigDockingAlwaysTabBar = true;
-		//io.ConfigDockingTransparentPayload = true;
-		//io.ConfigFlags |= ImGuiConfigFlags_DpiEnableScaleFonts;     // FIXME-DPI: Experimental. THIS CURRENTLY DOESN'T WORK AS EXPECTED. DON'T USE IN USER APP!
-		//io.ConfigFlags |= ImGuiConfigFlags_DpiEnableScaleViewports; // FIXME-DPI: Experimental.
-
-		// Setup Dear ImGui style
-		ImGui::StyleColorsDark();
-		//ImGui::StyleColorsLight();
-
-		// When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
-		ImGuiStyle& style = ImGui::GetStyle();
-		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-		{
-			style.WindowRounding = 0.0f;
-			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
-		}
-
-		// Setup Platform/Renderer backends
-		ImGui_ImplWin32_Init(application.GetHwnd());
-
-		tg::graphics::GraphicDevice_DX11*& graphicdevice = tg::graphics::GetDevice();
-		ID3D11Device* device = graphicdevice->GetID3D11Device().Get();
-		ID3D11DeviceContext* device_context = graphicdevice->GetID3D11DeviceContext().Get();
-
-		ImGui_ImplDX11_Init(device, device_context);
-
-		// Ensure we have the frame buffer reference for later sizing calculations
-		mFrameBuffer = tg::renderer::FrameBuffer;
-
-		// Initialize DisplaySize / DisplayFramebufferScale to match window and render target
-		RECT clientRect = {};
-		::GetClientRect(application.GetHwnd(), &clientRect);
-		const float clientW = static_cast<float>(clientRect.right - clientRect.left);
-		const float clientH = static_cast<float>(clientRect.bottom - clientRect.top);
-
-		float fbW = clientW;
-		float fbH = clientH;
-		if (mFrameBuffer)
-		{
-			auto& spec = mFrameBuffer->GetSpecification();
-			if (spec.Width > 0 && spec.Height > 0)
-			{
-				fbW = static_cast<float>(spec.Width);
-				fbH = static_cast<float>(spec.Height);
-			}
-		}
-
-		// io.DisplaySize should be logical (window/client) size.
-		// io.DisplayFramebufferScale = framebuffer_pixels / logical_pixels
-		io.DisplaySize = ImVec2((clientW > 0.0f) ? clientW : fbW, (clientH > 0.0f) ? clientH : fbH);
-		io.DisplayFramebufferScale = ImVec2(
-			(clientW > 0.0f) ? (fbW / clientW) : 1.0f,
-			(clientH > 0.0f) ? (fbH / clientH) : 1.0f
-		);
-
-		// Backend flags
-		io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors; // We can honor GetMouseCursor() values
-		io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos; // We can set mouse pos (optional)
-
-		return true;
-	}
-
-	void EditorApplication::imGuiRender()
+	void EditorApplication::OnImGuiRender()
 	{
 		// Load Fonts
 		// - If no fonts are loaded, dear imgui will use the default font. You can also load multiple fonts and use ImGui::PushFont()/PopFont() to select them.
@@ -188,12 +125,6 @@ namespace gui
 		bool show_demo_window = true;
 		bool show_another_window = false;
 		ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-
-		// Start the Dear ImGui frame
-		ImGui_ImplDX11_NewFrame();
-		ImGui_ImplWin32_NewFrame();
-		ImGui::NewFrame();
-		ImGuizmo::BeginFrame();
 
 		// We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not dockable into,
 		// because it would be confusing to have two docking targets within each others.
@@ -302,7 +233,7 @@ namespace gui
 		mViewportHovered = ImGui::IsWindowHovered();
 
 		// to do : mouse, keyboard event
-		// 
+		mImguiEditor->BlockEvents(!mViewportHovered);
 
 		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
 		mViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
@@ -378,96 +309,14 @@ namespace gui
 		ImGui::PopStyleVar();
 
 		ImGui::End(); // dockspace end
+	}
 
-#pragma region demo
-		////imGuizmo
-		//ImGuiIO& io = ImGui::GetIO();
+	// Event
+	void EditorApplication::SetCursorPos(double x, double y)
+	{
+		tg::MouseMovedEvent event(static_cast<float>(x), static_cast<float>(y));
 
-		//ImGuizmo::SetOrthographic(false/*!isPerspective*/);
-		//ImGuizmo::SetDrawlist(ImGui::GetCurrentWindow()->DrawList);
-
-		//ImGuizmo::BeginFrame();
-
-		//UINT width = application.GetWidth();
-		//UINT height = application.GetHeight();
-		//float windowWidth = (float)ImGui::GetWindowWidth();
-		//float windowHeight = (float)ImGui::GetWindowHeight();
-
-		//RECT rect = { 0, 0, 0, 0 };
-		//::GetClientRect(application.GetHwnd(), &rect);
-
-		//// Transform start
-		////ImGuizmo::SetRect(0, 0, width, height);
-		//ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
-
-		//Matrix viewMatirx;
-		//Matrix projectionMatirx;
-
-		//if (tg::renderer::mainCamera)
-		//{
-		//	viewMatirx = tg::renderer::mainCamera->GetViewMatrix();
-		//	projectionMatirx = tg::renderer::mainCamera->GetProjectionMatrix();
-		//}
-
-		//Matrix modelMatrix;
-		//if (tg::renderer::selectedObject)
-		//{
-		//	modelMatrix = tg::renderer::selectedObject->GetComponent<tg::Transform>()->GetWorldMatrix();
-		//}
-
-		//ImGuizmo::Manipulate(*viewMatirx.m, *projectionMatirx.m,
-		//	ImGuizmo::OPERATION::TRANSLATE, ImGuizmo::LOCAL, *modelMatrix.m);
-
-		//ImGuizmo::SetDrawlist(ImGui::GetCurrentWindow()->DrawList);
-
-		//demo window
-		//// 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
-		//if (show_demo_window)
-		//	ImGui::ShowDemoWindow(&show_demo_window);
-
-		//// 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
-		//{
-		//	static float f = 0.0f;
-		//	static int counter = 0;
-
-		//	ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
-
-		//	ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-		//	ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
-		//	ImGui::Checkbox("Another Window", &show_another_window);
-
-		//	ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-		//	ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
-
-		//	if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-		//		counter++;
-		//	ImGui::SameLine();
-		//	ImGui::Text("counter = %d", counter);
-
-		//	ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-		//	ImGui::End();
-		//}
-
-		//// 3. Show another simple window.
-		//if (show_another_window)
-		//{
-		//	ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-		//	ImGui::Text("Hello from another window!");
-		//	if (ImGui::Button("Close Me"))
-		//		show_another_window = false;
-		//	ImGui::End();
-		//}
-#pragma endregion
-		// Rendering
-		ImGui::Render();
-		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-
-
-		// Update and Render additional Platform Windows
-		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-		{
-			ImGui::UpdatePlatformWindows();
-			ImGui::RenderPlatformWindowsDefault();
-		}
+		if (mEventCallback)
+			mEventCallback(event);
 	}
 }

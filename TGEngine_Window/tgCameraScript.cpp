@@ -23,20 +23,20 @@ namespace tg
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		Vector3 pos = tr->GetPosition();
 		Vector3 dir = Vector3::Zero;
-		float spd = 500.0f;
+		float spd = 20.0f;
 
 		if (Input::GetKey(eKeyCode::A))
 			dir += -tr->Right();
 		if (Input::GetKey(eKeyCode::W))
-			dir += tr->Forward();
+			dir += tr->Up();
 		if (Input::GetKey(eKeyCode::D))
 			dir += tr->Right();
 		if (Input::GetKey(eKeyCode::S))
-			dir += -tr->Forward();
-		if (Input::GetKey(eKeyCode::E))
-			dir += tr->Up();
-		if (Input::GetKey(eKeyCode::Q))
 			dir += -tr->Up();
+		if (Input::GetKey(eKeyCode::Q))
+			dir += tr->Forward();
+		if (Input::GetKey(eKeyCode::E))
+			dir += -tr->Forward();
 
 		dir.Normalize();
 		pos += dir * spd * Time::DeltaTime();

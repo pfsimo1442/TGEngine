@@ -40,4 +40,7 @@ namespace gui
 	void EditorWindow::OnDestroy()
 	{
 	}
+	void EditorWindow::OnEvent(tg::Event& e)
+	{
+	}
 }

@@ -49,7 +49,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_EDITORWINDOW));
     
-    MSG msg;
+    MSG msg = {};
 
     // Peek Message Loop
     while (application.IsRunning())
@@ -185,9 +185,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         break;
     case WM_SIZE:
         {
-            application.ResizeGraphicDevice();
+		    application.GetWindow().SetWindowResize(LOWORD(lParam), HIWORD(lParam));
         }
-    break;
+        break;
+    case WM_MOUSEMOVE:
+        {
+            application.GetWindow().SetCursorPos(static_cast<double>(wParam), static_cast<double>(lParam));
+            gui::EditorApplication::SetCursorPos(static_cast<double>(wParam), static_cast<double>(lParam));
+	    }
+		break;
     case WM_PAINT:
         {
             PAINTSTRUCT ps;
