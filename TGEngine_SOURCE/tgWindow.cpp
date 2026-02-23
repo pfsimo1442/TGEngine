@@ -19,12 +19,4 @@ namespace tg
 		if (mData.EventCallback)
 			mData.EventCallback(event);
 	}
-
-	void Window::SetCursorPos(double x, double y)
-	{
-		MouseMovedEvent event(static_cast<float>(x), static_cast<float>(y));
-		
-		if (mData.EventCallback)
-			mData.EventCallback(event);
-	}
 }
