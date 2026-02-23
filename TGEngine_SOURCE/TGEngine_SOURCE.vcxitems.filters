@@ -305,6 +305,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgRenderTarget.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgKeyEvent.h">
+      <Filter>Event</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">

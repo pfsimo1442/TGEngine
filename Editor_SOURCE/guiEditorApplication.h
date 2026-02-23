@@ -1,10 +1,15 @@
 ﻿#pragma once
-#include "guiEditor.h"
 #include "guiEditorWindow.h"
 #include "guiImguiEditor.h"
 
 #include "..//TGEngine_SOURCE//tgRenderTarget.h"
-#include "..//TGEngine_SOURCE//tgEvent.h"
+#include "..//TGEngine_SOURCE//tgKeyEvent.h"
+#include "..//TGEngine_SOURCE//tgMouseEvent.h"
+
+namespace tg
+{
+	class KeyPressedEvent;
+}
 
 namespace gui
 {
@@ -71,7 +76,12 @@ namespace gui
 		static void OnImGuiRender();
 
 		//Event
+		static void SetKeyPressed(int keyCode, int scancode, int action, int mods);
 		static void SetCursorPos(double x, double y);
+
+		static bool OnKeyPressed(tg::KeyPressedEvent& e);
+
+		static void SetGuizmoType(int type) { mGuizmoType = type; }
 
 	private:
 		static ImguiEditor* mImguiEditor;

@@ -42,6 +42,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgIndexBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgInputLayout.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgKeyEvent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgMaterial.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgMath.h" />

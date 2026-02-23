@@ -6,7 +6,6 @@
 #include "..\\TGEngine_SOURCE\\tgGameObject.h"
 #include "..\\TGEngine_SOURCE\\tgTransform.h"
 #include "..\\TGEngine_SOURCE\\tgInput.h"
-#include "..\\TGEngine_SOURCE\\tgMouseEvent.h"
 
 extern tg::Application application;
 
@@ -72,6 +71,32 @@ namespace gui
 
 	void EditorApplication::OnEvent(tg::Event& e)
 	{
+		tg::EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<tg::KeyPressedEvent>([](tg::KeyPressedEvent& e) -> bool
+			{
+				// Todo : KeyPressedEvent
+				if (OnKeyPressed(e))
+					return true;
+
+				return false;
+			});
+
+		dispatcher.Dispatch<tg::KeyReleasedEvent>([](tg::KeyReleasedEvent& e) -> bool
+			{
+				// Todo : KeyReleasedEvent
+				//if (OnKeyPressed(e))
+					//return true;
+
+				return false;
+			});
+
+		dispatcher.Dispatch<tg::MouseMovedEvent>([](tg::MouseMovedEvent& e) -> bool
+			{
+				// Todo : MouseMovedEvent
+
+				return true;
+			});
+
 		if (!e.Handled)
 		{
 			mImguiEditor->OnEvent(e);
@@ -212,21 +237,21 @@ namespace gui
 
 			ImGui::EndMenuBar();
 		}
-		for (auto iter : mEditorWindows)
+		for (auto& iter : mEditorWindows)
 			iter.second->Run();
 
 		// viewport
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
 		ImGui::Begin("Scene");
 
-		auto viewportMinRegion = ImGui::GetWindowContentRegionMin(); // 씬뷰의 최소 좌표
-		auto viewportMaxRegion = ImGui::GetWindowContentRegionMax(); // 씬뷰의 최대 좌표
-		auto viewportOffset = ImGui::GetWindowPos(); // 씬뷰의 위치
+		const auto viewportMinRegion = ImGui::GetWindowContentRegionMin(); // 씬뷰의 최소 좌표
+		const auto viewportMaxRegion = ImGui::GetWindowContentRegionMax(); // 씬뷰의 최대 좌표
+		const auto viewportOffset = ImGui::GetWindowPos(); // 씬뷰의 위치
 
-		const int letTop = 0;
-		const int rightBottom = 1;
-		mViewportBounds[letTop] = { viewportMinRegion.x + viewportOffset.x, viewportMinRegion.y + viewportOffset.y };
-		mViewportBounds[rightBottom] = { viewportMaxRegion.x + viewportOffset.x, viewportMaxRegion.y + viewportOffset.y };
+		constexpr int letTop = 0;
+		constexpr int rightBottom = 1;
+		mViewportBounds[letTop] = Vector2{ viewportMinRegion.x + viewportOffset.x, viewportMinRegion.y + viewportOffset.y };
+		mViewportBounds[rightBottom] = Vector2{ viewportMaxRegion.x + viewportOffset.x, viewportMaxRegion.y + viewportOffset.y };
 
 		// check if the mouse,keyboard is on the Sceneview
 		mViewportFocused = ImGui::IsWindowFocused();
@@ -236,7 +261,7 @@ namespace gui
 		mImguiEditor->BlockEvents(!mViewportHovered);
 
 		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
-		mViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
+		mViewportSize = Vector2{ viewportPanelSize.x, viewportPanelSize.y };
 		tg::graphics::Texture* texture = mFrameBuffer->GetAttachmentTexture(0);
 		ImGui::Image((ImTextureID)texture->GetSRV().Get(), ImVec2{ mViewportSize.x, mViewportSize.y }
 		, ImVec2{ 0, 0 }, ImVec2{ 1, 1 });
@@ -246,7 +271,7 @@ namespace gui
 		{
 			if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("PROJECT_ITEM"))
 			{
-				const wchar_t* path = (const wchar_t*)payload->Data;
+				const auto path = static_cast<const wchar_t*>(payload->Data);
 				OpenScene(path);
 			}
 			ImGui::EndDragDropTarget();
@@ -254,11 +279,11 @@ namespace gui
 
 		// To do : guizmo
 		tg::GameObject* selectedObject = tg::renderer::selectedObject;
-		mGuizmoType = ImGuizmo::OPERATION::TRANSLATE;
 		if (selectedObject && mGuizmoType != -1)
 		{
 			ImGuizmo::SetOrthographic(false);
 			ImGuizmo::SetDrawlist();
+			ImGuizmo::SetGizmoSizeClipSpace(0.15f);
 			ImGuizmo::SetRect(mViewportBounds[0].x, mViewportBounds[0].y
 				, mViewportBounds[1].x - mViewportBounds[0].x, mViewportBounds[1].y - mViewportBounds[0].y);
 
@@ -284,7 +309,7 @@ namespace gui
 			float snapValues[3] = { snapValue, snapValue, snapValue };
 
 			ImGuizmo::Manipulate(*viewMatrix.m, *projectionMatrix.m, static_cast<ImGuizmo::OPERATION>(mGuizmoType)
-				, ImGuizmo::LOCAL, *worldMatrix.m, nullptr, snap ? snapValues : nullptr);
+				, ImGuizmo::WORLD, *worldMatrix.m, nullptr, snap ? snapValues : nullptr);
 
 			if (ImGuizmo::IsUsing())
 			{
@@ -312,11 +337,100 @@ namespace gui
 	}
 
 	// Event
+	void EditorApplication::SetKeyPressed(int keyCode, int scancode, int action, int mods)
+	{
+		constexpr int RELEASE = 0;
+		constexpr int PRESS = 1;
+		constexpr int REPEAT = 2;
+
+		//To do : repeat check
+		//if (action == PRESS)
+			//action = REPEAT;
+		//static std::unordered_map<key, >
+
+		// unordered map key setting
+
+		switch (action)
+		{
+		case RELEASE:
+		{
+			tg::KeyReleasedEvent event(static_cast<tg::eKeyCode>(keyCode));
+
+			if (mEventCallback)
+				mEventCallback(event);
+		}
+		break;
+		case PRESS:
+		{
+			tg::KeyPressedEvent event(static_cast<tg::eKeyCode>(keyCode), false);
+
+			if (mEventCallback)
+				mEventCallback(event);
+		}
+		break;
+		case REPEAT:
+		{
+			tg::KeyPressedEvent event(static_cast<tg::eKeyCode>(keyCode), true);
+
+			if (mEventCallback)
+				mEventCallback(event);
+		}
+		break;
+		}
+	}
+
 	void EditorApplication::SetCursorPos(double x, double y)
 	{
 		tg::MouseMovedEvent event(static_cast<float>(x), static_cast<float>(y));
 
 		if (mEventCallback)
 			mEventCallback(event);
+	}
+
+	bool EditorApplication::OnKeyPressed(tg::KeyPressedEvent& e)
+	{
+		if (e.IsRepeat())
+			return false;
+
+		bool control = tg::Input::GetKey(tg::eKeyCode::Ctrl_Left) || tg::Input::GetKey(tg::eKeyCode::Ctrl_Right);
+		bool shift = tg::Input::GetKey(tg::eKeyCode::Shift_Left) || tg::Input::GetKey(tg::eKeyCode::Shift_Right);
+
+		switch (e.GetKeyCode())
+		{
+			// Gizmos
+			case tg::eKeyCode::Q:
+			{
+				if (!ImGuizmo::IsUsing())
+					SetGuizmoType(-1);
+				break;
+			}
+			case tg::eKeyCode::W:
+			{
+				if (!ImGuizmo::IsUsing())
+					SetGuizmoType(ImGuizmo::OPERATION::TRANSLATE);
+				break;
+			}
+			case tg::eKeyCode::E:
+			{
+				if (!ImGuizmo::IsUsing())
+					SetGuizmoType(ImGuizmo::OPERATION::ROTATE);
+				break;
+			}
+			case tg::eKeyCode::R:
+			{
+				if (control)
+				{
+					//ScriptEngine::ReloadAssembly();
+				}
+				else
+				{
+					if (!ImGuizmo::IsUsing())
+						SetGuizmoType(ImGuizmo::OPERATION::SCALE);
+				}
+				break;
+			}
+		}
+
+		return true;
 	}
 }

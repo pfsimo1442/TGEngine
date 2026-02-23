@@ -1,4 +1,5 @@
-﻿#include "tgApplication.h"
+﻿#pragma once
+#include "tgApplication.h"
 #include "tgRenderer.h"
 #include "tgInput.h"
 #include "tgTime.h"
@@ -7,8 +8,6 @@
 #include "tgCollisionManager.h"
 #include "tgUIManager.h"
 #include "tgFmod.h"
-#include "tgApplicationEvent.h"
-#include "tgMouseEvent.h"
 
 
 namespace tg
@@ -70,7 +69,7 @@ namespace tg
 		InitializeWindow(hwnd);
 	}
 
-	void Application::ResizeGraphicDevice(UINT width, UINT height)
+	void Application::ResizeGraphicDevice(WindowResizeEvent& e)
 	{
 		if (mGraphicDevice == nullptr)
 			return;
@@ -78,8 +77,8 @@ namespace tg
 		D3D11_VIEWPORT viewport = {};
 		viewport.TopLeftX = 0.0f;
 		viewport.TopLeftY = 0.0f;
-		viewport.Width = static_cast<float>(width);
-		viewport.Height = static_cast<float>(height);
+		viewport.Width = static_cast<float>(e.GetWidth());
+		viewport.Height = static_cast<float>(e.GetHeight());	
 		viewport.MinDepth = 0.0f;
 		viewport.MaxDepth = 1.0f;
 
@@ -101,12 +100,7 @@ namespace tg
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowResizeEvent>([this](WindowResizeEvent& e) -> bool
 			{
-				ResizeGraphicDevice(e.GetWidth(), e.GetHeight());
-				return true;
-			});
-
-		dispatcher.Dispatch<MouseMovedEvent>([this](MouseMovedEvent& e) -> bool
-			{
+				ResizeGraphicDevice(e);
 				return true;
 			});
 	}

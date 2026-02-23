@@ -3,6 +3,9 @@
 #include "tgGraphicDevice_DX11.h"
 #include "tgEvent.h"
 #include "tgWindow.h"
+#include "tgApplicationEvent.h"
+#include "tgMouseEvent.h"
+#include "tgKeyEvent.h"
 
 namespace tg
 {
@@ -15,7 +18,7 @@ namespace tg
 		void Initialize(HWND hwnd, int width, int height);
 		void InitializeWindow(HWND hwnd);
 		void AdjustWindowRect(HWND hwnd, int width, int height);
-		void ResizeGraphicDevice(UINT width, UINT height);
+		void ResizeGraphicDevice(WindowResizeEvent& e);
 		void InitializeEtc();
 
 		void OnEvent(Event& e);
