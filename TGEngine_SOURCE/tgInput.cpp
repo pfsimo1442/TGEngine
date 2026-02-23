@@ -6,9 +6,7 @@ extern tg::Application application;
 namespace tg
 {
 	std::vector<Input::Key> Input::Keys = {};
-	math::Vector2 Input::mMousePosition = math::Vector2::Zero;
-	math::Vector2 Input::mOnMousePosition = math::Vector2::Zero;
-	bool Input::mbMouseOnWindow = false;
+	Vector2 Input::mMousePosition = Vector2::Zero;
 
 	void Input::Initialze()
 	{
@@ -64,18 +62,17 @@ namespace tg
 		GetCursorPos(&mousePos);
 		ScreenToClient(application.GetWindow().GetHwnd(), &mousePos);
 
-		if (0 < mousePos.x && (UINT)mousePos.x < application.GetWindow().GetWidth()
-			&& 0 < mousePos.y && (UINT)mousePos.y < application.GetWindow().GetHeight())
-		{
-			mbMouseOnWindow = true;
-			mOnMousePosition.x = (float)(mousePos.x);
-			mOnMousePosition.y = (float)(mousePos.y);
-		}
-		else
-			mbMouseOnWindow = false;
+		UINT width = application.GetWindow().GetWidth();
+		UINT height = application.GetWindow().GetHeight();
 
-		mMousePosition.x = (float)(mousePos.x);
-		mMousePosition.y = (float)(mousePos.y);
+		mMousePosition.x = -1.0f;
+		mMousePosition.y = -1.0f;
+
+		if (static_cast<UINT>(mousePos.x) > 0 && static_cast<UINT>(mousePos.x) < width)
+			mMousePosition.x = static_cast<float>(mousePos.x);
+
+		if (static_cast<UINT>(mousePos.y) > 0 && static_cast<UINT>(mousePos.y) < height)
+			mMousePosition.y = static_cast<float>(mousePos.y);
 	}
 
 	void Input::updateKey(Input::Key& key)

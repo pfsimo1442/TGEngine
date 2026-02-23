@@ -15,7 +15,7 @@ namespace tg
 		virtual void Update();
 		virtual void LateUpdate();
 		virtual void Render();
-		virtual void Destroy();
+		virtual void EndOfFrame();
 
 		void AddGameObject(GameObject* gameObject);
 		void EraseGameObject(GameObject* gameObject);

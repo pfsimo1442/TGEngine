@@ -20,6 +20,7 @@
 #define DIRECTINPUT_VERSION 0x0800
 #include <dinput.h>
 
+#include <iostream>
 #include <ostream>
 #include <sstream>
 

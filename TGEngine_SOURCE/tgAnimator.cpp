@@ -18,7 +18,7 @@ namespace tg
 			iter.second = nullptr;
 		}
 
-		for (auto& iter : mEvents)
+		for (auto& iter : mQueue)
 		{
 			delete iter.second;
 			iter.second = nullptr;
@@ -81,7 +81,7 @@ namespace tg
 		animation->SetAnimator(this);
 
 		Events* events = new Events();
-		mEvents.insert(std::make_pair(name, events));
+		mQueue.insert(std::make_pair(name, events));
 
 		mAnimations.insert(std::make_pair(name, animation));
 	}
@@ -194,9 +194,9 @@ namespace tg
 
 	Animator::Events* Animator::FindEvents(const std::wstring& name)
 	{
-		auto iter = mEvents.find(name);
+		auto iter = mQueue.find(name);
 
-		if (iter == mEvents.end())
+		if (iter == mQueue.end())
 			return nullptr;
 
 		return iter->second;

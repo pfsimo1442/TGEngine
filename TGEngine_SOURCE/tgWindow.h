@@ -45,6 +45,8 @@ namespace tg
 
 		void Initalize();
 		void SetWindowResize(UINT width, UINT height);
+
+		void SetWindowPos(UINT x, UINT y);
 		
 		// property
 		void SetEventCallback(const EventCallbackFn& callback) { mData.EventCallback = callback; }

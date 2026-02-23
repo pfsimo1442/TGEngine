@@ -6,7 +6,7 @@
 
 namespace tg::object
 {
-	void Destroy(GameObject* gameObject);
+	extern void Destroy(GameObject* gameObject);
 }
 
 namespace tg
@@ -18,9 +18,10 @@ namespace tg
 
 		enum class eState
 		{
+			Created,
 			Active,
 			Pause,
-			Dead,
+			Destroyed,
 			End
 		};
 
@@ -65,13 +66,13 @@ namespace tg
 		}
 
 		bool IsActive() const { return mState == eState::Active; }
-		bool IsDead() const { return mState == eState::Dead; }
+		bool IsDead() const { return mState == eState::Destroyed; }
 		eLayerType GetLayerType() const { return mLayerType; }
 		void SetLayerType(const eLayerType layerType) { mLayerType = layerType; }
 
 	private:
 		void initializeTransform();
-		void death() { mState = eState::Dead; }
+		void death() { mState = eState::Destroyed; }
 
 	private:
 		eState mState;

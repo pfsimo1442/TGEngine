@@ -143,6 +143,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgRenderTarget.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgEventQueue.cpp">
+      <Filter>Event\Queue</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
@@ -308,6 +311,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgKeyEvent.h">
       <Filter>Event</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgGameObjectEvent.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgEventQueue.h">
+      <Filter>Event\Queue</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -414,6 +423,9 @@
     </Filter>
     <Filter Include="Event">
       <UniqueIdentifier>{f5054d37-e1f7-4cfb-996d-9a924cf19daa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event\Queue">
+      <UniqueIdentifier>{5b44a012-e389-47d2-a6f9-3da6afa8133a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

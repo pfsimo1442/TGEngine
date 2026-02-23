@@ -16,13 +16,17 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)GraphEditor.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)guiComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)guiConsoleWindow.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)guiEditor.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)guiEditorApplication.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)guiEditorWindow.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)guiEntity.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)guiGameWindow.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)guiGUILayout.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)guiHierarchyWindow.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)guiImguiEditor.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)guiInspectorWindow.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)guiProjectWindow.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)guiTransform.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)imconfig.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)ImCurveEdit.h" />
@@ -42,13 +46,17 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)GraphEditor.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)guiComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)guiConsoleWindow.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)guiEditor.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)guiEditorApplication.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)guiEditorWindow.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)guiEntity.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)guiGameWindow.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)guiGUILayout.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)guiHierarchyWindow.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)guiImguiEditor.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)guiInspectorWindow.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)guiProjectWindow.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)guiTransform.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ImCurveEdit.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)ImGradient.cpp" />

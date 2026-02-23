@@ -118,8 +118,6 @@ namespace tg
 		__forceinline static bool GetKey(eKeyCode code) { return Keys[(UINT)code].state == eKeyState::Pressed; }
 
 		__forceinline static math::Vector2 GetMousePosition() { return mMousePosition; }
-		__forceinline static math::Vector2 GetOnMousePosition() { return mOnMousePosition; }
-		__forceinline static bool IsMouseOnWindow() { return mbMouseOnWindow; }
 
 	private:
 		static void createKeys();
@@ -128,14 +126,12 @@ namespace tg
 		static void updateKey(Key& key);
 
 		static bool isKeyDown(eKeyCode code);
-		static void getMousePositionByWindow ();
+		static void getMousePositionByWindow();
 		static void updateKeyDown(Key& key);
 		static void updateKeyUp(Key& key);
 
 	private:
 		static std::vector<Key> Keys;
 		static math::Vector2 mMousePosition;
-		static math::Vector2 mOnMousePosition;
-		static bool mbMouseOnWindow;
 	};
 }

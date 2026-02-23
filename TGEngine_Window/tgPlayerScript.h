@@ -1,6 +1,7 @@
 #pragma once
 #include "..//TGEngine_SOURCE//tgScript.h"
-//#include "..//TGEngine_SOURCE//tgTexture.h"
+#include "..//TGEngine_SOURCE//tgTexture.h"
+#include "tgProjectTile.h"
 
 namespace tg
 {
@@ -53,5 +54,8 @@ namespace tg
 		class Animator* mAnimator;
 
 		bool mPosSetter;
+
+		//sample
+		ProjectTile* mProjTile;
 	};
 }

@@ -6,6 +6,7 @@
 #include "tgApplicationEvent.h"
 #include "tgMouseEvent.h"
 #include "tgKeyEvent.h"
+#include "tgEventQueue.h"
 
 namespace tg
 {
@@ -20,8 +21,9 @@ namespace tg
 		void AdjustWindowRect(HWND hwnd, int width, int height);
 		void ResizeGraphicDevice(WindowResizeEvent& e);
 		void InitializeEtc();
+		void InitializeEventHandlers();
 
-		void OnEvent(Event& e);
+		void OnWindowEvent(Event& e);
 
 		void Run();
 		void Close();
@@ -30,8 +32,10 @@ namespace tg
 		void LateUpdate();
 		void Render();
 		void Present();
-		void Destroy();
+		void EndOfFrame();
 		void Release();
+
+		void PushEvent(Event* e) { mEventQueue.Push(e); }
 
 		Window& GetWindow() { return mWindow; }
 		bool IsLoaded() const { return mbLoaded; }
@@ -46,5 +50,6 @@ namespace tg
 		std::unique_ptr<graphics::GraphicDevice_DX11> mGraphicDevice;
 		
 		Window mWindow;
+		EventQueue mEventQueue;
 	};
 }

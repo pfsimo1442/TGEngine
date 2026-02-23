@@ -1,4 +1,4 @@
-#include "tgPlayerScript.h"
+﻿#include "tgPlayerScript.h"
 #include "tgInput.h"
 #include "tgTransform.h"
 #include "tgTime.h"
@@ -9,6 +9,8 @@
 #include "tgResources.h"
 #include "tgRigidbody.h"
 #include "tgUIManager.h"
+#include "tgSpriteRenderer.h"
+#include "tgTexture.h"
 
 namespace tg
 {
@@ -17,6 +19,8 @@ namespace tg
 		, mCurrentWS(eWalkState::Null)
 		, mLastWS(eWalkState::Null)
 		, mAnimator(nullptr)
+		, mPosSetter(false)
+		, mProjTile(nullptr)
 	{
 	}
 	PlayerScript::~PlayerScript()
@@ -29,48 +33,34 @@ namespace tg
 
 	void PlayerScript::Update()
 	{
-		//if (mAnimator == nullptr)
-		//	mAnimator = GetOwner()->GetComponent<Animator>();
-		//
-		//switch (mState)
-		//{
-		//case PlayerScript::eState::Idle:
-		//	idle();
-		//	break;
-		//case PlayerScript::eState::Walk:
-		//	move();
-		//	break;
-		//case PlayerScript::eState::Leak:
-		//	break;
-		//case PlayerScript::eState::Tired:
-		//	break;
-		//case PlayerScript::eState::Sleep:
-		//	break;
-		//case PlayerScript::eState::Water:
-		//	water();
-		//	break;
-		//case PlayerScript::eState::Stretch:
-		//	break;
-		//default:
-		//	break;
-		//}
+		static Vector3 pos = Vector3(-1, -1, 0);
 
-		//Transform* tr = GetOwner()->GetComponent<Transform>();
-		//Vector2 pos = tr->GetPosition();
-		//COLORREF color = mPixelMap->GetPixel(pos.x, pos.y + 50);
+		if (Input::GetKeyDown(eKeyCode::N))
+		{
+			ProjectTile* newTile = object::Instantiate<ProjectTile>(eLayerType::Player, pos);
+			if (newTile)
+			{
+				SpriteRenderer* sr = newTile->AddComponent<SpriteRenderer>();
+				if (sr)
+				{
+					auto tex = Resources::Find<graphics::Texture>(L"Player");
+					if (tex)
+						sr->SetSprite(tex);
+				}
 
-		//Rigidbody* playerRb = GetOwner()->GetComponent<Rigidbody>();
-		//if (color == RGB(255, 0, 0))
-		//{
-		//	playerRb->SetIsOnGround(true);
+				mProjTile = newTile;
+				pos.x += 1.0f;
+			}
+		}
 
-		//	pos.y -= 1;
-		//	tr->SetPosition(pos);
-		//}
-		//else
-		//{
-		//	playerRb->SetIsOnGround(false);
-		//}
+		if (Input::GetKeyDown(eKeyCode::D))
+		{
+			if (mProjTile)
+			{
+				object::Destroy(mProjTile);
+				mProjTile = nullptr;
+			}
+		}
 	}
 
 	void PlayerScript::LateUpdate()
@@ -85,39 +75,7 @@ namespace tg
 
 	void PlayerScript::AttackEffect()
 	{
-		/*Cat* mCat = object::Instantiate<Cat>(enums::eLayerType::Pet);
-		CatScript* catScr = mCat->AddComponent<CatScript>();
-
-		catScr->SetPlayer(GetOwner());
-
-		graphics::Texture* catTex = Resources::Find<graphics::Texture>(L"Cat");
-		Animator* catAni = mCat->AddComponent<Animator>();
-
-		catAni->CreateAnimationBySpriteSize(L"CatWalkDown", catTex
-			, Vector2(0.0f, 0.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		catAni->CreateAnimationBySpriteSize(L"CatWalkRight", catTex
-			, Vector2(0.0f, 32.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		catAni->CreateAnimationBySpriteSize(L"CatWalkUp", catTex
-			, Vector2(0.0f, 64.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		catAni->CreateAnimationBySpriteSize(L"CatWalkLeft", catTex
-			, Vector2(0.0f, 96.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		catAni->CreateAnimationBySpriteSize(L"CatSit", catTex
-			, Vector2(0.0f, 128.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		catAni->CreateAnimationBySpriteSize(L"CatLeak", catTex
-			, Vector2(0.0f, 160.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		catAni->CreateAnimationBySpriteSize(L"CatTired", catTex
-			, Vector2(0.0f, 192.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 4, 0.1f);
-		catAni->CreateAnimationBySpriteSize(L"CatSleep", catTex
-			, Vector2(0.0f, 224.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 2, 1.2f);
-		catAni->CreateAnimationBySpriteSize(L"CatStretch", catTex
-			, Vector2(64.0f, 224.0f), Vector2(32.0f, 32.0f), Vector2::Zero, 2, 0.5f);
-
-		Transform* tr = GetOwner()->GetComponent<Transform>();
-
-		mCat->GetComponent<Transform>()->SetPosition(tr->GetPosition());
-		mCat->GetComponent<Transform>()->SetScale(Vector2(2.0f, 2.0f));
-
-		catAni->PlayAnimation(L"CatSit", false);*/
+		
 	}
 
 	void PlayerScript::OnCollisionEnter(Collider* other)
@@ -152,52 +110,7 @@ namespace tg
 
 	void PlayerScript::idle()
 	{
-		//if (Input::GetKeyDown(eKeyCode::Mouse_Left))
-		//{
-		//	mState = PlayerScript::eState::Water;
-		//	mAnimator->PlayAnimation(L"PlayerWaterDown", false);
-
-		//	Vector2 mousePos = Input::GetMousePosition();
-		//}
-
-		//Rigidbody* rb = GetOwner()->GetComponent<Rigidbody>();
-		//Vector2 dir = Vector2::Zero;
-		//float spd = 500.0f;
-
-		//if (Input::GetKey(eKeyCode::D))
-		//	dir += Vector2::Right;
-		//if (Input::GetKey(eKeyCode::A))
-		//	dir += Vector2::Left;
-		//
-		//dir.Normalize();
-		//rb->AddForce(dir * spd);
-
-		//float V = 450.0f;
-		////float jumpForce = V * rb->GetMass() / Time::DeltaTime() - rb->GetFriction() * rb->GetMass() * rb->GetMass();
-		////if (jumpForce < 0.0f)
-		////	jumpForce = 0.0f;
-
-		//if ((Input::GetKeyDown(eKeyCode::W) || Input::GetKey(eKeyCode::W)) && rb->IsOnGround())
-		//{
-		//	//rb->AddForce(Vector2::Up.normalize() * jumpForce);
-		//	rb->AddVelocity(Vector2::Up * V);
-		//	rb->SetIsOnGround(false);
-		//}
-		///*if (Input::GetKey(eKeyCode::S))
-		//	dir += Vector2::Down;*/
-
-		//if (Input::GetKeyDown(eKeyCode::I))
-		//{
-		//	UIManager::Push(eUIType::HUD);
-		//	//UIManager::Push(eUIType::Button);
-
-		//}
-
-		//if (Input::GetKeyDown(eKeyCode::O))
-		//{
-		//	UIManager::Pop(eUIType::HUD);
-
-		//}
+		
 	}
 
 	void PlayerScript::move()

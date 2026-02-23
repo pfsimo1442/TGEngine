@@ -3,18 +3,8 @@
 #include "tgTime.h"
 #include "tgTransform.h"
 
-namespace tg::object
-{
-		void Destroy(GameObject* gameObject)
-		{
-			if (gameObject != nullptr)
-				gameObject->death();
-		}
-}
-
 namespace tg
 {
-
 	GameObject::GameObject()
 		: mState(eState::Active)
 		, mLayerType(eLayerType::None)

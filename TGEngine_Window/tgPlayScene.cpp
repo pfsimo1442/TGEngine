@@ -52,13 +52,17 @@ namespace tg
 		renderer::mainCamera = cameraComp;
 
 		//// Player
-		GameObject* player = object::Instantiate<Player>(eLayerType::Player);
-		object::DontDestroyOnLoad(player);
+		for (size_t i = 0; i < 1; i++)
+		{
+			GameObject* player = object::Instantiate<Player>(eLayerType::Player);
+			SpriteRenderer* sr = player->AddComponent<SpriteRenderer>();
+			sr->SetSprite(Resources::Find<Texture>(L"Player"));
 
-		SpriteRenderer* sr = player->AddComponent<SpriteRenderer>();
-		sr->SetSprite(Resources::Find<graphics::Texture>(L"Player"));
+			player->AddComponent<PlayerScript>();
 
-		renderer::selectedObject = player;
+			if (renderer::selectedObject == nullptr)
+				renderer::selectedObject = player;
+		}
 	}
 
 	void PlayScene::Update()
@@ -70,8 +74,8 @@ namespace tg
 	{
 		Scene::LateUpdate();
 
-		if (Input::GetKeyDown(eKeyCode::N))
-			SceneManager::LoadScene(L"TitleScene");
+		//if (Input::GetKeyDown(eKeyCode::N))
+			//SceneManager::LoadScene(L"TitleScene");
 	}
 
 	void PlayScene::Render()

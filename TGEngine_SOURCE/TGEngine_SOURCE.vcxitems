@@ -35,8 +35,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgEnums.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgEvent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgEventQueue.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgFmod.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgGameObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgGameObjectEvent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgGraphicDevice_DX11.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgGraphics.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgIndexBuffer.h" />
@@ -88,6 +90,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgConstantBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgDontDestroyOnLoad.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgEntity.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgEventQueue.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgFmod.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgGraphicDevice_DX11.cpp" />

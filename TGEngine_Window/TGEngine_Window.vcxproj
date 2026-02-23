@@ -159,6 +159,8 @@ copy "$(SolutionDir)External\Library\Fmod\Release\fmodstudio.dll" "$(SolutionDir
     <ClInclude Include="tgPlayer.h" />
     <ClInclude Include="tgPlayerScript.h" />
     <ClInclude Include="tgPlayScene.h" />
+    <ClInclude Include="tgProjectTile.h" />
+    <ClInclude Include="tgProjectTileScript.h" />
     <ClInclude Include="tgTile.h" />
     <ClInclude Include="tgTitleScene.h" />
   </ItemGroup>
@@ -170,6 +172,8 @@ copy "$(SolutionDir)External\Library\Fmod\Release\fmodstudio.dll" "$(SolutionDir
     <ClCompile Include="tgPlayer.cpp" />
     <ClCompile Include="tgPlayerScript.cpp" />
     <ClCompile Include="tgPlayScene.cpp" />
+    <ClCompile Include="tgProjectTile.cpp" />
+    <ClCompile Include="tgProjectTileScript.cpp" />
     <ClCompile Include="tgTile.cpp" />
     <ClCompile Include="tgTitleScene.cpp" />
   </ItemGroup>

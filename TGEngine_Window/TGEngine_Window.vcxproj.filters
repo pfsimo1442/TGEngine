@@ -40,6 +40,12 @@
     <ClInclude Include="tgLoadingScene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="tgProjectTile.h">
+      <Filter>Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="tgProjectTileScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tgPlayScene.cpp">
@@ -68,6 +74,12 @@
     </ClCompile>
     <ClCompile Include="tgLoadingScene.cpp">
       <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="tgProjectTile.cpp">
+      <Filter>Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="tgProjectTileScript.cpp">
+      <Filter>Scripts</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

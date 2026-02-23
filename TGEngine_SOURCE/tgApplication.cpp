@@ -8,7 +8,7 @@
 #include "tgCollisionManager.h"
 #include "tgUIManager.h"
 #include "tgFmod.h"
-
+#include "tgGameObjectEvent.h"
 
 namespace tg
 {
@@ -16,7 +16,7 @@ namespace tg
 		: mbLoaded(false)
 		, mbRunning(false)
 	{
-		mWindow.SetEventCallback(TG_BIND_EVENT_FN(Application::OnEvent));
+		mWindow.SetEventCallback(TG_BIND_EVENT_FN(Application::OnWindowEvent));
 	}
 	Application::~Application()
 	{
@@ -93,9 +93,33 @@ namespace tg
 	{
 		Input::Initialze();
 		Time::Initialize();
+
+		InitializeEventHandlers();
 	}
 
-	void Application::OnEvent(Event& e)
+	void Application::InitializeEventHandlers()
+	{
+		mEventQueue.RegisterHandler<GameObjectCreatedEvent>([this](GameObjectCreatedEvent& e) -> bool
+			{
+				// To do : create game object event handler
+
+				return true;
+			});
+
+		mEventQueue.RegisterHandler<GameObjectDestroyedEvent>([this](GameObjectDestroyedEvent& e) -> bool
+			{
+				// To do : destroy game object event handler
+
+				return true;
+			});
+
+		mEventQueue.SetCallback([this](Event& e)
+			{
+				std::cout << "[Application] Unhandled Event: " << e.ToString() << std::endl;
+			});
+	}
+
+	void Application::OnWindowEvent(Event& e)
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowResizeEvent>([this](WindowResizeEvent& e) -> bool
@@ -114,7 +138,7 @@ namespace tg
 		LateUpdate();
 		Render();
 
-		Destroy();
+		EndOfFrame();
 	}
 
 	void Application::Close()
@@ -163,9 +187,11 @@ namespace tg
 		GetDevice()->Present();
 	}
 
-	void Application::Destroy()
+	void Application::EndOfFrame()
 	{
-		SceneManager::Destroy();
+		SceneManager::EndOfFrame();
+
+		mEventQueue.Process();
 	}
 
 	void Application::Release()

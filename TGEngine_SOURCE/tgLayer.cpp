@@ -35,10 +35,7 @@ namespace tg
 		{
 			if (gameObj == nullptr)
 				continue;
-
-			GameObject::eState state = gameObj->GetActiveState();
-			if (state == GameObject::eState::Pause
-				|| state == GameObject::eState::Dead)
+			if (gameObj->IsActive() == false)
 				continue;
 
 			gameObj->Update();
@@ -51,10 +48,7 @@ namespace tg
 		{
 			if (gameObj == nullptr)
 				continue;
-
-			GameObject::eState state = gameObj->GetActiveState();
-			if (state == GameObject::eState::Pause
-				|| state == GameObject::eState::Dead)
+			if (gameObj->IsActive() == false)
 				continue;
 
 			gameObj->LateUpdate();
@@ -67,17 +61,14 @@ namespace tg
 		{
 			if (gameObj == nullptr)
 				continue;
-
-			GameObject::eState state = gameObj->GetActiveState();
-			if (state == GameObject::eState::Pause
-				|| state == GameObject::eState::Dead)
+			if (gameObj->IsActive() == false)
 				continue;
 
 			gameObj->Render();
 		}
 	}
 
-	void Layer::Destroy()
+	void Layer::EndOfFrame()
 	{
 		std::vector<GameObject*> deleteObjects = {};
 		findDeadGameObjects(deleteObjects);
@@ -107,7 +98,7 @@ namespace tg
 		for (GameObject* gameObj : mGameObjects)
 		{
 			GameObject::eState activeState = gameObj->GetActiveState();
-			if (activeState == GameObject::eState::Dead)
+			if (activeState == GameObject::eState::Destroyed)
 				gameObjects.push_back(gameObj);
 		}
 	}
