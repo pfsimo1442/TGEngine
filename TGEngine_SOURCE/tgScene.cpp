@@ -75,6 +75,9 @@ namespace tg
 
 	void Scene::EraseGameObject(GameObject* gameObj)
 	{
+		if (gameObj == nullptr)
+			return;
+
 		eLayerType layerType = gameObj->GetLayerType();
 		mLayers[static_cast<UINT>(layerType)]->EraseGameObject(gameObj);
 	}

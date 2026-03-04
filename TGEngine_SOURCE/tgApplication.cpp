@@ -8,7 +8,6 @@
 #include "tgCollisionManager.h"
 #include "tgUIManager.h"
 #include "tgFmod.h"
-#include "tgGameObjectEvent.h"
 
 namespace tg
 {
@@ -93,30 +92,6 @@ namespace tg
 	{
 		Input::Initialze();
 		Time::Initialize();
-
-		InitializeEventHandlers();
-	}
-
-	void Application::InitializeEventHandlers()
-	{
-		mEventQueue.RegisterHandler<GameObjectCreatedEvent>([this](GameObjectCreatedEvent& e) -> bool
-			{
-				// To do : create game object event handler
-
-				return true;
-			});
-
-		mEventQueue.RegisterHandler<GameObjectDestroyedEvent>([this](GameObjectDestroyedEvent& e) -> bool
-			{
-				// To do : destroy game object event handler
-
-				return true;
-			});
-
-		mEventQueue.SetCallback([this](Event& e)
-			{
-				std::cout << "[Application] Unhandled Event: " << e.ToString() << std::endl;
-			});
 	}
 
 	void Application::OnWindowEvent(Event& e)
@@ -190,8 +165,6 @@ namespace tg
 	void Application::EndOfFrame()
 	{
 		SceneManager::EndOfFrame();
-
-		mEventQueue.Process();
 	}
 
 	void Application::Release()

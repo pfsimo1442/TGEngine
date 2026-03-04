@@ -70,10 +70,7 @@ namespace tg
 
 	void Layer::EndOfFrame()
 	{
-		std::vector<GameObject*> deleteObjects = {};
-		findDeadGameObjects(deleteObjects);
-		eraseDeadGameObject();
-		deleteGameObjects(deleteObjects);
+
 	}
 
 	void Layer::AddGameObject(GameObject* gameObject)
@@ -86,11 +83,15 @@ namespace tg
 
 	void Layer::EraseGameObject(GameObject* eraseGameObj)
 	{
+		GameObject* buffer = eraseGameObj;
 		std::erase_if(mGameObjects,
 			[=](GameObject* gameObj)
 			{
 				return gameObj == eraseGameObj;
 			});
+
+		delete buffer;
+		buffer = nullptr;
 	}
 
 	void Layer::findDeadGameObjects(OUT std::vector<GameObject*>& gameObjects)

@@ -36,7 +36,7 @@ namespace tg
 			return ss.str();
 		}
 
-		EVENT_CLASS_TYPE(KeyPressed)
+		EVENT_CLASS_TYPE(KeyPressedEvent)
 	private:
 		bool mIsRepeat;
 	};
@@ -56,7 +56,7 @@ namespace tg
 			return ss.str();
 		}
 
-		EVENT_CLASS_TYPE(KeyReleased)
+		EVENT_CLASS_TYPE(KeyReleasedEvent)
 	};
 
 	class KeyTypedEvent : public KeyEvent
@@ -74,6 +74,6 @@ namespace tg
 			return ss.str();
 		}
 
-		EVENT_CLASS_TYPE(KeyTyped)
+		EVENT_CLASS_TYPE(KeyTypedEvent)
 	};
 }

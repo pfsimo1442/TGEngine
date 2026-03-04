@@ -22,7 +22,7 @@ namespace tg
 			return ss.str();
 		}
 
-		EVENT_CLASS_TYPE(WindowResize)
+		EVENT_CLASS_TYPE(WindowResizedEvent)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 
 	private:
@@ -34,7 +34,7 @@ namespace tg
 	public:
 		WindowCloseEvent() = default;
 
-		EVENT_CLASS_TYPE(WindowClose)
+		EVENT_CLASS_TYPE(WindowClosedEvent)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 }

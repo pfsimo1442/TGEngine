@@ -6,11 +6,11 @@ namespace tg
 	enum class eEventType
 	{
 		None = 0,
-		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
-		AppTick, AppUpdate, AppLateUpdate, AppRender,
-		KeyPressed, KeyReleased, KeyTyped,
-		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled,
-		GameObjectDestroyed, GameObjectCreated,
+		WindowClosedEvent, WindowResizedEvent, WindowGotFocusEvent, WindowLostFocusEvent, WindowMovedEvent,
+		AppTickedEvent, AppUpdatedEvent, AppLateUpdatedEvent, AppRenderedEvent,
+		KeyPressedEvent, KeyReleasedEvent, KeyTypedEvent,
+		MouseButtonPressedEvent, MouseButtonReleasedEvent, MouseMovedEvent, MouseScrolledEvent,
+		GameObjectDestroyedEvent, GameObjectCreatedEvent,
 	};
 
 	enum eEventCategory

@@ -37,7 +37,10 @@ namespace tg
 			return ss.str();
 		}
 
-		EVENT_CLASS_TYPE(GameObjectCreated)
+		GameObject* GetGameObject() const { return mGameObject; }
+		Scene* GetScene() const { return mScene; }
+
+		EVENT_CLASS_TYPE(GameObjectCreatedEvent)
 	private:
 		GameObject* mGameObject;
 		Scene* mScene;
@@ -60,7 +63,10 @@ namespace tg
 			return ss.str();
 		}
 
-		EVENT_CLASS_TYPE(GameObjectDestroyed)
+		GameObject* GetGameObject() const { return mGameObject; }
+		Scene* GetScene() const { return mScene; }
+
+		EVENT_CLASS_TYPE(GameObjectDestroyedEvent)
 	private:
 		GameObject* mGameObject;
 		Scene* mScene;

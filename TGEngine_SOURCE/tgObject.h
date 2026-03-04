@@ -19,10 +19,7 @@ namespace tg::object
 		gameObject->SetLayerType(type);
 
 		Scene* activeScene = SceneManager::GetActiveScene();
-		Layer* layer = activeScene->GetLayer(type);
-		layer->AddGameObject(gameObject);
-
-		application.PushEvent(new tg::GameObjectCreatedEvent(gameObject, activeScene));
+		SceneManager::PushEvent(new tg::GameObjectCreatedEvent(gameObject, activeScene));
 
 		return gameObject;
 	}
@@ -33,14 +30,11 @@ namespace tg::object
 		T* gameObject = new T();
 		gameObject->SetLayerType(type);
 
-		Scene* activeScene = SceneManager::GetActiveScene();
-		Layer* layer = activeScene->GetLayer(type);
-		layer->AddGameObject(gameObject);
-
 		Transform* tr = gameObject->template GetComponent<Transform>();
 		tr->SetPosition(position);
 
-		application.PushEvent(new tg::GameObjectCreatedEvent(gameObject, activeScene));
+		Scene* activeScene = SceneManager::GetActiveScene();
+		SceneManager::PushEvent(new tg::GameObjectCreatedEvent(gameObject, activeScene));
 
 		return gameObject;
 	}
@@ -61,6 +55,6 @@ namespace tg::object
 			gameObject->death();
 
 		Scene* activeScene = SceneManager::GetActiveScene();
-		application.PushEvent(new tg::GameObjectDestroyedEvent(gameObject, activeScene));
+		SceneManager::PushEvent(new tg::GameObjectDestroyedEvent(gameObject, activeScene));
 	}
 }
