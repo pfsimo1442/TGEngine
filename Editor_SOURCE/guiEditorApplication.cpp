@@ -1,5 +1,9 @@
 ﻿#include "guiEditorApplication.h"
 #include "guiInspectorWindow.h"
+#include "guiConsoleWindow.h"
+#include "guiGameWindow.h"
+#include "guiHierarchyWindow.h"
+#include "guiProjectWindow.h"
 
 #include "..\\TGEngine_SOURCE\\tgApplication.h"
 #include "..\\TGEngine_SOURCE\\tgRenderer.h"
@@ -28,12 +32,43 @@ namespace gui
 
 	bool EditorApplication::Initialize()
 	{
+#ifdef DEBUG
+		if (::AllocConsole() == TRUE)
+		{
+			FILE* nfp[3];
+			freopen_s(nfp + 0, "CONOUT$", "rb", stdin);
+			freopen_s(nfp + 1, "CONOUT$", "wb", stdout);
+			freopen_s(nfp + 2, "CONOUT$", "wb", stderr);
+			std::ios::sync_with_stdio();
+		}
+
+		std::cout << "Console Allocated" << std::endl;
+#endif
+
 		mImguiEditor = new ImguiEditor();
 		mFrameBuffer = tg::renderer::FrameBuffer;
 		mImguiEditor->Initialize();
+
+		// Inspector Window
 		InspectorWindow* inspector = new InspectorWindow();
 		mEditorWindows.insert(std::make_pair(L"InspectorWindow", inspector));
 		mEventCallback = &EditorApplication::OnEvent;
+
+		// Console Window
+		ConsoleWindow* console = new ConsoleWindow();
+		mEditorWindows.insert(std::make_pair(L"ConsoleWindow", console));
+
+		// Game Window
+		GameWindow* game = new GameWindow();
+		mEditorWindows.insert(std::make_pair(L"GameWindow", game));
+
+		// Hierarchy Window
+		HierarchyWindow* hierarchy = new HierarchyWindow();
+		mEditorWindows.insert(std::make_pair(L"HierarchyWindow", hierarchy));
+
+		// Project Window
+		ProjectWindow* project = new ProjectWindow();
+		mEditorWindows.insert(std::make_pair(L"ProjectWindow", project));
 
 		return true;
 	}
@@ -67,6 +102,11 @@ namespace gui
 		// Cleanup
 		delete mImguiEditor;
 		mImguiEditor = nullptr;
+
+		// Release Console
+#ifdef _DEBUG
+		FreeConsole();
+#endif
 	}
 
 	void EditorApplication::OnEvent(tg::Event& e)

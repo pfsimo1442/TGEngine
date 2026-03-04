@@ -397,3 +397,6 @@ FodyWeavers.xsd
 #resource
 /x64/Shaders_SOURCE/
 /x64/Resources/
+
+# imgui & imguizmo
+**/imgui.ini
