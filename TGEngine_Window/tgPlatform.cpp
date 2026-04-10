@@ -24,8 +24,8 @@ namespace tg
         GameObject::LateUpdate();
     }
 
-    void Platform::Render()
+    void Platform::Render(const Matrix& view, const Matrix& projection)
     {
-        GameObject::Render();
+        GameObject::Render(view, projection);
     }
 }

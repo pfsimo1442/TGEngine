@@ -7,8 +7,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Editor_Window", "Editor_Win
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TGEngine_Window", "TGEngine_Window\TGEngine_Window.vcxproj", "{1D86F1A5-BD5B-44F9-A962-13C459EED1EF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TGEngine_SOURCE", "TGEngine_SOURCE\TGEngine_SOURCE.vcxitems", "{391FAD46-6027-401D-84BC-BCA0B441A919}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shaders_SOURCE", "Shaders_SOURCE\Shaders_SOURCE.vcxitems", "{2C2F8E80-61D6-4F1B-998A-13952751BE95}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Editor_SOURCE", "Editor_SOURCE\Editor_SOURCE.vcxitems", "{203BAB2C-D4AA-4DB9-8FA7-DDECFD3E4860}"
@@ -18,10 +16,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "솔루션 항목", "솔루�
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{C8D5274F-AC00-46C7-1F8D-E88E81087A52}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{D9C67022-A63D-4CBB-8FB3-B7CD66D06429}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{7E2406CF-FBE2-4B29-B134-2DEBE44F82E1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectXTex", "Vendor\DirectXTex\DirectXTex_Desktop_2022.vcxproj", "{371B9FA9-4C90-4AC6-A123-ACED756D6C77}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TGEngine_CORE", "TGEngine_CORE\TGEngine_CORE.vcxproj", "{2485B887-2AF8-4C71-BC74-4324D4FA0C79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Profile|x64 = Profile|x64
+		Profile|x86 = Profile|x86
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
@@ -30,6 +40,10 @@ Global
 		{0CB83CBB-0FE0-4374-B9F8-4213963F877B}.Debug|x64.Build.0 = Debug|x64
 		{0CB83CBB-0FE0-4374-B9F8-4213963F877B}.Debug|x86.ActiveCfg = Debug|Win32
 		{0CB83CBB-0FE0-4374-B9F8-4213963F877B}.Debug|x86.Build.0 = Debug|Win32
+		{0CB83CBB-0FE0-4374-B9F8-4213963F877B}.Profile|x64.ActiveCfg = Profile|x64
+		{0CB83CBB-0FE0-4374-B9F8-4213963F877B}.Profile|x64.Build.0 = Profile|x64
+		{0CB83CBB-0FE0-4374-B9F8-4213963F877B}.Profile|x86.ActiveCfg = Profile|Win32
+		{0CB83CBB-0FE0-4374-B9F8-4213963F877B}.Profile|x86.Build.0 = Profile|Win32
 		{0CB83CBB-0FE0-4374-B9F8-4213963F877B}.Release|x64.ActiveCfg = Release|x64
 		{0CB83CBB-0FE0-4374-B9F8-4213963F877B}.Release|x64.Build.0 = Release|x64
 		{0CB83CBB-0FE0-4374-B9F8-4213963F877B}.Release|x86.ActiveCfg = Release|Win32
@@ -38,22 +52,55 @@ Global
 		{1D86F1A5-BD5B-44F9-A962-13C459EED1EF}.Debug|x64.Build.0 = Debug|x64
 		{1D86F1A5-BD5B-44F9-A962-13C459EED1EF}.Debug|x86.ActiveCfg = Debug|Win32
 		{1D86F1A5-BD5B-44F9-A962-13C459EED1EF}.Debug|x86.Build.0 = Debug|Win32
+		{1D86F1A5-BD5B-44F9-A962-13C459EED1EF}.Profile|x64.ActiveCfg = Profile|x64
+		{1D86F1A5-BD5B-44F9-A962-13C459EED1EF}.Profile|x64.Build.0 = Profile|x64
+		{1D86F1A5-BD5B-44F9-A962-13C459EED1EF}.Profile|x86.ActiveCfg = Profile|Win32
+		{1D86F1A5-BD5B-44F9-A962-13C459EED1EF}.Profile|x86.Build.0 = Profile|Win32
 		{1D86F1A5-BD5B-44F9-A962-13C459EED1EF}.Release|x64.ActiveCfg = Release|x64
 		{1D86F1A5-BD5B-44F9-A962-13C459EED1EF}.Release|x64.Build.0 = Release|x64
 		{1D86F1A5-BD5B-44F9-A962-13C459EED1EF}.Release|x86.ActiveCfg = Release|Win32
 		{1D86F1A5-BD5B-44F9-A962-13C459EED1EF}.Release|x86.Build.0 = Release|Win32
+		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Debug|x64.ActiveCfg = Debug|x64
+		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Debug|x64.Build.0 = Debug|x64
+		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Debug|x86.ActiveCfg = Debug|Win32
+		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Debug|x86.Build.0 = Debug|Win32
+		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Profile|x64.ActiveCfg = Profile|x64
+		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Profile|x64.Build.0 = Profile|x64
+		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Profile|x86.ActiveCfg = Profile|Win32
+		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Profile|x86.Build.0 = Profile|Win32
+		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Release|x64.ActiveCfg = Release|x64
+		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Release|x64.Build.0 = Release|x64
+		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Release|x86.ActiveCfg = Release|Win32
+		{371B9FA9-4C90-4AC6-A123-ACED756D6C77}.Release|x86.Build.0 = Release|Win32
+		{2485B887-2AF8-4C71-BC74-4324D4FA0C79}.Debug|x64.ActiveCfg = Debug|x64
+		{2485B887-2AF8-4C71-BC74-4324D4FA0C79}.Debug|x64.Build.0 = Debug|x64
+		{2485B887-2AF8-4C71-BC74-4324D4FA0C79}.Debug|x86.ActiveCfg = Debug|Win32
+		{2485B887-2AF8-4C71-BC74-4324D4FA0C79}.Debug|x86.Build.0 = Debug|Win32
+		{2485B887-2AF8-4C71-BC74-4324D4FA0C79}.Profile|x64.ActiveCfg = Release|x64
+		{2485B887-2AF8-4C71-BC74-4324D4FA0C79}.Profile|x64.Build.0 = Release|x64
+		{2485B887-2AF8-4C71-BC74-4324D4FA0C79}.Profile|x86.ActiveCfg = Release|Win32
+		{2485B887-2AF8-4C71-BC74-4324D4FA0C79}.Profile|x86.Build.0 = Release|Win32
+		{2485B887-2AF8-4C71-BC74-4324D4FA0C79}.Release|x64.ActiveCfg = Release|x64
+		{2485B887-2AF8-4C71-BC74-4324D4FA0C79}.Release|x64.Build.0 = Release|x64
+		{2485B887-2AF8-4C71-BC74-4324D4FA0C79}.Release|x86.ActiveCfg = Release|Win32
+		{2485B887-2AF8-4C71-BC74-4324D4FA0C79}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2C2F8E80-61D6-4F1B-998A-13952751BE95} = {C8D5274F-AC00-46C7-1F8D-E88E81087A52}
+		{203BAB2C-D4AA-4DB9-8FA7-DDECFD3E4860} = {D9C67022-A63D-4CBB-8FB3-B7CD66D06429}
+		{371B9FA9-4C90-4AC6-A123-ACED756D6C77} = {7E2406CF-FBE2-4B29-B134-2DEBE44F82E1}
+		{2485B887-2AF8-4C71-BC74-4324D4FA0C79} = {C8D5274F-AC00-46C7-1F8D-E88E81087A52}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8BDCDE6C-9721-47A1-991C-A6C40178E23C}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Editor_SOURCE\Editor_SOURCE.vcxitems*{0cb83cbb-0fe0-4374-b9f8-4213963f877b}*SharedItemsImports = 4
-		TGEngine_SOURCE\TGEngine_SOURCE.vcxitems*{1d86f1a5-bd5b-44f9-a962-13c459eed1ef}*SharedItemsImports = 4
 		Editor_SOURCE\Editor_SOURCE.vcxitems*{203bab2c-d4aa-4db9-8fa7-ddecfd3e4860}*SharedItemsImports = 9
+		Shaders_SOURCE\Shaders_SOURCE.vcxitems*{2485b887-2af8-4c71-bc74-4324d4fa0c79}*SharedItemsImports = 4
 		Shaders_SOURCE\Shaders_SOURCE.vcxitems*{2c2f8e80-61d6-4f1b-998a-13952751be95}*SharedItemsImports = 9
-		TGEngine_SOURCE\TGEngine_SOURCE.vcxitems*{391fad46-6027-401d-84bc-bca0b441a919}*SharedItemsImports = 9
 	EndGlobalSection
 EndGlobal

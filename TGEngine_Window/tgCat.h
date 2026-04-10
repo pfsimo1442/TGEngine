@@ -1,5 +1,5 @@
 #pragma once
-#include "..//TGEngine_SOURCE//tgGameObject.h"
+#include "..//TGEngine_CORE//tgGameObject.h"
 
 namespace tg
 {
@@ -10,7 +10,7 @@ namespace tg
         void Initialize() override;
         void Update() override;
         void LateUpdate() override;
-        void Render() override;
+        void Render(const Matrix& view, const Matrix& projection) override;
 
     private:
 

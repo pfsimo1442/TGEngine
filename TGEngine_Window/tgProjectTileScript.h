@@ -1,6 +1,6 @@
 #pragma once
-#include "..//TGEngine_SOURCE//tgScript.h"
-#include "..//TGEngine_SOURCE//tgTexture.h"
+#include "..//TGEngine_CORE//tgScript.h"
+#include "..//TGEngine_CORE//tgTexture.h"
 
 namespace tg
 {
@@ -13,7 +13,7 @@ namespace tg
 		void Initialize() override;
 		void Update() override;
 		void LateUpdate() override;
-		void Render() override;
+		void Render(const Matrix& view, const Matrix& projection) override;
 
 		void OnCollisionEnter(Collider* other) override;
 		void OnCollisionStay(Collider* other) override;

@@ -1,5 +1,5 @@
 #pragma once
-#include "..//TGEngine_SOURCE//tgScene.h"
+#include "..//TGEngine_CORE//tgScene.h"
 
 namespace tg
 {

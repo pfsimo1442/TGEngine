@@ -1,0 +1,452 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="tgAudioFilter.cpp" />
+    <ClCompile Include="tgAnimation.cpp">
+      <Filter>Component\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="tgAnimator.cpp">
+      <Filter>Component\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="tgApplication.cpp">
+      <Filter>High Level Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="tgAudioListener.cpp">
+      <Filter>Component\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="tgBaseRenderer.cpp">
+      <Filter>High Level Interface\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="tgBoxCollider2D.cpp">
+      <Filter>Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="tgCapsuleCollider2D.cpp">
+      <Filter>Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="tgCircleCollider2D.cpp">
+      <Filter>Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="tgCollider.cpp">
+      <Filter>Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="tgMaterial.cpp">
+      <Filter>Resource\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="tgScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="tgGameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="tgInput.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="tgTime.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="tgLayer.cpp">
+      <Filter>Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="tgResource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="tgResources.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="tgTexture.cpp">
+      <Filter>Resource\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="tgScript.cpp">
+      <Filter>Component\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="tgSpriteRenderer.cpp">
+      <Filter>Component\SpriteRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="tgTransform.cpp">
+      <Filter>Component\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="tgTilemapRenderer.cpp">
+      <Filter>Component\TilemapRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="tgRenderer.cpp">
+      <Filter>High Level Interface\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="tgCamera.cpp">
+      <Filter>Component\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="tgComponent.cpp">
+      <Filter>Component\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="tgDontDestroyOnLoad.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="tgRigidbody.cpp">
+      <Filter>Component\Rigidbody</Filter>
+    </ClCompile>
+    <ClCompile Include="tgObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="tgSceneManager.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="tgCollisionManager.cpp">
+      <Filter>Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="tgUIBase.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="tgUIManager.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="tgUIHUD.cpp">
+      <Filter>UI\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="tgUIButton.cpp">
+      <Filter>UI\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="tgFmod.cpp">
+      <Filter>Fmod</Filter>
+    </ClCompile>
+    <ClCompile Include="tgAudioSource.cpp">
+      <Filter>Component\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="tgAudioClip.cpp">
+      <Filter>Resource\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="tgGraphicDevice_DX11.cpp">
+      <Filter>Graphics\GraphicDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="tgMath.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="tgShader.cpp">
+      <Filter>Resource\Graphics\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="tgMesh.cpp">
+      <Filter>Resource\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="tgVertexBuffer.cpp">
+      <Filter>Graphics\GpuBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="tgConstantBuffer.cpp">
+      <Filter>Graphics\GpuBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="tgIndexBuffer.cpp">
+      <Filter>Graphics\GpuBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="tgInputLayout.cpp">
+      <Filter>Graphics\InputLayout</Filter>
+    </ClCompile>
+    <ClCompile Include="tgWindow.cpp">
+      <Filter>High Level Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="tgRenderTarget.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="tgEventQueue.cpp">
+      <Filter>Event\Queue</Filter>
+    </ClCompile>
+    <ClCompile Include="tgEditorCamera.cpp">
+      <Filter>Component\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="tgSceneCamera.cpp">
+      <Filter>Component\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="tgEntity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="tgAudioFilter.h" />
+    <ClInclude Include="CommonInclude.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="tgAnimator.h">
+      <Filter>Component\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="tgAnimation.h">
+      <Filter>Component\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="tgApplication.h">
+      <Filter>High Level Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="tgApplicationEvent.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="tgAudioListener.h">
+      <Filter>Component\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="tgBaseRenderer.h">
+      <Filter>High Level Interface\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="tgBoxCollider2D.h">
+      <Filter>Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="tgCapsuleCollider2D.h">
+      <Filter>Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="tgCollider.h">
+      <Filter>Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="tgCircleCollider2D.h">
+      <Filter>Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="tgMaterial.h">
+      <Filter>Resource\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="tgScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="tgGameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="tgInput.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="tgTime.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="tgLayer.h">
+      <Filter>Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="tgResource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="tgResources.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="tgTexture.h">
+      <Filter>Resource\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="tgScript.h">
+      <Filter>Component\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="tgSpriteRenderer.h">
+      <Filter>Component\SpriteRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="tgTransform.h">
+      <Filter>Component\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="tgTilemapRenderer.h">
+      <Filter>Component\TilemapRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="tgRenderer.h">
+      <Filter>High Level Interface\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="tgCamera.h">
+      <Filter>Component\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="tgComponent.h">
+      <Filter>Component\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="tgDontDestroyOnLoad.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="tgRigidbody.h">
+      <Filter>Component\Rigidbody</Filter>
+    </ClInclude>
+    <ClInclude Include="tgObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="tgSceneManager.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="tgCollisionManager.h">
+      <Filter>Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="tgUIBase.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="tgUIManager.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="tgUIHUD.h">
+      <Filter>UI\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="tgUIButton.h">
+      <Filter>UI\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="tgFmod.h">
+      <Filter>Fmod</Filter>
+    </ClInclude>
+    <ClInclude Include="tgAudioSource.h">
+      <Filter>Component\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="tgAudioClip.h">
+      <Filter>Resource\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="tgGraphicDevice_DX11.h">
+      <Filter>Graphics\GraphicDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="tgMath.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="tgShader.h">
+      <Filter>Resource\Graphics\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="tgMesh.h">
+      <Filter>Resource\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="tgVertexBuffer.h">
+      <Filter>Graphics\GpuBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="tgConstantBuffer.h">
+      <Filter>Graphics\GpuBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="tgIndexBuffer.h">
+      <Filter>Graphics\GpuBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="tgInputLayout.h">
+      <Filter>Graphics\InputLayout</Filter>
+    </ClInclude>
+    <ClInclude Include="tgWindow.h">
+      <Filter>High Level Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="tgRenderTarget.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="tgMouseEvent.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="tgKeyEvent.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="tgEventQueue.h">
+      <Filter>Event\Queue</Filter>
+    </ClInclude>
+    <ClInclude Include="tgGameObjectEvent.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="tgEvent.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="tgEditorCamera.h">
+      <Filter>Component\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="tgSceneCamera.h">
+      <Filter>Component\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="tgGraphics.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="tgEnums.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="tgEntity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Common">
+      <UniqueIdentifier>{bdf60ff6-c657-421e-95a5-80438dcadc0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{4c816c8d-abc4-4635-ad0b-1e6c24a0d52e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{e42dd0b1-edb7-4ee7-a110-cea739f34bf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{e4906ca5-1537-43c6-b5df-a2666b107b33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="High Level Interface">
+      <UniqueIdentifier>{479e5176-e3b5-4983-b04c-7b643a2819b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{59e5dc19-395c-421a-807f-cd01eb958ebb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Layer">
+      <UniqueIdentifier>{7b34bf1c-a769-4bea-a3d1-7e0dc728b50e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{8e2fa7ba-f0ad-4076-b951-05efedc730f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Texture">
+      <UniqueIdentifier>{36bc5e4b-8444-487e-af31-8aceba8b9abc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script">
+      <UniqueIdentifier>{74c45902-81ff-41fc-a50a-ae63147506e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Transform">
+      <UniqueIdentifier>{03bc858c-e87e-4cf9-93af-547dcf2abef7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Camera">
+      <UniqueIdentifier>{9aa43296-fcab-46c9-a8a8-bb7e11048cca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Collider">
+      <UniqueIdentifier>{ee784b89-3ebc-49f4-a72d-27a14793acde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Component">
+      <UniqueIdentifier>{9f8dcd2c-b94b-40c4-a96e-efa1be3ab4f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\TilemapRenderer">
+      <UniqueIdentifier>{906ace6a-458a-438f-b48c-e7b1beb0e880}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\SpriteRenderer">
+      <UniqueIdentifier>{ca32572d-9b01-4d1a-94e9-460ae3d24b4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Rigidbody">
+      <UniqueIdentifier>{74b74a56-fa94-47cc-8101-d3908e1967ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{5c06b3d6-1788-4107-a6d7-8266dd53872e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{c7171640-1677-4db1-9225-e144cd521c8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\HUD">
+      <UniqueIdentifier>{6166c4cf-61ed-4c69-959f-1cba6c4ef2ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Button">
+      <UniqueIdentifier>{e438c438-d015-40a2-8b23-cb9cc204c820}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fmod">
+      <UniqueIdentifier>{a5a9d08e-8f6a-40e1-b11d-14e42fbf3116}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Audio">
+      <UniqueIdentifier>{2456b81c-ede8-4639-a871-fb5f246abe24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Audio">
+      <UniqueIdentifier>{332bd131-383a-425a-9f7a-c3821d195c4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Graphics">
+      <UniqueIdentifier>{922032d2-0418-45c9-b1ee-7cb5a4f69be2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Graphics\Shader">
+      <UniqueIdentifier>{790ba090-d172-4168-9a9c-06b0cbd1049b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Material">
+      <UniqueIdentifier>{147b337a-294d-421c-b272-1ec1502c1b74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Mesh">
+      <UniqueIdentifier>{631e2917-4201-499c-aadc-5411f7c85a69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{8fb21f49-069e-4ee9-94d4-ebfa8b4958ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\GraphicDevice">
+      <UniqueIdentifier>{6229596a-732d-41dd-ace9-53f0737171a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\GpuBuffer">
+      <UniqueIdentifier>{94a0f166-cf27-439f-b6fa-ea120ac25740}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\InputLayout">
+      <UniqueIdentifier>{bd59ea2d-f267-4d19-9bac-42cab8e84963}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Animator">
+      <UniqueIdentifier>{d044ac2f-cba6-48c6-9691-5328b993a74f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event">
+      <UniqueIdentifier>{f5054d37-e1f7-4cfb-996d-9a924cf19daa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event\Queue">
+      <UniqueIdentifier>{5b44a012-e389-47d2-a6f9-3da6afa8133a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="High Level Interface\Renderer">
+      <UniqueIdentifier>{2b4c1c80-9d69-414d-9c09-87ed07b238ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{32aadf58-011e-4b58-b3bf-897e9073e5b8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

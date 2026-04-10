@@ -2,9 +2,9 @@
 #include "guiEditorWindow.h"
 #include "guiImguiEditor.h"
 
-#include "..//TGEngine_SOURCE//tgRenderTarget.h"
-#include "..//TGEngine_SOURCE//tgKeyEvent.h"
-#include "..//TGEngine_SOURCE//tgMouseEvent.h"
+#include "..//TGEngine_CORE//tgRenderTarget.h"
+#include "..//TGEngine_CORE//tgKeyEvent.h"
+#include "..//TGEngine_CORE//tgMouseEvent.h"
 
 namespace tg
 {

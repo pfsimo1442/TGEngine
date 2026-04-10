@@ -1,6 +1,6 @@
 #pragma once
-#include "..//TGEngine_SOURCE//tgScript.h"
-#include "..//TGEngine_SOURCE//tgTexture.h"
+#include "..//TGEngine_CORE//tgScript.h"
+#include "..//TGEngine_CORE//tgTexture.h"
 #include "tgProjectTile.h"
 
 namespace tg

@@ -30,9 +30,6 @@
     <ClInclude Include="tgTile.h">
       <Filter>Contents</Filter>
     </ClInclude>
-    <ClInclude Include="tgCameraScript.h">
-      <Filter>Scripts</Filter>
-    </ClInclude>
     <ClInclude Include="tgLoadScenes.h" />
     <ClInclude Include="tgPlatform.h">
       <Filter>Contents</Filter>
@@ -45,6 +42,9 @@
     </ClInclude>
     <ClInclude Include="tgProjectTileScript.h">
       <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="tgEditorScene.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -66,9 +66,6 @@
     <ClCompile Include="tgTile.cpp">
       <Filter>Contents</Filter>
     </ClCompile>
-    <ClCompile Include="tgCameraScript.cpp">
-      <Filter>Scripts</Filter>
-    </ClCompile>
     <ClCompile Include="tgPlatform.cpp">
       <Filter>Contents</Filter>
     </ClCompile>
@@ -80,6 +77,9 @@
     </ClCompile>
     <ClCompile Include="tgProjectTileScript.cpp">
       <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="tgEditorScene.cpp">
+      <Filter>Scenes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

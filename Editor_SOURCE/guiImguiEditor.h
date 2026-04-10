@@ -2,7 +2,7 @@
 #include "guiEditor.h"
 #include "guiEditorWindow.h"
 
-#include "..//TGEngine_SOURCE//tgEvent.h"
+#include "..//TGEngine_CORE//tgEvent.h"
 
 namespace gui
 {

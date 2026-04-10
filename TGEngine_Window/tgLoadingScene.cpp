@@ -6,8 +6,10 @@
 #include "tgAudioClip.h"
 #include "tgApplication.h"
 
+
 #include "tgTitleScene.h"
 #include "tgPlayScene.h"
+#include "tgEditorScene.h"
 
 extern tg::Application application;
 
@@ -68,6 +70,8 @@ namespace tg
 
 			SceneManager::CreateScene<TitleScene>(L"TitleScene");
 			SceneManager::CreateScene<PlayScene>(L"PlayScene");
+
+			SceneManager::CreateScene<EditorScene>(L"EditorScene");
 		}
 		m.unlock();
 
