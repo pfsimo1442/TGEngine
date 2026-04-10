@@ -32,7 +32,7 @@ namespace gui
 
 	bool EditorApplication::Initialize()
 	{
-#ifdef DEBUG
+#ifdef _DEBUG
 		if (::AllocConsole() == TRUE)
 		{
 			FILE* nfp[3];
