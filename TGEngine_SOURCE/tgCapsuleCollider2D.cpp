@@ -29,7 +29,7 @@ namespace tg
 
     }
 
-    void CapsuleCollider2D::Render()
+    void CapsuleCollider2D::Render(const Matrix& view, const Matrix& projection)
     {
         const Transform* tr = GetOwner()->GetComponent<Transform>();
         Vector3 pos = tr->GetPosition();

@@ -33,7 +33,7 @@ namespace tg
 		mAudioClip->Set3DAttributes(pos, vel);
 	}
 
-	void AudioSource::Render()
+	void AudioSource::Render(const Matrix& view, const Matrix& projection)
 	{
 
 	}

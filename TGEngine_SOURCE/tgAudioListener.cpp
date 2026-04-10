@@ -39,7 +39,7 @@ namespace tg
 		Fmod::Set3DListenerAttributes(pos, vel);
 	}
 
-	void AudioListener::Render()
+	void AudioListener::Render(const Matrix& view, const Matrix& projection)
 	{
 
 	}

@@ -82,7 +82,7 @@ namespace tg
 
 	}
 
-	void Rigidbody::Render()
+	void Rigidbody::Render(const Matrix& view, const Matrix& projection)
 	{
 		
 	}
