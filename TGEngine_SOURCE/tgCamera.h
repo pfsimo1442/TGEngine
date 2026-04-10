@@ -1,5 +1,7 @@
 #pragma once
 #include "tgComponent.h"
+#include "tgEvent.h"
+#include "tgGameObject.h"
 
 namespace tg
 {
@@ -24,7 +26,7 @@ namespace tg
 		void Initialize() override;
 		void Update() override;
 		void LateUpdate() override;
-		void Render() override;
+		void Render(const Matrix& view, const Matrix& projection) override;
 		
 		void CreateViewMatrix();
 		void CreateProjectionMatrix(eProjectionType type);

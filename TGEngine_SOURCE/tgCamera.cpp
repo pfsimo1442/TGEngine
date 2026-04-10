@@ -2,6 +2,7 @@
 #include "tgGameObject.h"
 #include "tgTransform.h"
 #include "tgApplication.h"
+#include "tgSceneManager.h"
 
 extern tg::Application application;
 
@@ -27,7 +28,8 @@ namespace tg
 
 	void Camera::Initialize()
 	{
-
+		Scene* activeScene = SceneManager::GetActiveScene();
+		activeScene->AddCamera(this);
 	}
 	
 	void Camera::Update()
@@ -44,7 +46,7 @@ namespace tg
 		ProjectionMatrix = mProjectionMatrix;
 	}
 
-	void Camera::Render()
+	void Camera::Render(const Matrix& view, const Matrix& projection)
 	{
 
 	}

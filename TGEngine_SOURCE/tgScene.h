@@ -2,6 +2,7 @@
 #include "tgEntity.h"
 #include "tgGameObject.h"
 #include "tgLayer.h"
+#include "tgCamera.h"
 
 namespace tg
 {
@@ -22,6 +23,12 @@ namespace tg
 		
 		void AddGameObject(GameObject* gameObj, eLayerType type);
 		void EraseGameObject(GameObject* gameObj);
+		void AddCamera(Camera* camera);
+		void RemoveCamera(Camera* camera);
+		void CollectRenderables(std::vector<GameObject*>& opaqueList, std::vector<GameObject*>& cutoutList, std::vector<GameObject*>& transparentList) const;
+		void SortByDistance(std::vector<GameObject*>& renderList, const Vector3& cameraPos, bool bAscending) const;
+		void RenderRenderables(const std::vector<GameObject*>& renderList, const Matrix& view, const Matrix& projection) const;
+
 		Layer* GetLayer(const eLayerType type) const { return mLayers[static_cast<UINT>(type)]; }
 
 	private:
@@ -29,5 +36,6 @@ namespace tg
 
 	private:
 		std::vector<Layer*> mLayers;
+		std::vector<Camera*> mCameras;
 	};
 }

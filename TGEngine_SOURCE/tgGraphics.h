@@ -55,7 +55,7 @@ namespace tg::graphics
 		Opaque,
 		CutOut,
 		Transparent,
-		PostProcess,
+		//PostProcess,
 		End,
 	};
 
@@ -82,7 +82,9 @@ namespace tg::graphics
 
 	enum class eBlendState
 	{
-		AlphaBlend,
+		Opaque,
+		Cutout,
+		Transparent,
 		OneOne,
 		End,
 	};
@@ -91,6 +93,7 @@ namespace tg::graphics
 	{
 		DepthNone,
 		LessEqual,
+		Always,
 		End,
 	};
 

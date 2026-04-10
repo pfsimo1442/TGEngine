@@ -40,10 +40,10 @@ namespace tg
 
 	}
 
-	void TilemapRenderer::Render()
+	void TilemapRenderer::Render(const Matrix& view, const Matrix& projection)
 	{
-		if (mTexture == nullptr)
-			assert(false);
+		//if (mTexture == nullptr)
+		//	assert(false);
 
 		//Transform* tr = GetOwner()->GetComponent<Transform>();
 		//Vector2 pos = tr->GetPosition();

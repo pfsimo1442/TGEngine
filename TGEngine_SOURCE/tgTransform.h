@@ -4,6 +4,8 @@
 
 namespace tg
 {
+    using namespace math;
+
     class Transform : public Component
     {
     public:
@@ -13,7 +15,7 @@ namespace tg
         void Initialize() override;
         void Update() override;
         void LateUpdate() override;
-        void Render() override;
+        void Render(const Matrix& view, const Matrix& projection) override;
 
         void Bind() const;
         
@@ -51,6 +53,4 @@ namespace tg
         Vector3 mRight;
         Vector3 mUp;
     };
-
-    using namespace math;
 }

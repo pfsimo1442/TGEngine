@@ -56,14 +56,14 @@ namespace tg
 		}
 	}
 
-	void GameObject::Render()
+	void GameObject::Render(const Matrix& view, const Matrix& projection)
 	{
 		for (Component* comp : mComponents)
 		{
 			if (comp == nullptr)
 				continue;
 
-			comp->Render();
+			comp->Render(view, projection);
 		}
 	}
 

@@ -14,14 +14,14 @@ namespace tg
 		void Initialize() override;
 		void Update() override;
 		void LateUpdate() override;
-		void Render() override;
+		void Render(const Matrix& view, const Matrix& projection) override;
 
-		[[noreturn]] void SetTexture(graphics::Texture* texture) { mTexture = texture; }
-		[[noreturn]] void SetSize(Vector2 size) { mSize = size; TileSize = mTileSize * mSize; }
-		[[noreturn]] void SetCellCoordination(Vector2 coord) { mCell = coord; }
-		[[noreturn]] void SetTileSize(Vector2 size) { mTileSize = size; TileSize = mTileSize * mSize; OriginTileSize = mTileSize;}
+		void SetTexture(graphics::Texture* texture) { mTexture = texture; }
+		void SetSize(Vector2 size) { mSize = size; TileSize = mTileSize * mSize; }
+		void SetCellCoordination(Vector2 coord) { mCell = coord; }
+		void SetTileSize(Vector2 size) { mTileSize = size; TileSize = mTileSize * mSize; OriginTileSize = mTileSize;}
 		
-		[[nodiscard]] Vector2 GetCellCoordination() const { return mCell; }
+		Vector2 GetCellCoordination() const { return mCell; }
 
 	public:
 		static Vector2 TileSize;

@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)tgEntity.cpp">
-      <Filter>Common</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -41,7 +38,7 @@
       <Filter>Component\Transform</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgRenderer.cpp">
-      <Filter>Renderer</Filter>
+      <Filter>High Level Interface\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)tgAnimator.cpp">
       <Filter>Component\Animator</Filter>
@@ -146,12 +143,21 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgEventQueue.cpp">
       <Filter>Event\Queue</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgBaseRenderer.cpp">
+      <Filter>High Level Interface\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgEntity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgSceneCamera.cpp">
+      <Filter>Component\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgEditorCamera.cpp">
+      <Filter>Component\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
-      <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)tgEntity.h">
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgScene.h">
@@ -194,7 +200,7 @@
       <Filter>Component\Transform</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgRenderer.h">
-      <Filter>Renderer</Filter>
+      <Filter>High Level Interface\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)tgAnimator.h">
       <Filter>Component\Animator</Filter>
@@ -317,6 +323,18 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgEventQueue.h">
       <Filter>Event\Queue</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgBaseRenderer.h">
+      <Filter>High Level Interface\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgEntity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgSceneCamera.h">
+      <Filter>Component\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgEditorCamera.h">
+      <Filter>Component\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -351,9 +369,6 @@
     </Filter>
     <Filter Include="Component\Transform">
       <UniqueIdentifier>{03bc858c-e87e-4cf9-93af-547dcf2abef7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Renderer">
-      <UniqueIdentifier>{2b4c1c80-9d69-414d-9c09-87ed07b238ad}</UniqueIdentifier>
     </Filter>
     <Filter Include="Component\Camera">
       <UniqueIdentifier>{9aa43296-fcab-46c9-a8a8-bb7e11048cca}</UniqueIdentifier>
@@ -426,6 +441,12 @@
     </Filter>
     <Filter Include="Event\Queue">
       <UniqueIdentifier>{5b44a012-e389-47d2-a6f9-3da6afa8133a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="High Level Interface\Renderer">
+      <UniqueIdentifier>{2b4c1c80-9d69-414d-9c09-87ed07b238ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{32aadf58-011e-4b58-b3bf-897e9073e5b8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

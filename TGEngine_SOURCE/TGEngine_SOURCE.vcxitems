@@ -23,6 +23,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgAudioFilter.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgAudioListener.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgAudioSource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgBaseRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgBoxCollider2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgCapsuleCollider2D.h" />
@@ -32,6 +33,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgConstantBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgDontDestroyOnLoad.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgEditorCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgEnums.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgEvent.h" />
@@ -57,6 +59,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)tgResources.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgRigidbody.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)tgSceneCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgSceneManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)tgShader.h" />
@@ -80,6 +83,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgAudioFilter.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgAudioListener.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgAudioSource.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgBaseRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgBoxCollider2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgCapsuleCollider2D.cpp" />
@@ -89,6 +93,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgConstantBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgDontDestroyOnLoad.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgEditorCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgEventQueue.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgFmod.cpp" />
@@ -108,6 +113,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)tgResources.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgRigidbody.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)tgSceneCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgSceneManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)tgShader.cpp" />

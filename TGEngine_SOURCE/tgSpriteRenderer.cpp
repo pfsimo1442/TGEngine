@@ -1,17 +1,13 @@
 #include "tgSpriteRenderer.h"
 #include "tgGameObject.h"
-#include "tgTransform.h"
+#include "tgTexture.h"
 #include "tgRenderer.h"
-
 #include "tgResources.h"
 
 namespace tg
 {
 	SpriteRenderer::SpriteRenderer()
-		: Component(eComponentType::SpriteRenderer)
-		, mSprite(nullptr)
-		, mMaterial(nullptr)
-		, mMesh(nullptr)
+		: BaseRenderer(eComponentType::SpriteRenderer)
 	{
 	}
 	SpriteRenderer::~SpriteRenderer()
@@ -20,37 +16,32 @@ namespace tg
 
 	void SpriteRenderer::Initialize()
 	{
-		mMesh = Resources::Find<Mesh>(L"RectMesh");
+		BaseRenderer::Initialize();
 
-		mMaterial = Resources::Find<Material>(L"SpriteDefaultMaterial");
+		Mesh* mesh = Resources::Find<Mesh>(L"RectMesh");
+		Material* material = Resources::Find<Material>(L"SpriteDefaultMaterial");
+
+		SetMesh(mesh);
+		SetMaterial(material);
 	}
 
 	void SpriteRenderer::Update()
 	{
-		
+		BaseRenderer::Update();
 	}
 	
 	void SpriteRenderer::LateUpdate()
 	{
-	
+		BaseRenderer::LateUpdate();
 	}
 
-	void SpriteRenderer::Render()
+	void SpriteRenderer::Render(const Matrix& view, const Matrix& projection)
 	{
-		Transform* tr = GetOwner()->GetComponent<Transform>();
-		if (tr)
-			tr->Bind();
-
-		if (mMesh)
-			mMesh->Bind();
-
-		if (mMaterial)
-			mMaterial->BindShader();
+		BaseRenderer::Render(view, projection);
 
 		if (mSprite)
 			mSprite->Bind(eShaderStage::PS, (UINT)eTextureType::Sprite);
 
-		if (mMesh)
-			graphics::GetDevice()->DrawIndexed(mMesh->GetIndexCount(), 0, 0);
+		BaseRenderer::Draw();
 	}
 }

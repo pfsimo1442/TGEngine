@@ -8,6 +8,7 @@
 #include "tgCollisionManager.h"
 #include "tgUIManager.h"
 #include "tgFmod.h"
+#include "tgTransform.h"
 
 namespace tg
 {
@@ -146,9 +147,9 @@ namespace tg
 		GetDevice()->BindDefaultRenderTarget();
 
 		Time::Render();
+		SceneManager::Render();
 		CollisionManager::Render();
 		UIManager::Render();
-		SceneManager::Render();
 
 		//copy back buffer
 		Microsoft::WRL::ComPtr<ID3D11Texture2D> src = GetDevice()->GetFrameBuffer();
