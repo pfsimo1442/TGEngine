@@ -68,7 +68,7 @@ namespace tg
 		
 	}
 
-	void PlayerScript::Render()
+	void PlayerScript::Render(const Matrix& view, const Matrix& projection)
 	{
 
 	}

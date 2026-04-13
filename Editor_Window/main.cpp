@@ -4,7 +4,7 @@
 #include "framework.h"
 #include "Editor_Window.h"
 
-#include "..\\TGEngine_SOURCE\\tgApplication.h"
+#include "..\\TGEngine_CORE\\tgApplication.h"
 
 #include "..\\TGEngine_Window\\tgLoadScenes.h"
 

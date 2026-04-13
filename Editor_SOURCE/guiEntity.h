@@ -1,6 +1,6 @@
-#pragma once
-#include "..\\TGEngine_SOURCE\\CommonInclude.h"
-#include "..\\TGEngine_SOURCE\\tgEvent.h"
+﻿#pragma once
+#include "..\\TGEngine_CORE\\CommonInclude.h"
+#include "..\\TGEngine_CORE\\tgEvent.h"
 
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include "imgui.h"

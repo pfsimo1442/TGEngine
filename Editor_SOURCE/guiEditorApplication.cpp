@@ -5,11 +5,11 @@
 #include "guiHierarchyWindow.h"
 #include "guiProjectWindow.h"
 
-#include "..\\TGEngine_SOURCE\\tgApplication.h"
-#include "..\\TGEngine_SOURCE\\tgRenderer.h"
-#include "..\\TGEngine_SOURCE\\tgGameObject.h"
-#include "..\\TGEngine_SOURCE\\tgTransform.h"
-#include "..\\TGEngine_SOURCE\\tgInput.h"
+#include "..\\TGEngine_CORE\\tgApplication.h"
+#include "..\\TGEngine_CORE\\tgRenderer.h"
+#include "..\\TGEngine_CORE\\tgGameObject.h"
+#include "..\\TGEngine_CORE\\tgTransform.h"
+#include "..\\TGEngine_CORE\\tgInput.h"
 
 extern tg::Application application;
 

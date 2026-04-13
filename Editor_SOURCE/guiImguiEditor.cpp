@@ -1,6 +1,6 @@
 #include "guiImguiEditor.h"
 
-#include "..\\TGEngine_SOURCE\\tgApplication.h"
+#include "..\\TGEngine_CORE\\tgApplication.h"
 
 extern tg::Application application;
 

@@ -1,5 +1,4 @@
-﻿#pragma once
-#include "tgApplication.h"
+﻿#include "tgApplication.h"
 #include "tgRenderer.h"
 #include "tgInput.h"
 #include "tgTime.h"
