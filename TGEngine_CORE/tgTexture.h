@@ -7,7 +7,7 @@
 #ifdef _DEBUG
 #pragma comment(lib, "..\\Vendor\\DirectXTex\\Bin\\Desktop_2022\\x64\\Debug\\DirectXTex.lib")
 #else
-#pragma comment(lib, "..\\External\\Library\\DirectXTex\\Release\\DirectXTex.lib")
+#pragma comment(lib, "..\\Vendor\\DirectXTex\\Bin\\Desktop_2022\\x64\\Release\\DirectXTex.lib")
 #endif
 
 #include "tgResource.h"

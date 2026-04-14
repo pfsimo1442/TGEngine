@@ -129,6 +129,9 @@
     <IntDir>Bin\Desktop_2022\$(Platform)\$(Configuration)Spectre\</IntDir>
     <TargetName>DirectXTex_Spectre</TargetName>
   </PropertyGroup>
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnabled>false</VcpkgEnabled>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>EnableAllWarnings</WarningLevel>
